@@ -1,4 +1,4 @@
-import Hello from "@/blogs/hello.mdx";
+import Hello from "@/content/blogs/hello.mdx";
 
 export default function Home() {
   return (
