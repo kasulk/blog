@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-import "./globals.css";
+import "@/styles/globals.css";
+
+if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
