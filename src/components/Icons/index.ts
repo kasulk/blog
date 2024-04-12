@@ -1,6 +1,7 @@
 export * from "./Activity";
 export * from "./ChevronDown";
 export * from "./Flash";
+export * from "./GitHub";
 export * from "./Heart";
 export * from "./Lock";
 export * from "./Moon";
