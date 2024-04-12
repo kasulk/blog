@@ -1,9 +1,9 @@
 // export * from "./Activity";
 // export * from "./ChevronDown";
 // export * from "./Flash";
-export * from "./GitHub";
+// export * from "./GitHub";
 // export * from "./Heart";
-export * from "./LinkedIn";
+// export * from "./LinkedIn";
 // export * from "./Lock";
 // export * from "./Moon";
 // export * from "./Plus";

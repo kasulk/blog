@@ -1,9 +1,5 @@
-import Link from "next/link";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "../ui/button";
-import { GitHubIcon, LinkedInIcon } from "../Icons";
 import { MainNav, MobileNav, ThemeSwitch } from ".";
+import { SocialLinks } from "./SocialLinks";
 
 export function SiteHeader() {
   return (
@@ -12,37 +8,7 @@ export function SiteHeader() {
         <MainNav />
         <div className="flex flex-1 items-center justify-end">
           <nav className="flex items-center">
-            <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={cn(
-                  buttonVariants({ variant: "ghost" }),
-                  "w-10 px-0",
-                )}
-              >
-                <GitHubIcon className="text-foreground" />
-                {/* <GitHubIcon className="h-4 w-4" /> */}
-                <span className="sr-only">GitHub</span>
-              </div>
-            </Link>
-            <Link
-              href={siteConfig.links.linkedin}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={cn(
-                  buttonVariants({ variant: "ghost" }),
-                  "w-10 px-0",
-                )}
-              >
-                <LinkedInIcon className="text-foreground" />
-                <span className="sr-only">LinkedIn</span>
-              </div>
-            </Link>
+            <SocialLinks />
             <ThemeSwitch />
             <MobileNav />
           </nav>

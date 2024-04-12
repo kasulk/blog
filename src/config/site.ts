@@ -8,9 +8,11 @@ export const siteConfig = {
 
   links: {
     personalSite: "https://danielkaser.de",
-    github: "https://github.com/kasulk",
-    linkedin: "https://linkedin.com/in/kasulk",
-    codewars: "https://www.codewars.com/users/kasulk",
+    social: {
+      github: "https://github.com/kasulk",
+      linkedin: "https://linkedin.com/in/kasulk",
+      // codewars: "https://www.codewars.com/users/kasulk",
+    },
 
     docs: {
       arrayMap:
