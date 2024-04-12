@@ -1,12 +1,18 @@
 export const siteConfig = {
   name: "kasulk's blog",
+  type: "blog",
   url: "https://example.com",
   description: "A really good blog.",
   author: "kasulk",
+  pages: ["home", "blog", "portfolio", "donate", "about"],
+
   links: {
     personalSite: "https://danielkaser.de",
-    github: "https://github.com/kasulk",
-    codewars: "https://www.codewars.com/users/kasulk",
+    social: {
+      github: "https://github.com/kasulk",
+      linkedin: "https://linkedin.com/in/kasulk",
+      // codewars: "https://www.codewars.com/users/kasulk",
+    },
 
     docs: {
       arrayMap:
