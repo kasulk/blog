@@ -1,4 +1,4 @@
-import { IconSvgProps } from "./types";
+import { IconSvgProps } from "../types";
 
 export const Flash = ({
   fill = "currentColor",
