@@ -2,7 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
-import { GitHubIcon } from "../Icons";
+import { GitHubIcon, LinkedInIcon } from "../Icons";
 import { MainNav } from ".";
 
 export function SiteHeader() {
@@ -26,6 +26,21 @@ export function SiteHeader() {
                 <GitHubIcon className="text-foreground" />
                 {/* <GitHubIcon className="h-4 w-4" /> */}
                 <span className="sr-only">GitHub</span>
+              </div>
+            </Link>
+            <Link
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "w-10 px-0",
+                )}
+              >
+                <LinkedInIcon className="text-foreground" />
+                <span className="sr-only">LinkedIn</span>
               </div>
             </Link>
           </nav>
