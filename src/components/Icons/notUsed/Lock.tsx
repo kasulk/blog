@@ -1,4 +1,4 @@
-import { IconSvgProps } from "./types";
+import { IconSvgProps } from "../types";
 
 export const Lock = ({ fill, size, height, width, ...props }: IconSvgProps) => {
   const color = fill;
