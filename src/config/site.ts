@@ -1,9 +1,11 @@
 export const siteConfig = {
-  name: "kasulk's",
+  name: "kasulk's blog",
   type: "blog",
   url: "https://example.com",
   description: "A really good blog.",
   author: "kasulk",
+  pages: ["home", "blog", "portfolio", "donate", "about"],
+
   links: {
     personalSite: "https://danielkaser.de",
     github: "https://github.com/kasulk",
