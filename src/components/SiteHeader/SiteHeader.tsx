@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { GitHubIcon, LinkedInIcon } from "../Icons";
-import { MainNav, MobileNav } from ".";
+import { MainNav, MobileNav, ThemeSwitch } from ".";
 
 export function SiteHeader() {
   return (
@@ -43,6 +43,7 @@ export function SiteHeader() {
                 <span className="sr-only">LinkedIn</span>
               </div>
             </Link>
+            <ThemeSwitch />
             <MobileNav />
           </nav>
         </div>

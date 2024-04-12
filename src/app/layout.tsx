@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
+import { Providers } from "./providers";
 
 if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 
@@ -26,10 +27,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           inter.variable,
         )}
       >
-        <div className="relative flex min-h-dvh flex-col bg-background">
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-        </div>
+        <Providers>
+          <div className="relative flex min-h-dvh flex-col bg-background">
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );
