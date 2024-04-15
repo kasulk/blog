@@ -57,6 +57,46 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        /// icke: add danger, warning and success semantic colors from nextui
+        danger: {
+          DEFAULT: "#f31260",
+          50: "#310413",
+          100: "#610726",
+          200: "#920b3a",
+          300: "#c20e4d",
+          400: "#f31260", // default
+          500: "#f54180",
+          600: "#f871a0",
+          700: "#faa0bf",
+          800: "#fdd0df",
+          900: "#fee7ef",
+        },
+        warning: {
+          DEFAULT: "#f5a524",
+          50: "#312107",
+          100: "#62420e",
+          200: "#936316",
+          300: "#c4841d",
+          400: "#f5a524", // default
+          500: "#f7b750",
+          600: "#f9c97c",
+          700: "#fbdba7",
+          800: "#fdedd3",
+          900: "#fefce8",
+        },
+        success: {
+          DEFAULT: "#17c964",
+          50: "#052814",
+          100: "#095028",
+          200: "#0e793c",
+          300: "#12a150",
+          400: "#17c964", // default
+          500: "#45d483",
+          600: "#74dfa2",
+          700: "#a2e9c1",
+          800: "#d1f4e0",
+          900: "#e8faf0",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
