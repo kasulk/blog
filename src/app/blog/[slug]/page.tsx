@@ -1,18 +1,32 @@
-import Hello from "@/content/blogs/hello.mdx";
-import { getBlogs } from "../blogFetchers";
+import { notFound } from "next/navigation";
+import { getBlogBySlug, getBlogs } from "../blogFetchers";
 
 type BlogPageProps = {
-  params: string;
+  params: { slug: string };
 };
 
-/// To style MD properly, add 'prose' class
-export default async function BlogPage({ params }: BlogPageProps) {
-  console.log("getBlogs():", await getBlogs());
+export default async function SingleBlogPage({ params }: BlogPageProps) {
+  const blog = await getBlogBySlug(params.slug);
+
+  if (!blog) notFound();
+
+  const { frontmatter, content } = blog;
+  const { title, author, publishDate } = frontmatter;
 
   return (
-    <article className="prose dark:prose-invert container mx-auto max-w-3xl py-6">
-      <h1 className="text-success mb-2">Test</h1>
-      <Hello />
+    /// To style MD properly, add 'prose' class
+    <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+      <h1>{title}</h1>
+      <p className="flex justify-end space-x-1">
+        <span>by {author}, </span>
+        <span>{publishDate}</span>
+      </p>
+      <div>{content}</div>
     </article>
   );
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const blogs = await getBlogs();
+  return blogs.map((blog) => ({ slug: blog.slug }));
 }
