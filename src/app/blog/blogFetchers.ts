@@ -1,4 +1,4 @@
-import type { JSXElementConstructor, ReactElement } from "react";
+// import type { JSXElementConstructor, ReactElement } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "fs";
 import path from "path";
@@ -9,16 +9,17 @@ type Frontmatter = {
   publishDate: string;
 };
 
-type GetBlogResult = {
+type Blog = {
+  fileContent: string;
   frontmatter: Frontmatter;
-  content: ReactElement<any, string | JSXElementConstructor<any>>;
+  // content: ReactElement<any, string | JSXElementConstructor<any>>;
   slug: string;
 };
 
-const contentDir = path.join(process.cwd(), "src/content/blogs");
+const blogDir = path.join(process.cwd(), "src/content/blogs");
 
-export async function getBlogs(): Promise<GetBlogResult[]> {
-  const filePaths = getFilesRecursively(contentDir);
+export async function getBlogs(): Promise<Blog[]> {
+  const filePaths = getFilesRecursively(blogDir);
   const blogs = await Promise.all(
     filePaths.map(async (path) => await getBlogByFilePath(path)),
   );
@@ -26,28 +27,19 @@ export async function getBlogs(): Promise<GetBlogResult[]> {
   return blogs;
 }
 
-export async function getBlogByFilePath(
-  filePath: string,
-): Promise<GetBlogResult> {
+export async function getBlogByFilePath(filePath: string): Promise<Blog> {
   const fileContent = fs.readFileSync(filePath, "utf8");
-
-  const { frontmatter, content } = await compileMDX<Frontmatter>({
-    source: fileContent,
-    options: { parseFrontmatter: true },
-  });
-
+  const frontmatter = await getFrontmatterFromFileContent(fileContent);
   const slug = path.parse(filePath).name;
 
   return {
+    fileContent,
     frontmatter,
-    content,
     slug,
   };
 }
 
-export async function getBlogBySlug(
-  slug: string,
-): Promise<GetBlogResult | null> {
+export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   const allBlogs = await getBlogs();
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
@@ -71,19 +63,14 @@ function getFilesRecursively(directory: string): string[] {
   return [...files, ...directoryFiles];
 }
 
-export async function getBlogBySlug_(slug: string) {
-  const fileName = slug + ".mdx";
-  const filePath = path.join(contentDir, fileName);
-  const fileContent = fs.readFileSync(filePath, "utf8");
-
-  const { frontmatter, content } = await compileMDX<Frontmatter>({
+/// Helper to extract the frontmatter from the file content
+async function getFrontmatterFromFileContent(
+  fileContent: string,
+): Promise<Frontmatter> {
+  const { frontmatter } = await compileMDX<Frontmatter>({
     source: fileContent,
     options: { parseFrontmatter: true },
   });
 
-  return {
-    frontmatter,
-    content,
-    slug: path.parse(fileName).name,
-  };
+  return frontmatter;
 }
