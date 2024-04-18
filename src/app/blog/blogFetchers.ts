@@ -10,7 +10,7 @@ type Frontmatter = {
 };
 
 type Blog = {
-  fileContent: string;
+  markdownWithFrontmatter: string;
   frontmatter: Frontmatter;
   // content: ReactElement<any, string | JSXElementConstructor<any>>;
   slug: string;
@@ -33,7 +33,7 @@ export async function getBlogByFilePath(filePath: string): Promise<Blog> {
   const slug = path.parse(filePath).name;
 
   return {
-    fileContent,
+    markdownWithFrontmatter: fileContent,
     frontmatter,
     slug,
   };

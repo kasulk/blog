@@ -8,10 +8,11 @@ type BlogPageProps = {
 
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
+  const fileContent = blog?.markdownWithFrontmatter;
 
-  if (!blog || !blog.fileContent) notFound();
+  if (!blog || !fileContent) notFound();
 
-  const { frontmatter, fileContent } = blog;
+  const { frontmatter, markdownWithFrontmatter } = blog;
   const { title, author, publishDate } = frontmatter;
 
   return (
@@ -22,7 +23,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
         <span>by {author}, </span>
         <span>{publishDate}</span>
       </p>
-      <CustomMDX source={fileContent} />
+      <CustomMDX source={markdownWithFrontmatter} />
     </article>
   );
 }
