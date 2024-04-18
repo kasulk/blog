@@ -1,7 +1,8 @@
-// import type { JSXElementConstructor, ReactElement } from "react";
-import { compileMDX } from "next-mdx-remote/rsc";
+import type { JSXElementConstructor, ReactElement } from "react";
 import fs from "fs";
 import path from "path";
+import { compileMDX } from "next-mdx-remote/rsc";
+import { customComponents } from "@/components/mdx-remote";
 
 type Frontmatter = {
   title: string;
@@ -9,10 +10,11 @@ type Frontmatter = {
   publishDate: string;
 };
 
+type Content = ReactElement<any, string | JSXElementConstructor<any>>;
+
 type Blog = {
-  markdownWithFrontmatter: string;
   frontmatter: Frontmatter;
-  // content: ReactElement<any, string | JSXElementConstructor<any>>;
+  content: Content;
   slug: string;
 };
 
@@ -29,12 +31,16 @@ export async function getBlogs(): Promise<Blog[]> {
 
 export async function getBlogByFilePath(filePath: string): Promise<Blog> {
   const fileContent = fs.readFileSync(filePath, "utf8");
-  const frontmatter = await getFrontmatterFromFileContent(fileContent);
   const slug = path.parse(filePath).name;
+  const { content, frontmatter } = await compileMDX<Frontmatter>({
+    source: fileContent,
+    options: { parseFrontmatter: true },
+    components: customComponents,
+  });
 
   return {
-    markdownWithFrontmatter: fileContent,
     frontmatter,
+    content,
     slug,
   };
 }
@@ -61,16 +67,4 @@ function getFilesRecursively(directory: string): string[] {
   }, []);
 
   return [...files, ...directoryFiles];
-}
-
-/// Helper to extract the frontmatter from the file content
-async function getFrontmatterFromFileContent(
-  fileContent: string,
-): Promise<Frontmatter> {
-  const { frontmatter } = await compileMDX<Frontmatter>({
-    source: fileContent,
-    options: { parseFrontmatter: true },
-  });
-
-  return frontmatter;
 }

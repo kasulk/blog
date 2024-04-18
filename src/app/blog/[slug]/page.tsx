@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
-import { CustomMDX } from "@/components/mdx-remote";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -8,11 +7,10 @@ type BlogPageProps = {
 
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
-  const fileContent = blog?.markdownWithFrontmatter;
 
-  if (!blog || !fileContent) notFound();
+  if (!blog) notFound();
 
-  const { frontmatter, markdownWithFrontmatter } = blog;
+  const { content, frontmatter } = blog;
   const { title, author, publishDate } = frontmatter;
 
   return (
@@ -23,7 +21,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
         <span>by {author}, </span>
         <span>{publishDate}</span>
       </p>
-      <CustomMDX source={markdownWithFrontmatter} />
+      {content}
     </article>
   );
 }
