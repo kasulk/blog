@@ -1,5 +1,5 @@
 import About from "@/content/about.mdx";
-import { components as customComponents } from "@/components/mdx-remote";
+import { customComponents } from "@/components/mdx-remote";
 
 export default function AboutPage() {
   return (

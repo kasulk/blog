@@ -1,7 +1,8 @@
-import { MDXComponents } from "mdx/types";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import type { MDXComponents } from "mdx/types";
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
-const components: MDXComponents = {
+export const customComponents: MDXComponents = {
   // Allows customizing built-in components, e.g. to add styling
   h1: ({ children }) => <h1 className="text-warning">{children}</h1>,
   h2: ({ children }) => <h2 className="text-danger">{children}</h2>,
@@ -12,7 +13,7 @@ export function CustomMDX(props: MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}
-      components={{ ...components, ...(props.components || {}) }}
+      components={{ ...customComponents, ...(props.components || {}) }}
       options={{ parseFrontmatter: true }} // hides frontmatter on rendered MDX
     />
   );
