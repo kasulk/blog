@@ -1,3 +1,5 @@
+import path from "path";
+
 export const siteConfig = {
   name: "kasulk's blog",
   type: "BLOG",
@@ -18,6 +20,9 @@ export const siteConfig = {
       arrayMap:
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
     },
+  },
+  dir: {
+    blogs: path.join(process.cwd(), "src/content/blogs"),
   },
 };
 
