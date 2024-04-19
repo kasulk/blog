@@ -4,14 +4,15 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Providers } from "./providers";
+import { siteConfig } from "@/config/site";
 
 if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "kasulk's blog",
-  description: "A really good blog.",
+  title: `${siteConfig.author}'s${siteConfig.type.toUpperCase()}`,
+  description: siteConfig.description,
 };
 
 type RootLayoutProps = Readonly<{

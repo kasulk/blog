@@ -2,11 +2,12 @@ import path from "path";
 
 export const siteConfig = {
   name: "kasulk's blog",
-  type: "BLOG",
+  type: "blog",
   url: "https://example.com",
   description: "A really good blog.",
   author: "kasulk",
-  pages: ["home", "blog", "portfolio", "donate", "about"],
+  // pages: ["home", "blog", "projekte", "donate", "icke"],
+  pages: ["blog", "projekte", "donate", "icke"],
 
   links: {
     personalSite: "https://danielkaser.de",
