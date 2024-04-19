@@ -1,4 +1,7 @@
 import type { MDXComponents } from "mdx/types";
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote/rsc";
+// import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 
 export const customComponents: MDXComponents = {
   /// Allows customizing built-in components, e.g. to add styling
@@ -7,16 +10,11 @@ export const customComponents: MDXComponents = {
   h3: ({ children }) => <h3 className="text-success">{children}</h3>,
 };
 
-/// not used
-// import type { MDXRemoteProps } from "next-mdx-remote/rsc";
-// import { MDXRemote } from "next-mdx-remote/rsc";
-
-// export function CustomMDX(props: MDXRemoteProps) {
-//   return (
-//     <MDXRemote
-//       {...props}
-//       components={{ ...customComponents, ...(props.components || {}) }}
-//       options={{ parseFrontmatter: true }} // hides frontmatter on rendered MDX
-//     />
-//   );
-// }
+export function CustomStyledMDX(props: MDXRemoteProps) {
+  return (
+    <MDXRemote
+      {...props}
+      components={{ ...customComponents, ...(props.components || {}) }}
+    />
+  );
+}
