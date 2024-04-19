@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getBlogs } from "./blogFetchers";
-import { getGermanDate } from "@/lib/utils/germanDate";
+import { formatDate } from "@/lib/utils/formatDate";
 
 export default async function Blog() {
   const blogs = await getBlogs();
@@ -10,9 +10,8 @@ export default async function Blog() {
       <h1 className="text-3xl font-bold">BLOG</h1>
 
       <section className="py-10">
-        <h2>Latest Blogs</h2>
-
-        <div className="py-2">
+        <h2>Letzte Blogs</h2>
+        <ul className="list-none py-2 pl-0">
           {blogs.map((blog) => (
             <Link
               className="no-underline"
@@ -20,7 +19,7 @@ export default async function Blog() {
               key={blog.slug}
               passHref
             >
-              <div className="my-5 flex justify-between rounded-lg px-6 py-2 align-middle transition-colors duration-300 hover:bg-danger/20">
+              <li className="my-5 flex list-none justify-between rounded-lg px-6 py-2 align-middle transition-colors duration-300 hover:bg-danger/20">
                 <div>
                   <h3 className="my-1">{blog.frontmatter.title}</h3>
                   <p className="my-1 text-gray-400">
@@ -29,16 +28,16 @@ export default async function Blog() {
                 </div>
                 <div className="my-auto flex flex-col items-end text-gray-400">
                   <p className="my-1">
-                    {getGermanDate(blog.frontmatter.publishDate)}
+                    {formatDate(blog.frontmatter.publishDate, "de-DE")}
                   </p>
                   <p className="my-1 text-gray-400">
                     {blog.frontmatter.author}
                   </p>
                 </div>
-              </div>
+              </li>
             </Link>
           ))}
-        </div>
+        </ul>
       </section>
     </main>
   );

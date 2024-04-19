@@ -1,7 +1,7 @@
 export type Frontmatter = {
   title: string;
   author: string;
-  publishDate: string;
+  publishDate: Date;
   description?: string;
 };
 
