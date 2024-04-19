@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { CustomStyledMDX } from "@/components/mdx-remote";
+import { formatDate } from "@/lib/utils/formatDate";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -20,7 +21,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
       <h1>{title}</h1>
       <p className="flex justify-end space-x-1">
         <span>by {author}, </span>
-        <span>{publishDate}</span>
+        <span>{formatDate(publishDate, "de-DE")}</span>
       </p>
       <CustomStyledMDX source={content} />
     </article>

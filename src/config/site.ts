@@ -1,10 +1,13 @@
+import path from "path";
+
 export const siteConfig = {
   name: "kasulk's blog",
-  type: "BLOG",
+  type: "blog",
   url: "https://example.com",
   description: "A really good blog.",
   author: "kasulk",
-  pages: ["home", "blog", "portfolio", "donate", "about"],
+  // pages: ["home", "blog", "projekte", "donate", "icke"],
+  pages: ["blog", "projekte", "donate", "icke"],
 
   links: {
     personalSite: "https://danielkaser.de",
@@ -18,6 +21,9 @@ export const siteConfig = {
       arrayMap:
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
     },
+  },
+  dir: {
+    blogs: path.join(process.cwd(), "src/content/blogs"),
   },
 };
 

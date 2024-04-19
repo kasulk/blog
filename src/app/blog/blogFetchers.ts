@@ -1,32 +1,28 @@
-import type { JSXElementConstructor, ReactElement } from "react";
+import type { Blog, Frontmatter } from "@/../types";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { siteConfig } from "@/config/site";
 
-type Frontmatter = {
-  title: string;
-  author: string;
-  publishDate: string;
-};
-
-type Blog = {
-  frontmatter: Frontmatter;
-  content: string;
-  slug: string;
-};
-
-const blogDir = path.join(process.cwd(), "src/content/blogs");
+const blogDir = siteConfig.dir.blogs;
 
 export async function getBlogs(): Promise<Blog[]> {
-  const filePaths = getFilesRecursively(blogDir);
-  const blogs = await Promise.all(
-    filePaths.map(async (path) => await getBlogByFilePath(path)),
+  const allFilePaths = getAllFilesFromSubDirs(blogDir);
+  const allBlogs = await Promise.all(
+    allFilePaths.map(async (path) => await getBlogByFilePath(path)),
   );
 
-  return blogs;
+  return allBlogs;
 }
 
-export async function getBlogByFilePath(filePath: string): Promise<Blog> {
+export async function getBlogBySlug(slug: string): Promise<Blog | null> {
+  const allBlogs = await getBlogs();
+  const blog = allBlogs.find((blog) => blog.slug === slug);
+
+  return blog || null;
+}
+
+async function getBlogByFilePath(filePath: string): Promise<Blog> {
   const fileContent = fs.readFileSync(filePath, "utf8");
   const slug = path.parse(filePath).name;
   const { data, content } = matter(fileContent);
@@ -38,15 +34,8 @@ export async function getBlogByFilePath(filePath: string): Promise<Blog> {
   };
 }
 
-export async function getBlogBySlug(slug: string): Promise<Blog | null> {
-  const allBlogs = await getBlogs();
-  const blog = allBlogs.find((blog) => blog.slug === slug);
-
-  return blog || null;
-}
-
 /// Helper to get all files from blog directory AND subdirectories
-function getFilesRecursively(directory: string): string[] {
+function getAllFilesFromSubDirs(directory: string): string[] {
   const entries = fs.readdirSync(directory, { withFileTypes: true });
   const files = entries
     .filter((file) => !file.isDirectory())
@@ -56,7 +45,7 @@ function getFilesRecursively(directory: string): string[] {
 
   const directoryFiles = directories.reduce<string[]>((all, dirEntry) => {
     const newDirPath = path.join(directory, dirEntry.name);
-    return all.concat(getFilesRecursively(newDirPath));
+    return all.concat(getAllFilesFromSubDirs(newDirPath));
   }, []);
 
   return [...files, ...directoryFiles];
