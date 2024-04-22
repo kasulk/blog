@@ -14,7 +14,16 @@ export const siteConfig = {
     social: {
       github: "https://github.com/kasulk",
       linkedin: "https://linkedin.com/in/kasulk",
-      // codewars: "https://www.codewars.com/users/kasulk",
+      codewars: "https://www.codewars.com/users/kasulk",
+    },
+    affiliate: {
+      _defaultTooltip:
+        "Affiliate-Link: Wenn du ueber diesen Link kaufst, kannst du mich unterstuetzen. Fuer dich entstehen dabei keinerlei Mehrkosten!",
+      amazon: "",
+      bondora: "",
+      honeypot: "",
+      ib: "https://ibkr.com/referral/daniel471",
+      swaper: "",
     },
 
     docs: {
