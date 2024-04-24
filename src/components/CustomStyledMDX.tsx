@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import AffiliateLink from "./AffiliateLink";
+import { AffiliateLink } from "@/components";
 import { siteConfig } from "@/config/site";
 // import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 

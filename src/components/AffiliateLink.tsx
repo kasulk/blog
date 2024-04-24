@@ -13,7 +13,7 @@ type AffliateLinkProps = {
   children?: React.ReactNode;
 };
 
-export default function AffiliateLink({
+export function AffiliateLink({
   href,
   tooltip = siteConfig.links.affiliate._defaultTooltip,
   children,
