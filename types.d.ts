@@ -3,7 +3,14 @@ export type Frontmatter = {
   author: string;
   pubDate: Date;
   description?: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
   isPublished: boolean;
+  category: string;
+  tags: string[];
+  series?: string;
 };
 
 export type Blog = {
