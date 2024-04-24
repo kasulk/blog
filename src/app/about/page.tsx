@@ -1,4 +1,4 @@
-import { CustomStyledMDX } from "@/components/mdx-remote";
+import { CustomStyledMDX } from "@/components";
 import matter from "gray-matter";
 
 const about = matter.read("src/content/about.mdx");
