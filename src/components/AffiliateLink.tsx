@@ -27,8 +27,8 @@ export default function AffiliateLink({
           </Link>
           *
         </TooltipTrigger>
-        <TooltipContent className="py-0">
-          <p>{tooltip}</p>
+        <TooltipContent>
+          <p className="my-0">{tooltip}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
