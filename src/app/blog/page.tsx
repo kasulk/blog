@@ -28,7 +28,7 @@ export default async function Blog() {
                 </div>
                 <div className="my-auto flex flex-col items-end text-gray-400">
                   <p className="my-1">
-                    {formatDate(blog.frontmatter.publishDate, "de-DE")}
+                    {formatDate(blog.frontmatter.pubDate, "de-DE")}
                   </p>
                   <p className="my-1 text-gray-400">
                     {blog.frontmatter.author}

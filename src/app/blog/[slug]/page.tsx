@@ -13,14 +13,14 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog) notFound();
 
   const { content, frontmatter } = blog;
-  const { title, author, publishDate } = frontmatter;
+  const { title, author, pubDate } = frontmatter;
 
   return (
     <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
       <h1>{title}</h1>
       <p className="flex justify-end space-x-1">
         <span>by {author}, </span>
-        <span>{formatDate(publishDate, "de-DE")}</span>
+        <span>{formatDate(pubDate, "de-DE")}</span>
       </p>
       <CustomStyledMDX
         source={content}
