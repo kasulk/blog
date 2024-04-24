@@ -22,7 +22,10 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
         <span>by {author}, </span>
         <span>{formatDate(publishDate, "de-DE")}</span>
       </p>
-      <CustomStyledMDX source={content} />
+      <CustomStyledMDX
+        source={content}
+        options={{ scope: { ...frontmatter } }}
+      />
     </article>
   );
 }

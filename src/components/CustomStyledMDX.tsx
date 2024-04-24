@@ -21,7 +21,7 @@ export function CustomStyledMDX(props: MDXRemoteProps) {
       // pass custom components through components prop:
       components={{ ...customComponents, ...(props.components || {}) }}
       // pass custom data/variables through options/scope prop:
-      options={{ scope: { ...siteConfig } }}
+      options={{ scope: { ...siteConfig, ...(props.options?.scope || {}) } }}
     />
   );
 }
