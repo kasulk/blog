@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.author}'s${siteConfig.type.toUpperCase()}`,
+  title: `${siteConfig.owner}'s${siteConfig.type.toUpperCase()}`,
   description: siteConfig.description,
 };
 
