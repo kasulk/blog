@@ -1,8 +1,9 @@
 export type Frontmatter = {
   title: string;
   author: string;
-  publishDate: Date;
+  pubDate: Date;
   description?: string;
+  isPublished: boolean;
 };
 
 export type Blog = {
