@@ -1,6 +1,9 @@
+import path from "path";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { CustomStyledMDX } from "@/components";
+import { siteConfig } from "@/config/site";
+import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { formatDate } from "@/lib/utils";
 
 type BlogPageProps = {
@@ -10,7 +13,7 @@ type BlogPageProps = {
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
 
-  if (!blog) notFound();
+  if (!blog || !blog.frontmatter.isPublished) notFound();
 
   const { content, frontmatter } = blog;
   const { title, author, pubDate } = frontmatter;
@@ -33,4 +36,43 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const blogs = await getBlogs();
   return blogs.map((blog) => ({ slug: blog.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
+  const blog = await getBlogBySlug(params.slug);
+
+  if (!blog) return {};
+
+  const { frontmatter } = blog;
+
+  const ogSearchParams = new URLSearchParams();
+  ogSearchParams.set("title", frontmatter.title);
+
+  return {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    authors: { name: siteConfig.owner },
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      type: "article",
+      url: path.join(process.cwd(), blog.slug),
+      images: [
+        {
+          url: `/api/og?${ogSearchParams.toString()}`,
+          width: 1200,
+          height: 630,
+          alt: frontmatter.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: [`/api/og?${ogSearchParams.toString()}`],
+    },
+  };
 }
