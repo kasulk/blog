@@ -5,9 +5,9 @@ export const siteConfig = {
   type: "blog",
   url: "https://example.com",
   description: "A really good blog.",
-  author: "kasulk",
-  // pages: ["home", "blog", "projekte", "donate", "icke"],
-  pages: ["blog", "projekte", "donate", "icke"],
+  owner: "Daniel Kaser",
+  // pages: ["home", "blog", "projekte", "donate", "about"],
+  pages: ["blog", "projekte", "donate", "about"],
 
   links: {
     personalSite: "https://danielkaser.de",
@@ -18,12 +18,15 @@ export const siteConfig = {
     },
     affiliate: {
       _defaultTooltip:
-        "Affiliate-Link: Wenn du ueber diesen Link kaufst, kannst du mich unterstuetzen. Fuer dich entstehen dabei keinerlei Mehrkosten!",
+        "Affiliate-Link: Wenn du ueber diesen Link kaufst, kannst du mich ohne Mehrkosten fuer dich unterstuetzen!",
       amazon: "",
       bondora: "",
-      honeypot: "",
+      honeypot: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
       ib: "https://ibkr.com/referral/daniel471",
+      lande: "https://lande.finance?referral=F7QGGIB",
+      mintos: "",
       swaper: "",
+      twino: "",
     },
 
     docs: {

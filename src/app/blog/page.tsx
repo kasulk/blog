@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getBlogs } from "./blogFetchers";
-import { formatDate } from "@/lib/utils/formatDate";
+import { formatDate } from "@/lib/utils";
 
 export default async function Blog() {
   const blogs = await getBlogs();

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { CustomStyledMDX } from "@/components";
-import { formatDate } from "@/lib/utils/formatDate";
+import { formatDate } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
