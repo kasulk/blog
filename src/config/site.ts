@@ -1,5 +1,4 @@
-import path from "path";
-
+// only configurations that DON'T need the server (node),
 export const siteConfig = {
   name: "kasulk's blog",
   type: "blog",
@@ -35,7 +34,7 @@ export const siteConfig = {
     },
   },
   dir: {
-    blogs: path.join(process.cwd(), "src/content/blogs"),
+    blogs: "src/content/blogs",
   },
 };
 

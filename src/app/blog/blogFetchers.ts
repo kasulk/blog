@@ -4,7 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import { siteConfig } from "@/config/site";
 
-const blogDir = siteConfig.dir.blogs;
+const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
 export async function getBlogs(): Promise<Blog[]> {
   const allFilePaths = getAllFilesFromSubDirs(blogDir);
