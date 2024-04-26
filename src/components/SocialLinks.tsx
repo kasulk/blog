@@ -5,7 +5,7 @@ import { capitalize, cn } from "@/lib/utils";
 import { DonateButton } from "./DonateButton";
 
 const socialIconClassNames = "h-6 w-6 text-foreground hover:text-foreground/80";
-const donateButtonClassNames = "h-7 w-7 text-danger hover:text-danger/80";
+const donateButtonClassNames = "h-7 w-7 text-accent hover:text-accent/80";
 const socialIcons = [
   <GitHubLogoIcon key="github" className={socialIconClassNames} />,
   <LinkedInLogoIcon key="linkedin" className={socialIconClassNames} />,

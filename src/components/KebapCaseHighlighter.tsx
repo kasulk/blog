@@ -5,7 +5,7 @@ type KebabCaseHighlighterProps = {
 
 export function KebabCaseHighlighter({
   text,
-  accentColor = "text-danger",
+  accentColor = "text-accent",
 }: KebabCaseHighlighterProps) {
   const words = text.match(/[A-Z]?[a-z]+|[A-Z]+(?![a-z])/g) || [];
 
