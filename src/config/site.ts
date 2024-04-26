@@ -2,7 +2,7 @@
 export const siteConfig = {
   name: "kasulk's blog",
   type: "blog",
-  url: "https://example.com",
+  url: "https://kasulks-blog.vercell.app",
   description: "A really good blog.",
   owner: "Daniel Kaser",
   // pages: ["home", "blog", "projekte", "donate", "about"],
