@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import { getInitials } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "About Me",
+  title: `About Me | ${siteConfig.name}`,
   description: "Information about me",
 };
 
