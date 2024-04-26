@@ -1,5 +1,5 @@
 import { MainNav, MobileNav, ThemeSwitch } from ".";
-import { SocialLinks } from "./SocialLinks";
+import { SocialLinks } from "../SocialLinks";
 
 export function SiteHeader() {
   return (
