@@ -1,6 +1,6 @@
 // only configurations that DON'T need the server (node),
 export const siteConfig = {
-  name: "kasulk's blog",
+  name: "kasulks",
   type: "blog",
   url: "https://kasulks-blog.vercell.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   Tooltip,
   TooltipContent,
@@ -22,10 +21,10 @@ export function AffiliateLink({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <Link href={href} target="_blank">
+          <a href={href} target="_blank">
             {children}
-          </Link>
-          *
+          </a>
+          <span className="sr-only">{tooltip}</span>*
         </TooltipTrigger>
         <TooltipContent>
           <p className="my-0">{tooltip}</p>

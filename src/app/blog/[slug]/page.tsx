@@ -51,9 +51,10 @@ export async function generateMetadata({
   ogSearchParams.set("title", frontmatter.title);
 
   return {
-    title: frontmatter.title,
+    title: `${frontmatter.title} | ${siteConfig.name}`,
     description: frontmatter.description,
-    authors: { name: siteConfig.owner },
+    authors: { name: frontmatter.author },
+
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
