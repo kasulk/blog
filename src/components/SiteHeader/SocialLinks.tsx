@@ -1,25 +1,28 @@
-import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { siteConfig } from "@/config/site";
 import { capitalize, cn } from "@/lib/utils";
+import { DonateButton } from "../DonateButton";
+
+const socialIconClassNames = "h-6 w-6 text-foreground hover:text-foreground/80";
+const donateButtonClassNames = "h-7 w-7 text-danger hover:text-danger/80";
+const socialIcons = [
+  <GitHubLogoIcon key="github" className={socialIconClassNames} />,
+  <LinkedInLogoIcon key="linkedin" className={socialIconClassNames} />,
+  // <CodewarsLogoIcon key="codewars" className={socialIconClassNames} />,
+];
 
 export function SocialLinks() {
-  const socialLinks = Object.values(siteConfig.links.social);
   const socialNames = Object.keys(siteConfig.links.social);
-
-  const iconClassNames = "text-foreground h-6 w-6 hover:text-foreground/80";
-
-  const socialIcons = [
-    <GitHubLogoIcon key="github" className={iconClassNames} />,
-    <LinkedInLogoIcon key="linkedin" className={iconClassNames} />,
-    // <CodewarsLogoIcon key="codewars" className={iconClassNames} />,
-  ];
+  // don't show link if there is no icon for it
+  const socialLinks = Object.values(siteConfig.links.social).filter(
+    (_, i) => i < socialIcons.length,
+  );
 
   return (
     <>
       {socialLinks.map((link, i) => (
-        <Link
+        <a
           key={`social-link-${i}`}
           href={link}
           target="_blank"
@@ -31,8 +34,9 @@ export function SocialLinks() {
             {socialIcons[i]}
             <span className="sr-only">{capitalize(socialNames[i])}</span>
           </div>
-        </Link>
+        </a>
       ))}
+      <DonateButton className={donateButtonClassNames} />
     </>
   );
 }
