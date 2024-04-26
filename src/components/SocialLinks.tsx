@@ -1,8 +1,8 @@
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "./ui/button";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { siteConfig } from "@/config/site";
 import { capitalize, cn } from "@/lib/utils";
-import { DonateButton } from "../DonateButton";
+import { DonateButton } from "./DonateButton";
 
 const socialIconClassNames = "h-6 w-6 text-foreground hover:text-foreground/80";
 const donateButtonClassNames = "h-7 w-7 text-danger hover:text-danger/80";

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter/SiteFooter";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 
