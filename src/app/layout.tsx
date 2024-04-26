@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter/SiteFooter";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="relative flex min-h-dvh flex-col bg-background">
             <SiteHeader />
             <main className="flex-1">{children}</main>
+            <SiteFooter />
           </div>
         </Providers>
       </body>
