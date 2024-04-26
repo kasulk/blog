@@ -3,7 +3,7 @@ export const siteConfig = {
   name: "kasulk's blog",
   type: "blog",
   url: "https://kasulks-blog.vercell.app",
-  description: "A really good blog.",
+  description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
   // pages: ["home", "blog", "projekte", "donate", "about"],
   pages: ["blog", "projekte", "donate", "about"],
