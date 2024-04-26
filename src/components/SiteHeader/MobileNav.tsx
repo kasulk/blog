@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Branding, NavLink } from ".";
 import { siteConfig } from "@/config/site";
-import { capitalize } from "@/lib/utils";
+import { capitalize, spacifyCamelCase } from "@/lib/utils";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -14,8 +14,11 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" className="w-10 px-0 sm:hidden">
-          <HamburgerMenuIcon className="h-5 w-5 text-foreground" />
+        <Button
+          variant="ghost"
+          className="w-10 px-0 hover:text-white sm:hidden"
+        >
+          <HamburgerMenuIcon className="h-5 w-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
@@ -30,7 +33,7 @@ export function MobileNav() {
               onOpenChange={setOpen}
               page={page}
             >
-              {capitalize(page)}
+              {spacifyCamelCase(capitalize(page))}
             </NavLink>
           ))}
         </div>
