@@ -22,7 +22,10 @@ export function DonateButton({ className }: DonateButtonProps) {
         <TooltipTrigger>
           <Link href="/donate">
             <div
-              className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "w-10 px-0 text-accent hover:text-white",
+              )}
             >
               <HeartFilledIcon className={className} />
               <span className="sr-only">{tooltipContent}</span>

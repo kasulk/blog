@@ -4,12 +4,12 @@ import { siteConfig } from "@/config/site";
 import { capitalize, cn } from "@/lib/utils";
 import { DonateButton } from "./DonateButton";
 
-const socialIconClassNames = "h-6 w-6 text-foreground hover:text-foreground/80";
-const donateButtonClassNames = "h-7 w-7 text-accent hover:text-accent/80";
+const socialIconSize = "h-6 w-6";
+const supportIconSize = "h-7 w-7";
 const socialIcons = [
-  <GitHubLogoIcon key="github" className={socialIconClassNames} />,
-  <LinkedInLogoIcon key="linkedin" className={socialIconClassNames} />,
-  // <CodewarsLogoIcon key="codewars" className={socialIconClassNames} />,
+  <GitHubLogoIcon key="github" className={socialIconSize} />,
+  <LinkedInLogoIcon key="linkedin" className={socialIconSize} />,
+  // <CodewarsLogoIcon key="codewars" className={socialIconSize} />,
 ];
 
 export function SocialLinks() {
@@ -21,22 +21,25 @@ export function SocialLinks() {
 
   return (
     <>
-      {socialLinks.map((link, i) => (
+      {socialLinks.map((href, i) => (
         <a
           key={`social-link-${i}`}
-          href={link}
+          href={href}
           target="_blank"
           rel="noreferrer"
         >
           <div
-            className={cn(buttonVariants({ variant: "ghost" }), "w-10 px-0")}
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "w-10 px-0 text-foreground",
+            )}
           >
             {socialIcons[i]}
             <span className="sr-only">{capitalize(socialNames[i])}</span>
           </div>
         </a>
       ))}
-      <DonateButton className={donateButtonClassNames} />
+      <DonateButton className={supportIconSize} />
     </>
   );
 }

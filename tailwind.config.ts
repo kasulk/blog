@@ -3,13 +3,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./mdx-components.tsx",
-  ],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -60,42 +54,42 @@ const config = {
         /// icke: add danger, warning and success semantic colors from nextui
         danger: {
           DEFAULT: "#f31260",
-          50: "#310413",
-          100: "#610726",
-          200: "#920b3a",
-          300: "#c20e4d",
-          400: "#f31260", // default
-          500: "#f54180",
-          600: "#f871a0",
-          700: "#faa0bf",
-          800: "#fdd0df",
-          900: "#fee7ef",
+          50: "#fee7ef",
+          100: "#fdd0df",
+          200: "#faa0bf",
+          300: "#f871a0",
+          400: "#f54180",
+          500: "#f31260", // default
+          600: "#c20e4d",
+          700: "#920b3a",
+          800: "#610726",
+          900: "#310413",
         },
         warning: {
           DEFAULT: "#f5a524",
-          50: "#312107",
-          100: "#62420e",
-          200: "#936316",
-          300: "#c4841d",
-          400: "#f5a524", // default
-          500: "#f7b750",
-          600: "#f9c97c",
-          700: "#fbdba7",
-          800: "#fdedd3",
-          900: "#fefce8",
+          50: "#fefce8",
+          100: "#fdedd3",
+          200: "#fbdba7",
+          300: "#f9c97c",
+          400: "#f7b750",
+          500: "#f5a524", // default
+          600: "#c4841d",
+          700: "#936316",
+          800: "#62420e",
+          900: "#312107",
         },
         success: {
           DEFAULT: "#17c964",
-          50: "#052814",
-          100: "#095028",
-          200: "#0e793c",
-          300: "#12a150",
-          400: "#17c964", // default
-          500: "#45d483",
-          600: "#74dfa2",
-          700: "#a2e9c1",
-          800: "#d1f4e0",
-          900: "#e8faf0",
+          50: "#e8faf0",
+          100: "#d1f4e0",
+          200: "#a2e9c1",
+          300: "#74dfa2",
+          400: "#45d483",
+          500: "#17c964", // default
+          600: "#12a150",
+          700: "#0e793c",
+          800: "#095028",
+          900: "#052814",
         },
       },
       borderRadius: {
