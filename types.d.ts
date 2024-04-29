@@ -3,7 +3,7 @@ export type Frontmatter = {
   author: string;
   pubDate: Date;
   description?: string;
-  image?: {
+  image: {
     src: string;
     alt: string;
   };
