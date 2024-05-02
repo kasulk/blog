@@ -19,15 +19,16 @@ export function SupportButton({ className }: SupportButtonProps) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <Link href="/donate">
-            <Button
-              className="w-10 px-0 text-accent hover:text-white"
-              variant="ghost"
-            >
+          <Button
+            asChild
+            className="w-10 px-0 text-accent hover:text-white"
+            variant="ghost"
+          >
+            <Link href="/donate">
               <HeartFilledIcon className={className} />
               <span className="sr-only">{tooltipContent}</span>
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </TooltipTrigger>
         <TooltipContent>
           <p className="my-0">{tooltipContent}</p>
