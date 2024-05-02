@@ -23,7 +23,9 @@ export default function BlogCard({ blog }: BlogCardProps) {
     <Card>
       <CardHeader>
         <div className="flex text-sm font-semibold">
-          <CategoryBadge>{category.toUpperCase()}</CategoryBadge>
+          <CategoryBadge className="rounded-b-none">
+            {category.toUpperCase()}
+          </CategoryBadge>
         </div>
         <Link href={`/blog/${slug}`}>
           <Image
@@ -35,14 +37,20 @@ export default function BlogCard({ blog }: BlogCardProps) {
           />
         </Link>
         <CardTitle>{title}</CardTitle>
-        <CardDescription className="my-0">
-          <span>{formatDate(pubDate, "de-DE")}</span>
-          <span className="mx-2">•</span>
-          <span>{author}</span>
+        <CardDescription className="my-0 flex flex-col sm:flex-row">
+          <span className="whitespace-nowrap">
+            {formatDate(pubDate, "de-DE")}
+          </span>
+          <span className="mx-2 hidden sm:inline-block">•</span>
+          <Link href="#" className="whitespace-nowrap no-underline">
+            {author}
+          </Link>
         </CardDescription>
       </CardHeader>
-      <CardContent className="text-xl text-muted-foreground">
-        {description}
+      <CardContent className="text-lg text-muted-foreground sm:text-xl">
+        {description && description.length > 200
+          ? description.slice(0, 200) + "..."
+          : description}
       </CardContent>
     </Card>
   );
