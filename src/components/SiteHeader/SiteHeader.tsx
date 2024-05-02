@@ -8,7 +8,7 @@ export function SiteHeader() {
         <MainNav />
         <div className="flex flex-1 items-center justify-end">
           <nav className="flex items-center">
-            <SocialLinks />
+            <SocialLinks className="hidden sm:inline-block" />
             <ThemeSwitch />
             <MobileNav />
           </nav>
