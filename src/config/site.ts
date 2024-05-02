@@ -5,8 +5,10 @@ export const siteConfig = {
   url: "https://kasulks-blog.vercell.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
-  // pages: ["home", "blog", "projekte", "donate", "aboutMe"],
-  pages: ["blog", "projekte", "donate", "aboutMe"],
+  pages: ["blog", "projekte", "support", "aboutMe"],
+  dir: {
+    blogs: "src/content/blogs",
+  },
 
   links: {
     personalSite: "https://danielkaser.de",
@@ -25,6 +27,7 @@ export const siteConfig = {
       lande: "https://lande.finance?referral=F7QGGIB",
       mintos: "",
       swaper: "",
+      tradeRepublic: "https://ref.trade.re/7g7k9z1g",
       twino: "",
     },
 
@@ -32,9 +35,6 @@ export const siteConfig = {
       arrayMap:
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
     },
-  },
-  dir: {
-    blogs: "src/content/blogs",
   },
 };
 
