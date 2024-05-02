@@ -13,7 +13,7 @@ export type Frontmatter = {
   series?: string;
 };
 
-export type Blog = {
+export type BlogPost = {
   frontmatter: Frontmatter;
   content: string;
   slug: string;

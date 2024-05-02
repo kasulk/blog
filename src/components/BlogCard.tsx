@@ -1,4 +1,4 @@
-import type { Blog } from "@/../types";
+import type { BlogPost } from "@/../types";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,7 +12,7 @@ import CategoryBadge from "./CategoryBadge";
 import { formatDate } from "@/lib/utils";
 
 type BlogCardProps = {
-  blog: Blog; // todo: rename to BlogPost
+  blog: BlogPost;
 };
 
 export default function BlogCard({ blog }: BlogCardProps) {

@@ -1,4 +1,4 @@
-import type { Blog, Frontmatter } from "@/../types";
+import type { BlogPost, Frontmatter } from "@/../types";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
-export async function getBlogs(): Promise<Blog[]> {
+export async function getBlogs(): Promise<BlogPost[]> {
   const allFilePaths = getAllFilesFromSubDirs(blogDir);
   const allBlogs = await Promise.all(
     allFilePaths.map(async (path) => await getBlogByFilePath(path)),
@@ -15,14 +15,14 @@ export async function getBlogs(): Promise<Blog[]> {
   return allBlogs;
 }
 
-export async function getBlogBySlug(slug: string): Promise<Blog | null> {
+export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   const allBlogs = await getBlogs();
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
   return blog || null;
 }
 
-async function getBlogByFilePath(filePath: string): Promise<Blog> {
+async function getBlogByFilePath(filePath: string): Promise<BlogPost> {
   const fileContent = fs.readFileSync(filePath, "utf8");
   const slug = path.parse(filePath).name;
   const { data, content } = matter(fileContent);
