@@ -4,7 +4,8 @@ export type Frontmatter = {
   pubDate: Date;
   description?: string;
   image: {
-    src: string;
+    fileName: string;
+    credits?: string;
     alt: string;
   };
   isPublished: boolean;

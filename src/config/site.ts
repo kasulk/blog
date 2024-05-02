@@ -8,6 +8,7 @@ export const siteConfig = {
   pages: ["blog", "projekte", "support", "aboutMe"],
   dir: {
     blogs: "src/content/blogs",
+    blogImages: "/img/blogs",
   },
 
   links: {
