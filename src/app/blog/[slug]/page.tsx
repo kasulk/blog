@@ -1,4 +1,5 @@
 import path from "path";
+import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomStyledMDX } from "@/components";
@@ -22,7 +23,10 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
     <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
       <h1>{title}</h1>
       <p className="flex justify-end space-x-1">
-        <span>by {author}, </span>
+        <Link href="#" className="no-underline">
+          {author === "icke" ? siteConfig.owner : author}
+        </Link>
+        <span className="space-x-2">|</span>
         <span>{formatDate(pubDate, "de-DE")}</span>
       </p>
       <CustomStyledMDX
