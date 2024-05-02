@@ -5,31 +5,28 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Button } from "./ui/button";
 import { HeartFilledIcon } from "@radix-ui/react-icons";
-import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
 
-type DonateButtonProps = {
+type SupportButtonProps = {
   className?: string;
 };
 
 const tooltipContent = "Unterstützen";
 
-export function DonateButton({ className }: DonateButtonProps) {
+export function SupportButton({ className }: SupportButtonProps) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
           <Link href="/donate">
-            <div
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "w-10 px-0 text-accent hover:text-white",
-              )}
+            <Button
+              className="w-10 px-0 text-accent hover:text-white"
+              variant="ghost"
             >
               <HeartFilledIcon className={className} />
               <span className="sr-only">{tooltipContent}</span>
-            </div>
+            </Button>
           </Link>
         </TooltipTrigger>
         <TooltipContent>

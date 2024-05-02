@@ -1,4 +1,4 @@
-import type { Blog } from "@/../types";
+import type { BlogPost } from "@/../types";
 
 type formatBlogsOptions = {
   filterOutDrafts?: boolean;
@@ -8,16 +8,16 @@ type formatBlogsOptions = {
 };
 
 export function formatBlogs(
-  blogs: Blog[],
+  blogs: BlogPost[],
   {
     filterOutDrafts = true,
     filterOutFuturePosts = true,
     sortByDate = true,
     limit = null,
   }: formatBlogsOptions = {},
-): Blog[] {
+): BlogPost[] {
   // filter drafts/future posts
-  const filteredBlogs = blogs.reduce<Blog[]>((acc, blog) => {
+  const filteredBlogs = blogs.reduce<BlogPost[]>((acc, blog) => {
     const { pubDate, isPublished } = blog.frontmatter;
     if (filterOutDrafts && !isPublished) return acc;
     if (filterOutFuturePosts && new Date(pubDate) > new Date()) return acc;

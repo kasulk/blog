@@ -3,7 +3,7 @@ export type Frontmatter = {
   author: string;
   pubDate: Date;
   description?: string;
-  image?: {
+  image: {
     src: string;
     alt: string;
   };
@@ -13,7 +13,7 @@ export type Frontmatter = {
   series?: string;
 };
 
-export type Blog = {
+export type BlogPost = {
   frontmatter: Frontmatter;
   content: string;
   slug: string;

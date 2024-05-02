@@ -1,8 +1,8 @@
-import { buttonVariants } from "./ui/button";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import { SupportButton } from "./SupportButton";
+import { Button } from "./ui/button";
 import { siteConfig } from "@/config/site";
-import { capitalize, cn } from "@/lib/utils";
-import { DonateButton } from "./DonateButton";
+import { capitalize } from "@/lib/utils";
 
 const socialIconSize = "h-6 w-6";
 const supportIconSize = "h-7 w-7";
@@ -28,18 +28,13 @@ export function SocialLinks() {
           target="_blank"
           rel="noreferrer"
         >
-          <div
-            className={cn(
-              buttonVariants({ variant: "ghost" }),
-              "w-10 px-0 text-foreground",
-            )}
-          >
+          <Button className="w-10 px-0 text-foreground" variant="ghost">
             {socialIcons[i]}
             <span className="sr-only">{capitalize(socialNames[i])}</span>
-          </div>
+          </Button>
         </a>
       ))}
-      <DonateButton className={supportIconSize} />
+      <SupportButton className={supportIconSize} />
     </>
   );
 }
