@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import CategoryBadge from "./CategoryBadge";
 import { formatDate } from "@/lib/utils";
 
 type BlogCardProps = {
@@ -22,10 +23,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
     <Card>
       <CardHeader>
         <div className="flex text-sm font-semibold">
-          {/*// todo: turn to button */}
-          <span className="rounded-sm bg-accent px-3 py-1 text-white/90 transition-colors duration-300 hover:bg-danger/80 hover:text-white/80">
-            {category.toUpperCase()}
-          </span>
+          <CategoryBadge>{category.toUpperCase()}</CategoryBadge>
         </div>
         <Link href={`/blog/${slug}`}>
           <Image

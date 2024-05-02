@@ -16,7 +16,6 @@ export default async function Blog() {
   return (
     <main className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
       <h1 className="inline-block text-4xl font-black lg:text-5xl">Blog</h1>
-
       <section className="py-10">
         <h2 className="text-3xl">Letzte Blogs</h2>
         <ul className="list-none py-2 pl-0">
