@@ -1,12 +1,12 @@
-type KebabCaseHighlighterProps = {
+type CamelCaseHighlighterProps = {
   text: string;
   accentColor?: string;
 };
 
-export function KebabCaseHighlighter({
+export function CamelCaseHighlighter({
   text,
   accentColor = "text-accent",
-}: KebabCaseHighlighterProps) {
+}: CamelCaseHighlighterProps) {
   const words = text.match(/[A-Z]?[a-z]+|[A-Z]+(?![a-z])/g) || [];
 
   return (

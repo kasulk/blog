@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Branding, NavLink } from ".";
-import { capitalize } from "@/lib/utils";
+import { capitalize, spacifyCamelCase } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
 export function MainNav() {
@@ -17,7 +17,7 @@ export function MainNav() {
           page={page}
           className="hidden sm:inline-block"
         >
-          {capitalize(page)}
+          {spacifyCamelCase(capitalize(page))}
         </NavLink>
       ))}
     </nav>
