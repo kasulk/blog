@@ -9,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CategoryBadge from "./CategoryBadge";
-import { formatDate } from "@/lib/utils";
+import { formatDate, createImageCreditsTag } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 type BlogCardProps = {
   blog: BlogPost;
@@ -18,6 +19,7 @@ type BlogCardProps = {
 export default function BlogCard({ blog }: BlogCardProps) {
   const { frontmatter, slug } = blog;
   const { title, description, author, pubDate, image, category } = frontmatter;
+  const blogImageDir = siteConfig.dir.blogImages;
 
   return (
     <Card>
@@ -27,10 +29,11 @@ export default function BlogCard({ blog }: BlogCardProps) {
             {category.toUpperCase()}
           </CategoryBadge>
         </div>
-        <Link href={`/blog/${slug}`}>
+        <Link href={`/blog/${slug}`} className="no-underline">
           <Image
-            src={image?.src}
+            src={`${blogImageDir}/${image?.file}`}
             alt={image?.alt}
+            title={image.credits && createImageCreditsTag(image.credits)}
             width={1280}
             height={200}
             className="my-0"
