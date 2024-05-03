@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { getBlogs } from "./blogFetchers";
-import { siteConfig } from "@/config/site";
-import { formatBlogs } from "./formatBlogs";
 import BlogCard from "@/components/BlogCard";
+import { getBlogs } from "./blogFetchers";
+import { formatBlogs } from "./formatBlogs";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: `Mein Blog | ${siteConfig.name}`,

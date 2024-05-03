@@ -18,8 +18,8 @@ export function formatBlogs(
 ): BlogPost[] {
   // filter drafts/future posts
   const filteredBlogs = blogs.reduce<BlogPost[]>((acc, blog) => {
-    const { pubDate, isPublished } = blog.frontmatter;
-    if (filterOutDrafts && !isPublished) return acc;
+    const { pubDate, isDraft } = blog.frontmatter;
+    if (filterOutDrafts && isDraft) return acc;
     if (filterOutFuturePosts && new Date(pubDate) > new Date()) return acc;
     acc.push(blog);
     return acc;

@@ -4,10 +4,14 @@ export type Frontmatter = {
   pubDate: Date;
   description?: string;
   image: {
-    src: string;
+    file: string;
     alt: string;
+    credits?: {
+      creator?: string;
+      source?: string;
+    };
   };
-  isPublished: boolean;
+  isDraft: boolean;
   category: string;
   tags: string[];
   series?: string;
