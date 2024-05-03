@@ -14,7 +14,7 @@ type BlogPageProps = {
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
 
-  if (!blog || !blog.frontmatter.isPublished) notFound();
+  if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter } = blog;
   const { title, author, pubDate } = frontmatter;

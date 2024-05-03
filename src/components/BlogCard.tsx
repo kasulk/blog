@@ -31,7 +31,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
         </div>
         <Link href={`/blog/${slug}`} className="no-underline">
           <Image
-            src={`${blogImageDir}/${image?.fileName}`}
+            src={`${blogImageDir}/${image?.file}`}
             alt={image?.alt}
             title={image.credits && createImageCreditsTag(image.credits)}
             width={1280}
