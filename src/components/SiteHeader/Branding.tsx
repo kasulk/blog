@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CamelCaseHighlighter } from "../CamelCaseHighlighter";
 import { siteConfig } from "@/config/site";
 
@@ -5,10 +6,10 @@ const branding = `${siteConfig.name}${siteConfig.type.toUpperCase()}`;
 
 export function Branding() {
   return (
-    <div className="flex space-x-2">
-      <span className="font-bold">
+    <Link href="/" className="flex items-center space-x-2">
+      <span className="font-bold sm:text-lg md:text-xl">
         <CamelCaseHighlighter text={branding} />
       </span>
-    </div>
+    </Link>
   );
 }

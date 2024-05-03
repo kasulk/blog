@@ -24,7 +24,7 @@ export function SupportButton({ className }: SupportButtonProps) {
             className="w-10 px-0 text-accent hover:text-white"
             variant="ghost"
           >
-            <Link href="/donate">
+            <Link href="/support">
               <HeartFilledIcon className={className} />
               <span className="sr-only">{tooltipContent}</span>
             </Link>
