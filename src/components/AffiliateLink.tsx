@@ -21,7 +21,11 @@ export function AffiliateLink({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <a href={href} target="_blank">
+          <a
+            href={href}
+            target="_blank"
+            className="font-bold text-warning-600 hover:text-warning-700 dark:text-warning/90 dark:hover:text-warning/70"
+          >
             {children}
           </a>
           <span className="sr-only">{tooltip}</span>*
