@@ -22,31 +22,34 @@ export default function BlogCard({ blog }: BlogCardProps) {
   const blogImageDir = siteConfig.dir.blogImages;
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <div className="flex text-sm font-semibold">
           <CategoryBadge className="rounded-b-none">
             {category.toUpperCase()}
           </CategoryBadge>
         </div>
-        <Link href={`/blog/${slug}`} className="no-underline">
+        <Link
+          href={`/blog/${slug}`}
+          className="relative h-36 no-underline sm:h-48"
+        >
           <Image
             src={`${blogImageDir}/${image?.file}`}
             alt={image?.alt}
             title={image.credits && createImageCreditsTag(image.credits)}
-            width={1280}
-            height={200}
-            className="my-0"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="my-0 object-cover"
           />
         </Link>
         <CardTitle>{title}</CardTitle>
-        <CardDescription className="my-0 flex flex-col sm:flex-row">
+        <CardDescription className="my-0 flex flex-col sm:flex-row sm:space-x-2">
           <span className="whitespace-nowrap">
             {formatDate(pubDate, "de-DE")}
           </span>
-          <span className="mx-2 hidden sm:inline-block">•</span>
+          <span className="hidden sm:inline-block">•</span>
           <Link href="#" className="whitespace-nowrap no-underline">
-            {author}
+            {author === "icke" ? siteConfig.owner : author}
           </Link>
         </CardDescription>
       </CardHeader>
