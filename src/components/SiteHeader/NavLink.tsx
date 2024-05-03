@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 type NavLinkProps = {
   page: string;
@@ -24,7 +23,7 @@ export function NavLink({
     <Link
       href={href}
       className={cn(
-        `${className} text-sm font-medium transition-colors hover:text-primary`,
+        `${className}  whitespace-nowrap font-medium transition-colors hover:text-primary`,
         pathname === `/${page === "home" ? "" : page}`
           ? "text-foreground"
           : "text-foreground/60",

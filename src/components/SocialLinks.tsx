@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 import { capitalize } from "@/lib/utils";
 
 const socialIconSize = "h-6 w-6";
-const supportIconSize = "h-7 w-7";
+const supportIconSize = "h-6 w-6 sm:h-7 w-7";
 const socialIcons = [
   <GitHubLogoIcon key="github" className={socialIconSize} />,
   <LinkedInLogoIcon key="linkedin" className={socialIconSize} />,

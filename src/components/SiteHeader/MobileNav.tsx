@@ -12,32 +12,39 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          className="w-10 px-0 hover:text-white sm:hidden"
-        >
-          <HamburgerMenuIcon className="h-5 w-5" />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="right">
-        <NavLink onOpenChange={setOpen} page="/" className="flex items-center">
-          <Branding />
-        </NavLink>
-        <div className="mt-3 flex flex-col gap-3">
-          {siteConfig.pages.map((page, i) => (
-            <NavLink
-              key={`mobile-nav-link-${i}`}
-              onOpenChange={setOpen}
-              page={page}
-            >
-              {spacifyCamelCase(capitalize(page))}
-            </NavLink>
-          ))}
-        </div>
-      </SheetContent>
-    </Sheet>
+    <nav className="flex items-center">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <Button
+            variant="ghost"
+            className="w-10 px-0 hover:text-white sm:hidden"
+          >
+            <HamburgerMenuIcon className="h-5 w-5" />
+            <span className="sr-only">Toggle Menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="right">
+          <NavLink
+            onOpenChange={setOpen}
+            page="/"
+            className="flex items-center"
+          >
+            <Branding />
+          </NavLink>
+          <div className="mt-12 flex flex-col space-y-8">
+            {siteConfig.pages.map((page, i) => (
+              <NavLink
+                key={`mobile-nav-link-${i}`}
+                onOpenChange={setOpen}
+                page={page}
+                className="text-xl"
+              >
+                {spacifyCamelCase(capitalize(page))}
+              </NavLink>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
+    </nav>
   );
 }

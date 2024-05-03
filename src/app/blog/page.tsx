@@ -15,9 +15,11 @@ export default async function Blog() {
 
   return (
     <main className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
-      <h1 className="inline-block text-4xl font-black lg:text-5xl">Blog</h1>
+      <h1 className="inline-block text-3xl font-black sm:text-4xl lg:text-5xl">
+        Blog
+      </h1>
       <section>
-        <h2 className="text-3xl">Letzte Blogs</h2>
+        <h2 className="mb-0 text-2xl sm:mb-2 md:text-3xl">Letzte Blogs</h2>
         <ul className="list-none py-2 pl-0">
           {formattedBlogs.map((blog) => (
             <li
