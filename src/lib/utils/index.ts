@@ -4,3 +4,4 @@ export * from "./capitalize";
 export * from "./formatDate";
 export * from "./getInitials";
 export * from "./spacifyCamelCase";
+export * from "./createImageCreditsTag";

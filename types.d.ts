@@ -5,8 +5,11 @@ export type Frontmatter = {
   description?: string;
   image: {
     fileName: string;
-    credits?: string;
     alt: string;
+    credits?: {
+      creator?: string;
+      source?: string;
+    };
   };
   isPublished: boolean;
   category: string;

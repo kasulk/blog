@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import CategoryBadge from "./CategoryBadge";
-import { formatDate } from "@/lib/utils";
+import { formatDate, createImageCreditsTag } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
 type BlogCardProps = {
@@ -33,7 +33,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
           <Image
             src={`${blogImageDir}/${image?.fileName}`}
             alt={image?.alt}
-            title={image?.credits}
+            title={image.credits && createImageCreditsTag(image.credits)}
             width={1280}
             height={200}
             className="my-0"
