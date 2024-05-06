@@ -20,7 +20,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   const { title, author, pubDate } = frontmatter;
 
   return (
-    <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+    <article className="prose mx-auto max-w-3xl py-6 dark:prose-invert">
       <h1>{title}</h1>
       <p className="flex justify-end space-x-1">
         <Link href="#" className="no-underline">
