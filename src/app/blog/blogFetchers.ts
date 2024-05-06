@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { siteConfig } from "@/config/site";
+import { sortObjectKeys } from "@/lib/utils";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
@@ -45,7 +46,7 @@ export function getCategoriesWithCounts(blogs: BlogPost[]): {
     else catsWithCounts[category] = 1;
   });
 
-  return catsWithCounts;
+  return sortObjectKeys(catsWithCounts);
 }
 
 async function getBlogByFilePath(filePath: string): Promise<BlogPost> {

@@ -24,9 +24,9 @@ export function BlogCard({ blog }: BlogCardProps) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <div className="flex">
+        <Link href={`/blog/category/${category}`} className="flex no-underline">
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
-        </div>
+        </Link>
         <Link
           href={`/blog/${slug}`}
           className="relative h-36 no-underline sm:h-48"

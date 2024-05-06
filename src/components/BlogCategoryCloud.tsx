@@ -16,7 +16,7 @@ export default async function BlogCategoryCloud() {
         <li key={`category-${i + 1}`}>
           <Link
             className="no-underline"
-            href={`/category/${slugify(category)}/`}
+            href={`/blog/category/${slugify(category)}/`}
           >
             <CategoryBadge>
               <span>{category}</span>&nbsp;
