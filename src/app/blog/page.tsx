@@ -14,10 +14,10 @@ export default async function Blog() {
   const formattedBlogs = formatBlogs(blogs);
 
   return (
-    <section className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+    <>
       <BlogPageHeader />
       <h2 className="mb-0 text-2xl sm:mb-2 md:text-3xl">Letzte Blogs</h2>
       <BlogPostsList blogs={formattedBlogs} />
-    </section>
+    </>
   );
 }
