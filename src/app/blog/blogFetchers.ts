@@ -33,6 +33,21 @@ export async function getBlogsByCategory(
   return blogsByCategory;
 }
 
+export function getCategoriesWithCounts(blogs: BlogPost[]): {
+  [key: string]: number;
+} {
+  const catsWithCounts: { [key: string]: number } = {};
+
+  blogs.forEach((blog) => {
+    const category = blog.frontmatter.category;
+
+    if (catsWithCounts[category]) catsWithCounts[category]++;
+    else catsWithCounts[category] = 1;
+  });
+
+  return catsWithCounts;
+}
+
 async function getBlogByFilePath(filePath: string): Promise<BlogPost> {
   const fileContent = fs.readFileSync(filePath, "utf8");
   const slug = path.parse(filePath).name;
