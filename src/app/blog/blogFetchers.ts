@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { siteConfig } from "@/config/site";
+import { sortObjectKeys } from "@/lib/utils";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
@@ -20,6 +21,32 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   const blog = allBlogs.find((blog) => blog.slug === slug);
 
   return blog || null;
+}
+
+export async function getBlogsByCategory(
+  category: string,
+): Promise<BlogPost[]> {
+  const allBlogs = await getBlogs();
+  const blogsByCategory = allBlogs.filter(
+    (blog) => blog.frontmatter.category === category,
+  );
+
+  return blogsByCategory;
+}
+
+export function getCategoriesWithCounts(blogs: BlogPost[]): {
+  [key: string]: number;
+} {
+  const catsWithCounts: { [key: string]: number } = {};
+
+  blogs.forEach((blog) => {
+    const category = blog.frontmatter.category;
+
+    if (catsWithCounts[category]) catsWithCounts[category]++;
+    else catsWithCounts[category] = 1;
+  });
+
+  return sortObjectKeys(catsWithCounts);
 }
 
 async function getBlogByFilePath(filePath: string): Promise<BlogPost> {

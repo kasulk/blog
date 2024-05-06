@@ -10,6 +10,7 @@ export const siteConfig = {
     blogs: "src/content/blogs",
     blogImages: "/img/blogs",
   },
+  showCategoryCount: true,
 
   links: {
     personalSite: "https://danielkaser.de",
