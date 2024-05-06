@@ -16,7 +16,7 @@ type BlogCardProps = {
   blog: BlogPost;
 };
 
-export default function BlogCard({ blog }: BlogCardProps) {
+export function BlogCard({ blog }: BlogCardProps) {
   const { frontmatter, slug } = blog;
   const { title, description, author, pubDate, image, category } = frontmatter;
   const blogImageDir = siteConfig.dir.blogImages;
