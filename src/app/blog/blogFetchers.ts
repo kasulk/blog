@@ -22,6 +22,17 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   return blog || null;
 }
 
+export async function getBlogsByCategory(
+  category: string,
+): Promise<BlogPost[]> {
+  const allBlogs = await getBlogs();
+  const blogsByCategory = allBlogs.filter(
+    (blog) => blog.frontmatter.category === category,
+  );
+
+  return blogsByCategory;
+}
+
 async function getBlogByFilePath(filePath: string): Promise<BlogPost> {
   const fileContent = fs.readFileSync(filePath, "utf8");
   const slug = path.parse(filePath).name;
