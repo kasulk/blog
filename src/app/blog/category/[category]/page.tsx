@@ -15,14 +15,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const formattedBlogs = formatBlogs(blogsByCategory);
 
   return (
-    <section className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+    <>
       <BlogPageHeader />
       <h2 className="mb-0 flex flex-col text-2xl sm:mb-2 md:text-3xl">
         <span>Letzte Blogs in der Kategorie</span>
         <span className="text-accent">{category.toUpperCase()}</span>
       </h2>
       <BlogPostsList blogs={formattedBlogs} />
-    </section>
+    </>
   );
 }
 
