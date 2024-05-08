@@ -16,12 +16,15 @@ type AffliateLinkProps = {
 type Affiliates = { [key: string]: string };
 
 export function AffiliateLink({
-  partner,
   href,
+  partner,
   tooltip = siteConfig.links.affiliate._defaultTooltip,
   children,
 }: AffliateLinkProps) {
   //
+  if (!href && !partner)
+    throw new Error(siteConfig.errors.noAffiliateLinkProps);
+
   const affiliates: Affiliates = siteConfig.links.affiliate;
   if (partner) href = affiliates[partner];
 

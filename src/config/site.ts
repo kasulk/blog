@@ -38,6 +38,11 @@ export const siteConfig = {
         "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
     },
   },
+
+  errors: {
+    noAffiliateLinkProps:
+      "Bitte 'href' ODER 'partner' angeben! (AffiliateLink) \n\n=> <AffiliateLink partner={amazon}>Amazon</AffiliateLink> \nODER: \n=> <AffiliateLink href={https://amazon.de/>}>Amazon</AffiliateLink>",
+  },
 };
 
 export type SiteConfig = typeof siteConfig;
