@@ -20,8 +20,6 @@ export const siteConfig = {
       codewars: "https://www.codewars.com/users/kasulk",
     },
     affiliate: {
-      _defaultTooltip:
-        "Affiliate-Link ❤ Wenn du über diesen Link kaufst, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
       amazon: "",
       bondora: "",
       honeypot: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
@@ -32,16 +30,30 @@ export const siteConfig = {
       tradeRepublic: "https://ref.trade.re/7g7k9z1g",
       twino: "",
     },
+  },
 
-    docs: {
-      arrayMap:
-        "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
+  docs: {
+    arrayMap:
+      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
+  },
+
+  defaultTooltips: {
+    affiliate: {
+      order:
+        "Affiliate-Link ❤ Wenn du über diesen Link bestellst, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
+      register:
+        "Affiliate-Link ❤ Wenn du dich über diesen Link anmeldest, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
     },
   },
 
   errors: {
-    noAffiliateLinkProps:
-      "Bitte 'href' ODER 'partner' angeben! (AffiliateLink) \n\n=> <AffiliateLink partner={amazon}>Amazon</AffiliateLink> \nODER: \n=> <AffiliateLink href={https://amazon.de/>}>Amazon</AffiliateLink>",
+    AffiliateLink: {
+      missingHrefOrPartner:
+        "Bitte 'href' ODER 'partner' angeben! (AffiliateLink) \n\n=> <AffiliateLink partner={amazon}>Amazon</AffiliateLink> \nODER: \n=> <AffiliateLink href='https://amazon.de/'}>Amazon</AffiliateLink>",
+      missingTypeOrTooltip:
+        "Bitte 'type' ODER 'tooltip' angeben! (AffiliateLink) \n\n=> <AffiliateLink type='order'>Some Shop</AffiliateLink> \nODER: \n=> <AffiliateLink type='register'>Some Account</AffiliateLink> \n\nODER: \n<AffiliateLink tooltip='Ein cooler Tootip!'>Amazon</AffiliateLink>",
+      wrongType: "Falscher 'type'",
+    },
   },
 };
 

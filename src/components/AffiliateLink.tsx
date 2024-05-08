@@ -7,6 +7,7 @@ import {
 import { siteConfig } from "@/config/site";
 
 type AffliateLinkProps = {
+  type?: "order" | "register";
   href?: string;
   partner?: string;
   tooltip?: string;
@@ -15,17 +16,28 @@ type AffliateLinkProps = {
 
 type Affiliates = { [key: string]: string };
 
+const { links } = siteConfig;
+const errors = siteConfig.errors.AffiliateLink;
+const tooltips = siteConfig.defaultTooltips.affiliate;
+
 export function AffiliateLink({
   href,
   partner,
-  tooltip = siteConfig.links.affiliate._defaultTooltip,
+  type,
+  tooltip,
   children,
 }: AffliateLinkProps) {
-  //
-  if (!href && !partner)
-    throw new Error(siteConfig.errors.noAffiliateLinkProps);
+  // get tooltip content
+  if (!type && !tooltip) throw new Error(errors.missingTypeOrTooltip);
+  if (!tooltip) {
+    if (type === "order") tooltip = tooltips.order;
+    else if (type === "register") tooltip = tooltips.register;
+    else throw new Error(`${errors.wrongType}: '${type}'`);
+  }
 
-  const affiliates: Affiliates = siteConfig.links.affiliate;
+  // get link/href
+  if (!href && !partner) throw new Error(errors.missingHrefOrPartner);
+  const affiliates: Affiliates = links.affiliate;
   if (partner) href = affiliates[partner];
 
   return (
