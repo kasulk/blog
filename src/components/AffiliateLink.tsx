@@ -7,16 +7,24 @@ import {
 import { siteConfig } from "@/config/site";
 
 type AffliateLinkProps = {
-  href: string;
+  href?: string;
+  partner?: string;
   tooltip?: string;
   children?: React.ReactNode;
 };
 
+type Affiliates = { [key: string]: string };
+
 export function AffiliateLink({
+  partner,
   href,
   tooltip = siteConfig.links.affiliate._defaultTooltip,
   children,
 }: AffliateLinkProps) {
+  //
+  const affiliates: Affiliates = siteConfig.links.affiliate;
+  if (partner) href = affiliates[partner];
+
   return (
     <TooltipProvider>
       <Tooltip>

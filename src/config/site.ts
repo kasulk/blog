@@ -21,7 +21,7 @@ export const siteConfig = {
     },
     affiliate: {
       _defaultTooltip:
-        "Affiliate-Link: Wenn du ueber diesen Link kaufst, kannst du mich ohne Mehrkosten fuer dich unterstuetzen!",
+        "Affiliate-Link ❤ Wenn du über diesen Link kaufst, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
       amazon: "",
       bondora: "",
       honeypot: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
