@@ -7,16 +7,39 @@ import {
 import { siteConfig } from "@/config/site";
 
 type AffliateLinkProps = {
-  href: string;
+  type?: "order" | "register";
+  href?: string;
+  partner?: string;
   tooltip?: string;
   children?: React.ReactNode;
 };
 
+type Affiliates = { [key: string]: string };
+
+const { links } = siteConfig;
+const errors = siteConfig.errors.AffiliateLink;
+const tooltips = siteConfig.defaultTooltips.affiliate;
+
 export function AffiliateLink({
   href,
-  tooltip = siteConfig.links.affiliate._defaultTooltip,
+  partner,
+  type,
+  tooltip,
   children,
 }: AffliateLinkProps) {
+  // get tooltip content
+  if (!type && !tooltip) throw new Error(errors.missingTypeOrTooltip);
+  if (!tooltip) {
+    if (type === "order") tooltip = tooltips.order;
+    else if (type === "register") tooltip = tooltips.register;
+    else throw new Error(`${errors.wrongType}: '${type}'`);
+  }
+
+  // get link/href
+  if (!href && !partner) throw new Error(errors.missingHrefOrPartner);
+  const affiliates: Affiliates = links.affiliate;
+  if (partner) href = affiliates[partner];
+
   return (
     <TooltipProvider>
       <Tooltip>
