@@ -23,11 +23,11 @@ export const siteConfig = {
 
   errors: {
     AffiliateLink: {
-      missingHrefOrPartner:
-        "Bitte 'href' ODER 'partner' angeben! (AffiliateLink) \n\n=> <AffiliateLink partner={amazon}>Amazon</AffiliateLink> \nODER: \n=> <AffiliateLink href='https://amazon.de/'}>Amazon</AffiliateLink>",
+      notFoundPartner:
+        "Affiliate-Partner nicht gefunden! \nPartner muss in camelCase uebergeben werden. \nBitte 'partner' ueberpruefen! (AffiliateLink) \n\n=> <AffiliateLink partner='amazon'>Amazon</AffiliateLink>",
       missingTypeOrTooltip:
         "Bitte 'type' ODER 'tooltip' angeben! (AffiliateLink) \n\n=> <AffiliateLink type='order'>Some Shop</AffiliateLink> \nODER: \n=> <AffiliateLink type='register'>Some Account</AffiliateLink> \n\nODER: \n<AffiliateLink tooltip='Ein cooler Tootip!'>Amazon</AffiliateLink>",
-      wrongType: "Falscher 'type'",
+      wrongType: "Falscher Affiliate-'type'",
     },
   },
 };

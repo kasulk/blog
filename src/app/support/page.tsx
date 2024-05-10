@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { links } from "@/config/links";
-import { slugify } from "@/lib/utils";
+import { camelCasify, slugify } from "@/lib/utils";
+import { AffiliateLink } from "@/components";
 
 export const metadata: Metadata = {
   title: `Support | ${siteConfig.name}`,
@@ -17,6 +18,7 @@ export default function SupportPage() {
         Wenn dir dieser Blog gefaellt, freue ich mich, wenn du uns (den Blog und
         mich) unterstuetzt.
       </p>
+
       <h2>How it works</h2>
       <p>Im Folgenden findest Inspirationen, wie du das tun kannst.</p>
       <p>Im Grunde gibt es 3 Moeglichkeiten:</p>
@@ -35,6 +37,7 @@ export default function SupportPage() {
           </Link>
         </li>
       </ol>
+
       <h3 id="affiliate-links">Affiliate-Links</h3>
       <p>
         Affiliate-Links sind Links, bei denen ich eine kleine Provision bekomme
@@ -47,6 +50,15 @@ export default function SupportPage() {
       </p>
       <p>Hier findest du eine Liste mit Affiliate-Links:</p>
       <div>Anbieter | Beschreibung | Bonus fuer mich | Bonus fuer dich</div>
+
+      <ul className="list-none">
+        {links.affiliate.map(({ name }) => (
+          <li key={`${slugify(name)}-affiliate-link`}>
+            <AffiliateLink partner={camelCasify(name)} />
+          </li>
+        ))}
+      </ul>
+
       <h3 id="spenden">Spenden</h3>
       <p>
         Eine weitere Moeglichkeit den Blog zu unterstuetzen sind Spenden.
@@ -59,6 +71,7 @@ export default function SupportPage() {
           </li>
         ))}
       </ol>
+
       <h3 id="merchandise">Merchandise (coming soon...)</h3>
       <p>
         Ich hab ein paar geile Ideen fuer T-Shirts und Tassen auf der Pfanne!

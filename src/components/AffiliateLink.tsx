@@ -1,60 +1,56 @@
+import type { AffiliateType } from "@/../types";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { links } from "@/config/links";
 import { siteConfig } from "@/config/site";
+import { camelCasify, dashify } from "@/lib/utils";
 
 type AffliateLinkProps = {
-  type?: "order" | "register";
-  href?: string;
-  partner?: string;
+  partner: string;
   tooltip?: string;
   children?: React.ReactNode;
 };
 
-type Affiliates = { [key: string]: string };
-
-const { links } = siteConfig;
 const errors = siteConfig.errors.AffiliateLink;
 const tooltips = siteConfig.defaultTooltips.affiliate;
 
 export function AffiliateLink({
-  href,
   partner,
-  type,
   tooltip,
   children,
 }: AffliateLinkProps) {
-  // get tooltip content
-  if (!type && !tooltip) throw new Error(errors.missingTypeOrTooltip);
-  if (!tooltip) {
-    if (type === "order") tooltip = tooltips.order;
-    else if (type === "register") tooltip = tooltips.register;
-    else throw new Error(`${errors.wrongType}: '${type}'`);
-  }
+  //
+  const foundPartner = links.affiliate.find(
+    ({ name }) => camelCasify(name) === partner,
+  );
 
-  // get link/href
-  if (!href && !partner) throw new Error(errors.missingHrefOrPartner);
-  const affiliates: Affiliates = links.affiliate;
-  if (partner) href = affiliates[partner];
+  if (!foundPartner) throw new Error(`'${partner}'\n${errors.notFoundPartner}`);
+  const { name, url, type } = foundPartner;
+
+  const defaultTooltip = tooltips[type as AffiliateType];
+  if (!defaultTooltip) throw new Error(`${errors.wrongType}: '${type}'`);
+
+  tooltip = tooltip || defaultTooltip;
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
           <a
-            href={href}
+            href={url}
             target="_blank"
             className="font-bold text-warning-600 hover:text-warning-700 dark:text-warning/90 dark:hover:text-warning/70"
           >
-            {children}
+            {children ? children : name}
           </a>
-          <span className="sr-only">{tooltip}</span>*
+          <span className="sr-only">{`${dashify(name)}-${tooltip}`}</span>*
         </TooltipTrigger>
         <TooltipContent>
-          <p className="my-0">{tooltip}</p>
+          <p className="my-0">{`${dashify(name)}-${tooltip}`}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
