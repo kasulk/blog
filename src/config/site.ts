@@ -2,7 +2,7 @@
 export const siteConfig = {
   name: "kasulks",
   type: "blog",
-  url: "https://kasulks-blog.vercell.app",
+  url: "https://kasulks-blog.vercel.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
   pages: ["blog", "projekte", "support", "aboutMe"],
@@ -11,43 +11,6 @@ export const siteConfig = {
     blogImages: "/img/blogs",
   },
   showCategoryCount: true,
-
-  links: {
-    personalSite: "https://danielkaser.de",
-    social: {
-      github: "https://github.com/kasulk",
-      linkedin: "https://linkedin.com/in/kasulk",
-      codewars: "https://www.codewars.com/users/kasulk",
-    },
-    affiliate: {
-      amazon: "",
-      bondora: "",
-      honeypot: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
-      ib: "https://ibkr.com/referral/daniel471",
-      lande: "https://lande.finance?referral=F7QGGIB",
-      mintos: "",
-      swaper: "",
-      tradeRepublic: "https://ref.trade.re/7g7k9z1g",
-      twino: "",
-    },
-    donate: {
-      paypal: {
-        name: "PayPal",
-        description: "",
-        url: "",
-      },
-      buymeacoffee: {
-        name: "Buy Me a Coffee",
-        description: "",
-        url: "",
-      },
-    },
-  },
-
-  docs: {
-    arrayMap:
-      "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
-  },
 
   defaultTooltips: {
     affiliate: {

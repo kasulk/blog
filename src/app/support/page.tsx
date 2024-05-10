@@ -1,13 +1,13 @@
+import Link from "next/link";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import Link from "next/link";
+import { links } from "@/config/links";
+import { slugify } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `Support | ${siteConfig.name}`,
   description: "Unterstütze diesen Blog!",
 };
-
-const donateLinks = siteConfig.links.donate;
 
 export default function SupportPage() {
   return (
@@ -53,8 +53,8 @@ export default function SupportPage() {
         Spenden kannst du z.B. senden ueber:
       </p>
       <ol>
-        {Object.values(donateLinks).map(({ name, url }, i) => (
-          <li key={`donate-link-${i + 1}`}>
+        {links.donate.map(({ name, url }) => (
+          <li key={`${slugify(name)}-link`}>
             <Link href={url}>{name}</Link>
           </li>
         ))}
