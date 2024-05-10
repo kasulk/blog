@@ -30,6 +30,18 @@ export const siteConfig = {
       tradeRepublic: "https://ref.trade.re/7g7k9z1g",
       twino: "",
     },
+    donate: {
+      paypal: {
+        name: "PayPal",
+        description: "",
+        url: "",
+      },
+      buymeacoffee: {
+        name: "Buy Me a Coffee",
+        description: "",
+        url: "",
+      },
+    },
   },
 
   docs: {
