@@ -17,7 +17,7 @@ export const siteConfig = {
       order:
         "Affiliate-Link ❤ Wenn du über diesen Link bestellst, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
       register:
-        "Affiliate-Link ❤ Wenn du dich über diesen Link anmeldest, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
+        "Affiliate-Link ❤ Wenn du dich über diesen Link registrierst, unterstützt du meine Arbeit! (ohne Mehrkosten für dich)",
     },
   },
 
