@@ -10,7 +10,7 @@ export function MainNav() {
       {siteConfig.pages.map((page, i) => (
         <NavLink
           key={`main-nav-link-${i}`}
-          page={page}
+          page={page.toLowerCase()}
           className="hidden sm:inline-block md:text-xl"
         >
           {spacifyCamelCase(capitalize(page))}

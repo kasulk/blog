@@ -36,7 +36,7 @@ export function MobileNav() {
               <NavLink
                 key={`mobile-nav-link-${i}`}
                 onOpenChange={setOpen}
-                page={page}
+                page={page.toLowerCase()}
                 className="text-xl"
               >
                 {spacifyCamelCase(capitalize(page))}
