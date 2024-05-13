@@ -2,7 +2,7 @@
 
 import { NavLink } from ".";
 import { capitalize, spacifyCamelCase } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 export function MainNav() {
   return (

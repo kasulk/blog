@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CategoryBadge } from "@/components";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 import { getBlogs, getCategoriesWithCounts } from "@/app/blog/blogFetchers";
 import { formatBlogs } from "@/app/blog/formatBlogs";
 import { slugify } from "@/lib/utils";

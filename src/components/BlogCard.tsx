@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { CategoryBadge } from "@/components";
 import { formatDate, createImageCreditsTag } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 type BlogCardProps = {
   blog: BlogPost;

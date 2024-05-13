@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
-import { links } from "@/config/links";
-import { camelCasify, slugify } from "@/lib/utils";
 import { AffiliateLink } from "@/components";
+import { links, siteConfig } from "@/config";
+import { camelCasify, slugify } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `Support | ${siteConfig.name}`,

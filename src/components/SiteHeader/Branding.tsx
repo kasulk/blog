@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CamelCaseHighlighter } from "../CamelCaseHighlighter";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 const branding = `${siteConfig.name}${siteConfig.type.toUpperCase()}`;
 

@@ -1,7 +1,7 @@
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { SupportButton } from "./SupportButton";
 import { Button } from "./ui/button";
-import { links } from "@/config/links";
+import { links } from "@/config";
 import { slugify } from "@/lib/utils";
 
 const socialIconSize = "h-6 w-6";

@@ -5,8 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { links } from "@/config/links";
-import { siteConfig } from "@/config/site";
+import { links, siteConfig } from "@/config";
 import { camelCasify, dashify } from "@/lib/utils";
 
 type AffliateLinkProps = {

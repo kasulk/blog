@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import { AffiliateLink, SupportButton } from "@/components";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 // import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 
 export const customComponents: MDXComponents = {
