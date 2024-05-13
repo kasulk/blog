@@ -33,7 +33,7 @@ export function AffiliateLink({
   const defaultTooltip = tooltips[type as AffiliateType];
   if (!defaultTooltip) throw new Error(`${errors.wrongType}: '${type}'`);
 
-  tooltip = tooltip || defaultTooltip;
+  tooltip = tooltip || `${dashify(name)}-${defaultTooltip}`;
 
   return (
     <TooltipProvider>
@@ -46,10 +46,10 @@ export function AffiliateLink({
           >
             {children ? children : name}
           </a>
-          <span className="sr-only">{`${dashify(name)}-${tooltip}`}</span>*
+          <span className="sr-only">{tooltip}</span>*
         </TooltipTrigger>
         <TooltipContent>
-          <p className="my-0">{`${dashify(name)}-${tooltip}`}</p>
+          <p className="my-0">{tooltip}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

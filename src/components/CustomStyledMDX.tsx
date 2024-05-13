@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import { AffiliateLink, SupportButton } from "@/components";
-import { siteConfig } from "@/config";
+import { links, siteConfig } from "@/config";
 // import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 
 export const customComponents: MDXComponents = {
@@ -33,7 +33,9 @@ export function CustomStyledMDX(props: MDXRemoteProps) {
       // pass custom components through components prop:
       components={{ ...customComponents, ...(props.components || {}) }}
       // pass custom data/variables through options/scope prop:
-      options={{ scope: { ...siteConfig, ...(props.options?.scope || {}) } }}
+      options={{
+        scope: { ...siteConfig, ...links, ...(props.options?.scope || {}) },
+      }}
     />
   );
 }
