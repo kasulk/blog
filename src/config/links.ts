@@ -33,9 +33,25 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Bondora",
+      description: "",
+      url: "",
+      type: "register",
+      category: "Finanzen",
+      subCategory: "P2P-Kredite",
+      rewards: {
+        referrer: "5 Euro",
+        user: "",
+      },
+      payoutOn: "",
+      lastUpdated: new Date("2024-05-13"),
+      blog: "",
+    },
+    {
+      name: "Debitum",
       description: "",
       url: "",
       type: "register",
@@ -47,6 +63,37 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
+    },
+    {
+      name: "Estateguru",
+      description: "",
+      url: "",
+      type: "register",
+      category: "Finanzen",
+      subCategory: "P2P-Kredite",
+      rewards: {
+        referrer: "",
+        user: "",
+      },
+      payoutOn: "",
+      lastUpdated: new Date("2024-05-13"),
+      blog: "",
+    },
+    {
+      name: "Flatex",
+      description: "",
+      url: "",
+      type: "register",
+      category: "Finanzen",
+      subCategory: "Broker",
+      rewards: {
+        referrer: "",
+        user: "",
+      },
+      payoutOn: "",
+      lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Honeypot",
@@ -63,6 +110,7 @@ export const links = {
       payoutOn:
         "Erfolgreicher Anstellung des Geworbenen durch einen Arbeitgeber.",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Interactive Brokers",
@@ -77,6 +125,7 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Lande",
@@ -91,6 +140,7 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Mintos",
@@ -105,6 +155,22 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
+    },
+    {
+      name: "Robocash",
+      description: "",
+      url: "",
+      type: "register",
+      category: "Finanzen",
+      subCategory: "P2P-Kredite",
+      rewards: {
+        referrer: "",
+        user: "",
+      },
+      payoutOn: "",
+      lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Swaper",
@@ -119,6 +185,23 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
+    },
+    {
+      name: "TickTick",
+      description:
+        "Organisiere dein Leben und steigere deine Produktivität mit dieser vielseitigen To-Do-App. Erstelle Aufgaben, Gewohnheiten und Erinnerungen und verfolge deine Fortschritte mit intuitiven Tools.",
+      url: "https://ticktick.com/r?c=t0b238or",
+      type: "register",
+      category: "Produktivität",
+      subCategory: "Todo-App",
+      rewards: {
+        referrer: "1 Monat TickTick-Premium gratis (ca. 3 Euro)",
+        user: "leider z.Zt. nüscht...",
+      },
+      payoutOn: "Buchung einer Premium-Mitgliedschaft durch den Geworbenen.",
+      lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Trade Republic",
@@ -135,6 +218,7 @@ export const links = {
       payoutOn:
         "Investition des Geworbenen innerhalb der ersten 21 Tage nach Kontoeröffung.",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
     {
       name: "Twino",
@@ -149,6 +233,7 @@ export const links = {
       },
       payoutOn: "",
       lastUpdated: new Date("2024-05-13"),
+      blog: "",
     },
   ],
 

@@ -85,6 +85,7 @@ export default function SupportPage() {
             rewards,
             payoutOn,
             lastUpdated,
+            blog,
           }) =>
             url && (
               <li key={`${slugify(name)}-affiliate-link`} className="space-y-2">
@@ -96,7 +97,16 @@ export default function SupportPage() {
                   {category && subCategory && <span className="mx-2">|</span>}
                   <span>{subCategory}</span>
                 </div>
-                {description && <div>{description}</div>}
+                {description && (
+                  <div>
+                    {description}{" "}
+                    {blog && (
+                      <Link href={`blog/${blog}`} className="text-accent">
+                        &rarr; Blog-Artikel lesen
+                      </Link>
+                    )}
+                  </div>
+                )}
                 <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 ">
                   {rewards.referrer && (
                     <div className="sm:flex-1">
