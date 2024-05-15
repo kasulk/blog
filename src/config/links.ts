@@ -196,7 +196,7 @@ export const links = {
       category: "Produktivität",
       subCategory: "Todo-App",
       rewards: {
-        referrer: "1 Monat TickTick-Premium gratis (ca. 3 Euro)",
+        referrer: "1 Monat TickTick-Premium gratis (ca.&nbsp;3&nbsp;Euro)",
         user: "leider z.Zt. nüscht...",
       },
       payoutOn: "Buchung einer Premium-Mitgliedschaft durch den Geworbenen.",

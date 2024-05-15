@@ -99,11 +99,16 @@ export default function SupportPage() {
                 </div>
                 {description && (
                   <div>
-                    {description}{" "}
+                    <div dangerouslySetInnerHTML={{ __html: description }} />{" "}
                     {blog && (
-                      <Link href={`blog/${blog}`} className="text-accent">
-                        &rarr; Blog-Artikel lesen
-                      </Link>
+                      <div className="flex justify-end">
+                        <Link
+                          href={`blog/${blog}`}
+                          className="whitespace-nowrap text-accent"
+                        >
+                          &rarr; Blog-Artikel lesen
+                        </Link>
+                      </div>
                     )}
                   </div>
                 )}
@@ -111,20 +116,22 @@ export default function SupportPage() {
                   {rewards.referrer && (
                     <div className="sm:flex-1">
                       <div className="font-semibold">Bonus für mich:</div>
-                      <div>{rewards.referrer}</div>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: rewards.referrer }}
+                      />
                     </div>
                   )}
                   {rewards.user && (
                     <div className="sm:flex-1">
                       <div className="font-semibold">Bonus für dich:</div>
-                      <div>{rewards.user}</div>
+                      <div dangerouslySetInnerHTML={{ __html: rewards.user }} />
                     </div>
                   )}
                 </div>
                 {payoutOn && (
                   <div>
                     <div className="font-semibold">Auszahlung bei: </div>
-                    <div>{payoutOn}</div>
+                    <div dangerouslySetInnerHTML={{ __html: payoutOn }} />
                   </div>
                 )}
                 <div className="flex justify-end text-sm">
