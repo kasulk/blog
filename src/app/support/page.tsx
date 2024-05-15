@@ -4,8 +4,8 @@ import { siteConfig } from "@/config";
 import {
   SupportDonateSection,
   SupportAffiliateSection,
+  SupportMerchSection,
 } from "@/components/SupportPage/";
-import SupportMerchSection from "@/components/SupportPage/SupportMerchSection";
 
 export const metadata: Metadata = {
   title: `Support | ${siteConfig.name}`,
@@ -44,9 +44,13 @@ export default function SupportPage() {
         </li>
       </ol>
 
-      <SupportDonateSection />
-      <SupportAffiliateSection />
-      <SupportMerchSection />
+      <hr />
+
+      <div className="flex flex-col space-y-12">
+        <SupportDonateSection />
+        <SupportAffiliateSection />
+        <SupportMerchSection />
+      </div>
     </>
   );
 }

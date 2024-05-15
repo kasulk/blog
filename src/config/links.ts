@@ -241,12 +241,14 @@ export const links = {
     {
       name: "PayPal",
       description: "",
-      url: "",
+      url: "https://www.paypal.com/donate/?hosted_button_id=ZQ5D3AFXDA36L",
+      icon: "",
     },
     {
       name: "Buy Me a Coffee",
       description: "",
-      url: "",
+      url: "https://buymeacoffee.com/schokoladenpo",
+      icon: "🥐",
     },
   ],
 
