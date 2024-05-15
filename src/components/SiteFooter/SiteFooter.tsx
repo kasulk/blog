@@ -1,5 +1,5 @@
-import { siteConfig } from "@/config/site";
 import { SocialLinks } from "@/components";
+import { siteConfig } from "@/config";
 
 export function SiteFooter() {
   return (

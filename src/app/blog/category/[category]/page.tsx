@@ -3,7 +3,7 @@ import { BlogPageHeader, BlogPostsList } from "@/components";
 import { getBlogs, getBlogsByCategory } from "@/app/blog/blogFetchers";
 import { formatBlogs } from "@/app/blog/formatBlogs";
 import { capitalize } from "@/lib/utils";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 type CategoryPageProps = {
   params: { category: string };

@@ -6,6 +6,8 @@ export * from "./AffiliateLink";
 export * from "./SupportButton";
 
 export * from "./BlogCard";
+export * from "./BlogCategoryCloud";
 export * from "./BlogPageHeader";
 export * from "./BlogPostsList";
 export * from "./CategoryBadge";
+export * from "./CamelCaseHighlighter";

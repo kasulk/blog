@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Branding, NavLink } from ".";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 import { capitalize, spacifyCamelCase } from "@/lib/utils";
 
 export function MobileNav() {
@@ -36,7 +36,7 @@ export function MobileNav() {
               <NavLink
                 key={`mobile-nav-link-${i}`}
                 onOpenChange={setOpen}
-                page={page}
+                page={page.toLowerCase()}
                 className="text-xl"
               >
                 {spacifyCamelCase(capitalize(page))}

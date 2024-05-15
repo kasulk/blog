@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
-import { siteConfig } from "@/config/site";
 import { Branding } from "@/components/SiteHeader";
+import { links, siteConfig } from "@/config";
 
 // docs: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation
 
@@ -53,7 +53,12 @@ export async function GET(req: NextRequest) {
           <div tw="flex items-center w-full justify-between">
             <div tw="flex text-xl">{siteConfig.url}</div>
             <div tw="flex items-center text-xl">
-              <div tw="flex ml-2">{siteConfig.links.social.github}</div>
+              {/* <div tw="flex ml-2">{links.social.github}</div> */}
+              {links.social.map((link) => (
+                <div key={link.name} tw="flex ml-2">
+                  {link.name}/kasulk
+                </div>
+              ))}
             </div>
           </div>
         </div>

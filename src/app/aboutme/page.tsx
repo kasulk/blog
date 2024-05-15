@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 import { getInitials } from "@/lib/utils";
 
 export const metadata: Metadata = {

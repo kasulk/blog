@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CustomStyledMDX } from "@/components";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { formatDate } from "@/lib/utils";
 

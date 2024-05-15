@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { BlogPageHeader, BlogPostsList } from "@/components";
 import { getBlogs } from "./blogFetchers";
 import { formatBlogs } from "./formatBlogs";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 export const metadata: Metadata = {
   title: `Mein Blog | ${siteConfig.name}`,

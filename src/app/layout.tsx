@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Providers } from "./providers";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 
 if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 
