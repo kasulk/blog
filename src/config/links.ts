@@ -255,3 +255,6 @@ export const links = {
       "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",
   },
 };
+
+export type SiteLinks = typeof links;
+export type AffiliateLinkType = (typeof links.affiliate)[number];
