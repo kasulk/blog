@@ -1,5 +1,8 @@
 export * from "./CustomStyledMDX";
 
+export * from "./Link";
+export * from "./LinkExternal";
+
 export * from "./Callout";
 export * from "./SocialLinks";
 export * from "./AffiliateLink";
