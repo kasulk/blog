@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { BlogPageHeader, BlogPostsList } from "@/components";
+import { PageHeader, H2, BlogPostsList } from "@/components";
 import { getBlogs } from "./blogFetchers";
 import { formatBlogs } from "./formatBlogs";
 import { siteConfig } from "@/config";
@@ -15,8 +15,9 @@ export default async function Blog() {
 
   return (
     <>
-      <BlogPageHeader />
-      <h2 className="mb-0 text-2xl sm:mb-2 md:text-3xl">Letzte Blogs</h2>
+      <PageHeader>Blog</PageHeader>
+
+      <H2>Letzte Blogs</H2>
       <BlogPostsList blogs={formattedBlogs} />
     </>
   );

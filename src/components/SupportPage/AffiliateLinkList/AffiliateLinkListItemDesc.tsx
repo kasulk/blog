@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components";
 
 type Props = {
   description: string;
@@ -12,10 +12,7 @@ export function AffiliateLinkListItemDesc({ description, blog }: Props) {
         <div dangerouslySetInnerHTML={{ __html: description }} />{" "}
         {blog && (
           <div className="flex justify-end">
-            <Link
-              href={`blog/${blog}`}
-              className="whitespace-nowrap text-accent"
-            >
+            <Link href={`blog/${blog}`} className="whitespace-nowrap">
               &rarr; Blog-Artikel lesen
             </Link>
           </div>

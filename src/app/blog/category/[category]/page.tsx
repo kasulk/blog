@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { BlogPageHeader, BlogPostsList } from "@/components";
+import { PageHeader, H2, BlogPostsList } from "@/components";
 import { getBlogs, getBlogsByCategory } from "@/app/blog/blogFetchers";
 import { formatBlogs } from "@/app/blog/formatBlogs";
 import { capitalize } from "@/lib/utils";
@@ -16,11 +16,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <>
-      <BlogPageHeader />
-      <h2 className="mb-0 flex flex-col text-2xl sm:mb-2 md:text-3xl">
+      <PageHeader>Blog</PageHeader>
+
+      <H2 className="flex flex-col">
         <span>Letzte Blogs in der Kategorie</span>
         <span className="text-accent">{category.toUpperCase()}</span>
-      </h2>
+      </H2>
       <BlogPostsList blogs={formattedBlogs} />
     </>
   );

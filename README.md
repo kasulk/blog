@@ -39,4 +39,4 @@ JavaScript &bull; TypeScript &bull; React &bull; Next.js &bull; Tailwind &bull; 
 
 Made with 😋 in Berlin.
 
-[![High Lighthouse score of kasulksBLOG](/img/lighthouse-score-202405.png "High Lighthouse score of kasulksBLOG")](https://googlechrome.github.io/lighthouse/viewer/?psiurl=https%3A%2F%2Fkasulks-blog.vercel.app%2Fblog&strategy=mobile&category=performance&category=accessibility&category=best-practices&category=seo&locale=en-US&utm_source=lh-chrome-ext)
+[![High Lighthouse score of kasulksBLOG](public/img/lighthouse-score-202405.png "High Lighthouse score of kasulksBLOG")](https://googlechrome.github.io/lighthouse/viewer/?psiurl=https%3A%2F%2Fkasulks-blog.vercel.app%2Fblog&strategy=mobile&category=performance&category=accessibility&category=best-practices&category=seo&locale=en-US&utm_source=lh-chrome-ext)

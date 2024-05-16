@@ -3,7 +3,7 @@ import { siteConfig } from "@/config";
 
 export function SiteFooter() {
   return (
-    <footer>
+    <footer className="mt-auto">
       <div className="mb-4 mt-14 flex flex-col items-center">
         <div className="mb-3 flex items-center space-x-4">
           <SocialLinks />

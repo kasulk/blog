@@ -1,27 +1,28 @@
-import Link from "next/link";
 import { Metadata } from "next";
 import { siteConfig } from "@/config";
+import { PageHeader, H2, Link } from "@/components";
 import {
   SupportDonateSection,
   SupportAffiliateSection,
+  SupportMerchSection,
 } from "@/components/SupportPage/";
-import SupportMerchSection from "@/components/SupportPage/SupportMerchSection";
 
 export const metadata: Metadata = {
-  title: `Support | ${siteConfig.name}`,
+  title: `Support Me | ${siteConfig.name}`,
   description: "Unterstütze diesen Blog!",
 };
 
 export default function SupportPage() {
   return (
     <>
-      <h1>Support</h1>
+      <PageHeader>Support Me</PageHeader>
+
       <p>
         Wenn dir dieser Blog gefällt, freue ich mich, wenn du uns (den Blog und
         mich) unterstützt.
       </p>
 
-      <h2>How it works</h2>
+      <H2>How it works</H2>
       <p>Im Folgenden findest Inspirationen, wie du das tun kannst.</p>
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
@@ -44,9 +45,13 @@ export default function SupportPage() {
         </li>
       </ol>
 
-      <SupportDonateSection />
-      <SupportAffiliateSection />
-      <SupportMerchSection />
+      <hr />
+
+      <div className="flex flex-col space-y-12">
+        <SupportDonateSection />
+        <SupportAffiliateSection />
+        <SupportMerchSection />
+      </div>
     </>
   );
 }
