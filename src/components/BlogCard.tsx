@@ -1,5 +1,4 @@
 import type { BlogPost } from "@/../types";
-import Link from "next/link";
 import Image from "next/image";
 import {
   Card,
@@ -8,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CategoryBadge } from "@/components";
+import { Link, CategoryBadge } from "@/components";
 import { formatDate, createImageCreditsTag } from "@/lib/utils";
 import { siteConfig } from "@/config";
 
@@ -24,13 +23,10 @@ export function BlogCard({ blog }: BlogCardProps) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <Link href={`/blog/category/${category}`} className="flex no-underline">
+        <Link href={`/blog/category/${category}`} className="flex">
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
         </Link>
-        <Link
-          href={`/blog/${slug}`}
-          className="relative h-36 no-underline sm:h-48"
-        >
+        <Link href={`/blog/${slug}`} className="relative h-36 sm:h-48">
           <Image
             src={`${blogImageDir}/${image?.file}`}
             alt={image?.alt}
@@ -40,13 +36,20 @@ export function BlogCard({ blog }: BlogCardProps) {
             className="my-0 object-cover"
           />
         </Link>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>
+          <Link
+            href={`/blog/${slug}`}
+            className="text-foreground hover:text-foreground/80"
+          >
+            {title}
+          </Link>
+        </CardTitle>
         <CardDescription className="my-0 flex flex-col sm:flex-row sm:space-x-2">
           <span className="whitespace-nowrap">
             {formatDate(pubDate, "de-DE")}
           </span>
           <span className="hidden sm:inline-block">•</span>
-          <Link href="#" className="whitespace-nowrap no-underline">
+          <Link href="/aboutme" className="whitespace-nowrap">
             {author === "icke" ? siteConfig.owner : author}
           </Link>
         </CardDescription>

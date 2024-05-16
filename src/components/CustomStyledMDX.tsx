@@ -1,8 +1,7 @@
 import type { MDXComponents } from "mdx/types";
-import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import { AffiliateLink, SupportButton } from "@/components";
+import { Link, AffiliateLink, SupportButton } from "@/components";
 import { links, siteConfig } from "@/config";
 // import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 
@@ -13,11 +12,7 @@ export const customComponents: MDXComponents = {
     <blockquote className="mx-4">{children}</blockquote>
   ),
   /// nextjs components
-  Link: ({ children, href }) => (
-    <Link href={href} className="text-accent no-underline hover:text-danger/80">
-      {children}
-    </Link>
-  ),
+  Link: ({ children, href }) => <Link href={href}>{children}</Link>,
   Image,
   /// custom components
   AffiliateLink,
