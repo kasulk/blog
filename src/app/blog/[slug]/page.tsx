@@ -2,7 +2,7 @@ import path from "path";
 import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { H1, CustomStyledMDX } from "@/components";
+import { PageHeader, CustomStyledMDX } from "@/components";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
 import { formatDate } from "@/lib/utils";
@@ -20,8 +20,9 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   const { title, author, pubDate } = frontmatter;
 
   return (
-    <article className="prose mx-auto max-w-3xl dark:prose-invert">
-      <H1>{title}</H1>
+    <article>
+      <PageHeader>{title}</PageHeader>
+
       <p className="flex justify-end space-x-1">
         <Link href="#" className="no-underline">
           {author === "icke" ? siteConfig.owner : author}

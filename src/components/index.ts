@@ -5,6 +5,8 @@ export * from "./Headings";
 export * from "./Link";
 export * from "./LinkExternal";
 
+export * from "./PageHeader";
+
 export * from "./Callout";
 export * from "./SocialLinks";
 export * from "./AffiliateLink";

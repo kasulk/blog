@@ -10,15 +10,12 @@ export default function BlogSectionLayout({
 }: BlogSectionLayoutProps) {
   return (
     <>
-      <section className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
-        {children}
-      </section>
-      <section className="container prose mx-auto flex max-w-3xl py-6 dark:prose-invert">
+      <section>{children}</section>
+      <section>
         <div>
           <H2>Blog Kategorien</H2>
           <BlogCategoryCloud />
         </div>
-        <div></div>
       </section>
     </>
   );
