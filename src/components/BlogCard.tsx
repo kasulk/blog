@@ -45,9 +45,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           </Link>
         </CardTitle>
         <CardDescription className="my-0 flex flex-col sm:flex-row sm:space-x-2">
-          <span className="whitespace-nowrap">
-            {formatDate(pubDate, "de-DE")}
-          </span>
+          <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
           <span className="hidden sm:inline-block">•</span>
           <Link href="/aboutme" className="whitespace-nowrap">
             {author === "icke" ? siteConfig.owner : author}

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/config";
-import { Link } from "@/components";
+import { H1, H2, Link } from "@/components";
 import {
   SupportDonateSection,
   SupportAffiliateSection,
@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <>
-      <h1>Support Me</h1>
+      <H1>Support Me</H1>
       <p>
         Wenn dir dieser Blog gefällt, freue ich mich, wenn du uns (den Blog und
         mich) unterstützt.
       </p>
 
-      <h2>How it works</h2>
+      <H2>How it works</H2>
       <p>Im Folgenden findest Inspirationen, wie du das tun kannst.</p>
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
