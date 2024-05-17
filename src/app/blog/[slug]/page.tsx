@@ -28,7 +28,6 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           source={content}
           options={{ scope: { ...frontmatter } }}
         />
-        <hr className="flex sm:hidden" />
         <footer>
           <BlogRelatedPosts {...params} category={category} />
         </footer>
