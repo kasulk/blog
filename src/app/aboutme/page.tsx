@@ -19,28 +19,33 @@ export default async function AboutMePage() {
       <div className="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start md:gap-16">
         <div className="flex min-w-48 max-w-48 flex-col gap-2 py-4">
           <Avatar className="h-48 w-48">
-            <AvatarImage src="/img/avatar.jpg" alt={owner} />
-            <AvatarFallback className="bg-warning/20 text-6xl">
+            <AvatarImage
+              src="/img/avatar.jpg"
+              alt={owner}
+              className="m-0"
+              title="Jip. Dit bin icke — von meiner Schokoladenseite!"
+            />
+            <AvatarFallback className="bg-danger/40 text-6xl">
               {getInitials(owner)}
             </AvatarFallback>
           </Avatar>
-          <h2 className="break-words text-center text-2xl font-bold">
+          <h2 className="mb-0 mt-8 break-words text-center text-2xl font-bold">
             {owner}
           </h2>
           <p className="break-words text-center text-muted-foreground">
             Web Developer
           </p>
         </div>
-        <p className="flex flex-col space-y-6 py-4 text-lg text-muted-foreground">
-          <div>
+        <div className="flex flex-col space-y-0 py-4 text-lg text-muted-foreground">
+          <p className="mt-0">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur.
-          </div>
-          <div>
+          </p>
+          <p>
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
             officia deserunt mollit anim id est laborum Lorem ipsum dolor sit
             amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -50,8 +55,8 @@ export default async function AboutMePage() {
             esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit
             anim id est laborum
-          </div>
-        </p>
+          </p>
+        </div>
       </div>
     </>
   );
