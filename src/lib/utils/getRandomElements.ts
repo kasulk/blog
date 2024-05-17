@@ -1,3 +1,11 @@
+/**
+ * Gets numElements amount of random elements from an array
+ * (if there are less elements in the array, the whole array gets randomized)
+ *
+ * @param inputArr
+ * @param numElements
+ * @returns numElements (or inputArr.length) amount of random elements from the input array
+ */
 export function getRandomElements<T>(inputArr: T[], numElements: number): T[] {
   const result: T[] = [];
   const arr = [...inputArr];
@@ -6,14 +14,14 @@ export function getRandomElements<T>(inputArr: T[], numElements: number): T[] {
   if (numElements >= arrLen) {
     // return whole shuffled array
     for (let i = arrLen - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.trunc(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 
     return arr;
   }
 
-  // numElements zufällige Elemente auswählen
+  // select numElements-amount of random elements
   for (let i = 0; i < numElements; i++) {
     const randomIndex = Math.trunc(Math.random() * (arrLen - i));
     result.push(arr[randomIndex]);

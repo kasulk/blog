@@ -15,5 +15,6 @@ export * from "./SupportButton";
 export * from "./BlogCard";
 export * from "./BlogCategoryCloud";
 export * from "./BlogPostsList";
+export * from "./BlogRelatedPosts";
 export * from "./CategoryBadge";
 export * from "./CamelCaseHighlighter";

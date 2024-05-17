@@ -1,7 +1,7 @@
 import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader, CustomStyledMDX } from "@/components";
+import { PageHeader, CustomStyledMDX, BlogRelatedPosts } from "@/components";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
@@ -16,7 +16,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter } = blog;
-  const { title } = frontmatter;
+  const { title, category } = frontmatter;
 
   return (
     <>
@@ -28,6 +28,10 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           source={content}
           options={{ scope: { ...frontmatter } }}
         />
+        <hr className="flex sm:hidden" />
+        <footer>
+          <BlogRelatedPosts {...params} category={category} />
+        </footer>
       </article>
     </>
   );

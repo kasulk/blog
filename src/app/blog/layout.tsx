@@ -1,5 +1,4 @@
-import { H2 } from "@/components";
-import BlogCategoryCloud from "@/components/BlogCategoryCloud";
+import { BlogCategoryCloud } from "@/components";
 
 type BlogSectionLayoutProps = {
   children: React.ReactNode;
@@ -11,11 +10,9 @@ export default function BlogSectionLayout({
   return (
     <>
       <section>{children}</section>
+      <hr className="flex sm:hidden" />
       <section>
-        <div>
-          <H2>Blog Kategorien</H2>
-          <BlogCategoryCloud />
-        </div>
+        <BlogCategoryCloud />
       </section>
     </>
   );
