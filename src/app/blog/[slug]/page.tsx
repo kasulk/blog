@@ -1,15 +1,17 @@
 import path from "path";
-import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader, CustomStyledMDX } from "@/components";
+import { Link, PageHeader, CustomStyledMDX, CategoryBadge } from "@/components";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
-import { formatDate } from "@/lib/utils";
+import { createImageCreditsTag, formatDate } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
 };
+
+const blogImageDir = siteConfig.dir.blogImages;
 
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
@@ -17,14 +19,28 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter } = blog;
-  const { title, author, pubDate } = frontmatter;
+  const { title, author, pubDate, image, category } = frontmatter;
 
   return (
     <article>
       <PageHeader>{title}</PageHeader>
 
+      <Link href={`/blog/category/${category}`} className="flex">
+        <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
+      </Link>
+      <div className="relative h-36 sm:h-48">
+        <Image
+          src={`${blogImageDir}/${image?.file}`}
+          alt={image?.alt}
+          title={image.credits && createImageCreditsTag(image.credits)}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="my-0 rounded-t-sm object-cover"
+        />
+      </div>
+
       <p className="flex justify-end space-x-1">
-        <Link href="#" className="no-underline">
+        <Link href="/aboutme">
           {author === "icke" ? siteConfig.owner : author}
         </Link>
         <span className="space-x-2">|</span>
