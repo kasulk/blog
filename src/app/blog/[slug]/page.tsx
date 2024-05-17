@@ -1,17 +1,14 @@
 import path from "path";
-import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Link, PageHeader, CustomStyledMDX, CategoryBadge } from "@/components";
+import { PageHeader, CustomStyledMDX } from "@/components";
+import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
-import { createImageCreditsTag, formatDate } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
 };
-
-const blogImageDir = siteConfig.dir.blogImages;
 
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
@@ -19,38 +16,20 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter } = blog;
-  const { title, author, pubDate, image, category } = frontmatter;
+  const { title } = frontmatter;
 
   return (
-    <article>
+    <>
       <PageHeader>{title}</PageHeader>
 
-      <Link href={`/blog/category/${category}`} className="flex">
-        <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
-      </Link>
-      <div className="relative h-36 sm:h-48">
-        <Image
-          src={`${blogImageDir}/${image?.file}`}
-          alt={image?.alt}
-          title={image.credits && createImageCreditsTag(image.credits)}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="my-0 rounded-t-sm object-cover"
+      <article>
+        <BlogPostHeader frontmatter={frontmatter} />
+        <CustomStyledMDX
+          source={content}
+          options={{ scope: { ...frontmatter } }}
         />
-      </div>
-
-      <p className="flex justify-end space-x-1">
-        <Link href="/aboutme">
-          {author === "icke" ? siteConfig.owner : author}
-        </Link>
-        <span className="space-x-2">|</span>
-        <span>{formatDate(pubDate)}</span>
-      </p>
-      <CustomStyledMDX
-        source={content}
-        options={{ scope: { ...frontmatter } }}
-      />
-    </article>
+      </article>
+    </>
   );
 }
 
