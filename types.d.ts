@@ -3,14 +3,7 @@ export type Frontmatter = {
   author: string;
   pubDate: Date;
   description?: string;
-  image: {
-    file: string;
-    alt: string;
-    credits?: {
-      creator?: string;
-      source?: string;
-    };
-  };
+  image: BlogPostImage;
   isDraft: boolean;
   category: string;
   tags: string[];
@@ -21,6 +14,15 @@ export type BlogPost = {
   frontmatter: Frontmatter;
   content: string;
   slug: string;
+};
+
+type BlogPostImage = {
+  file: string;
+  alt: string;
+  credits?: {
+    creator?: string;
+    source?: string;
+  };
 };
 
 export type AffiliateType = "order" | "register";

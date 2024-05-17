@@ -1,11 +1,10 @@
 import path from "path";
-import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeader, CustomStyledMDX } from "@/components";
+import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
-import { formatDate } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -17,24 +16,20 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter } = blog;
-  const { title, author, pubDate } = frontmatter;
+  const { title } = frontmatter;
 
   return (
-    <article>
+    <>
       <PageHeader>{title}</PageHeader>
 
-      <p className="flex justify-end space-x-1">
-        <Link href="#" className="no-underline">
-          {author === "icke" ? siteConfig.owner : author}
-        </Link>
-        <span className="space-x-2">|</span>
-        <span>{formatDate(pubDate)}</span>
-      </p>
-      <CustomStyledMDX
-        source={content}
-        options={{ scope: { ...frontmatter } }}
-      />
-    </article>
+      <article>
+        <BlogPostHeader frontmatter={frontmatter} />
+        <CustomStyledMDX
+          source={content}
+          options={{ scope: { ...frontmatter } }}
+        />
+      </article>
+    </>
   );
 }
 
