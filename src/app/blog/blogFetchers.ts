@@ -27,9 +27,10 @@ export async function getBlogsByCategory(
   category: string,
 ): Promise<BlogPost[]> {
   const allBlogs = await getBlogs();
-  const blogsByCategory = allBlogs.filter(
-    (blog) => blog.frontmatter.category === category,
-  );
+  const blogsByCategory = allBlogs.filter((blog) => {
+    const { frontmatter } = blog;
+    return frontmatter.category.toLowerCase() === category.toLowerCase();
+  });
 
   return blogsByCategory;
 }
