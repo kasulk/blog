@@ -7,8 +7,8 @@ export function SupportAffiliateSection() {
       <H3>Affiliate-Links</H3>
 
       <p>
-        Affiliate-Links sind Links, bei denen ich eine Provision bekomme wenn du
-        über so einen Link kaufst bzw. dich registrierst.
+        Affiliate-Links sind Links, bei denen ich eine Provision bekomme, wenn
+        du etwas über so einen Link kaufst bzw. dich registrierst.
       </p>
       <p>
         Ob du über so einen Link kaufst bzw. dich registrierst, verursacht für
@@ -30,7 +30,9 @@ export function SupportAffiliateSection() {
         empfehlen kann und möchte.
       </p>
 
-      <p>Hier findest du eine Liste mit Affiliate-Links:</p>
+      <p>
+        Hier findest du eine Liste mit Affiliate-Links (alphabetisch sortiert):
+      </p>
       <AffiliateLinkList />
     </section>
   );

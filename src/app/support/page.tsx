@@ -18,12 +18,12 @@ export default function SupportPage() {
       <PageHeader>Support Me</PageHeader>
 
       <p>
-        Wenn dir dieser Blog gefällt, freue ich mich, wenn du uns (den Blog und
-        mich) unterstützt.
+        Wenn dir dieser Blog gefällt, freue ich mich, wenn du uns (also den Blog
+        und mich) unterstützt.
       </p>
 
       <H2>How it works</H2>
-      <p>Im Folgenden findest Inspirationen, wie du das tun kannst.</p>
+      <p>Im Folgenden findest du Inspirationen, wie du das tun kannst.</p>
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
         <li>
