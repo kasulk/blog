@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "development") require("@/styles/devOnly.css");
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: `Hi | ${siteConfig.name}`,
+  title: `Salü | ${siteConfig.name}`,
   description: siteConfig.description,
   metadataBase: new URL(process.env.NEXT_APP_URL ?? siteConfig.url),
 };
