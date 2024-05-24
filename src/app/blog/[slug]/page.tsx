@@ -2,6 +2,7 @@ import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeader, CustomStyledMDX, BlogRelatedPosts } from "@/components";
+import { BackButton } from "@/components";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
 import { getBlogBySlug, getBlogs } from "../blogFetchers";
@@ -21,6 +22,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   return (
     <>
       <PageHeader>{title}</PageHeader>
+      <BackButton />
 
       <article>
         <BlogPostHeader frontmatter={frontmatter} />
@@ -28,10 +30,10 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           source={content}
           options={{ scope: { ...frontmatter } }}
         />
-        <footer>
-          <BlogRelatedPosts {...params} category={category} />
-        </footer>
       </article>
+
+      <BackButton />
+      <BlogRelatedPosts {...params} category={category} />
     </>
   );
 }

@@ -7,6 +7,7 @@ export * from "./LinkExternal";
 
 export * from "./PageHeader";
 
+export * from "./BackButton";
 export * from "./Callout";
 export * from "./SocialLinks";
 export * from "./AffiliateLink";
