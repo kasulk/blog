@@ -32,13 +32,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.variable,
-        )}
+        className={cn("min-h-screen font-sans antialiased", inter.variable)}
       >
         <Providers>
-          <div className="relative flex min-h-dvh flex-col bg-background">
+          <div className="relative flex min-h-dvh flex-col">
             <SiteHeader />
             <main className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
               {children}
