@@ -21,9 +21,8 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        // background: "hsl(var(--background))",
-        background: "--bg-gradient",
         foreground: "hsl(var(--foreground))",
+        // background: "hsl(var(--background))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -94,8 +93,7 @@ const config = {
         },
       },
       backgroundImage: {
-        "gradient-light": "var(--bg-gradient-light)",
-        "gradient-dark": "var(--bg-gradient-dark)",
+        gradient: "var(--bg-gradient)",
       },
       borderRadius: {
         lg: "var(--radius)",
