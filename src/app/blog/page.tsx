@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { PageHeader, H2, BlogPostsList } from "@/components";
-import { getBlogs } from "./blogFetchers";
-import { formatBlogs } from "./formatBlogs";
+import { getBlogs } from "@/lib/blogFetchers";
+import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { siteConfig } from "@/config";
 
 export const metadata: Metadata = {

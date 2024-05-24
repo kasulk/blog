@@ -1,7 +1,7 @@
 import { Link, H2, CategoryBadge } from "@/components";
 import { siteConfig } from "@/config";
-import { getBlogs, getCategoriesWithCounts } from "@/app/blog/blogFetchers";
-import { formatBlogs } from "@/app/blog/formatBlogs";
+import { getBlogs, getCategoriesWithCounts } from "@/lib/blogFetchers";
+import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { slugify } from "@/lib/utils";
 
 export async function BlogCategoryCloud() {

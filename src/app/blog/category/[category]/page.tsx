@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { PageHeader, H2, BlogPostsList } from "@/components";
-import { getBlogs, getBlogsByCategory } from "@/app/blog/blogFetchers";
-import { formatBlogs } from "@/app/blog/formatBlogs";
 import { capitalize } from "@/lib/utils";
 import { siteConfig } from "@/config";
+import { getBlogs, getBlogsByCategory } from "@/lib/blogFetchers";
+import { formatBlogs } from "@/lib/blogFetchers/utils";
 
 type CategoryPageProps = {
   params: { category: string };
