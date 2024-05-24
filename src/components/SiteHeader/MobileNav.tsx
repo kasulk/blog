@@ -23,11 +23,11 @@ export function MobileNav() {
             <span className="sr-only">Toggle Menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right">
+        <SheetContent side="right" className="bg-gradient">
           <NavLink
             onOpenChange={setOpen}
             page="/"
-            className="flex items-center"
+            className="flex items-center "
           >
             <Branding />
           </NavLink>
