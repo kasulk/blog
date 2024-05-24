@@ -14,6 +14,7 @@ export type BlogPost = {
   frontmatter: Frontmatter;
   content: string;
   slug: string;
+  relativeFilePath: string;
 };
 
 type BlogPostImage = {
