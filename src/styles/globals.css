@@ -16,10 +16,10 @@
     --foreground: 222 84% 5%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 84% 5%;
+    --card-foreground: var(--foreground);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 84% 5%;
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
 
     --primary: 222 47% 11%;
     --primary-foreground: 210 40% 98%;
@@ -31,14 +31,14 @@
     --muted-foreground: 215 16% 46%;
 
     --accent: 339, 90%, 51%; /* danger */
-    --accent-foreground: 0 0% 100%;
+    --accent-foreground: var(--background);
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 222 84% 5%;
+    --ring: var(--foreground);
 
     --radius: 0.5rem;
   }
@@ -55,26 +55,26 @@
 
     --foreground: 210 40% 98%;
 
-    --card: 222 84% 5%;
-    --card-foreground: 210 40% 98%;
+    --card: var(--background);
+    --card-foreground: var(--foreground);
 
-    --popover: 222 84% 5%;
-    --popover-foreground: 210 40% 98%;
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
 
-    --primary: 210 40% 98%;
+    --primary: var(--foreground);
     --primary-foreground: 222 47% 11%;
 
     --secondary: 217 33% 18%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary-foreground: var(--foreground);
 
     --muted: 217 33% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 339, 90%, 51%; /* danger */
-    --accent-foreground: 210 40% 98%;
+    --accent: 339 90% 51%; /* danger */
+    --accent-foreground: var(--foreground);
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: var(--foreground);
 
     --border: 217 33% 18%;
     --input: 217 33% 18%;
@@ -88,7 +88,6 @@
   }
 
   body {
-    /* @apply bg-background text-foreground; */
     @apply bg-gradient text-foreground;
   }
 }
