@@ -6,7 +6,7 @@
   :root {
     --background: 0 0% 100%;
     --background2: 40, 80%, 90%;
-    --bg-gradient-light: linear-gradient(
+    --bg-gradient: linear-gradient(
       to bottom,
       hsl(var(--background)),
       80%,
@@ -46,7 +46,7 @@
   .dark {
     --background: 222 84% 5%;
     --background2: 222 84% 10%;
-    --bg-gradient-dark: linear-gradient(
+    --bg-gradient: linear-gradient(
       to bottom,
       hsl(var(--background)),
       80%,
@@ -86,13 +86,9 @@
   * {
     @apply border-border;
   }
+
   body {
     /* @apply bg-background text-foreground; */
-    @apply bg-gradient-light text-foreground;
-  }
-
-  .dark body {
-    /* @apply bg-gradient text-foreground; */
-    @apply bg-gradient-dark text-foreground;
+    @apply bg-gradient text-foreground;
   }
 }
