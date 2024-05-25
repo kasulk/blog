@@ -5,7 +5,10 @@ import { PageHeader, CustomStyledMDX, BlogRelatedPosts } from "@/components";
 import { BackButton } from "@/components";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
-import { getBlogBySlug, getBlogs } from "../blogFetchers";
+import {
+  getBlogBySlug,
+  getBlogs,
+} from "../../../lib/blogFetchers/blogFetchers";
 
 type BlogPageProps = {
   params: { slug: string };

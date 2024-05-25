@@ -1,6 +1,6 @@
 import { Link, H2, H4 } from "@/components";
-import { getBlogsByCategory } from "@/app/blog/blogFetchers";
-import { formatBlogs } from "@/app/blog/formatBlogs";
+import { getBlogsByCategory } from "@/lib/blogFetchers/blogFetchers";
+import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { getMonthAndYearFromDate } from "@/lib/utils";
 import { siteConfig } from "@/config";
 
