@@ -8,6 +8,8 @@ import { Branding, NavLink } from ".";
 import { siteConfig } from "@/config";
 import { capitalize, spacifyCamelCase } from "@/lib/utils";
 
+const { pages } = siteConfig;
+
 export function MobileNav() {
   const [open, setOpen] = useState(false);
 
@@ -32,16 +34,21 @@ export function MobileNav() {
             <Branding />
           </NavLink>
           <div className="mt-12 flex flex-col space-y-8">
-            {siteConfig.pages.map((page, i) => (
-              <NavLink
-                key={`mobile-nav-link-${i}`}
-                onOpenChange={setOpen}
-                page={page.toLowerCase()}
-                className="text-xl"
-              >
-                {spacifyCamelCase(capitalize(page))}
-              </NavLink>
-            ))}
+            {Object.keys(pages).map((page, i) => {
+              const pageObj = pages[page as keyof typeof pages];
+              return (
+                pageObj.showOnNav && (
+                  <NavLink
+                    key={`mobile-nav-link-${i}`}
+                    onOpenChange={setOpen}
+                    page={page.toLowerCase()}
+                    className="text-xl"
+                  >
+                    {spacifyCamelCase(capitalize(page))}
+                  </NavLink>
+                )
+              );
+            })}
           </div>
         </SheetContent>
       </Sheet>

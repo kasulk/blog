@@ -19,7 +19,7 @@ export function NavLink({
   const router = useRouter();
   const pathname = usePathname();
 
-  const navPages = siteConfig.pages;
+  const navPages = Object.keys(siteConfig.pages);
 
   // if the page name is 'home' reduce href to '/'
   const href = page === "home" ? "/" : `/${page}`;
