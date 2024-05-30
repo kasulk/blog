@@ -22,7 +22,7 @@ export async function BlogRelatedPosts({ slug, category }: Props) {
   if (!formattedAndShuffledBlogs.length) return;
 
   return (
-    <>
+    <section>
       <hr className="flex sm:hidden" />
       <H2>Verwandte Posts</H2>
       <ul className="flex list-none flex-col ps-0">
@@ -46,6 +46,6 @@ export async function BlogRelatedPosts({ slug, category }: Props) {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   );
 }

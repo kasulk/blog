@@ -10,8 +10,8 @@ export async function BlogCategoryCloud() {
   const categoriesWithCounts = getCategoriesWithCounts(formattedBlogs);
 
   return (
-    <>
-      <H2>Blog Kategorien</H2>
+    <section>
+      <H2>Kategorien</H2>
       <ul className="flex list-none flex-wrap ps-0">
         {Object.entries(categoriesWithCounts).map(([category, count], i) => (
           <li
@@ -27,6 +27,6 @@ export async function BlogCategoryCloud() {
           </li>
         ))}
       </ul>
-    </>
+    </section>
   );
 }
