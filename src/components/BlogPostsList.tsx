@@ -7,7 +7,7 @@ type BlogPostsListProps = {
 
 export function BlogPostsList({ blogs }: BlogPostsListProps) {
   return (
-    <ul className="list-none py-2 pl-0">
+    <ul className="list-none py-2 ps-0">
       {blogs.map((blog) => (
         <li
           key={`blogs-li-${blog.slug}`}

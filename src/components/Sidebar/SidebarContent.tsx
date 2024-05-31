@@ -1,14 +1,15 @@
-import { getBlogs } from "@/lib/blogFetchers";
-import { BlogCategoryCloud } from ".";
-import { BlogRelatedPosts } from ".";
+import { H3 } from "../Headings";
 
-export async function SidebarContent() {
-  const blogs = await getBlogs();
+type Props = {
+  title: string;
+  children: React.ReactNode;
+};
 
+export async function SidebarContent({ title, children }: Props) {
   return (
-    <>
-      {/* <BlogCategoryCloud blogs={blogs} /> */}
-      {/* <BlogRelatedPosts /> */}
-    </>
+    <section className="flex min-w-60 max-w-60 flex-col justify-start sm:max-w-36 md:min-w-48">
+      <H3 className="mt-0 md:font-normal">{title}</H3>
+      {children}
+    </section>
   );
 }

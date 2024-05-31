@@ -1,14 +1,16 @@
 import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader, CustomStyledMDX, BlogRelatedPosts } from "@/components";
-import { BackButton } from "@/components";
+import { PageHeader, CustomStyledMDX, BackButton } from "@/components";
+import {
+  Sidebar,
+  SidebarContent,
+  BlogRelatedPosts,
+  BlogCategoryCloud,
+} from "@/components/Sidebar";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
-import {
-  getBlogBySlug,
-  getBlogs,
-} from "../../../lib/blogFetchers/blogFetchers";
+import { getBlogBySlug, getBlogs } from "@/lib/blogFetchers/blogFetchers";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -25,18 +27,27 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   return (
     <>
       <PageHeader>{title}</PageHeader>
-      <BackButton />
 
-      <article>
-        <BlogPostHeader frontmatter={frontmatter} />
-        <CustomStyledMDX
-          source={content}
-          options={{ scope: { ...frontmatter } }}
-        />
-      </article>
+      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start lg:gap-16">
+        <article className="w-full flex-1 flex-col">
+          <BackButton />
+          <BlogPostHeader frontmatter={frontmatter} />
+          <CustomStyledMDX
+            source={content}
+            options={{ scope: { ...frontmatter } }}
+          />
+          <BackButton />
+        </article>
 
-      <BackButton />
-      <BlogRelatedPosts {...params} category={category} />
+        <Sidebar>
+          <SidebarContent title="Kategorien">
+            <BlogCategoryCloud />
+          </SidebarContent>
+          <SidebarContent title="Verwandte Posts">
+            <BlogRelatedPosts {...params} category={category} />
+          </SidebarContent>
+        </Sidebar>
+      </div>
     </>
   );
 }

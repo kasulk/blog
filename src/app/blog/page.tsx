@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import { PageHeader, H2, BlogPostsList } from "@/components";
-import { Sidebar, BlogCategoryCloud } from "@/components/Sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  BlogCategoryCloud,
+} from "@/components/Sidebar";
 import { getBlogs } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { siteConfig } from "@/config";
@@ -25,7 +29,9 @@ export default async function Blog() {
         </section>
 
         <Sidebar>
-          <BlogCategoryCloud />
+          <SidebarContent title="Kategorien">
+            <BlogCategoryCloud />
+          </SidebarContent>
         </Sidebar>
       </div>
     </>

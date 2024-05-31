@@ -1,4 +1,4 @@
-import { Link, H2, H4 } from "@/components";
+import { Link, H4 } from "@/components";
 import { getBlogsByCategory } from "@/lib/blogFetchers/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { getMonthAndYearFromDate } from "@/lib/utils";
@@ -22,30 +22,26 @@ export async function BlogRelatedPosts({ slug, category }: Props) {
   if (!formattedAndShuffledBlogs.length) return;
 
   return (
-    <section>
-      <hr className="flex sm:hidden" />
-      <H2>Verwandte Posts</H2>
-      <ul className="flex list-none flex-col ps-0">
-        {formattedAndShuffledBlogs.map((blog) => (
-          <li
-            key={`related-posts-${blog.slug}`}
-            className="m-0 mb-1 mr-1 w-full bg-slate-100 p-4 dark:bg-slate-900/50"
-          >
-            <Link href={`/blog/${blog.slug}/`} className="hover:opacity-80">
-              <H4 className="mt-0">{blog.frontmatter.title}</H4>
+    <ul className="flex list-none flex-col gap-4 ps-0">
+      {formattedAndShuffledBlogs.map((blog) => (
+        <li
+          key={`related-posts-${blog.slug}`}
+          className="m-0 mb-1 mr-1 w-full bg-slate-100 dark:bg-slate-900/50"
+        >
+          <Link href={`/blog/${blog.slug}/`} className="hover:opacity-80">
+            <H4 className="mt-0">{blog.frontmatter.title}</H4>
+          </Link>
+          <div className="flex justify-end space-x-1">
+            <Link href="/aboutme">
+              {blog.frontmatter.author === "icke"
+                ? siteConfig.owner
+                : blog.frontmatter.author}
             </Link>
-            <div className="flex justify-end space-x-1">
-              <Link href="/aboutme">
-                {blog.frontmatter.author === "icke"
-                  ? siteConfig.owner
-                  : blog.frontmatter.author}
-              </Link>
-              <span>|</span>
-              <span>{getMonthAndYearFromDate(blog.frontmatter.pubDate)}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+            <span>|</span>
+            <span>{getMonthAndYearFromDate(blog.frontmatter.pubDate)}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
