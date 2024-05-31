@@ -9,68 +9,26 @@ export const siteConfig = {
     blog: {
       isActive: true,
       showOnNav: true,
-      showSidebar: true,
-      showSidebarSections: {
-        categories: true,
-        recentPosts: false,
-        relatedPosts: true,
-        tags: false,
-      },
     },
     portfolio: {
       isActive: true,
       showOnNav: true,
-      showSidebar: false,
-      showSidebarSections: {
-        categories: false,
-        recentPosts: false,
-        relatedPosts: true,
-        tags: false,
-      },
     },
     support: {
       isActive: true,
       showOnNav: true,
-      showSidebar: false,
-      showSidebarSections: {
-        categories: false,
-        recentPosts: false,
-        relatedPosts: true,
-        tags: false,
-      },
     },
     aboutMe: {
       isActive: true,
       showOnNav: true,
-      showSidebar: false,
-      showSidebarSections: {
-        categories: false,
-        recentPosts: false,
-        relatedPosts: true,
-        tags: false,
-      },
     },
     blogPost: {
       isActive: true,
       showOnNav: false,
-      showSidebar: true,
-      showSidebarSections: {
-        categories: false,
-        recentPosts: false,
-        relatedPosts: true,
-        tags: false,
-      },
     },
     _defaultPageConfig: {
       isActive: false,
       showOnNav: false,
-      showSidebar: false,
-      showSidebarSections: {
-        categories: false,
-        recentPosts: false,
-        relatedPosts: false,
-        tags: false,
-      },
     },
   },
 

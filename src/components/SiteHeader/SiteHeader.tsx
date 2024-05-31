@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Branding, MainNav, MobileNav, ThemeSwitch } from ".";
 import { SocialLinks } from "../SocialLinks";
 

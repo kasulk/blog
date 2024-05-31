@@ -35,9 +35,10 @@ export function MobileNav() {
           </NavLink>
           <div className="mt-12 flex flex-col space-y-8">
             {Object.keys(pages).map((page, i) => {
-              const pageObj = pages[page as keyof typeof pages];
+              const { isActive, showOnNav } = pages[page as keyof typeof pages];
               return (
-                pageObj.showOnNav && (
+                isActive &&
+                showOnNav && (
                   <NavLink
                     key={`mobile-nav-link-${i}`}
                     onOpenChange={setOpen}
