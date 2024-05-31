@@ -5,11 +5,38 @@ export const siteConfig = {
   url: "https://kasulks-blog.vercel.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
-  pages: ["blog", "portfolio", "support", "aboutMe"],
+  pages: {
+    blog: {
+      isActive: true,
+      showOnNav: true,
+    },
+    portfolio: {
+      isActive: true,
+      showOnNav: true,
+    },
+    support: {
+      isActive: true,
+      showOnNav: true,
+    },
+    aboutMe: {
+      isActive: true,
+      showOnNav: true,
+    },
+    blogPost: {
+      isActive: true,
+      showOnNav: false,
+    },
+    _defaultPageConfig: {
+      isActive: false,
+      showOnNav: false,
+    },
+  },
+
   dir: {
     blogs: "src/content/blogs",
     blogImages: "/img/blogs",
   },
+
   showCategoryCount: true,
 
   defaultTooltips: {
@@ -33,3 +60,4 @@ export const siteConfig = {
 };
 
 export type SiteConfig = typeof siteConfig;
+export type PageConfig = typeof siteConfig.pages._defaultPageConfig;

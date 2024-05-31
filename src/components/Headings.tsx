@@ -13,7 +13,7 @@ export function H1({ className, children }: HeadingProps) {
 
 export function H2({ className, children }: HeadingProps) {
   return (
-    <h2 className={`mb-6 text-2xl sm:text-3xl lg:text-4xl ${className}`}>
+    <h2 className={`mb-6 mt-0 text-2xl sm:text-3xl lg:text-4xl ${className}`}>
       {children}
     </h2>
   );

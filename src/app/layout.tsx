@@ -37,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <div className="relative flex min-h-dvh flex-col">
             <SiteHeader />
-            <main className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+            <main className="container prose mx-auto max-w-6xl py-6 dark:prose-invert">
               {children}
             </main>
             <SiteFooter />

@@ -1,5 +1,10 @@
 import { Metadata } from "next";
 import { PageHeader, H2, BlogPostsList } from "@/components";
+import {
+  Sidebar,
+  SidebarContent,
+  BlogCategoryCloud,
+} from "@/components/Sidebar";
 import { getBlogs } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { siteConfig } from "@/config";
@@ -17,8 +22,18 @@ export default async function Blog() {
     <>
       <PageHeader>Blog</PageHeader>
 
-      <H2>Letzte Blogs</H2>
-      <BlogPostsList blogs={formattedBlogs} />
+      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
+        <section>
+          <H2>Letzte Blogs</H2>
+          <BlogPostsList blogs={formattedBlogs} />
+        </section>
+
+        <Sidebar>
+          <SidebarContent title="Kategorien">
+            <BlogCategoryCloud />
+          </SidebarContent>
+        </Sidebar>
+      </div>
     </>
   );
 }
