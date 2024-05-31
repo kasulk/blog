@@ -1,10 +1,10 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { H1, H2, H3, H4, Link } from "@/components";
 import { AffiliateLink, SupportButton } from "@/components";
 import { links, siteConfig } from "@/config";
-// import remarkGfm from "remark-gfm"; /// for GitHub Flavored MD
 
 export const customComponents: MDXComponents = {
   /// customized built-in components, e.g. add styling
@@ -31,9 +31,12 @@ export function CustomStyledMDX(props: MDXRemoteProps) {
       {...props}
       // pass custom components through components prop:
       components={{ ...customComponents, ...(props.components || {}) }}
-      // pass custom data/variables through options/scope prop:
       options={{
+        // pass custom data/variables through options/scope prop:
         scope: { ...siteConfig, ...links, ...(props.options?.scope || {}) },
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
       }}
     />
   );
