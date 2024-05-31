@@ -1,3 +1,5 @@
+import { siteConfig } from "./site";
+
 export const links = {
   personalSite: "https://danielkaser.de",
 
@@ -5,7 +7,7 @@ export const links = {
     {
       name: "GitHub",
       description: "",
-      url: "https://github.com/kasulk",
+      url: `https://github.com/${siteConfig.github.user}`,
     },
     {
       name: "LinkedIn",

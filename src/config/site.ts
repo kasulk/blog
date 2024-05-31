@@ -5,6 +5,13 @@ export const siteConfig = {
   url: "https://kasulks-blog.vercel.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
+  github: {
+    user: "kasulk",
+    repos: {
+      blog: "blog",
+    },
+  },
+
   pages: {
     blog: {
       isActive: true,
