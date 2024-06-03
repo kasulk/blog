@@ -1,25 +1,20 @@
+import type { BlogPost } from "@/../types";
 import { Link, H4 } from "@/components";
-import { getBlogsByCategory } from "@/lib/blogFetchers/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { getMonthAndYearFromDate } from "@/lib/utils";
 import { siteConfig } from "@/config";
 
 type Props = {
-  slug: string;
-  category: string;
+  relatedBlogs: BlogPost[];
 };
 
 const NUM_RELATED_POSTS = 5;
 
-export async function BlogRelatedPosts({ slug, category }: Props) {
-  const relatedBlogs = await getBlogsByCategory(category);
-  const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
-  const formattedAndShuffledBlogs = formatBlogs(otherBlogs, {
+export async function BlogRelatedPosts({ relatedBlogs }: Props) {
+  const formattedAndShuffledBlogs = formatBlogs(relatedBlogs, {
     sortByDate: false,
     limit: NUM_RELATED_POSTS,
   });
-
-  if (!formattedAndShuffledBlogs.length) return;
 
   return (
     <ul className="flex list-none flex-col gap-4 ps-0">

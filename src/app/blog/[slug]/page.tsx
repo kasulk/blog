@@ -10,7 +10,11 @@ import {
 } from "@/components/Sidebar";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import { siteConfig } from "@/config";
-import { getBlogBySlug, getBlogs } from "@/lib/blogFetchers/blogFetchers";
+import {
+  getBlogs,
+  getBlogBySlug,
+  getBlogsByCategory,
+} from "@/lib/blogFetchers/blogFetchers";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -21,8 +25,12 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
 
   if (!blog || blog.frontmatter.isDraft) notFound();
 
-  const { content, frontmatter } = blog;
+  const { content, frontmatter, slug } = blog;
   const { title, category } = frontmatter;
+
+  const relatedBlogs = await getBlogsByCategory(category);
+  const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
+  const hasRelatedBlogs = otherBlogs.length > 0;
 
   return (
     <>
@@ -43,9 +51,11 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           <SidebarContent title="Kategorien">
             <BlogCategoryCloud />
           </SidebarContent>
-          <SidebarContent title="Verwandte Posts">
-            <BlogRelatedPosts {...params} category={category} />
-          </SidebarContent>
+          {hasRelatedBlogs && (
+            <SidebarContent title="Verwandte Posts">
+              <BlogRelatedPosts relatedBlogs={otherBlogs} />
+            </SidebarContent>
+          )}
         </Sidebar>
       </div>
     </>
