@@ -23,7 +23,7 @@ export default async function Blog() {
       <PageHeader>Blog</PageHeader>
 
       <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-        <section>
+        <section className="flex-1">
           <H2>Letzte Blogs</H2>
           <BlogPostsList blogs={formattedBlogs} />
         </section>
