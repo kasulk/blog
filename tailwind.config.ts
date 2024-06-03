@@ -14,6 +14,44 @@ const config = {
       },
     },
     extend: {
+      // Binding element 'theme' implicitly has an 'any' type.
+      // => tw-bug-workaround: https://github.com/tailwindlabs/tailwindcss-typography/issues/335
+      typography: (theme: any) => ({
+        DEFAULT: {
+          css: {
+            "code::before": {
+              content: "none",
+            },
+            "code::after": {
+              content: "none",
+            },
+            pre: {
+              fontWeight: "semi-bold",
+              color: theme("colors.foreground"),
+              backgroundColor: theme("colors.muted.DEFAULT"),
+            },
+            code: {
+              color: theme("colors.foreground"),
+              backgroundColor: theme("colors.muted.DEFAULT"),
+              // backgroundColor: theme("colors.red.500"),
+              padding: theme("borderRadius.sm"),
+              paddingBottom: 0,
+              borderRadius: theme("borderRadius.sm"),
+
+              // remove tw-typography (prose) auto-backticks from code-elements
+              "::before": {
+                content: "none",
+              },
+              "::after": {
+                content: "none",
+              },
+            },
+            blockquote: {
+              margin: "0 1rem",
+            },
+          },
+        },
+      }),
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
@@ -118,6 +156,7 @@ const config = {
   },
   plugins: [
     require("@tailwindcss/typography"), // use prose class to add styles from tailwind/typography
+    // typographyPlugin,
     require("tailwindcss-animate"),
   ],
 } satisfies Config;

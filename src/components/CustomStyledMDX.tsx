@@ -12,9 +12,6 @@ export const customComponents: MDXComponents = {
   h2: ({ children }) => <H2 className="text-accent">{children}</H2>,
   h3: ({ children }) => <H3>{children}</H3>,
   h4: ({ children }) => <H4>{children}</H4>,
-  blockquote: ({ children }) => (
-    <blockquote className="mx-4">{children}</blockquote>
-  ),
   /// nextjs components
   Image,
   /// custom components
@@ -36,6 +33,7 @@ export function CustomStyledMDX(props: MDXRemoteProps) {
         scope: { ...siteConfig, ...links, ...(props.options?.scope || {}) },
         mdxOptions: {
           remarkPlugins: [remarkGfm],
+          format: "mdx",
         },
       }}
     />
