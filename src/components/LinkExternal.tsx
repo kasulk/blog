@@ -14,7 +14,7 @@ export function LinkExternal({
   href,
   target = "_blank",
   rel = "noopener noreferrer",
-  className,
+  className = "",
   children,
 }: Props) {
   return (
@@ -22,7 +22,7 @@ export function LinkExternal({
       href={href}
       target={target}
       rel={rel}
-      className={`text-accent no-underline hover:text-danger-600 ${className}`}
+      className={`text-accent no-underline hover:text-danger-600${className}`}
     >
       {children}
     </a>

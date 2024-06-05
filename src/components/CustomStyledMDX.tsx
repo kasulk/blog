@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { H1, H2, H3, H4, Link } from "@/components";
+import { H1, H2, H3, H4, Link, LinkExternal } from "@/components";
 import { AffiliateLink, SupportButton } from "@/components";
 import { links, siteConfig } from "@/config";
 
@@ -15,7 +15,8 @@ export const customComponents: MDXComponents = {
   /// nextjs components
   Image,
   /// custom components
-  Link: ({ children, href }) => <Link href={href}>{children}</Link>,
+  Link: (props) => <Link {...props}>{props.children}</Link>,
+  A: (props) => <LinkExternal {...props}>{props.children}</LinkExternal>,
   AffiliateLink,
   SupportButton: ({ className }) => (
     <SupportButton className={`${className} h-7 w-7`} />
