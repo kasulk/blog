@@ -1,12 +1,12 @@
 import { Metadata } from "next";
-import { Link, PageHeader, SupportButton } from "@/components";
+import { Link, LinkExternal, PageHeader } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
-import { getInitials } from "@/lib/utils";
+import { getInitials, getSocialUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `About Me | ${siteConfig.name}`,
-  description: "Information about me",
+  description: "Einige Informationen über mich",
 };
 
 const { owner } = siteConfig;
@@ -38,10 +38,9 @@ export default async function AboutMePage() {
         </div>
         <div className="flex flex-col space-y-6 py-4 text-lg text-muted-foreground">
           <p className="m-0">
-            Hola Partypeople! Ich heiße Daniel und bin verantwortlich für das
-            was hier geschrieben steht. Im Folgenden findet ihr ein bisschen
-            Info über mich. Danach noch ein bisschen Lorem Ipsum, damit es nicht
-            so leer aussieht.
+            Ich heiße Daniel und bin verantwortlich für das was hier geschrieben
+            steht. Im Folgenden findet ihr ein bisschen Info über mich. Danach
+            noch ein bisschen Lorem Ipsum, damit es nicht so leer aussieht.
           </p>
           <p>
             2022 habe ich mich endlich entschlossen JavaScript zu lernen. Nach
@@ -51,8 +50,13 @@ export default async function AboutMePage() {
           </p>
           <p>
             Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
-            aufgehübscht hatte, habe ich mit diesem Blog begonnen. Das
-            Projekt-Tagebuch dazu findest du hier.
+            aufgehübscht hatte und ca. 650{" "}
+            <LinkExternal href={getSocialUrl("Codewars")}>
+              Coding-Challenges
+            </LinkExternal>{" "}
+            später, habe ich mit diesem Blog begonnen. Das Projekt-Tagebuch dazu
+            findest du{" "}
+            <Link href="/blog/projekt-tagebuch-blog-tag-1">hier</Link>.
           </p>
           <p>
             Neben dem Coden kann ich noch ganz gut mit Geld umgehen und mich
@@ -62,9 +66,12 @@ export default async function AboutMePage() {
           </p>
           <p>Der Rest ist noch recht lose und ich schau mal wo es hingeht.</p>
           <p>
-            Ich hab also erst mal 4 Kategorien eingerichtet: Finanzen, Coden,
-            Inspiration und Verschiedenes. Was Coden angeht, findest du meinen
-            aktuellen Tech-Stack außerdem auf GitHub.
+            Ich hab also erst mal 4 Kategorien eingerichtet:{" "}
+            <Link href="/category/finanzen">Finanzen</Link>,{" "}
+            <Link href="/category/coden">Coden</Link>,{" "}
+            <Link href="/category/inspiration">Inspiration</Link> und{" "}
+            <Link href="/category/verschiedenes">Verschiedenes</Link>. Was Coden
+            angeht, findest du meinen aktuellen Tech-Stack außerdem auf GitHub.
           </p>
           <p>
             Wenn du eine Frage hast, von der du überzeugt bist, ich könnte sie
@@ -78,6 +85,7 @@ export default async function AboutMePage() {
             <Link href="/support" className="mx-2">
               ♥
             </Link>
+            <span className="sr-only">Herz</span>
             klickst.
           </p>
           <p>
@@ -87,10 +95,10 @@ export default async function AboutMePage() {
             Cras tellus dui, varius ut nullam.
           </p>
           <p>Sieht doch gleich viel voller aus, oder?! Find ich auch.</p>
-          <p>So, und jetzt lesen, lesen, lesen!</p>
-          <p>
-            <div>Beste Grüße aus Berlin,</div>
-            <div>Daniel</div>
+          <p>So, und jetzt viel Spaß beim lesen, lesen, lesen!</p>
+          <p className="flex flex-col">
+            <span>Beste Grüße aus Berlin,</span>
+            <span>Daniel</span>
           </p>
         </div>
       </div>
