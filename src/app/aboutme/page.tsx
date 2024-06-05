@@ -36,9 +36,7 @@ export default async function AboutMePage() {
             Web Developer
           </p>
         </div>
-        {/* <div className="flex flex-col space-y-0 py-4 text-lg text-muted-foreground"> */}
         <div className="flex flex-col space-y-6 py-4 text-lg text-muted-foreground">
-          {/* <p className="mt-0"> */}
           <p className="m-0">
             Hola Partypeople! Ich heiße Daniel und bin verantwortlich für das
             was hier geschrieben steht. Im Folgenden findet ihr ein bisschen
