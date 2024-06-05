@@ -14,7 +14,9 @@ type SupportButtonProps = {
 
 const tooltipContent = "Unterstützen";
 
-export function SupportButton({ className }: SupportButtonProps) {
+export function SupportButton({
+  className = "h-6 w-6 sm:h-7 sm:w-7",
+}: SupportButtonProps) {
   return (
     <TooltipProvider>
       <Tooltip>
