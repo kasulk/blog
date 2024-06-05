@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { PageHeader } from "@/components";
+import { Link, PageHeader, SupportButton } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
 import { getInitials } from "@/lib/utils";
@@ -36,25 +36,63 @@ export default async function AboutMePage() {
             Web Developer
           </p>
         </div>
-        <div className="flex flex-col space-y-0 py-4 text-lg text-muted-foreground">
-          <p className="mt-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+        {/* <div className="flex flex-col space-y-0 py-4 text-lg text-muted-foreground"> */}
+        <div className="flex flex-col space-y-6 py-4 text-lg text-muted-foreground">
+          {/* <p className="mt-0"> */}
+          <p className="m-0">
+            Hola Partypeople! Ich heiße Daniel und bin verantwortlich für das
+            was hier geschrieben steht. Im Folgenden findet ihr ein bisschen
+            Info über mich. Danach noch ein bisschen Lorem Ipsum, damit es nicht
+            so leer aussieht.
           </p>
           <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum
+            2022 habe ich mich endlich entschlossen JavaScript zu lernen. Nach
+            ein paar Online-Kursen hatte ich Anfang 2023 die Chance an einem
+            12-wöchigen “Fullstack”-Bootcamp in Berlin teilzunehmen.
+            Schwerpunkte waren React, Next.js und MongoDB.
+          </p>
+          <p>
+            Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
+            aufgehübscht hatte, habe ich mit diesem Blog begonnen. Das
+            Projekt-Tagebuch dazu findest du hier.
+          </p>
+          <p>
+            Neben dem Coden kann ich noch ganz gut mit Geld umgehen und mich
+            selbst ganz gut geißeln. Darum wirst du hier hauptsächlich
+            Geschwafel über Finanzen, Coden und Inspiration bzw. Motivation
+            finden. Vielleicht auch mal was Sportliches.
+          </p>
+          <p>Der Rest ist noch recht lose und ich schau mal wo es hingeht.</p>
+          <p>
+            Ich hab also erst mal 4 Kategorien eingerichtet: Finanzen, Coden,
+            Inspiration und Verschiedenes. Was Coden angeht, findest du meinen
+            aktuellen Tech-Stack außerdem auf GitHub.
+          </p>
+          <p>
+            Wenn du eine Frage hast, von der du überzeugt bist, ich könnte sie
+            qualifiziert beantworten, schreib mir gerne. Wenn meine Antwort für
+            viele Leute hilfreich sein könnte, gibt’s vielleicht sogar ‘nen
+            neuen Blog-Artikel.
+          </p>
+          <p>
+            Wenn du meine Arbeit (finanziell) unterstützen möchtest, findest du
+            jederzeit Inspiration dazu, wenn du auf das
+            <Link href="/support" className="mx-2">
+              ♥
+            </Link>
+            klickst.
+          </p>
+          <p>
+            So, jetzt das versprochene Lorem Ipsum: Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Donec gravida dictum eros nec ultrices.
+            Morbi nisi lectus, viverra quis venenatis sed, dignissim eget massa.
+            Cras tellus dui, varius ut nullam.
+          </p>
+          <p>Sieht doch gleich viel voller aus, oder?! Find ich auch.</p>
+          <p>So, und jetzt lesen, lesen, lesen!</p>
+          <p>
+            <div>Beste Grüße aus Berlin,</div>
+            <div>Daniel</div>
           </p>
         </div>
       </div>
