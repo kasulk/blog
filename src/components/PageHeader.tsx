@@ -1,11 +1,12 @@
-import { H1 } from "@/components";
+import { H1, VGWortMark } from "@/components";
 
 type Props = {
   className?: string;
   children: React.ReactNode;
+  vgWortCode?: string;
 };
 
-export function PageHeader({ className, children }: Props) {
+export function PageHeader({ className, children, vgWortCode }: Props) {
   return (
     <header>
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
@@ -14,6 +15,7 @@ export function PageHeader({ className, children }: Props) {
         </div>
       </div>
       <hr className="my-8" />
+      <VGWortMark code={vgWortCode} />
     </header>
   );
 }
