@@ -10,11 +10,12 @@ export const metadata: Metadata = {
 };
 
 const { owner } = siteConfig;
+const vgWortCode = "347c1cd684b448f8a709c8570bd55340";
 
 export default async function AboutMePage() {
   return (
     <>
-      <PageHeader>About Me</PageHeader>
+      <PageHeader vgWortCode={vgWortCode}>About Me</PageHeader>
 
       <div className="flex flex-col items-center gap-8 md:flex-row-reverse md:items-start md:gap-16">
         <div className="flex min-w-48 max-w-48 flex-col gap-2 py-4">
