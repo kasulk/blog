@@ -254,6 +254,13 @@ export const links = {
     },
   ],
 
+  vgWort: [
+    {
+      name: "Counting Mark",
+      url: "https://vg07.met.vgwort.de/na",
+    },
+  ],
+
   docs: {
     arrayMap:
       "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map?retiredLocale=de",

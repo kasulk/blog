@@ -8,6 +8,7 @@ export type Frontmatter = {
   category: string;
   tags: string[];
   series?: string;
+  vgWortCode?: string;
 };
 
 export type BlogPost = {

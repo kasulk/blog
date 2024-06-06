@@ -12,6 +12,7 @@ export * from "./Callout";
 export * from "./SocialLinks";
 export * from "./AffiliateLink";
 export * from "./SupportButton";
+export * from "./VGWortMark";
 
 export * from "./BlogCard";
 export * from "./BlogPostsList";
