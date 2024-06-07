@@ -1,18 +1,12 @@
 type Props = {
-  href: string;
-  target?: "_blank";
-  rel?:
-    | "noopener"
-    | "noreferrer"
-    | "noopener noreferrer"
-    | "noreferrer noopener";
+  href?: string;
+  rel?: string;
   className?: string;
   children?: React.ReactNode;
 };
 
 export function LinkExternal({
   href,
-  target = "_blank",
   rel = "noopener noreferrer",
   className = "",
   children,
@@ -20,9 +14,9 @@ export function LinkExternal({
   return (
     <a
       href={href}
-      target={target}
+      target="_blank"
       rel={rel}
-      className={`text-accent no-underline hover:text-danger-600${className}`}
+      className={`text-accent no-underline hover:text-danger-600 ${className}`}
     >
       {children}
     </a>

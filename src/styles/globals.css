@@ -91,3 +91,11 @@
     @apply bg-gradient text-foreground;
   }
 }
+
+/*
+remove bullet points for gfm-mdx-task-list, 
+i.e. lists with checkboxes, '- [x]' 
+*/
+.contains-task-list {
+  @apply list-none;
+}
