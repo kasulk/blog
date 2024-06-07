@@ -1,12 +1,12 @@
 import NextLink from "next/link";
 
 type Props = {
-  href: string;
+  href?: string;
   className?: string;
   children?: React.ReactNode;
 };
 
-export function Link({ href, className, children }: Props) {
+export function Link({ href = "/not-found", className, children }: Props) {
   return (
     <NextLink
       href={href}

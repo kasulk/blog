@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { Link, LinkExternal, AffiliateLink, H1, H4 } from "@/components";
+import { Link, LinkExternal, AffiliateLink } from "@/components";
 import { SupportButton } from "@/components";
 import { links, siteConfig } from "@/config";
 
@@ -25,16 +25,13 @@ export const customComponents: MDXComponents = {
   /// elements compiled from md(x)
   //! only works for compiled md(x)-elements
   // e.g. '## Some Title' => '<h2>Some Title</h2>'
-  h1: ({ children }) => <h1 className="text-warning">{children}</h1>,
-  h2: ({ children }) => <h2 className="text-danger">{children}</h2>,
-  h3: ({ children }) => <h3 className="text-success">{children}</h3>,
-  h4: ({ children }) => <h4 className="text-success">{children}</h4>,
   a: (props) => {
     if (props.href?.startsWith("#")) return <a {...props}>{props.children}</a>;
+    if (props.href?.startsWith("/"))
+      return <Link {...props}>{props.children}</Link>;
     return <LinkExternal {...props}>{props.children}</LinkExternal>;
   },
   /// custom components
-  Link,
   AffiliateLink,
   SupportButton: ({ className }) => (
     <SupportButton className={`h-7 w-7 ${className}`} />
