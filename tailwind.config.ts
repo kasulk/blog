@@ -19,25 +19,22 @@ const config = {
       typography: (theme: any) => ({
         DEFAULT: {
           css: {
-            "code::before": {
-              content: "none",
-            },
-            "code::after": {
-              content: "none",
+            a: {
+              textDecoration: "none",
+              "&:hover": {
+                textDecoration: "underline",
+              },
             },
             pre: {
-              fontWeight: "semi-bold",
               color: theme("colors.foreground"),
               backgroundColor: theme("colors.muted.DEFAULT"),
             },
             code: {
               color: theme("colors.foreground"),
               backgroundColor: theme("colors.muted.DEFAULT"),
-              // backgroundColor: theme("colors.red.500"),
               padding: theme("borderRadius.sm"),
               paddingBottom: 0,
               borderRadius: theme("borderRadius.sm"),
-
               // remove tw-typography (prose) auto-backticks from code-elements
               "::before": {
                 content: "none",
@@ -156,7 +153,6 @@ const config = {
   },
   plugins: [
     require("@tailwindcss/typography"), // use prose class to add styles from tailwind/typography
-    // typographyPlugin,
     require("tailwindcss-animate"),
   ],
 } satisfies Config;
