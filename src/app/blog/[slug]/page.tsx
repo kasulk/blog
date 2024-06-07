@@ -26,7 +26,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter, slug } = blog;
-  const { title, category } = frontmatter;
+  const { title, category, vgWortCode } = frontmatter;
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
@@ -34,7 +34,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
 
   return (
     <>
-      <PageHeader>{title}</PageHeader>
+      <PageHeader vgWortCode={vgWortCode}>{title}</PageHeader>
 
       <div className="flex flex-col items-center gap-8 md:flex-row md:items-start lg:gap-16">
         <article className="w-full flex-1 flex-col">
