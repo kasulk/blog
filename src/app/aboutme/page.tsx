@@ -1,8 +1,10 @@
 import { Metadata } from "next";
-import { Link, LinkExternal, PageHeader } from "@/components";
+// import { Link, LinkExternal, PageHeader } from "@/components";
+import { Link, PageHeader } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
 import { getInitials, getSocialUrl } from "@/lib/utils";
+import { ExternalLink } from "@/components/Links/ExternalLink";
 
 export const metadata: Metadata = {
   title: `About Me | ${siteConfig.name}`,
@@ -52,9 +54,10 @@ export default async function AboutMePage() {
           <p>
             Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
             aufgehübscht hatte und ca. 650{" "}
-            <LinkExternal href={getSocialUrl("Codewars")}>
+            {/* <a href={getSocialUrl("Codewars")}>Coding-Challenges</a> später, */}
+            <ExternalLink href={getSocialUrl("Codewars")}>
               Coding-Challenges
-            </LinkExternal>{" "}
+            </ExternalLink>{" "}
             später, habe ich mit diesem Blog begonnen. Das Projekt-Tagebuch dazu
             findest du{" "}
             <Link href="/blog/projekt-tagebuch-blog-tag-1">hier</Link>.

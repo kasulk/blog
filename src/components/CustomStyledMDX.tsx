@@ -2,10 +2,12 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { Link, LinkExternal, AffiliateLink } from "@/components";
+// import { Link, LinkExternal, AffiliateLink } from "@/components";
+import { Link, AffiliateLink } from "@/components";
 import { SupportButton } from "@/components";
 import { siteConfig } from "@/config";
 import * as links from "@/config/links";
+import { ExternalLink } from "./Links/ExternalLink";
 
 export const customComponents: MDXComponents = {
   /// nextjs components
@@ -23,7 +25,8 @@ export const customComponents: MDXComponents = {
           {children}
         </AffiliateLink>
       );
-    return <LinkExternal {...props}>{children}</LinkExternal>;
+    // return <a {...props}>{children}</a>;
+    return <ExternalLink {...props}>{children}</ExternalLink>;
   },
   /// custom components
   AffiliateLink,

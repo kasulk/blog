@@ -3,7 +3,8 @@ import { SupportButton } from "./SupportButton";
 import { Button } from "./ui/button";
 import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
-import { LinkExternal } from "./Links/LinkExternal";
+import { ExternalLink } from "./Links/ExternalLink";
+// import { LinkExternal } from "./Links/LinkExternal";
 
 const socialIconSize = "h-6 w-6";
 const supportIconSize = "h-6 w-6 sm:h-7 sm:w-7";
@@ -25,7 +26,8 @@ export function SocialLinks({ className }: SocialLinksProps) {
   return (
     <>
       {linksWithIcon.map(({ name, url }, i) => (
-        <LinkExternal
+        // <a key={`${slugify(name)}-link`} href={url} className={className}>
+        <ExternalLink
           key={`${slugify(name)}-link`}
           href={url}
           className={className}
@@ -34,7 +36,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
             {socialIcons[i]}
             <span className="sr-only">{`Link to ${name}`}</span>
           </Button>
-        </LinkExternal>
+        </ExternalLink>
       ))}
       <SupportButton className={supportIconSize} />
     </>
