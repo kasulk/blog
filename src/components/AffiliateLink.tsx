@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { siteConfig } from "@/config";
+import { siteConfig, errors as allErrors } from "@/config";
 import * as links from "@/config/links";
 import { camelCasify, dashify } from "@/lib/utils";
 
@@ -15,7 +15,7 @@ type AffliateLinkProps = {
   children?: React.ReactNode;
 };
 
-const errors = siteConfig.errors.AffiliateLink;
+const errors = allErrors.AffiliateLink;
 const tooltips = siteConfig.defaultTooltips.affiliate;
 
 export function AffiliateLink({
