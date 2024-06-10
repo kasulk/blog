@@ -3,7 +3,7 @@ import { SupportButton } from "./SupportButton";
 import { Button } from "./ui/button";
 import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
-import { LinkExternal } from "./LinkExternal";
+import { LinkExternal } from "./Links/LinkExternal";
 
 const socialIconSize = "h-6 w-6";
 const supportIconSize = "h-6 w-6 sm:h-7 sm:w-7";

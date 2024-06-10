@@ -1,5 +1,5 @@
 import { H4 } from "@/components";
-import { AffiliateLink } from "@/components/AffiliateLink";
+import { AffiliateLink } from "@/components/Links/AffiliateLink";
 import { camelCasify } from "@/lib/utils";
 
 type Props = {
