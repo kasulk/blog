@@ -5,7 +5,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { links, siteConfig } from "@/config";
+import { siteConfig } from "@/config";
+import * as links from "@/config/links";
 import { camelCasify, dashify } from "@/lib/utils";
 
 type AffliateLinkProps = {
@@ -27,7 +28,7 @@ export function AffiliateLink({
     ({ name }) => camelCasify(name) === partner,
   );
 
-  if (!foundPartner) throw new Error(`'${partner}'\n${errors.notFoundPartner}`);
+  if (!foundPartner) throw new Error(`'${partner}'\n${errors.partnerNotFound}`);
   const { name, url, type } = foundPartner;
 
   const defaultTooltip = tooltips[type as AffiliateType];

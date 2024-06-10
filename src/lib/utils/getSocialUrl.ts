@@ -1,4 +1,4 @@
-import { links } from "@/config";
+import * as links from "@/config/links";
 
 export function getSocialUrl(socialName: string): string {
   const social = links.social.find(({ name }) => socialName === name);

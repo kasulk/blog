@@ -5,22 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Link, LinkExternal, AffiliateLink } from "@/components";
 import { SupportButton } from "@/components";
 import { siteConfig } from "@/config";
-// import {
-//   affiliateLinks,
-//   docsLinks,
-//   donateLinks,
-//   socialLinks,
-//   vgWortLinks,
-// } from "@/config/links";
 import * as links from "@/config/links";
-
-// const links = {
-//   ...affiliateLinks,
-//   ...docsLinks,
-//   ...donateLinks,
-//   ...socialLinks,
-//   ...vgWortLinks,
-// };
 
 export const customComponents: MDXComponents = {
   /// nextjs components
@@ -29,12 +14,12 @@ export const customComponents: MDXComponents = {
   //! only works for compiled md(x)-elements
   // e.g. '## Some Title' => '<h2>Some Title</h2>'
   a: (props) => {
-    const { href, children } = props;
+    const { href, title, children, ...restProps } = props;
     if (href?.startsWith("#")) return <a {...props}>{children}</a>;
     if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
     if (href?.startsWith("$"))
       return (
-        <AffiliateLink partner={href.slice(1)} {...props}>
+        <AffiliateLink partner={href.slice(1)} tooltip={title} {...restProps}>
           {children}
         </AffiliateLink>
       );

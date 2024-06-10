@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { H3, Link } from "@/components";
-import { links } from "@/config";
+import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
 import PayPalIcon from "@/assets/img/pp144.png";
 

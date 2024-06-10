@@ -1,4 +1,4 @@
-import type { AffiliateLinkType } from "@/config";
+import type { AffiliateLink } from "@/config/links";
 import {
   AffiliateLinkListItemDate,
   AffiliateLinkListItemDesc,
@@ -8,7 +8,7 @@ import {
   AffiliateLinkListItemTerms,
 } from "./";
 
-type Props = AffiliateLinkType;
+type Props = AffiliateLink;
 
 export function AffiliateLinkListItem({
   name,
