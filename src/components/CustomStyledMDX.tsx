@@ -4,32 +4,41 @@ import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { Link, LinkExternal, AffiliateLink } from "@/components";
 import { SupportButton } from "@/components";
-import { links, siteConfig } from "@/config";
+import { siteConfig } from "@/config";
+// import {
+//   affiliateLinks,
+//   docsLinks,
+//   donateLinks,
+//   socialLinks,
+//   vgWortLinks,
+// } from "@/config/links";
+import * as links from "@/config/links";
 
-type RelType =
-  | "noopener"
-  | "noreferrer"
-  | "noopener noreferrer"
-  | "noreferrer noopener";
-
-const allowedRelValues = [
-  "noopener",
-  "noreferrer",
-  "noopener noreferrer",
-  "noreferrer noopener",
-] as const;
+// const links = {
+//   ...affiliateLinks,
+//   ...docsLinks,
+//   ...donateLinks,
+//   ...socialLinks,
+//   ...vgWortLinks,
+// };
 
 export const customComponents: MDXComponents = {
   /// nextjs components
   Image,
-  /// elements compiled from md(x)
+  /// html-elements compiled from md(x)
   //! only works for compiled md(x)-elements
   // e.g. '## Some Title' => '<h2>Some Title</h2>'
   a: (props) => {
-    if (props.href?.startsWith("#")) return <a {...props}>{props.children}</a>;
-    if (props.href?.startsWith("/"))
-      return <Link {...props}>{props.children}</Link>;
-    return <LinkExternal {...props}>{props.children}</LinkExternal>;
+    const { href, children } = props;
+    if (href?.startsWith("#")) return <a {...props}>{children}</a>;
+    if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
+    if (href?.startsWith("$"))
+      return (
+        <AffiliateLink partner={href.slice(1)} {...props}>
+          {children}
+        </AffiliateLink>
+      );
+    return <LinkExternal {...props}>{children}</LinkExternal>;
   },
   /// custom components
   AffiliateLink,
