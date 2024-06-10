@@ -1,5 +1,5 @@
 import { AffiliateLinkListItem } from "./";
-import { links } from "@/config";
+import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
 
 export function AffiliateLinkList() {

@@ -1,7 +1,7 @@
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { SupportButton } from "./SupportButton";
 import { Button } from "./ui/button";
-import { links } from "@/config";
+import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
 import { LinkExternal } from "./LinkExternal";
 
@@ -20,11 +20,11 @@ type SocialLinksProps = {
 
 export function SocialLinks({ className }: SocialLinksProps) {
   // hide link if there is no icon for it
-  const socialLinks = links.social.filter((_, i) => i < socialIcons.length);
+  const linksWithIcon = links.social.filter((_, i) => i < socialIcons.length);
 
   return (
     <>
-      {socialLinks.map(({ name, url }, i) => (
+      {linksWithIcon.map(({ name, url }, i) => (
         <LinkExternal
           key={`${slugify(name)}-link`}
           href={url}

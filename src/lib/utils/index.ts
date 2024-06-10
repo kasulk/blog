@@ -5,6 +5,7 @@ export * from "./capitalize";
 export * from "./createImageCreditsTag";
 export * from "./dashify";
 export * from "./formatDate";
+export * from "./getAffiliatePartnersNames";
 export * from "./getInitials";
 export * from "./getSocialUrl";
 export * from "./slugify";

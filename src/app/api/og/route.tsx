@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 import { Branding } from "@/components/SiteHeader";
-import { links, siteConfig } from "@/config";
+import { siteConfig } from "@/config";
+import * as links from "@/config/links";
 
 // docs: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation
 

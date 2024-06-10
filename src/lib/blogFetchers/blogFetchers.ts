@@ -1,7 +1,5 @@
-import type { BlogPost, Frontmatter } from "@/../types";
-import fs from "fs";
+import type { BlogPost } from "@/../types";
 import path from "path";
-import matter from "gray-matter";
 import { siteConfig } from "@/config";
 import { sortObjectKeys } from "@/lib/utils";
 import {

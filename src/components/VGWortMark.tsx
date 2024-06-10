@@ -1,4 +1,4 @@
-import { links } from "@/config";
+import * as links from "@/config/links";
 
 type Props = {
   code?: string;

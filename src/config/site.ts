@@ -1,3 +1,6 @@
+import { getAffiliatePartnersNames } from "@/lib/utils";
+import * as links from "@/config/links";
+
 // only configurations that DON'T need the server (node),
 export const siteConfig = {
   name: "kasulks",
@@ -5,6 +8,7 @@ export const siteConfig = {
   url: "https://kasulks-blog.vercel.app",
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
+  personalSite: "https://danielkaser.de",
   github: {
     user: "kasulk",
     repos: {
@@ -57,10 +61,15 @@ export const siteConfig = {
 
   errors: {
     AffiliateLink: {
-      notFoundPartner:
-        "Affiliate-Partner nicht gefunden! \nPartner muss in camelCase uebergeben werden. \nBitte 'partner' ueberpruefen! (AffiliateLink) \n\n=> <AffiliateLink partner='amazon'>Amazon</AffiliateLink>",
-      missingTypeOrTooltip:
-        "Bitte 'type' ODER 'tooltip' angeben! (AffiliateLink) \n\n=> <AffiliateLink type='order'>Some Shop</AffiliateLink> \nODER: \n=> <AffiliateLink type='register'>Some Account</AffiliateLink> \n\nODER: \n<AffiliateLink tooltip='Ein cooler Tootip!'>Amazon</AffiliateLink>",
+      partnerNotFound:
+        "Affiliate-Partner nicht gefunden! \n" +
+        "Partner muss in camelCase übergeben werden. \n" +
+        "Bitte 'partner' überprüfen! (AffiliateLink) \n\n" +
+        "JSX => <AffiliateLink partner='tradeRepublic'>Trade Republic</AffiliateLink>\n" +
+        "MDX => [Trade Republic]($tradeRepublic)\n\n" +
+        "Mögliche Partner sind:\n" +
+        "=======================\n" +
+        getAffiliatePartnersNames(links.affiliate).join("\n"),
       wrongType: "Falscher Affiliate-'type'",
     },
   },
