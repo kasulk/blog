@@ -10,7 +10,11 @@ series: testseries
 image: { file: computer-4484282_1280.jpg, alt: This is an image of a desk }
 ---
 
+[Go to 'Inline Text Heading'](#inline-text)
+
 ## Welcome to my MDX page! (h2)
+
+### Heading with Ümläüts!
 
 ### This is an h3 element
 
@@ -22,11 +26,11 @@ This is a list in [Markdown]($tradeRepublic):
 
 - One
 - Two
-- Three
+- Three[^1]
 
 1. One
 1. Two
-1. Three
+1. Three[^anotherFn]
 
 There is a code snippet below:
 
@@ -59,3 +63,13 @@ Lorem ipsum `dolor` sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 > A greater than…
 
 <h2 class="text-danger">test-component from mdx-file</h2>
+
+##### Footnotes:
+
+[^1]: Hello Footnote
+
+    nice!
+
+    yamann
+
+[^anotherFn]: Another Footnote!

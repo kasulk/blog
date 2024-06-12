@@ -6,13 +6,19 @@ import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { SupportButton } from "@/components";
 import { siteConfig } from "@/config";
 import * as links from "@/config/links";
+import { createId } from "@/lib/utils";
 
 export const customComponents: MDXComponents = {
   /// nextjs components
   Image,
-  /// html-elements compiled from md(x)
-  //! only works for compiled md(x)-elements
-  // e.g. '## Some Title' => '<h2>Some Title</h2>'
+  /// HTML-elements compiled from MD(X)
+  //! only works for compiled MD(X)-elements
+  // e.g. '## Some Title' ==> '<h2>Some Title</h2>'
+  h2: ({ children }) => <h2 id={createId(children)}>{children}</h2>,
+  h3: ({ children }) => <h3 id={createId(children)}>{children}</h3>,
+  h4: ({ children }) => <h4 id={createId(children)}>{children}</h4>,
+  h5: ({ children }) => <h5 id={createId(children)}>{children}</h5>,
+  h6: ({ children }) => <h6 id={createId(children)}>{children}</h6>,
   a: (props) => {
     const { href, title, children, ...restProps } = props;
     if (href?.startsWith("#")) return <a {...props}>{children}</a>;

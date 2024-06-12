@@ -87,6 +87,10 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-pt-20; /* offsets the destination of anchor links by height of SiteHeader/Nav */
+  }
+
   body {
     @apply bg-gradient text-foreground;
   }
