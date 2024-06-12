@@ -1,6 +1,7 @@
 import type { Frontmatter } from "@/../types";
 import Image from "next/image";
-import { Link, CategoryBadge } from "@/components";
+import { CategoryBadge } from "@/components";
+import { Link } from "@/components/Links";
 import { siteConfig } from "@/config";
 import { createImageCreditsTag, formatDate } from "@/lib/utils";
 

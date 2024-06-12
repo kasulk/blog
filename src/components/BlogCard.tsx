@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link, CategoryBadge } from "@/components";
+import { Link } from "@/components/Links";
+import { CategoryBadge } from "@/components";
 import { formatDate, createImageCreditsTag } from "@/lib/utils";
 import { siteConfig } from "@/config";
 

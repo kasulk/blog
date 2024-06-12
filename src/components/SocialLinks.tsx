@@ -1,9 +1,9 @@
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
-import { SupportButton } from "./SupportButton";
+import { SupportButton } from "@/components/SupportButton"; //? barrel imports not working here (server/client-conflict?)
+import { ExternalLink } from "@/components/Links";
 import { Button } from "./ui/button";
 import * as links from "@/config/links";
 import { slugify } from "@/lib/utils";
-import { LinkExternal } from "./LinkExternal";
 
 const socialIconSize = "h-6 w-6";
 const supportIconSize = "h-6 w-6 sm:h-7 sm:w-7";
@@ -25,7 +25,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
   return (
     <>
       {linksWithIcon.map(({ name, url }, i) => (
-        <LinkExternal
+        <ExternalLink
           key={`${slugify(name)}-link`}
           href={url}
           className={className}
@@ -34,7 +34,7 @@ export function SocialLinks({ className }: SocialLinksProps) {
             {socialIcons[i]}
             <span className="sr-only">{`Link to ${name}`}</span>
           </Button>
-        </LinkExternal>
+        </ExternalLink>
       ))}
       <SupportButton className={supportIconSize} />
     </>

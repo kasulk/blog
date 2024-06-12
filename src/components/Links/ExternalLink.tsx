@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export function LinkExternal({
+export function ExternalLink({
   href,
   rel = "noopener noreferrer",
   className = "",

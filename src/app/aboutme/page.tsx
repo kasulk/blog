@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { Link, LinkExternal, PageHeader } from "@/components";
+import { Link, ExternalLink } from "@/components/Links";
+import { PageHeader } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
 import { getInitials, getSocialUrl } from "@/lib/utils";
@@ -52,9 +53,9 @@ export default async function AboutMePage() {
           <p>
             Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
             aufgehübscht hatte und ca. 650{" "}
-            <LinkExternal href={getSocialUrl("Codewars")}>
+            <ExternalLink href={getSocialUrl("Codewars")}>
               Coding-Challenges
-            </LinkExternal>{" "}
+            </ExternalLink>{" "}
             später, habe ich mit diesem Blog begonnen. Das Projekt-Tagebuch dazu
             findest du{" "}
             <Link href="/blog/projekt-tagebuch-blog-tag-1">hier</Link>.

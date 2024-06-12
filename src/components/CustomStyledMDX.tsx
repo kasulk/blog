@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { Link, LinkExternal, AffiliateLink } from "@/components";
+import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { SupportButton } from "@/components";
 import { siteConfig } from "@/config";
 import * as links from "@/config/links";
@@ -23,10 +23,9 @@ export const customComponents: MDXComponents = {
           {children}
         </AffiliateLink>
       );
-    return <LinkExternal {...props}>{children}</LinkExternal>;
+    return <ExternalLink {...props}>{children}</ExternalLink>;
   },
   /// custom components
-  AffiliateLink,
   SupportButton: ({ className }) => (
     <SupportButton className={`h-7 w-7 ${className}`} />
   ),

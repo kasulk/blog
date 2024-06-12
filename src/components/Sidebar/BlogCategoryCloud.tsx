@@ -1,4 +1,5 @@
-import { Link, CategoryBadge } from "@/components";
+import { Link } from "@/components/Links";
+import { CategoryBadge } from "@/components";
 import { siteConfig } from "@/config";
 import { getBlogs, getCategoriesWithCounts } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";

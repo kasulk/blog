@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/config";
-import { PageHeader, H2, Link } from "@/components";
+import { Link } from "@/components/Links";
+import { PageHeader, H2 } from "@/components";
 import {
   SupportDonateSection,
   SupportAffiliateSection,
