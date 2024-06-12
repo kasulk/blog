@@ -2,9 +2,9 @@ export * from "./CustomStyledMDX";
 
 export * from "./Headings";
 
-export * from "./Links/Link";
+export * from "./Links/Link"; //! error beim rausnehmen...
 // export * from "./Links/LinkExternal";
-export * from "./Links/AffiliateLink";
+// export * from "./Links/AffiliateLink";
 
 export * from "./PageHeader";
 
