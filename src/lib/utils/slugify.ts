@@ -1,5 +1,7 @@
+import { replaceUmlauts } from "./replaceUmlauts";
+
 export function slugify(text: string): string {
-  return text
+  return replaceUmlauts(text)
     .toLowerCase()
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "")

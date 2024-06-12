@@ -9,6 +9,7 @@ export * from "./formatDate";
 export * from "./getAffiliatePartnersNames";
 export * from "./getInitials";
 export * from "./getSocialUrl";
+export * from "./replaceUmlauts";
 export * from "./slugify";
 export * from "./sortObjectKeys";
 export * from "./spacifyCamelCase";
