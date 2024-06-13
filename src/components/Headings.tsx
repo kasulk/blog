@@ -89,15 +89,15 @@ function CopyableHeading({
   children,
   as: Tag,
 }: CopyableHeadingProps) {
-  const [tooltip, setTooltip] = useState("");
+  const [confirmation, setConfirmation] = useState("");
   const pathname = usePathname();
   id = id || createId(children);
 
   function handleCopy() {
     const link = `${window.location.origin}${pathname}#${id}`;
     navigator.clipboard.writeText(link).then(() => {
-      setTooltip("Link kopiert!");
-      setTimeout(() => setTooltip(""), 1000);
+      setConfirmation("Link kopiert!");
+      setTimeout(() => setConfirmation(""), 1000);
     });
   }
 
@@ -110,16 +110,18 @@ function CopyableHeading({
       <Tag id={id} className={`flex items-center space-x-[0.5em] ${className}`}>
         <span>{children}</span>
         <Link2Icon className="h-[1em] w-[1em] opacity-0 transition-opacity duration-500 hover:text-accent group-hover:opacity-100" />
-        <Tooltip tooltip={tooltip} />
+        <CopyConfirmation confirmation={confirmation} />
       </Tag>
     </div>
   );
 }
 
-function Tooltip({ tooltip }: { tooltip: string }) {
+function CopyConfirmation({ confirmation }: { confirmation: string }) {
   return (
-    tooltip && (
-      <span className="whitespace-nowrap text-sm text-accent">{tooltip}</span>
+    confirmation && (
+      <span className="whitespace-nowrap text-sm text-accent">
+        {confirmation}
+      </span>
     )
   );
 }
