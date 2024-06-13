@@ -1,4 +1,4 @@
-import { H3 } from "../Headings";
+import { H3 } from "@/components/Headings";
 
 type Props = {
   title: string;

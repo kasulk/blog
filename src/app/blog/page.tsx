@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { PageHeader, H2, BlogPostsList } from "@/components";
+import { H2 } from "@/components/Headings";
+import { PageHeader, BlogPostsList } from "@/components";
 import {
   Sidebar,
   SidebarContent,

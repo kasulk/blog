@@ -1,5 +1,6 @@
 import { Link } from "@/components/Links";
-import { H2, PageHeader } from "@/components";
+import { H2 } from "@/components/Headings";
+import { PageHeader } from "@/components";
 
 export default function Home() {
   return (

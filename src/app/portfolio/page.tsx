@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { PageHeader, H2 } from "@/components";
+import { H2 } from "@/components/Headings";
+import { PageHeader } from "@/components";
 import { siteConfig } from "@/config";
 
 export const metadata: Metadata = {
