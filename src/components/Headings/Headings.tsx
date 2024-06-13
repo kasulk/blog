@@ -1,18 +1,9 @@
-"use client";
+import { CopyableHeading } from "./CopyableHeading";
 
-import { ElementType, useState } from "react";
-import { usePathname } from "next/navigation";
-import { createId } from "@/lib/utils";
-import { Link2Icon } from "@radix-ui/react-icons";
-
-type HeadingProps = {
+export type HeadingProps = {
   id?: string;
   className?: string;
   children: React.ReactNode;
-};
-
-type CopyableHeadingProps = HeadingProps & {
-  as: ElementType;
 };
 
 export function H1({ id, className = "", children }: HeadingProps) {
@@ -80,48 +71,5 @@ export function H6({ id, className = "", children }: HeadingProps) {
     >
       {children}
     </CopyableHeading>
-  );
-}
-
-function CopyableHeading({
-  id,
-  className,
-  children,
-  as: Tag,
-}: CopyableHeadingProps) {
-  const [confirmation, setConfirmation] = useState("");
-  const pathname = usePathname();
-  id = id || createId(children);
-
-  function handleCopy() {
-    const link = `${window.location.origin}${pathname}#${id}`;
-    navigator.clipboard.writeText(link).then(() => {
-      setConfirmation("Link kopiert!");
-      setTimeout(() => setConfirmation(""), 1000);
-    });
-  }
-
-  return (
-    <div
-      className="group cursor-pointer"
-      onClick={handleCopy}
-      title="Link kopieren"
-    >
-      <Tag id={id} className={`flex items-center space-x-[0.5em] ${className}`}>
-        <span>{children}</span>
-        <Link2Icon className="h-[1em] w-[1em] opacity-0 transition-opacity duration-500 hover:text-accent group-hover:opacity-100" />
-        <CopyConfirmation confirmation={confirmation} />
-      </Tag>
-    </div>
-  );
-}
-
-function CopyConfirmation({ confirmation }: { confirmation: string }) {
-  return (
-    confirmation && (
-      <span className="whitespace-nowrap text-sm text-accent">
-        {confirmation}
-      </span>
-    )
   );
 }

@@ -1,7 +1,5 @@
 export * from "./CustomStyledMDX";
 
-export * from "./Headings";
-
 export * from "./PageHeader";
 
 export * from "./BackButton";

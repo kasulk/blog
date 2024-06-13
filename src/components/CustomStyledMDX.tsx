@@ -3,7 +3,8 @@ import Image from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
-import { H2, H3, H4, H5, H6, SupportButton } from "@/components";
+import { H2, H3, H4, H5, H6 } from "@/components/Headings";
+import { SupportButton } from "@/components";
 import { siteConfig } from "@/config";
 import * as links from "@/config/links";
 

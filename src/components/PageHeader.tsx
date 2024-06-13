@@ -1,4 +1,5 @@
-import { H1, VGWortMark } from "@/components";
+import { H1 } from "@/components/Headings";
+import { VGWortMark } from "@/components";
 
 type Props = {
   className?: string;

@@ -1,6 +1,6 @@
 import type { BlogPost } from "@/../types";
 import { Link } from "@/components/Links";
-import { H4 } from "@/components";
+import { H4 } from "@/components/Headings";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import { getMonthAndYearFromDate } from "@/lib/utils";
 import { siteConfig } from "@/config";

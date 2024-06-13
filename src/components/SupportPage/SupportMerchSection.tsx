@@ -1,4 +1,4 @@
-import { H3 } from "@/components";
+import { H3 } from "@/components/Headings";
 
 export function SupportMerchSection() {
   return (

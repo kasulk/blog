@@ -1,4 +1,5 @@
-import { H3, Callout } from "@/components";
+import { H3 } from "@/components/Headings";
+import { Callout } from "@/components";
 import { AffiliateLinkList } from "./AffiliateLinkList";
 
 export function SupportAffiliateSection() {
