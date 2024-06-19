@@ -39,8 +39,14 @@ export const customComponents: MDXComponents = {
   },
   blockquote: (props) => {
     const children = React.Children.toArray(props.children);
-    const content = (children[1] as React.ReactElement)?.props
-      .children as string;
+    const rawContent = (children[1] as React.ReactElement)?.props.children;
+
+    // fixes issue if other HTML-elements are used within blockquotes, e.g. <br/>
+    const hasMoreNestedChildren = Array.isArray(rawContent);
+    const content = hasMoreNestedChildren
+      ? rawContent.filter((child) => typeof child === "string").join("")
+      : rawContent;
+
     const typeTag = content.match(/\[\!(.*?)\]/); // e.g. extract 'note' from [!note]
 
     if (!content || !typeTag) return <blockquote>{props.children}</blockquote>;
