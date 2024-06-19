@@ -65,29 +65,11 @@ export const calloutColorMap = {
     bgColor: "text-muted-foreground",
     borderColor: "text-muted-foreground",
   },
-  danger: {
+  caution: {
     titleColor: "text-danger-600",
     textColor: "text-danger-900",
     bgColor: "bg-danger-100",
     borderColor: "border-danger-600",
-  },
-  warning: {
-    titleColor: "text-warning-600",
-    textColor: "text-warning-900",
-    bgColor: "bg-warning-100",
-    borderColor: "border-warning-600",
-  },
-  success: {
-    titleColor: "text-success-600",
-    textColor: "text-success-900",
-    bgColor: "bg-success-100",
-    borderColor: "border-success-600",
-  },
-  tip: {
-    titleColor: "text-success-600",
-    textColor: "text-success-900",
-    bgColor: "bg-success-100",
-    borderColor: "border-success-600",
   },
   important: {
     titleColor: "text-fuchsia-600",
@@ -100,6 +82,18 @@ export const calloutColorMap = {
     textColor: "text-blue-900",
     bgColor: "bg-blue-100",
     borderColor: "border-blue-600",
+  },
+  tip: {
+    titleColor: "text-success-600",
+    textColor: "text-success-900",
+    bgColor: "bg-success-100",
+    borderColor: "border-success-600",
+  },
+  warning: {
+    titleColor: "text-warning-600",
+    textColor: "text-warning-900",
+    bgColor: "bg-warning-100",
+    borderColor: "border-warning-600",
   },
 } as const;
 
