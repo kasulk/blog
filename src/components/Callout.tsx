@@ -1,6 +1,6 @@
 import type { CalloutType } from "@/config";
 import { calloutColorMap as colorMap } from "@/config";
-import { cn } from "@/lib/utils";
+import { cn, translateDefaultCalloutTitle } from "@/lib/utils";
 import { ReactNode } from "react";
 
 type Props = {
@@ -21,6 +21,8 @@ export function Callout({
   if (!(type in colorMap)) type = "default";
   const { titleColor, textColor, bgColor, borderColor } = colorMap[type];
 
+  if (title) title = translateDefaultCalloutTitle(title).toUpperCase();
+
   return (
     <blockquote
       className={cn(
@@ -32,11 +34,7 @@ export function Callout({
       )}
       {...props}
     >
-      {title && (
-        <div className={`font-semibold ${titleColor}`}>
-          {title.toUpperCase()}
-        </div>
-      )}
+      {title && <div className={`font-semibold ${titleColor}`}>{title}</div>}
       <div>{children}</div>
     </blockquote>
   );
