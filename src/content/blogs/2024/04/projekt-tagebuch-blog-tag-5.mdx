@@ -1,0 +1,97 @@
+---
+title: Projekt-Tagebuch Blog, Tag 5
+author: icke
+pubDate: 2024-04-17
+description: Heute wollte ich mich noch mal um die Frontmatter kümmern. Oder um das Frontmatter? Oder um den?! Wer weiß... egal. Die Frontmatters halt. Kruzifix! Jedenfalls wird der/die/das bisher nicht richtig...
+isDraft: false
+category: coden
+tags: []
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode: faa1c2818f5c4afc83369487e0c0b114
+---
+
+Mittwoch, 17. April 2024
+
+**Wochen-Ziele:**
+
+- [x] ~Blog-Grundgerüst steht und ich kann bloggen bis der Arzt kommt~
+
+**Tages-Ziele:**
+
+- [x] ~[Frontmatter gescheit extrahieren](#frontmatter-gescheit-extrahieren)~
+- [x] ~[Custom CSS-Styles in gerenderte MDX-Files laden](#custom-css-styles-in-gerenderte-mdx-files-laden)~
+- [ ] atemberaubende Readme erstellen
+
+---
+
+## Frontmatter gescheit extrahieren
+
+Heute wollte ich mich noch mal um die Frontmatter kümmern. Oder um _das_ Frontmatter? Oder um _den_?! Wer weiß... egal. Die Frontmatters halt. Kruzifix!
+
+Jedenfalls wurde _der/die/das_ Frontmatter bisher nicht richtig extrahiert und vom eigentlichen Content in der MDX-Datei getrennt.
+
+Wenn das nicht klappen solle würde, müsste ich zur Not [gray-matter](https://www.npmjs.com/package/gray-matter) installieren und einrichten oder es mit einem Meta-Daten-Objekt lösen. Diese Möglichkeit bietet [next/mdx](https://www.npmjs.com/package/@next/mdx) auch.
+
+Weitere Packages wollte ich gerne vermeiden, weil es eigentlich mit [next-mdx-remote](https://www.npmjs.com/package/next-mdx-remote) funktionieren sollte...
+
+Ich habe es dann doch hinbekommen. Problem war, dass sich in der MDX-Datei ein auskommentierter Komponenten-Import befand. Damit kam der MDX-Compiler von next-mdx-remote offensichtlich nicht klar. Kommentar gelöscht, Frontmatter funzt.
+
+## Custom CSS-Styles in gerenderte MDX-Files laden
+
+Als nächstes habe ich mich an die nicht funktionierenden Custom-Styles gemacht. Man kann mit next-mdx-remote benutzerdefinierte Komponenten erstellen und diese den vom Markdown in HTML übersetzten Tags zuweisen. Ich glaube das war jetzt ziemlich unverständlich. Hier mal ein Beispiel aus meiner src/components/mdx-remote.tsx:
+
+```tsx
+// src/components/mdx-remote.tsx:
+import { MDXComponents } from "mdx/types";
+import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+
+const components: MDXComponents = {
+  // Allows customizing built-in components, e.g. to add styling
+  h1: ({ children }) => <h1 className="text-red-500">{children}</h1>,
+  h2: ({ children }) => <h2 className="text-blue-500">{children}</h2>,
+  h3: ({ children }) => <h3 className="text-green-500">{children}</h3>,
+};
+```
+
+Man erstellt hier quasi schnelle namenlose Komponenten und weist sie Properties im `components`-Objekt zu. Das wird dann beim Compilen des MD bzw. MDX gelesen und die entsprechenden Komponenten werden 'ersetzt'. Dazu gibt man im zweiten Schritte das `components`-Objekt an eine `CustomMDX`-Komponente.
+
+```tsx
+// src/components/mdx-remote.tsx:
+export function CustomMDX(props: MDXRemoteProps) {
+  return (
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+      options={{ parseFrontmatter: true }} // hides frontmatter on rendered MDX
+    />
+  );
+}
+```
+
+Im dritten Schritte importiert man die `CustomMDX`-Komponente da wo man sein MDX rendern möchte und füttert sie mit dem bloßen, unveränderten Text-Inhalt seiner MDX-Datei.
+
+```tsx
+// src/app/blog/[slug]/page.tsx
+<article className="prose dark:prose-invert container mx-auto max-w-3xl py-6">
+  <h1>{title}</h1>
+  <p className="flex justify-end space-x-1">
+    <span>by {author},</span>
+    <span>{publishDate}</span>
+  </p>
+  <CustomMDX source={fileContent} />
+</article>
+```
+
+Und genau hier war das Problem. Die `compileMDX`-Funktion von next-mdx-remote schnappt sich den Text-Inhalt einer MDX-Datei und wandelt ihn in Frontmatter und eine fertige React-Komponente um. Die React-Komponente ist aber schon fertig kompiliert und die `CustomMDX`-Komponente hat jetzt hier keinen Einfluss mehr.
+
+Darum hab ich jetzt die `compileMDX`-Funktion nur genutzt um die Frontmatter vom Textinhalt zu trennen. Dann gebe ich den kompletten rohen Textinhalt (inklusive enthaltener Frontmatter) noch mal extra in die `CustomMDX`-Komponente. Jetzt funzts. Aber irgendwie is dit scheiße. Fühlt sich irgendwie doppelt-gemoppelt an...
+
+Naja, wahrscheinlich jammern auf hohem Niveau. Gerendert wird alles im Build-Prozess. Dürfte also keinerlei Performance- bzw. SEO-Einbußen in der Production verursachen.
+
+Mission accomplished. 🚀
