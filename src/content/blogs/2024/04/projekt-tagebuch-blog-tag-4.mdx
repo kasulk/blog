@@ -1,0 +1,100 @@
+---
+title: Projekt-Tagebuch Blog, Tag 4
+author: icke
+pubDate: 2024-04-15
+description: Als Erstes habe ich einen Tailwind-Bug gefixt. Beim installieren von shadcn wurde von shadcn die komplette tailwind.config überschrieben. Die hatte ich aber leider schon auf MDX gepolt. Das musste ich jetzt einfach ein zweites Mal machen.
+isDraft: false
+category: coden
+tags: []
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode: 802ef689d32042dab1d7afc26118a65c
+---
+
+Montag, 15. April 2024
+
+**Wochen-Ziele:**
+
+- [x] ~Blog-Grundgerüst steht und ich kann bloggen bis der Arzt kommt~
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [ ] alle MDX-Dateien im Content-Verzeichnis und Unterverzeichnissen rendern
+
+---
+
+## Tailwind Bugfix
+
+Als Erstes habe ich heute einen Tailwind-Bug gefixt. Beim installieren von shadcn wurde von shadcn die komplette tailwind.config überschrieben. Die hatte ich aber leider schon auf MDX gepolt. Das musste ich jetzt einfach ein zweites Mal machen.
+
+Das war nicht schwer. Eigentlich waren es nur 2 Zeilen und die MDX-Styles waren wieder da. Aber daruff musste erst ma komm'...
+
+## Content-Ordner
+
+Wenn man irgendwann hunderte oder sogar tausende von Blog-Artikeln hat, wird man irgendwann im Editor von einer mega Liste erschlagen, wenn man den Ordner öffnet.
+
+Um das zu vermeiden, habe ich mir in Anlehnung an Wordpress folgende Dateistruktur ausgeknobelt:
+
+```bash
+├── src
+│ ├── content
+│ │ ├── blog
+│ │ │ ├── 2024
+│ │ │ │ ├── 01
+│ │ │ │ │ ├── my-first-blog.mdx
+│ │ │ │ │ ├── my-second-blog.mdx
+│ │ │ │ │ ├── my-best-blog.mdx
+│ │ │ │ │ ├── ...
+│ │ │ │ ├── 02
+│ │ │ │ ├── 03
+│ │ │ │ ├── 04
+│ │ │ │ ├── 05
+│ │ │ │ ├── 06
+│ │ │ │ ├── 07
+│ │ │ │ ├── 08
+│ │ │ │ ├── 09
+│ │ │ │ ├── 10
+│ │ │ │ ├── 11
+│ │ │ │ └── 12
+│ │ │ ├── 2025
+│ │ │ │ ├── 01
+│ │ │ │ ├── 02
+│ │ │ │ ├── 03
+│ │ │ │ ├── ...
+```
+
+Sprich, einfach für jedes Jahr einen Ordner mit jeweils 12 Unterordnern. Einen für jeden Monat.
+
+Das musste ich jetzt also nur noch irgendwie in Next.js bzw. JavaScript bzw. TypeScript übersetzen. Das war mein Ziel für heute.
+
+Erst mal lief's auch irgendwie ganz gut. Bis ich feststellte, dass die Frontmatter, also die Meta-Daten jeder Datei beim Aufbereiten nicht ordentlich vom Content der Seiten getrennt werden.
+
+Also irgendwas ist da im Argen. Leider hab ich's heute nicht mehr geschafft das zu fixen.
+
+## Exkurs: Was ist Frontmatter?
+
+Eine MD- bzw. eine MDX-Datei sieht ungefähr so aus:
+
+```
+---
+title: My First Blog
+description: This is the wonderful description of my first blog.
+publishDate: 2024-04-15
+---
+
+## Der Spaziergang
+
+Gestern ging ich mit meinem **Hund** spazieren...
+```
+
+Frontmatter ist jetzt der Teil zwischen den oberen und unteren 3 Bindestrichen (“---").
+
+Diesen Teil kann man programmatisch extrahieren und lustig für andere Zwecke verarbeiten.
+
+Sehr knappe Erkärung, aber dafür auch sehr gut, wie ich finde.
