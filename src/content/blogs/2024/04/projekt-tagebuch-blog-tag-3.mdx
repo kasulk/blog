@@ -1,0 +1,60 @@
+---
+title: Projekt-Tagebuch Blog, Tag 3
+author: icke
+pubDate: 2024-04-12
+description:
+isDraft: false
+category: coden
+tags: []
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode: 2dbe79d56cbd4033b23426ca34287164
+---
+
+Freitag, 12. April 2024
+
+**Wochen-Ziele:**
+
+- [x] ~Site-Header fertigstellen~
+
+**Tages-Ziele:**
+
+- [x] ~[Brand in den Header einfügen](#branding)~
+- [x] ~[Links in den Header einfügen](#header-links-einfuegen)~
+- [x] ~[Dark-Mode-Toggle in den Header einfügen](#darkmode-toggle)~
+- [ ] atemberaubende Readme erstellen
+
+---
+
+## Branding
+
+So, heute habe ich mich also an den Site-Header gemacht. Ich habe das `Branding` (also den Logo-Ersatz) und die `MainNav` erstellt. Die Daten für beides habe ich ebenfalls global in meiner `siteConfig` hinterlegt (s. letzter Blog). Das macht es pflegeleicht.
+
+## Header-Links einfügen
+
+Als nächstes habe ich die Social-Links und das Mobile-Menu erstellt. Also das `BurgerMenu`, auf das man in der Mobile-Ansicht zugreifen kann. Auf größeren Screens wird es ausgeblendet. Auch hier habe ich wieder versucht alles was geht in der `siteConfig` zu unterzubringen.
+
+Außerdem habe ich die `NavLink`-Komponente der `MainNav` für die `MobileNav` recycelt. Nu hab ich eine `NavLink`-Komponente für beide Navs. Das hat erstaunlich gut geklappt. Erstaunlich weil ein bisschen tricky. Die `MobileNav`-Links brauchen nämlich noch einen Klick-Event-Handler um das Mobile-Menü auf Klick wieder geschmeidig zu schließen.
+
+## DarkMode-Toggle
+
+Dann war der DarkMode inklusive Toggle dran. Bei mir heißt er allerdings Switch. Auch das war mit shadcn und Next wieder einigermaßen easy zu lösen. Provider anlegen, im Main-Content im Layout wrappen, Dropdown von shadcn installieren, Dropdown-Menü-Komponente anlegen, fert'sch.
+
+## Refactor, refactor, refactor
+
+Danach hab ich die Social-Links vom `SiteHeader` in eine dedizierte `SocialLinks`-Komponente verschoben, damit meine `SiteHeader`-Komponente wieder übersichtlich wird. Und die Social-Links sind jetzt nicht mehr hardgecodet, sondern werden ebenfalls aus der `siteConfig` gemappt bzw. generiert.
+
+## Deploy
+
+Zum Schluss hab ich nur noch quick and dirty auf Vercel deployt. Wobei dies nicht ohne Probleme ging. Ich habe rasch die Type-Imports für die ungenutzten Icons gefixt, die ich zuvor in einen separaten Ordner verschob. Das war’s. Blog’s online Baby! 🤘
+
+## Bleibt mir nur noch zu sagen:
+
+“I’m so proud. But it was a team effort. I couldn’t have done it without the team. I want to thank the whole team, my grandma, the janitor...” - so, schulz!
+
+See you on monday partypeople!
