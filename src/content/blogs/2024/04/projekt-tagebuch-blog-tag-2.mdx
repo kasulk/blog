@@ -1,0 +1,125 @@
+---
+title: Projekt-Tagebuch Blog, Tag 2
+author: icke
+pubDate: 2024-04-11
+description: Gestern konnte ich endlich mit dem Blog anfangen! Leider stellte sich alles aber wieder schwieriger raus als ich dachte. Soll es ein Blog mit CMS sein? Wenn ja, headless oder nicht...
+isDraft: false
+category: coden
+tags: []
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode: 1e0e98e688b94ccab7ba08c9a10b78bd
+---
+
+Donnerstag, 11. April 2024
+
+**Wochen-Ziele:**
+
+- [ ] Site-Header fertigstellen
+
+**Tages-Ziele:**
+
+- [x] ~[Shadcn installieren und einrichten](#shadcn-installieren)~
+- [x] ~Basic Setup abschließen~
+- [x] ~Site-Header Komponente anlegen~
+
+---
+
+Nachdem ich vorgestern das Blog-Projekt neu angelegt und grundlegend eingerichtet habe, wollte ich heute noch ein bisschen konfigurieren und dann mit der ersten Komponente anfangen.
+
+## Prettier & Prettier für Tailwind
+
+Als erstes habe ich [prettier](https://www.npmjs.com/package/prettier) und [prettier-plugin-tailwindcss](https://www.npmjs.com/package/prettier-plugin-tailwindcss) installiert. Mit dem Tailwind-Prettier-Plugin werden bei jedem Speichern die Tailwind-Klassen sortiert. Das ist ziemlich geil, ansonsten verliert man nämlich schnell den Überblick!
+
+## Shadcn installieren
+
+Dann habe ich [shadcn](https://ui.shadcn.com) “installiert”. Shadcn ist eine UI- bzw. Component-Library, die mit Tailwind harmoniert. Shadcn wird eigentlich nicht installiert, sondern initialisiert. Aber es verändert einige Dateien und andere Änderungen muss man manuell vornehmen. Also für mich ist das “installieren”.
+
+Die benötigten Komponenten werden dann allerdings einfach nur noch ins Projekt kopiert. Ich habe shadcn bereits bei <ExternalLink href={`https://github.com/${github.user}/${github.repos.ursula}`}>Ursula</ExternalLink> verwendet. In Kombination mit NextUI. Von der NextUI-Nav z.B. war ich nicht so sehr begeistert.
+
+[NextUI](https://nextui.org) sieht teilweise schon recht sexy aus, aber mein derzeitiger Gesamteindruck ist, dass NextUI noch relativ in den Kinderschuhen steckt. In meinem letzten Projekt bin ich auf teilweise fiese Hürden gestoßen.
+
+Teilweise kann man halt nicht mal einfach so schnell was anpassen. Und es ist schwer hinter die Kulissen zu schauen. Darum werde ich für meinen Blog erst mal auf NextUI verzichten. Auch wenn er dann vielleicht nicht ganz so fancy wird.
+
+## Icons Baby! Oder so ähnlich...
+
+Als nächstes habe ich mir schon mal reichlich Icons ins Projekt kopiert. Nur um dann herauszufinden, dass shadcn schon viele Icons mitliefert...
+
+## siteConfig
+
+Außerdem hab ich eine siteConfig-Datei angelegt. Hier kommen statisch-dynamische Daten rein. Wat?! Also Daten, die eher selten geändert werden, aber wenn, können sie hier zentral angepasst werden, ohne dass man sämtliche Dateien durchkämmen muss.
+
+### Ein Beispiel:
+
+Wenn du deinen Nutzernamen und deinen LinkedIn-Profil-Link änderst, müsstest du bei herkömmlicher Methode für jede Seite oder Komponente in der du den Link verwendest, in jeder Datei den Link ändern.
+
+Mit einer siteConfig änderst du nur 1x und lädst für jede Seite, Komponente oder Datei, die den Link braucht, die Daten aus eben jener siteConfig. So sieht z.B. meine siteConfig.ts aus:
+
+```ts
+export const siteConfig = {
+  name: "kasulks",
+  type: "blog",
+  url: "https://kasulks-blog.vercel.app",
+  description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
+  owner: "Daniel Kaser",
+  personalSite: "https://danielkaser.de",
+  github: {
+    user: "kasulk",
+    repos: {
+      blog: "blog",
+      ursula: "ursula-3000",
+    },
+  },
+};
+```
+
+Die siteConfig importierst du dir dann einfach da wo du sie brauchst und greifst auf den Link zu:
+
+```ts
+import { siteConfig } from “@/config/siteConfig”
+
+<Link href={siteConfig.personalSite}>Geil!</Link>
+```
+
+Gerendert sieht's dann so aus: <ExternalLink href={`${personalSite}`}>Geil!</ExternalLink>
+
+> [!danger:Nice Heading baby!]
+> Useful **information** that users should know, even when skimming content.
+> SEcond Line!
+
+> [!note:Nice Heading baby!]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!warning]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!success]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!important]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!tip]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!caution]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> [!note:am rande]
+> Useful information that users should know, even when skimming content.
+> SEcond Line!
+
+> ordenary blockquote
+
+Das wars dann eigentlich auch schon für gestern. Bis morjen!

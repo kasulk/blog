@@ -13,3 +13,4 @@ export * from "./replaceUmlauts";
 export * from "./slugify";
 export * from "./sortObjectKeys";
 export * from "./spacifyCamelCase";
+export * from "./translateDefaultCalloutTitle";

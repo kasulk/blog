@@ -1,31 +1,41 @@
-import { cn } from "@/lib/utils";
+import type { CalloutType } from "@/config";
+import { calloutColorMap as colorMap } from "@/config";
+import { cn, translateDefaultCalloutTitle } from "@/lib/utils";
 import { ReactNode } from "react";
 
-interface CalloutProps {
-  type?: "default" | "warning" | "danger" | "success";
+type Props = {
+  type?: CalloutType;
+  title?: string;
   className?: string;
   children?: ReactNode;
-}
+};
 
 export function Callout({
   type = "default",
-  className,
+  title,
+  className = "",
   children,
   ...props
-}: CalloutProps) {
+}: Props) {
+  //
+  if (!(type in colorMap)) type = "default";
+  const { titleColor, textColor, bgColor, borderColor } = colorMap[type];
+
+  if (title) title = translateDefaultCalloutTitle(title).toUpperCase();
+
   return (
-    <div
+    <blockquote
       className={cn(
-        `boder-l-4 my-6 w-full items-start rounded-md border p-4 dark:max-w-none ${className}`,
-        {
-          "border-danger-600 bg-danger-100 dark:prose": type === "danger",
-          "border-warning-600 bg-warning-100 dark:prose": type === "warning",
-          "border-success-600 bg-success-100 dark:prose": type === "success",
-        },
+        `my-6 items-start rounded-md border border-l-4 p-4 ${className}`,
+        // "prose",
+        textColor,
+        bgColor,
+        borderColor,
       )}
       {...props}
     >
+      {title && <div className={`font-semibold ${titleColor}`}>{title}</div>}
       <div>{children}</div>
-    </div>
+    </blockquote>
   );
 }
