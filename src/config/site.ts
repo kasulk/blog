@@ -14,7 +14,8 @@ export const siteConfig = {
     },
   },
   vgWort: {
-    charThreshold: 1800,
+    charCountThreshold: 1800,
+    viewCountThreshold: 1500,
     showCharCounterInDevMode: true,
   },
 

@@ -1,24 +1,21 @@
 import { siteConfig } from "@/config";
+import { getCharCounterColor } from "@/lib/utils";
 
 type Props = {
   mdxLength: number;
+  className?: string;
 };
 
-const { vgWort } = siteConfig;
+const { charCountThreshold } = siteConfig.vgWort;
 
-function getCharCounterColor(numChars: number): string {
-  if (numChars >= vgWort.charThreshold * 1.111) return "bg-success-600/50";
-  if (numChars >= vgWort.charThreshold) return "bg-warning-600/50";
-  return "bg-danger-600/50";
-}
-
-export function CharCounter({ mdxLength }: Props) {
-  const bgColor = getCharCounterColor(mdxLength);
+export function CharCounter({ mdxLength, className = "" }: Props) {
+  const bgColor = getCharCounterColor(mdxLength, charCountThreshold);
+  className = `${bgColor} ${className}` || "";
 
   return (
     <div
       title="Anzahl Zeichen im rohen MDX-Content (ohne Frontmatter)"
-      className={`fixed bottom-8 right-8 flex h-16 w-16 items-center justify-center rounded-full opacity-60 shadow-md hover:opacity-100 ${bgColor}`}
+      className={`bottom-8 right-8 flex h-16 w-16 items-center justify-center rounded-full text-foreground opacity-60 shadow-md hover:opacity-100 ${className}`}
     >
       {mdxLength.toLocaleString("de-DE")}
     </div>
