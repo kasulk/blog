@@ -1,4 +1,4 @@
-import { CopyableHeading } from "./CopyableHeading";
+import { AutoCopyableHeading } from "./AutoCopyableHeading";
 
 export type HeadingProps = {
   id?: string;
@@ -26,9 +26,9 @@ export function H2({
   return (
     <>
       {autoCopyable ? (
-        <CopyableHeading as="h2" id={id} className={className}>
+        <AutoCopyableHeading as="h2" id={id} className={className}>
           {children}
-        </CopyableHeading>
+        </AutoCopyableHeading>
       ) : (
         <h2 id={id} className={className}>
           {children}
@@ -49,9 +49,9 @@ export function H3({
   return (
     <>
       {autoCopyable ? (
-        <CopyableHeading as="h3" id={id} className={className}>
+        <AutoCopyableHeading as="h3" id={id} className={className}>
           {children}
-        </CopyableHeading>
+        </AutoCopyableHeading>
       ) : (
         <h3 id={id} className={className}>
           {children}
@@ -72,9 +72,9 @@ export function H4({
   return (
     <>
       {autoCopyable ? (
-        <CopyableHeading as="h4" id={id} className={className}>
+        <AutoCopyableHeading as="h4" id={id} className={className}>
           {children}
-        </CopyableHeading>
+        </AutoCopyableHeading>
       ) : (
         <h4 id={id} className={className}>
           {children}
@@ -95,9 +95,9 @@ export function H5({
   return (
     <>
       {autoCopyable ? (
-        <CopyableHeading as="h5" id={id} className={className}>
+        <AutoCopyableHeading as="h5" id={id} className={className}>
           {children}
-        </CopyableHeading>
+        </AutoCopyableHeading>
       ) : (
         <h5 id={id} className={className}>
           {children}
@@ -118,9 +118,9 @@ export function H6({
   return (
     <>
       {autoCopyable ? (
-        <CopyableHeading as="h6" id={id} className={className}>
+        <AutoCopyableHeading as="h6" id={id} className={className}>
           {children}
-        </CopyableHeading>
+        </AutoCopyableHeading>
       ) : (
         <h6 id={id} className={className}>
           {children}

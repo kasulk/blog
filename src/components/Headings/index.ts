@@ -1,2 +1,2 @@
 export * from "./Headings";
-export * from "./CopyableHeading";
+export * from "./AutoCopyableHeading";

@@ -7,16 +7,16 @@ import { usePathname } from "next/navigation";
 import { Link2Icon } from "@radix-ui/react-icons";
 import { createId } from "@/lib/utils";
 
-type CopyableHeadingProps = HeadingProps & {
+type AutoCopyableHeadingProps = HeadingProps & {
   as: ElementType;
 };
 
-export function CopyableHeading({
+export function AutoCopyableHeading({
   id,
   className,
   children,
   as: Tag,
-}: CopyableHeadingProps) {
+}: AutoCopyableHeadingProps) {
   const [confirmation, setConfirmation] = useState("");
   const pathname = usePathname();
   id = id || createId(children);
