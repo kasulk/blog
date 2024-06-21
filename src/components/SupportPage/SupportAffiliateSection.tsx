@@ -5,7 +5,7 @@ import { AffiliateLinkList } from "./AffiliateLinkList";
 export function SupportAffiliateSection() {
   return (
     <section id="affiliate-links" className="scroll-mt-12">
-      <H3>Affiliate-Links</H3>
+      <H3 autoCopyable>Affiliate-Links</H3>
 
       <p>
         Affiliate-Links sind Links, bei denen ich eine Provision bekomme, wenn

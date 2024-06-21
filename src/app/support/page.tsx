@@ -24,7 +24,7 @@ export default function SupportPage() {
         und mich) unterstützt.
       </p>
 
-      <H2>How it works</H2>
+      <H2 autoCopyable>How it works</H2>
       <p>Im Folgenden findest du Inspirationen, wie du das tun kannst.</p>
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
