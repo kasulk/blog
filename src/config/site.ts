@@ -13,6 +13,10 @@ export const siteConfig = {
       ursula: "ursula-3000",
     },
   },
+  vgWort: {
+    charThreshold: 1800,
+    showCharCounterInDevMode: true,
+  },
 
   pages: {
     blog: {

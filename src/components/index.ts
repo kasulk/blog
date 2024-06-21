@@ -7,6 +7,7 @@ export * from "./Callout";
 export * from "./SocialLinks";
 export * from "./SupportButton";
 export * from "./VGWortMark";
+export * from "./CharCounter";
 
 export * from "./BlogCard";
 export * from "./BlogPostsList";
