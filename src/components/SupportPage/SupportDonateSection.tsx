@@ -8,7 +8,7 @@ import PayPalIcon from "@/assets/img/pp144.png";
 export function SupportDonateSection() {
   return (
     <section id="spenden" className="scroll-mt-12">
-      <H3>Spenden</H3>
+      <H3 autoCopyable>Spenden</H3>
 
       <p>
         Eine Möglichkeit den Blog zu unterstützen sind Spenden. Spenden kannst

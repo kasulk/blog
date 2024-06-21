@@ -20,11 +20,31 @@ export const customComponents: MDXComponents = {
   /// HTML-elements compiled from MD(X)
   //! only works for compiled MD(X)-elements
   // e.g. '## Some Title' ==> '<h2>Some Title</h2>'
-  h2: (props) => <H2 {...props}>{props.children}</H2>,
-  h3: (props) => <H3 {...props}>{props.children}</H3>,
-  h4: (props) => <H4 {...props}>{props.children}</H4>,
-  h5: (props) => <H5 {...props}>{props.children}</H5>,
-  h6: (props) => <H6 {...props}>{props.children}</H6>,
+  h2: (props) => (
+    <H2 autoCopyable {...props}>
+      {props.children}
+    </H2>
+  ),
+  h3: (props) => (
+    <H3 autoCopyable {...props}>
+      {props.children}
+    </H3>
+  ),
+  h4: (props) => (
+    <H4 autoCopyable {...props}>
+      {props.children}
+    </H4>
+  ),
+  h5: (props) => (
+    <H5 autoCopyable {...props}>
+      {props.children}
+    </H5>
+  ),
+  h6: (props) => (
+    <H6 autoCopyable {...props}>
+      {props.children}
+    </H6>
+  ),
   a: (props) => {
     const { href, title, children, ...restProps } = props;
     if (href?.startsWith("#")) return <a {...props}>{children}</a>;
