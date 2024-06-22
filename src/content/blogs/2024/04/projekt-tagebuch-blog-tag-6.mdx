@@ -1,0 +1,112 @@
+---
+title: Projekt-Tagebuch Blog, Tag 6
+author: icke
+pubDate: 2024-04-18
+description: Heute hab ich mir das Repo von `next-mdx-remote` noch mal genauer angekuckt. Insbesondere die `compileMDX`-Funktion. Meine Recherchen haben ergeben, dass diese Funktion neben `source` und `options` auch `components` empfangen kann.
+isDraft: false
+category: coden
+tags: []
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode: 347c1cd684b448f8a709c8570bd55340
+---
+
+Donnerstag, 18. April 2024
+
+**Wochen-Ziele:**
+
+- [x] ~Blog-Grundgerüst steht und ich kann bloggen bis der Arzt kommt~
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+
+---
+
+## compileMDX()
+
+Heute hab ich mir das Repo von `next-mdx-remote` noch mal genauer angekuckt. Insbesondere die `compileMDX`-Funktion. Meine Recherchen haben ergeben, dass diese Funktion neben `source` und `options` auch `components` empfangen kann.
+
+Das hörte sich erst mal interessant an und ich habe es genauer unter die Lupe genommen. Und tatsächlich: Angeblich kann man hier seine Custom Components übergeben, die dann das MDX während des kompilierens mit `compileMDX` z.B. mit eigenen Styles anreichern können! Cool.
+
+Also hab ich die ganze Logik wieder ein bisschen umgebaut. Jetzt kann ich tatsächlich in einem Vorgang Content von Frontmatter trennen, eigene Styles einfügen und das MDX in eine React-Komponente verwandeln. Das Ganze sieht jetzt aus wie folgt.
+
+Meine Custom Components (Muster):
+
+```tsx
+// components/CustomStyledMDX.tsx
+import type { MDXComponents } from "mdx/types";
+
+export const customComponents: MDXComponents = {
+  /// Allows customizing built-in components, e.g. to add styling
+  h1: ({ children }) => <h1 className="text-warning">{children}</h1>,
+  h2: ({ children }) => <h2 className="text-danger">{children}</h2>,
+  h3: ({ children }) => <h3 className="text-success">{children}</h3>,
+};
+```
+
+Meine `getBlogByFilePath`-Funktion mit `compileMDX`-Funktion:
+
+```ts
+// utils/getBlogByFilePath.ts
+export async function getBlogByFilePath(filePath: string): Promise<Blog> {
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const slug = path.parse(filePath).name;
+  const { content, frontmatter } = await compileMDX<Frontmatter>({
+    source: fileContent,
+    options: { parseFrontmatter: true },
+    components: customComponents,
+  });
+
+  return {
+    frontmatter,
+    content,
+    slug,
+  };
+}
+```
+
+Meine `SingleBlogPage`-Komponente:
+
+```tsx
+// src/app/blog/[slug]/page.tsx
+import { notFound } from "next/navigation";
+import { getBlogBySlug, getBlogs } from "../blogFetchers";
+
+type BlogPageProps = {
+  params: { slug: string };
+};
+
+export default async function SingleBlogPage({ params }: BlogPageProps) {
+  const blog = await getBlogBySlug(params.slug);
+
+  if (!blog) notFound();
+
+  const { content, frontmatter } = blog;
+  const { title, author, publishDate } = frontmatter;
+
+  return (
+    // To style MD properly, add 'prose' class
+    <article className="prose dark:prose-invert container mx-auto max-w-3xl py-6">
+      <h1>{title}</h1>
+      <p className="flex justify-end space-x-1">
+        <span>by {author}, </span>
+        <span>{publishDate}</span>
+      </p>
+      {content}
+    </article>
+  );
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const blogs = await getBlogs();
+  return blogs.map((blog) => ({ slug: blog.slug }));
+}
+```
+
+Dit jefällt mir schon ma janz jut!
