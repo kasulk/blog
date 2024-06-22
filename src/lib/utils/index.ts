@@ -15,3 +15,4 @@ export * from "./slugify";
 export * from "./sortObjectKeys";
 export * from "./spacifyCamelCase";
 export * from "./translateDefaultCalloutTitle";
+export * from "./truncify";
