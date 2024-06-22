@@ -1,7 +1,12 @@
 import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHeader, CustomStyledMDX, BackButton } from "@/components";
+import {
+  PageHeader,
+  CustomStyledMDX,
+  BackButton,
+  CharCounter,
+} from "@/components";
 import {
   Sidebar,
   SidebarContent,
@@ -19,6 +24,9 @@ import {
 type BlogPageProps = {
   params: { slug: string };
 };
+
+const isDevMode = process.env.NODE_ENV === "development";
+const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
@@ -58,6 +66,8 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           )}
         </Sidebar>
       </div>
+
+      {showCharCounter && <CharCounter mdxLength={content.length} />}
     </>
   );
 }

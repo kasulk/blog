@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "@/components/Links";
-import { CategoryBadge } from "@/components";
+import { CategoryBadge, CharCounter } from "@/components";
 import { formatDate, createImageCreditsTag } from "@/lib/utils";
 import { siteConfig } from "@/config";
 
@@ -16,14 +16,17 @@ type BlogCardProps = {
   blog: BlogPost;
 };
 
+const isDevMode = process.env.NODE_ENV === "development";
+const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
+
 export function BlogCard({ blog }: BlogCardProps) {
-  const { frontmatter, slug } = blog;
+  const { content, frontmatter, slug } = blog;
   const { title, description, author, pubDate, image, category } = frontmatter;
   const blogImageDir = siteConfig.dir.blogImages;
 
   return (
     <Card className="w-full">
-      <CardHeader>
+      <CardHeader className="relative">
         <Link href={`/blog/category/${category}`} className="flex">
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
         </Link>
@@ -36,6 +39,12 @@ export function BlogCard({ blog }: BlogCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="my-0 object-cover"
           />
+          {showCharCounter && (
+            <CharCounter
+              className="absolute -bottom-6 -right-4"
+              mdxLength={content.length}
+            />
+          )}
         </Link>
         <CardTitle>
           <Link
