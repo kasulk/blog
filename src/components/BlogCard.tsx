@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Link } from "@/components/Links";
 import { CategoryBadge, CharCounter } from "@/components";
-import { formatDate, createImageCreditsTag } from "@/lib/utils";
+import { formatDate, createImageCreditsTag, truncify } from "@/lib/utils";
 import { siteConfig } from "@/config";
 
 type BlogCardProps = {
@@ -63,9 +63,7 @@ export function BlogCard({ blog }: BlogCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="text-lg text-muted-foreground sm:text-xl">
-        {description && description.length > 200
-          ? description.slice(0, 200) + "..."
-          : description}
+        {description && truncify(description)}
       </CardContent>
     </Card>
   );
