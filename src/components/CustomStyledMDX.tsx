@@ -8,6 +8,7 @@ import { H2, H3, H4, H5, H6 } from "@/components/Headings";
 import { Callout, SupportButton } from "@/components";
 import { CalloutType, siteConfig } from "@/config";
 import * as links from "@/config/links";
+import { getAnchorFromLinkText } from "@/lib/utils/getAnchorFromLinkText";
 
 export const customComponents: MDXComponents = {
   /// nextjs components
@@ -47,7 +48,19 @@ export const customComponents: MDXComponents = {
   ),
   a: (props) => {
     const { href, title, children, ...restProps } = props;
-    if (href?.startsWith("#")) return <a {...props}>{children}</a>;
+    // internal link; same page (i.e. anchor link)
+    if (href?.startsWith("#")) {
+      if (href === "#") {
+        const anchor = getAnchorFromLinkText(children);
+        return (
+          <a href={anchor} title={title} {...restProps}>
+            {children}
+          </a>
+        );
+      }
+      return <a {...props}>{children}</a>;
+    }
+    // internal link; other page
     if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
     if (href?.startsWith("$"))
       return (
