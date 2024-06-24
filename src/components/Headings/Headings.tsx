@@ -21,7 +21,7 @@ export function H2({
   autoCopyable = false,
   children,
 }: HeadingProps) {
-  className = `mb-6 mt-0 text-2xl sm:text-3xl lg:text-4xl ${className}`;
+  className = `mb-6 text-2xl sm:text-3xl lg:text-4xl ${className}`;
 
   return (
     <>
