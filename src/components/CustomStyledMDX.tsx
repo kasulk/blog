@@ -72,13 +72,13 @@ export const customComponents: MDXComponents = {
   },
   blockquote: (props) => {
     const children = React.Children.toArray(props.children);
-    const rawContent = (children[1] as React.ReactElement)?.props.children;
+    const nestedNode = (children[1] as React.ReactElement)?.props.children;
 
     // fixes issue if other HTML-elements are used within blockquotes, e.g. <br/>
-    const hasMoreNestedChildren = Array.isArray(rawContent);
+    const hasMoreNestedChildren = Array.isArray(nestedNode);
     const content = hasMoreNestedChildren
-      ? rawContent.filter((child) => typeof child === "string").join("")
-      : rawContent;
+      ? nestedNode.filter((child) => typeof child === "string").join("")
+      : nestedNode;
 
     const typeTag = content.match(/\[\!(.*?)\]/); // e.g. extract 'note' from [!note]
 
@@ -88,7 +88,7 @@ export const customComponents: MDXComponents = {
       CalloutType,
       string?,
     ];
-    const text = content.split("\r\n").slice(1).join("\r\n");
+    const text = content.split("\n").slice(1).join("\n");
 
     return (
       <Callout title={title || type} type={type}>
