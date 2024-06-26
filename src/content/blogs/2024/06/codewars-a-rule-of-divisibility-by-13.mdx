@@ -99,13 +99,13 @@ Call `thirt` the function which processes this sequence of operations on an inte
 
 Quelle: [codewars.com](https://www.codewars.com)
 
-## Lösungsschritte
+## Lösung
 
 ### Pseudo-Code
 
 Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
 
-- Als erstes speichern wir uns die Remainder-Sequenzdd in einer Variablen
+- Als erstes speichern wir uns die Remainder-Sequenz in einer Variablen
 - Dann brauchen wir einen Loop
 - In jeder Iteration drehen wir die Ziffern der aktuellen Zahl um
 - Dann berechnen wir für jede Ziffer das Produkt mit der aktuellen Zahl aus der Remainder-Sequenz
@@ -116,18 +116,29 @@ Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
 
 Geil. Übersetzen wir unseren Pseudo-Code in TypeScript:
 
+<Accordion>
+**Lösungsschritte**
+{/* <br/> */}
+
+<Accordion>
 Meine erste Zeile (ich habe `n` in `num` umbenannt):
 
 ```ts
 export function thirt(num: number): number {
 ```
 
+</Accordion>
+
+<Accordion>
 Dann speichern wir uns die Remainder-Sequenz in eine Variable:
 
 ```ts
 const sequence = [1, 10, 9, 12, 3, 4];
 ```
 
+</Accordion>
+
+<Accordion>
 Außerdem lege ich mir noch 2 weitere Variablen für die aktuelle Zahl und die aktuelle Summe an:
 
 ```ts
@@ -137,6 +148,9 @@ let currSum = 0;
 
 So ist sichergestellt, dass die Input-Zahl durch diese Funktion nicht verändert wird (Immutabilität).
 
+</Accordion>
+
+<Accordion>
 Dann der Loop:
 
 ```ts
@@ -145,6 +159,9 @@ Dann der Loop:
 
 Ich entscheide mich hier für einen unbedingten, unendlichen `while`-Loop.
 
+</Accordion>
+
+<Accordion>
 Jetzt setze ich die aktuelle Zahl:
 
 ```ts
@@ -153,12 +170,18 @@ if (currSum) currNum = currSum;
 
 Wir haben die Summe mit `0` initialisiert. Darum ist die aktuelle Zahl im ersten Durchlauf die Input-Zahl (`num`), danach entspricht sie der aktuellen Summe.
 
+</Accordion>
+
+<Accordion>
 Jetzt können wir die Ziffern der aktuellen Zahl umdrehen:
 
 ```ts
 const revDigits = [...String(currNum)].reverse().map(Number);
 ```
 
+</Accordion>
+
+<Accordion>
 Und jetzt die Summe der Produkte der Ziffern und der aktuellen Sequenz-Zahl berechnen:
 
 ```ts
@@ -167,6 +190,9 @@ currSum = revDigits.reduce((sum, digit, i) => sum + digit * sequence[i % 6], 0);
 
 Für mich macht es in diesem Fall keinen Sinn die Sequenz-Länge (`6`) dynamisch zu halten. Darum habe ich sie hier hardgecodet. Du kann natürlich auch gerne `sequence.length` verwenden.
 
+</Accordion>
+
+<Accordion>
 Wenn die aktuelle Zahl der aktuellen Summe entspricht, können wir die aktuelle Zahl zurückgeben und damit auch den Loop beenden:
 
 ```ts
@@ -179,7 +205,11 @@ Voilá! 💪
 
 Fragen?
 
-## Lösung
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
 
 ```ts
 export function thirt(num: number): number {
@@ -201,3 +231,5 @@ export function thirt(num: number): number {
   }
 }
 ```
+
+</Accordion>
