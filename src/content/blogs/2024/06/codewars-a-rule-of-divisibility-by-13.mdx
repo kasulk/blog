@@ -20,10 +20,9 @@ vgWortCode: efe21e31562042f7a35266da30e00a40
 
 1. [Die Fakten](#)
 1. [Beschreibung](#)
-1. [Lösungsschritte](#)
+1. [Lösung](#)
    1. [Pseudo-Code](#)
    1. [Code](#)
-1. [Lösung](#)
 
 ---
 
@@ -105,12 +104,47 @@ Quelle: [codewars.com](https://www.codewars.com)
 
 Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
 
-- Als erstes speichern wir uns die Remainder-Sequenz in einer Variablen
-- Dann brauchen wir einen Loop
-- In jeder Iteration drehen wir die Ziffern der aktuellen Zahl um
-- Dann berechnen wir für jede Ziffer das Produkt mit der aktuellen Zahl aus der Remainder-Sequenz
-- Und können dann die Summe dieser Produkte berechnen
-- Wenn die aktuelle Zahl dieser Summe entspricht, können wir den Loop beenden
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als erstes speichern wir uns die Remainder-Sequenz in einer Variablen
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir einen Loop! ⭕
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In jeder Iteration drehen wir die Ziffern der aktuellen Zahl um
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann berechnen wir für jede Ziffer das Produkt mit der aktuellen Zahl aus der Remainder-Sequenz
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Und können dann die Summe dieser Produkte berechnen
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn die aktuelle Zahl dieser Summe entspricht, können wir den Loop beenden
+
+</Accordion>
+
+</Accordion>
 
 ### Code
 
@@ -118,7 +152,6 @@ Geil. Übersetzen wir unseren Pseudo-Code in TypeScript:
 
 <Accordion>
 **Lösungsschritte**
-{/* <br/> */}
 
 <Accordion>
 Meine erste Zeile (ich habe `n` in `num` umbenannt):
@@ -128,7 +161,6 @@ export function thirt(num: number): number {
 ```
 
 </Accordion>
-
 <Accordion>
 Dann speichern wir uns die Remainder-Sequenz in eine Variable:
 
@@ -137,7 +169,6 @@ const sequence = [1, 10, 9, 12, 3, 4];
 ```
 
 </Accordion>
-
 <Accordion>
 Außerdem lege ich mir noch 2 weitere Variablen für die aktuelle Zahl und die aktuelle Summe an:
 
@@ -149,7 +180,6 @@ let currSum = 0;
 So ist sichergestellt, dass die Input-Zahl durch diese Funktion nicht verändert wird (Immutabilität).
 
 </Accordion>
-
 <Accordion>
 Dann der Loop:
 
@@ -160,7 +190,6 @@ Dann der Loop:
 Ich entscheide mich hier für einen unbedingten, unendlichen `while`-Loop.
 
 </Accordion>
-
 <Accordion>
 Jetzt setze ich die aktuelle Zahl:
 
@@ -171,7 +200,6 @@ if (currSum) currNum = currSum;
 Wir haben die Summe mit `0` initialisiert. Darum ist die aktuelle Zahl im ersten Durchlauf die Input-Zahl (`num`), danach entspricht sie der aktuellen Summe.
 
 </Accordion>
-
 <Accordion>
 Jetzt können wir die Ziffern der aktuellen Zahl umdrehen:
 
@@ -180,7 +208,6 @@ const revDigits = [...String(currNum)].reverse().map(Number);
 ```
 
 </Accordion>
-
 <Accordion>
 Und jetzt die Summe der Produkte der Ziffern und der aktuellen Sequenz-Zahl berechnen:
 
@@ -191,7 +218,6 @@ currSum = revDigits.reduce((sum, digit, i) => sum + digit * sequence[i % 6], 0);
 Für mich macht es in diesem Fall keinen Sinn die Sequenz-Länge (`6`) dynamisch zu halten. Darum habe ich sie hier hardgecodet. Du kann natürlich auch gerne `sequence.length` verwenden.
 
 </Accordion>
-
 <Accordion>
 Wenn die aktuelle Zahl der aktuellen Summe entspricht, können wir die aktuelle Zahl zurückgeben und damit auch den Loop beenden:
 
