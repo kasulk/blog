@@ -1,3 +1,4 @@
+import "@/styles/highlight-js/github-dark.css";
 import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
