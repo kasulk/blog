@@ -2,12 +2,13 @@ export * from "./CustomStyledMDX";
 
 export * from "./PageHeader";
 
+export * from "./Accordion";
 export * from "./BackButton";
 export * from "./Callout";
+export * from "./CharCounter";
 export * from "./SocialLinks";
 export * from "./SupportButton";
 export * from "./VGWortMark";
-export * from "./CharCounter";
 
 export * from "./BlogCard";
 export * from "./BlogPostsList";

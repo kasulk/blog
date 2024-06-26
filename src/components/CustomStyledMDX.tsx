@@ -5,7 +5,7 @@ import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { H2, H3, H4, H5, H6 } from "@/components/Headings";
-import { Callout, SupportButton } from "@/components";
+import { Accordion, Callout, SupportButton } from "@/components";
 import { CalloutType, siteConfig } from "@/config";
 import * as links from "@/config/links";
 import { getAnchorFromLinkText } from "@/lib/utils/getAnchorFromLinkText";
@@ -14,6 +14,16 @@ export const customComponents: MDXComponents = {
   /// nextjs components
   Image,
   /// custom components
+  Accordion: (props) => {
+    const { children, ...restProps } = props;
+    // extract the first line/children to be the summary
+    const [firstParagraph, ...content] = children;
+    const summary = firstParagraph.props.children;
+
+    return (
+      <Accordion {...restProps} summary={summary} content={content}></Accordion>
+    );
+  },
   ExternalLink,
   SupportButton: ({ className }) => (
     <SupportButton className={`h-7 w-7 ${className}`} />
@@ -46,6 +56,15 @@ export const customComponents: MDXComponents = {
       {props.children}
     </H6>
   ),
+  details: (props) => {
+    const { className, children } = props;
+    return (
+      <details className="hover:cursor-pointer hover:underline">
+        {children}
+        blub
+      </details>
+    );
+  },
   a: (props) => {
     const { href, title, children, ...restProps } = props;
     // internal link; same page (i.e. anchor link)
