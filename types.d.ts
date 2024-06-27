@@ -33,6 +33,8 @@ type CodingChallengeData = {
   platform: string;
   id?: string;
   title: string;
+  level?: string;
+  language?: string;
 };
 
 export type AffiliateType = "order" | "register";
