@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { H2, H3, H4, H5, H6 } from "@/components/Headings";
 import { Accordion, Callout, SupportButton } from "@/components";
@@ -128,6 +129,7 @@ export function CustomStyledMDX(props: MDXRemoteProps) {
         scope: { ...siteConfig, ...links, ...(props.options?.scope || {}) },
         mdxOptions: {
           remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeHighlight],
           format: "mdx",
         },
       }}

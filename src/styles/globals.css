@@ -103,3 +103,11 @@ i.e. lists with checkboxes, '- [x]'
 .contains-task-list {
   @apply list-none;
 }
+
+/*
+remove backticks from one-line code-blocks for good
+*/
+code::after,
+code::before {
+  content: none !important;
+}
