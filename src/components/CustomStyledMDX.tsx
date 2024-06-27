@@ -57,15 +57,6 @@ export const customComponents: MDXComponents = {
       {props.children}
     </H6>
   ),
-  details: (props) => {
-    const { className, children } = props;
-    return (
-      <details className="hover:cursor-pointer hover:underline">
-        {children}
-        blub
-      </details>
-    );
-  },
   a: (props) => {
     const { href, title, children, ...restProps } = props;
     // internal link; same page (i.e. anchor link)

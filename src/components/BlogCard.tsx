@@ -26,7 +26,7 @@ export function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <Card className="w-full">
-      <CardHeader className="relative">
+      <CardHeader>
         <Link href={`/blog/category/${category}`} className="flex">
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
         </Link>
@@ -41,7 +41,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           />
           {showCharCounter && (
             <CharCounter
-              className="absolute -bottom-6 -right-4"
+              className="absolute -bottom-4 -right-3"
               mdxLength={content.length}
             />
           )}

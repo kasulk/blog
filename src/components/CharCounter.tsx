@@ -15,7 +15,7 @@ export function CharCounter({ mdxLength, className = "" }: Props) {
   return (
     <div
       title="Anzahl Zeichen im rohen MDX-Content (ohne Frontmatter)"
-      className={`bottom-8 right-8 flex h-16 w-16 items-center justify-center rounded-full text-foreground opacity-60 shadow-md hover:opacity-100 ${className}`}
+      className={`fixed bottom-8 right-8 flex h-16 w-16 items-center justify-center rounded-full text-foreground opacity-60 shadow-md hover:opacity-100 ${className}`}
     >
       {mdxLength.toLocaleString("de-DE")}
     </div>
