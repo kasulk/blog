@@ -1,4 +1,4 @@
-import type { BlogPost } from "@/../types";
+import type { BlogPost, Frontmatter } from "@/../types";
 import Image from "next/image";
 import {
   Card,
@@ -9,7 +9,12 @@ import {
 } from "@/components/ui/card";
 import { Link } from "@/components/Links";
 import { CategoryBadge, CharCounter } from "@/components";
-import { formatDate, createImageCreditsTag, truncify } from "@/lib/utils";
+import {
+  createImageCreditsTag,
+  createBlogPostDescription,
+  formatDate,
+  truncify,
+} from "@/lib/utils";
 import { siteConfig } from "@/config";
 
 type BlogCardProps = {
@@ -21,7 +26,8 @@ const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export function BlogCard({ blog }: BlogCardProps) {
   const { content, frontmatter, slug } = blog;
-  const { title, description, author, pubDate, image, category } = frontmatter;
+  const { title, author, pubDate, image, category } = frontmatter;
+  const description = createBlogPostDescription(frontmatter);
   const blogImageDir = siteConfig.dir.blogImages;
 
   return (
