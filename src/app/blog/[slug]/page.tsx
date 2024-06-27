@@ -21,6 +21,7 @@ import {
   getBlogBySlug,
   getBlogsByCategory,
 } from "@/lib/blogFetchers/blogFetchers";
+import { createBlogPostTitle } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -35,7 +36,9 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter, slug } = blog;
-  const { title, category, vgWortCode } = frontmatter;
+
+  const { category, vgWortCode } = frontmatter;
+  const title = createBlogPostTitle(frontmatter);
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
@@ -86,17 +89,18 @@ export async function generateMetadata({
   if (!blog) return {};
 
   const { frontmatter } = blog;
+  const title = createBlogPostTitle(frontmatter);
 
   const ogSearchParams = new URLSearchParams();
-  ogSearchParams.set("title", frontmatter.title);
+  ogSearchParams.set("title", title);
 
   return {
-    title: `${frontmatter.title} | ${siteConfig.name}`,
+    title: `${title} | ${siteConfig.name}`,
     description: frontmatter.description,
     authors: { name: frontmatter.author },
 
     openGraph: {
-      title: frontmatter.title,
+      title,
       description: frontmatter.description,
       type: "article",
       url: path.join(process.cwd(), blog.slug),
@@ -105,13 +109,13 @@ export async function generateMetadata({
           url: `/api/og?${ogSearchParams.toString()}`,
           width: 1200,
           height: 630,
-          alt: frontmatter.title,
+          alt: title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: frontmatter.title,
+      title: title,
       description: frontmatter.description,
       images: [`/api/og?${ogSearchParams.toString()}`],
     },
