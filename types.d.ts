@@ -9,6 +9,8 @@ export type Frontmatter = {
   tags: string[];
   series?: string;
   vgWortCode?: string;
+  type: string;
+  codingChallengeData?: CodingChallengeData;
 };
 
 export type BlogPost = {
@@ -25,6 +27,12 @@ type BlogPostImage = {
     creator?: string;
     source?: string;
   };
+};
+
+type CodingChallengeData = {
+  platform: string;
+  id?: string;
+  title: string;
 };
 
 export type AffiliateType = "order" | "register";
