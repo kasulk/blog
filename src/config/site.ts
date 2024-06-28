@@ -6,6 +6,9 @@ export const siteConfig = {
   description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
   personalSite: "https://danielkaser.de",
+  email: {
+    questions: "frage@kasulk.com",
+  },
   github: {
     user: "kasulk",
     repos: {

@@ -2,6 +2,8 @@ export * from "./cn";
 
 export * from "./camelCasify";
 export * from "./capitalize";
+export * from "./createBlogPostDescription";
+export * from "./createBlogPostTitle";
 export * from "./createId";
 export * from "./createImageCreditsTag";
 export * from "./dashify";

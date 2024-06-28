@@ -1,19 +1,28 @@
 ---
-title: Codewars | A Rule of Divisibility by 13
+title:
 author: icke
 pubDate: 2024-06-24
 description:
 isDraft: false
 category: coden
-tags: [codewars, typescript]
-series: coding-challenges
+tags:
+  - codewars
+  - typescript
+series: Coding Challenges
 image:
-  {
-    file: rest-700156_1280.jpg,
-    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
-    credits: { creator: Gabor Fejes, source: Pixabay },
-  }
+  file: codewars.png
+  alt: Codewars. Achieve mastery through challenge.
+  credits:
+    creator: Codewars
+    source: codewars.com
 vgWortCode: efe21e31562042f7a35266da30e00a40
+
+codingChallengeData:
+  platform: Codewars
+  id: 564057bc348c7200bd0000ff
+  title: A Rule of Divisibility by 13
+  level: 6 kyu
+  language: TypeScript
 ---
 
 ## Inhalt
@@ -23,16 +32,17 @@ vgWortCode: efe21e31562042f7a35266da30e00a40
 1. [Lösung](#)
    1. [Pseudo-Code](#)
    1. [Code](#)
+1. [Feedback](#)
 
 ---
 
 ## Die Fakten:
 
-|                  |                                                                                        |
-| ---------------- | -------------------------------------------------------------------------------------- |
-| **Name:**        | [A Rule of Divisibility by 13](https://www.codewars.com/kata/564057bc348c7200bd0000ff) |
-| **Level (kyu)**: | 6                                                                                      |
-| **Sprache**:     | TypeScript                                                                             |
+|              |                                                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------- |
+| **Name:**    | <ExternalLink href={`${codewars.challenge.url}/${codingChallengeData.id}`}>{codingChallengeData.title}</ExternalLink> |
+| **Level**:   | {codingChallengeData.level}                                                                                           |
+| **Sprache**: | {codingChallengeData.language}                                                                                        |
 
 ## Beschreibung:
 
@@ -96,7 +106,7 @@ Call `thirt` the function which processes this sequence of operations on an inte
 
 `thirt(321)` calculates 48, 48 and returns `48`
 
-Quelle: [codewars.com](https://www.codewars.com)
+Quelle: <ExternalLink href={codewarsBaseURL}>{codewarsDomain}</ExternalLink>
 
 ## Lösung
 
@@ -229,7 +239,7 @@ Wenn die aktuelle Zahl der aktuellen Summe entspricht, können wir die aktuelle 
 
 Voilá! 💪
 
-Fragen?
+[Fragen?](#feedback)
 
 </Accordion>
 </Accordion>
@@ -259,3 +269,13 @@ export function thirt(num: number): number {
 ```
 
 </Accordion>
+
+## Feedback
+
+<a
+  href={`mailto:${email.questions}?subject=Frage zu ${codingChallengeData.platform} "${codingChallengeData.title}" (${codingChallengeData.language})`}
+>
+  Schreib mir!
+</a>
+
+<SocialLinks />

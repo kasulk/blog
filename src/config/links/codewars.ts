@@ -1,12 +1,13 @@
-const baseURL = "https://www.codewars.com";
+export const codewarsDomain = "codewars.com";
+export const codewarsBaseURL = `https://www.${codewarsDomain}`;
 
 export const codewars = {
   challenge: {
     description: "",
-    url: `${baseURL}/kata`, // append challenge-id
+    url: `${codewarsBaseURL}/kata`, // append challenge-id
   },
   api: {
     description: "",
-    url: `${baseURL}/api/v1/code-challenges`, // append challenge-id
+    url: `${codewarsBaseURL}/api/v1/code-challenges`, // append challenge-id
   },
 } as const;
