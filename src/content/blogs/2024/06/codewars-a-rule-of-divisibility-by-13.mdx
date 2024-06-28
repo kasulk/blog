@@ -8,7 +8,7 @@ category: coden
 tags:
   - codewars
   - typescript
-series: Coding Challenges
+series: Code Challenges
 image:
   file: codewars.png
   alt: Codewars. Achieve mastery through challenge.
@@ -17,7 +17,7 @@ image:
     source: codewars.com
 vgWortCode: efe21e31562042f7a35266da30e00a40
 
-codingChallengeData:
+codeChallengeData:
   platform: Codewars
   id: 564057bc348c7200bd0000ff
   title: A Rule of Divisibility by 13
@@ -38,11 +38,11 @@ codingChallengeData:
 
 ## Die Fakten:
 
-|              |                                                                                                                       |
-| ------------ | --------------------------------------------------------------------------------------------------------------------- |
-| **Name:**    | <ExternalLink href={`${codewars.challenge.url}/${codingChallengeData.id}`}>{codingChallengeData.title}</ExternalLink> |
-| **Level**:   | {codingChallengeData.level}                                                                                           |
-| **Sprache**: | {codingChallengeData.language}                                                                                        |
+|              |                                                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Name:**    | <ExternalLink href={`${codewars.challenge.url}/${codeChallengeData.id}`}>{codeChallengeData.title}</ExternalLink> |
+| **Level**:   | {codeChallengeData.level}                                                                                         |
+| **Sprache**: | {codeChallengeData.language}                                                                                      |
 
 ## Beschreibung:
 
@@ -272,10 +272,8 @@ export function thirt(num: number): number {
 
 ## Feedback
 
-<a
-  href={`mailto:${email.questions}?subject=Frage zu ${codingChallengeData.platform} "${codingChallengeData.title}" (${codingChallengeData.language})`}
->
-  Schreib mir!
-</a>
+**Schreib mir!**
 
-<SocialLinks />
+<SocialLinks
+  emailSubject={`Frage zu ${codeChallengeData.platform} "${codeChallengeData.title}" (${codeChallengeData.language})`}
+/>

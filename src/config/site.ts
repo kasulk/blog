@@ -107,6 +107,7 @@ export const calloutColorMap = {
 
 export type SiteConfig = typeof siteConfig;
 export type PageConfig = typeof siteConfig.pages._defaultPageConfig;
+export type EmailOptions = keyof typeof siteConfig.email;
 
 type CalloutColorMap = typeof calloutColorMap;
 export type CalloutType = keyof CalloutColorMap;

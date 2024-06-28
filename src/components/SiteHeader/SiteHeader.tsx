@@ -8,7 +8,11 @@ export function SiteHeader() {
         <Branding />
         <MainNav />
         <div className="flex items-center justify-end">
-          <SocialLinks className="hidden sm:inline-block" />
+          <SocialLinks
+            showEmail={false}
+            showCodewars={false}
+            className="hidden sm:inline-block"
+          />
           <ThemeSwitch />
           <MobileNav />
         </div>
