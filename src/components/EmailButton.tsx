@@ -19,7 +19,7 @@ const tooltipContent = "Schreib mir!";
 
 export function EmailButton({
   className = "h-6 w-6 sm:h-7 sm:w-7",
-  subject = "",
+  subject = "Das ist sooo cool!",
   email = "questions",
 }: Props) {
   subject = subject && `?subject=${subject}`;

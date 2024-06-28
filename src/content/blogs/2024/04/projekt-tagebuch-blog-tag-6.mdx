@@ -92,7 +92,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
 
   return (
     // To style MD properly, add 'prose' class
-    <article className="prose dark:prose-invert container mx-auto max-w-3xl py-6">
+    <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
       <h1>{title}</h1>
       <p className="flex justify-end space-x-1">
         <span>by {author}, </span>
@@ -110,3 +110,12 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 ```
 
 Dit jefällt mir schon ma janz jut!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks />
+
+</Accordion>
