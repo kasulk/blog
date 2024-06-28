@@ -10,7 +10,7 @@ export type Frontmatter = {
   series?: string;
   vgWortCode?: string;
   type: string;
-  codingChallengeData?: CodingChallengeData;
+  codeChallengeData?: CodeChallengeData;
 };
 
 export type BlogPost = {
@@ -29,7 +29,7 @@ type BlogPostImage = {
   };
 };
 
-type CodingChallengeData = {
+type CodeChallengeData = {
   platform: string;
   id?: string;
   title: string;
