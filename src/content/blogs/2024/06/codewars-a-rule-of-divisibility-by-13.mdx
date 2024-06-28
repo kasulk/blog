@@ -272,10 +272,8 @@ export function thirt(num: number): number {
 
 ## Feedback
 
-<a
-  href={`mailto:${email.questions}?subject=Frage zu ${codingChallengeData.platform} "${codingChallengeData.title}" (${codingChallengeData.language})`}
->
-  Schreib mir!
-</a>
+**Schreib mir!**
 
-<SocialLinks />
+<SocialLinks
+  emailSubject={`Frage zu ${codingChallengeData.platform} "${codingChallengeData.title}" (${codingChallengeData.language})`}
+/>
