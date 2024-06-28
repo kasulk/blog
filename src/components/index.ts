@@ -6,6 +6,7 @@ export * from "./Accordion";
 export * from "./BackButton";
 export * from "./Callout";
 export * from "./CharCounter";
+export * from "./EmailButton";
 export * from "./SocialLinks";
 export * from "./SupportButton";
 export * from "./VGWortMark";
