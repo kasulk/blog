@@ -1,4 +1,4 @@
-import type { BlogPost, Frontmatter } from "@/../types";
+import type { BlogPost } from "@/../types";
 import Image from "next/image";
 import {
   Card,
@@ -47,7 +47,7 @@ export function BlogCard({ blog }: BlogCardProps) {
           />
           {showCharCounter && (
             <CharCounter
-              className="absolute -bottom-4 -right-3"
+              className="absolute h-auto rounded-sm opacity-80"
               mdxLength={content.length}
             />
           )}
