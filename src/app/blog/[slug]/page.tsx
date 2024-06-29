@@ -21,7 +21,7 @@ import {
   getBlogBySlug,
   getBlogsByCategory,
 } from "@/lib/blogFetchers/blogFetchers";
-import { createBlogPostTitle } from "@/lib/utils";
+import { createBlogPostTitle, fetchCodewarsChallengeAPI } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -37,12 +37,21 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
 
   const { content, frontmatter, slug } = blog;
 
-  const { category, vgWortCode } = frontmatter;
+  const { category, vgWortCode, codeChallengeData } = frontmatter;
   const title = createBlogPostTitle(frontmatter);
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
   const hasRelatedBlogs = otherBlogs.length > 0;
+
+  // get API data
+  const codewarsApiData = await fetchCodewarsChallengeAPI(
+    codeChallengeData?.id,
+  );
+
+  const frontmatterWithApiData = codewarsApiData
+    ? { ...frontmatter, apiData: codewarsApiData }
+    : { ...frontmatter };
 
   return (
     <>
@@ -54,7 +63,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           <BlogPostHeader frontmatter={frontmatter} />
           <CustomStyledMDX
             source={content}
-            options={{ scope: { ...frontmatter } }}
+            options={{ scope: { ...frontmatterWithApiData } }}
           />
           <BackButton />
         </article>
