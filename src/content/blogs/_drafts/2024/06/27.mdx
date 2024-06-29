@@ -1,0 +1,74 @@
+---
+title: Projekt-Tagebuch Blog, Tag 6-27
+author: icke
+pubDate: 2024-06-27
+description: Als Erstes hab ich heute den CharCounter gefixt. Irgendwie ist mir der CharCounter fuer den DevMode verrutscht. Warum weiss ich nicht, aber jetzt ist er wieder da wo er sein soll.
+isDraft: true
+category: coden
+tags:
+series: projekt-tagebuch-blog
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+vgWortCode:
+---
+
+Donnerstag, 27/6
+
+Wochen-Ziele:
+
+- [] Blog-Projekt-Tagebuch in den Blog uploaden
+
+Tages-Ziele:
+
+- [] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~Bugfix: Verrutschter CharCounter~
+- [x] ~Blog-typ-spezifisches Frontmatter implementieren~
+
+## Bugfix: Verrutschter CharCounter
+
+Als Erstes hab ich heute den CharCounter gefixt. Irgendwie ist mir der CharCounter fuer den DevMode verrutscht. Warum weiss ich nicht, aber jetzt ist er wieder da wo er sein soll.
+
+Fuer die SingleBlogPage hab ich die `fixed`-Klasse hinzugefuegt und fuer die BlogCard in der Blog-Liste hab ich noch mal `-bottom` und `-right` angepasst.
+
+## Blog-typ-spezifisches Frontmatter implementieren
+
+Dann hab ich mich ans Blog-typ-spezifisches Frontmatter gemacht. D.h., neben dem allgemeinen Frontmatter wollte ich fuer Coding-Challenges noch spezielle Daten, wie z.B. Titel der Challenge, Platform (z.B. Codewars), Sprache, Level und ID.
+
+Der Titel z.B. soll automatisch zum generieren des Titels des Blog-Posts verwendet werden, wenn dort keiner im Frontmatter hinterlegt wurde.
+
+Etwas aehnliches hab ich fuer die Kurzbeschreibung (fuer die Preview) gemacht. Wenn im allgemeinen Frontmatter keine Beschreibung vorhanden ist, wird automatisch eine generiert. Inklusive Titel und Level.
+
+Jetzt konnte ich die Links zur Challenge dynamisieren und muss sie so nicht fuer jede Coding-Challenge neu schreiben.
+
+```mdx
+|              |                                                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Name:**    | <ExternalLink href={`${codewars.challenge.url}/${codeChallengeData.id}`}>{codeChallengeData.title}</ExternalLink> |
+| **Level**:   | {codeChallengeData.level}                                                                                         |
+| **Sprache**: | {codeChallengeData.language}                                                                                      |
+```
+
+## E-Mail in die siteConfig
+
+Ausserdem hab ich mir noch eine E-mail-Adresse in der `siteConfig` hinterlegt. So dass dort global auf sie zugegriffen werden kann. Ausserdem kann ich sie dort schnell und einfach aendern wenn ihr mich zuspamt.
+
+## SocialLinks in BlogPosts einfuegen
+
+Dann hab ich noch meine ` SocialLinks`-Komponente in die `CustomStyledMDX`-Komponente eingefuegt, damit sie fuer Blog-Posts im MDX verfuegbar ist.
+
+Die gibt's jetzt naemlich am Ende jedes Blog-Posts mit einer Aufforderung fuer [Feedback](#)!
+
+Apropos Ende. Bitteschoen:
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
