@@ -1,3 +1,5 @@
+import type { StrippedApiData } from "@/lib/apiFetchers/types";
+
 export type Frontmatter = {
   title: string;
   author: string;
@@ -13,12 +15,8 @@ export type Frontmatter = {
   codeChallengeData?: CodeChallengeData;
 };
 
-export type ApiData = {
-  [key: string]: unknown;
-};
-
 export type FrontmatterWithApiData = Frontmatter & {
-  apiData?: ApiData;
+  apiData: StrippedApiData;
 };
 
 export type BlogPost = {
