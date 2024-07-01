@@ -13,6 +13,14 @@ export type Frontmatter = {
   codeChallengeData?: CodeChallengeData;
 };
 
+export type ApiData = {
+  [key: string]: unknown;
+};
+
+export type FrontmatterWithApiData = Frontmatter & {
+  apiData?: ApiData;
+};
+
 export type BlogPost = {
   frontmatter: Frontmatter;
   content: string;
@@ -30,11 +38,9 @@ type BlogPostImage = {
 };
 
 type CodeChallengeData = {
+  id: string;
   platform: string;
-  id?: string;
-  title: string;
-  level?: string;
-  language?: string;
+  language: string;
 };
 
 export type AffiliateType = "order" | "register";

@@ -12,3 +12,5 @@ export const codeChallenge = {
     },
   },
 } as const;
+
+export type CodeChallenge = typeof codeChallenge;

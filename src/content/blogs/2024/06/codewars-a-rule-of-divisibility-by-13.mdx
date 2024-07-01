@@ -18,10 +18,8 @@ image:
 vgWortCode: efe21e31562042f7a35266da30e00a40
 
 codeChallengeData:
-  platform: Codewars
+  platform: codewars
   id: 564057bc348c7200bd0000ff
-  title: A Rule of Divisibility by 13
-  level: 6 kyu
   language: TypeScript
 ---
 
@@ -38,17 +36,18 @@ codeChallengeData:
 
 ## Die Fakten:
 
-|              |                                                                                                                   |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- |
-| **Name:**    | <ExternalLink href={`${codewars.challenge.url}/${codeChallengeData.id}`}>{codeChallengeData.title}</ExternalLink> |
-| **Level**:   | {codeChallengeData.level}                                                                                         |
-| **Sprache**: | {codeChallengeData.language}                                                                                      |
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.rank.name}                                                                                                                        |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
 
 ## Beschreibung:
 
 <FetchedMarkdown>{apiData.description}</FetchedMarkdown>
 
-Quelle: <ExternalLink href={codewarsBaseURL}>{codewarsDomain}</ExternalLink>
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
 
 ## Lösung
 

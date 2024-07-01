@@ -38,7 +38,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   const { content, frontmatter, slug } = blog;
 
   const { category, vgWortCode, codeChallengeData } = frontmatter;
-  const title = createBlogPostTitle(frontmatter);
+  // const title = createBlogPostTitle(frontmatter);
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
@@ -52,6 +52,8 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   const frontmatterWithApiData = codewarsApiData
     ? { ...frontmatter, apiData: codewarsApiData }
     : { ...frontmatter };
+
+  const title = createBlogPostTitle(frontmatterWithApiData);
 
   return (
     <>
