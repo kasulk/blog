@@ -1,6 +1,7 @@
-import { codewars } from "@/config/links";
+import type { ApiData } from "@/../types";
+import { codeChallenge } from "@/config/links";
 
-type ApiData = { [key: string]: unknown };
+const { codewars } = codeChallenge;
 
 export async function fetchCodewarsChallengeAPI(
   id?: string,
