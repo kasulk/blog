@@ -2,6 +2,7 @@ import "@/styles/highlight-js/github-dark.css";
 import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { siteConfig } from "@/config";
 import {
   PageHeader,
   CustomStyledMDX,
@@ -15,13 +16,13 @@ import {
   BlogCategoryCloud,
 } from "@/components/Sidebar";
 import { BlogPostHeader } from "@/components/BlogPostPage";
-import { siteConfig } from "@/config";
 import {
   getBlogs,
   getBlogBySlug,
   getBlogsByCategory,
-} from "@/lib/blogFetchers/blogFetchers";
-import { createBlogPostTitle, fetchCodewarsChallengeAPI } from "@/lib/utils";
+} from "@/lib/blogFetchers";
+import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
+import { createBlogPostDescription, createBlogPostTitle } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -36,24 +37,18 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   if (!blog || blog.frontmatter.isDraft) notFound();
 
   const { content, frontmatter, slug } = blog;
-
   const { category, vgWortCode, codeChallengeData } = frontmatter;
-  // const title = createBlogPostTitle(frontmatter);
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
   const hasRelatedBlogs = otherBlogs.length > 0;
 
   // get API data
-  const codewarsApiData = await fetchCodewarsChallengeAPI(
-    codeChallengeData?.id,
-  );
+  const apiData = codeChallengeData
+    ? await fetchCodeChallengeAPIs(codeChallengeData)
+    : null;
 
-  const frontmatterWithApiData = codewarsApiData
-    ? { ...frontmatter, apiData: codewarsApiData }
-    : { ...frontmatter };
-
-  const title = createBlogPostTitle(frontmatterWithApiData);
+  const title = createBlogPostTitle(frontmatter, apiData);
 
   return (
     <>
@@ -65,7 +60,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
           <BlogPostHeader frontmatter={frontmatter} />
           <CustomStyledMDX
             source={content}
-            options={{ scope: { ...frontmatterWithApiData } }}
+            options={{ scope: { ...frontmatter, apiData } }}
           />
           <BackButton />
         </article>
@@ -100,19 +95,27 @@ export async function generateMetadata({
   if (!blog) return {};
 
   const { frontmatter } = blog;
-  const title = createBlogPostTitle(frontmatter);
+  const { codeChallengeData } = frontmatter;
+
+  // get API data
+  const apiData = codeChallengeData
+    ? await fetchCodeChallengeAPIs(codeChallengeData)
+    : null;
+
+  const title = createBlogPostTitle(frontmatter, apiData);
+  const description = createBlogPostDescription(frontmatter, apiData);
 
   const ogSearchParams = new URLSearchParams();
   ogSearchParams.set("title", title);
 
   return {
     title: `${title} | ${siteConfig.name}`,
-    description: frontmatter.description,
+    description,
     authors: { name: frontmatter.author },
 
     openGraph: {
       title,
-      description: frontmatter.description,
+      description,
       type: "article",
       url: path.join(process.cwd(), blog.slug),
       images: [
@@ -126,8 +129,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: frontmatter.description,
+      title,
+      description,
       images: [`/api/og?${ogSearchParams.toString()}`],
     },
   };
