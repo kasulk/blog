@@ -18,6 +18,7 @@ export type CodewarsApiData = {
 
 export type StrippedApiData = {
   id: string;
+  platform: "Codewars";
   name: string;
   level: string;
   url: string;

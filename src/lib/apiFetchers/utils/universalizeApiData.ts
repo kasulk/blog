@@ -5,5 +5,12 @@ export function universalizeCodewarsApiData(
 ): StrippedApiData {
   const { id, name, rank, url, description } = apiData;
 
-  return { id, name, level: rank?.name, url, description };
+  return {
+    id,
+    platform: "Codewars",
+    name,
+    level: rank?.name,
+    url,
+    description,
+  };
 }
