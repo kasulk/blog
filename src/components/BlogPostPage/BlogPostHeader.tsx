@@ -1,10 +1,9 @@
 import type { BlogPost } from "@/../types";
 import Image from "next/image";
-import { CategoryBadge } from "@/components";
-import { Link } from "@/components/Links";
+import { CategoryBadge, ReadingTime } from "@/components";
+import { Link, AuthorLink } from "@/components/Links";
 import { siteConfig } from "@/config";
-import { createImageCreditsTag, formatDate, getReadingTime } from "@/lib/utils";
-import { ReadingTime } from "../ReadingTime";
+import { createImageCreditsTag, formatDate } from "@/lib/utils";
 
 type Props = {
   blog: BlogPost;
@@ -34,9 +33,7 @@ export function BlogPostHeader({ blog }: Props) {
       </div>
 
       <div className="mb-1 mt-4 flex justify-end space-x-1">
-        <Link href="/aboutme">
-          {author === "icke" ? siteConfig.owner : author}
-        </Link>
+        <AuthorLink author={author} />
         <span className="space-x-2">|</span>
         <span>{formatDate(pubDate)}</span>
       </div>
