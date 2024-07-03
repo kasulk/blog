@@ -7,8 +7,9 @@ type Props = {
 
 export function ReadingTime({ text, className = "" }: Props) {
   return (
-    <div className={`text-right ${className}`}>
-      Lesedauer: ca. {getReadingTime(text)} min.
-    </div>
+    <span className={`flex justify-end ${className}`}>
+      <span className="hidden sm:flex">Lesedauer: ca.&nbsp;</span>
+      <span>{getReadingTime(text)} min.</span>
+    </span>
   );
 }

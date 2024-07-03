@@ -17,6 +17,7 @@ import {
 } from "@/lib/utils";
 import { siteConfig } from "@/config";
 import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
+import { ReadingTime } from "./ReadingTime";
 
 type BlogCardProps = {
   blog: BlogPost;
@@ -68,12 +69,15 @@ export async function BlogCard({ blog }: BlogCardProps) {
             {title}
           </Link>
         </CardTitle>
-        <CardDescription className="my-0 flex flex-col sm:flex-row sm:space-x-2">
-          <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
-          <span className="hidden sm:inline-block">•</span>
-          <Link href="/aboutme" className="whitespace-nowrap">
-            {author === "icke" ? siteConfig.owner : author}
-          </Link>
+        <CardDescription className="flex flex-wrap justify-between">
+          <div className="my-0 flex flex-col sm:flex-row sm:space-x-2">
+            <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
+            <span className="hidden sm:inline-block">•</span>
+            <Link href="/aboutme" className="whitespace-nowrap">
+              {!author || author === "icke" ? siteConfig.owner : author}
+            </Link>
+          </div>
+          <ReadingTime text={content} />
         </CardDescription>
       </CardHeader>
       <CardContent className="text-lg text-muted-foreground sm:text-xl">
