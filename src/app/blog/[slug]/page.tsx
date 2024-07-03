@@ -21,6 +21,7 @@ import {
   getBlogBySlug,
   getBlogsByCategory,
 } from "@/lib/blogFetchers";
+import { checkVGWortCode } from "@/lib/blogFetchers/utils";
 import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
 import { createBlogPostDescription, createBlogPostTitle } from "@/lib/utils";
 
@@ -35,6 +36,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   const blog = await getBlogBySlug(params.slug);
 
   if (!blog || blog.frontmatter.isDraft) notFound();
+  checkVGWortCode(blog);
 
   const { content, frontmatter, slug } = blog;
   const { category, vgWortCode, codeChallengeData } = frontmatter;
