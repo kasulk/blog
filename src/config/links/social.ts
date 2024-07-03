@@ -1,20 +1,21 @@
 import { siteConfig } from "../site";
+import { baseURLs } from "./baseUrls";
 
 export const social = [
   {
     name: "GitHub",
     description: "",
-    url: `https://github.com/${siteConfig.github.user}`,
+    url: `${baseURLs.github}/${siteConfig.github.user}`,
   },
   {
     name: "LinkedIn",
     description: "",
-    url: "https://linkedin.com/in/kasulk",
+    url: `${baseURLs.linkedin}/in/kasulk`,
   },
   {
     name: "Codewars",
     description: "",
-    url: "https://www.codewars.com/users/kasulk",
+    url: `${baseURLs.codewars}/users/kasulk`,
   },
 ] as const;
 

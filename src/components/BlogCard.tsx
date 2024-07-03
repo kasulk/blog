@@ -16,6 +16,7 @@ import {
   truncify,
 } from "@/lib/utils";
 import { siteConfig } from "@/config";
+import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
 
 type BlogCardProps = {
   blog: BlogPost;
@@ -24,11 +25,18 @@ type BlogCardProps = {
 const isDevMode = process.env.NODE_ENV === "development";
 const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
-export function BlogCard({ blog }: BlogCardProps) {
+export async function BlogCard({ blog }: BlogCardProps) {
   const { content, frontmatter, slug } = blog;
-  const { title, author, pubDate, image, category } = frontmatter;
-  const description = createBlogPostDescription(frontmatter);
+  const { title, author, pubDate, image, category, codeChallengeData } =
+    frontmatter;
   const blogImageDir = siteConfig.dir.blogImages;
+
+  // get API data
+  const apiData = codeChallengeData
+    ? await fetchCodeChallengeAPIs(codeChallengeData)
+    : null;
+
+  const description = createBlogPostDescription(frontmatter, apiData);
 
   return (
     <Card className="w-full">

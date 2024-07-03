@@ -1,3 +1,5 @@
+import type { StrippedApiData } from "@/lib/apiFetchers/types";
+
 export type Frontmatter = {
   title: string;
   author: string;
@@ -11,6 +13,10 @@ export type Frontmatter = {
   vgWortCode?: string;
   type: string;
   codeChallengeData?: CodeChallengeData;
+};
+
+export type FrontmatterWithApiData = Frontmatter & {
+  apiData: StrippedApiData;
 };
 
 export type BlogPost = {
@@ -30,11 +36,9 @@ type BlogPostImage = {
 };
 
 type CodeChallengeData = {
+  id: string;
   platform: string;
-  id?: string;
-  title: string;
-  level?: string;
-  language?: string;
+  language: string;
 };
 
 export type AffiliateType = "order" | "register";
