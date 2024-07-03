@@ -1,17 +1,19 @@
-import type { Frontmatter } from "@/../types";
+import type { BlogPost } from "@/../types";
 import Image from "next/image";
 import { CategoryBadge } from "@/components";
 import { Link } from "@/components/Links";
 import { siteConfig } from "@/config";
-import { createImageCreditsTag, formatDate } from "@/lib/utils";
+import { createImageCreditsTag, formatDate, getReadingTime } from "@/lib/utils";
+import { ReadingTime } from "../ReadingTime";
 
 type Props = {
-  frontmatter: Frontmatter;
+  blog: BlogPost;
 };
 
 const blogImageDir = siteConfig.dir.blogImages;
 
-export function BlogPostHeader({ frontmatter }: Props) {
+export function BlogPostHeader({ blog }: Props) {
+  const { frontmatter, content } = blog;
   const { author, pubDate, image, category } = frontmatter;
 
   return (
@@ -31,13 +33,14 @@ export function BlogPostHeader({ frontmatter }: Props) {
         />
       </div>
 
-      <p className="flex justify-end space-x-1">
+      <div className="mb-1 mt-4 flex justify-end space-x-1">
         <Link href="/aboutme">
           {author === "icke" ? siteConfig.owner : author}
         </Link>
         <span className="space-x-2">|</span>
         <span>{formatDate(pubDate)}</span>
-      </p>
+      </div>
+      <ReadingTime text={content} />
     </header>
   );
 }
