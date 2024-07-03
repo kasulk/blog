@@ -4,10 +4,10 @@ import { siteConfig } from "@/config";
 import { sortObjectKeys } from "@/lib/utils";
 import {
   checkForDuplicateSlugs,
+  checkForDuplicateVGWortCodes,
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
-import { checkForDuplicateVGWortCodes } from "./utils/checkForDuplicateVGWortCodes";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
