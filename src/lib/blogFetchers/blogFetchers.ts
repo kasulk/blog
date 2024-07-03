@@ -4,6 +4,7 @@ import { siteConfig } from "@/config";
 import { sortObjectKeys } from "@/lib/utils";
 import {
   checkForDuplicateSlugs,
+  checkForDuplicateVGWortCodes,
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
@@ -17,6 +18,7 @@ export async function getBlogs(): Promise<BlogPost[]> {
   );
 
   checkForDuplicateSlugs(allBlogs);
+  checkForDuplicateVGWortCodes(allBlogs);
 
   return allBlogs;
 }

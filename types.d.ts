@@ -10,7 +10,7 @@ export type Frontmatter = {
   category: string;
   tags: string[];
   series?: string;
-  vgWortCode?: string;
+  vgWortCode: string;
   type: string;
   codeChallengeData?: CodeChallengeData;
 };
