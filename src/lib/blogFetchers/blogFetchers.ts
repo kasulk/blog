@@ -7,6 +7,7 @@ import {
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
+import { checkForDuplicateVGWortCodes } from "./utils/checkForDuplicateVGWortCodes";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
@@ -17,6 +18,7 @@ export async function getBlogs(): Promise<BlogPost[]> {
   );
 
   checkForDuplicateSlugs(allBlogs);
+  checkForDuplicateVGWortCodes(allBlogs);
 
   return allBlogs;
 }
