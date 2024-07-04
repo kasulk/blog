@@ -1,6 +1,7 @@
 export * from "./cn";
 
 export * from "./camelCasify";
+export * from "./getReadingTime";
 export * from "./capitalize";
 export * from "./createBlogPostDescription";
 export * from "./createBlogPostTitle";

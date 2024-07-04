@@ -7,13 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link } from "@/components/Links";
-import { CategoryBadge, CharCounter } from "@/components";
+import { Link, AuthorLink } from "@/components/Links";
+import { CategoryBadge, CharCounter, ReadingTime } from "@/components";
 import {
   createImageCreditsTag,
   createBlogPostDescription,
   formatDate,
   truncify,
+  createBlogPostTitle,
 } from "@/lib/utils";
 import { siteConfig } from "@/config";
 import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
@@ -22,20 +23,21 @@ type BlogCardProps = {
   blog: BlogPost;
 };
 
+const blogImageDir = siteConfig.dir.blogImages;
+
 const isDevMode = process.env.NODE_ENV === "development";
 const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export async function BlogCard({ blog }: BlogCardProps) {
   const { content, frontmatter, slug } = blog;
-  const { title, author, pubDate, image, category, codeChallengeData } =
-    frontmatter;
-  const blogImageDir = siteConfig.dir.blogImages;
+  const { author, pubDate, image, category, codeChallengeData } = frontmatter;
 
   // get API data
   const apiData = codeChallengeData
     ? await fetchCodeChallengeAPIs(codeChallengeData)
     : null;
 
+  const title = createBlogPostTitle(frontmatter, apiData);
   const description = createBlogPostDescription(frontmatter, apiData);
 
   return (
@@ -68,12 +70,13 @@ export async function BlogCard({ blog }: BlogCardProps) {
             {title}
           </Link>
         </CardTitle>
-        <CardDescription className="my-0 flex flex-col sm:flex-row sm:space-x-2">
-          <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
-          <span className="hidden sm:inline-block">•</span>
-          <Link href="/aboutme" className="whitespace-nowrap">
-            {author === "icke" ? siteConfig.owner : author}
-          </Link>
+        <CardDescription className="flex flex-wrap justify-between">
+          <div className="my-0 flex flex-col sm:flex-row sm:space-x-2">
+            <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
+            <span className="hidden sm:inline-block">•</span>
+            <AuthorLink author={author} />
+          </div>
+          <ReadingTime text={content} />
         </CardDescription>
       </CardHeader>
       <CardContent className="text-lg text-muted-foreground sm:text-xl">

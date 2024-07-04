@@ -59,7 +59,7 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
       <div className="flex flex-col items-center gap-8 md:flex-row md:items-start lg:gap-16">
         <article className="w-full flex-1 flex-col">
           <BackButton />
-          <BlogPostHeader frontmatter={frontmatter} />
+          <BlogPostHeader blog={blog} />
           <CustomStyledMDX
             source={content}
             options={{ scope: { ...frontmatter, apiData } }}
