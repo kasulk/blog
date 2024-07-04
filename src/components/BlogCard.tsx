@@ -1,5 +1,4 @@
 import type { BlogPost } from "@/../types";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -8,9 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link, AuthorLink } from "@/components/Links";
-import { CategoryBadge, CharCounter, ReadingTime } from "@/components";
 import {
-  createImageCreditsTag,
+  BlogPostImage,
+  CategoryBadge,
+  CharCounter,
+  ReadingTime,
+} from "@/components";
+import {
   createBlogPostDescription,
   formatDate,
   truncify,
@@ -47,14 +50,7 @@ export async function BlogCard({ blog }: BlogCardProps) {
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
         </Link>
         <Link href={`/blog/${slug}`} className="relative h-36 sm:h-48">
-          <Image
-            src={`${blogImageDir}/${image?.file}`}
-            alt={image?.alt}
-            title={image.credits && createImageCreditsTag(image.credits)}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="my-0 object-cover"
-          />
+          <BlogPostImage frontmatter={frontmatter} />
           {showCharCounter && (
             <CharCounter
               className="absolute h-auto rounded-sm opacity-80"

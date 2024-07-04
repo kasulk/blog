@@ -1,9 +1,8 @@
 import type { BlogPost } from "@/../types";
-import Image from "next/image";
-import { CategoryBadge, ReadingTime } from "@/components";
+import { BlogPostImage, CategoryBadge, ReadingTime } from "@/components";
 import { Link, AuthorLink } from "@/components/Links";
 import { siteConfig } from "@/config";
-import { createImageCreditsTag, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 type Props = {
   blog: BlogPost;
@@ -22,14 +21,7 @@ export function BlogPostHeader({ blog }: Props) {
       </Link>
 
       <div className="relative h-36 sm:h-48">
-        <Image
-          src={`${blogImageDir}/${image?.file}`}
-          alt={image?.alt}
-          title={image.credits && createImageCreditsTag(image.credits)}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="my-0 rounded-t-sm object-cover"
-        />
+        <BlogPostImage frontmatter={frontmatter} />
       </div>
 
       <div className="mb-1 mt-4 flex justify-end space-x-1">

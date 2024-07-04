@@ -5,7 +5,7 @@ export type Frontmatter = {
   author: string;
   pubDate: Date;
   description?: string;
-  image: BlogPostImage;
+  image: BlogPostImage | null;
   isDraft: boolean;
   category: string;
   tags: string[];
