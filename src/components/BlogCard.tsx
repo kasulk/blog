@@ -67,11 +67,13 @@ export async function BlogCard({ blog }: BlogCardProps) {
           </Link>
         </CardTitle>
         <CardDescription className="flex flex-wrap justify-between">
-          <div className="my-0 flex flex-col sm:flex-row sm:space-x-2">
+          {/* use inline elements here only (no block elements), */}
+          {/* for CardDescription is a <p>-element! */}
+          <span className="my-0 flex flex-col sm:flex-row sm:space-x-2">
             <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
             <span className="hidden sm:inline-block">•</span>
             <AuthorLink author={author} />
-          </div>
+          </span>
           <ReadingTime text={content} />
         </CardDescription>
       </CardHeader>
