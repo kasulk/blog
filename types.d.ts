@@ -1,13 +1,13 @@
 import type { StrippedApiData } from "@/lib/apiFetchers/types";
 
 export type Frontmatter = {
-  title: string;
-  author: string;
+  title: string | null;
+  author: string | null;
   pubDate: Date;
-  description?: string;
-  image: BlogPostImage | null;
-  isDraft: boolean;
-  category: string;
+  description: string | null;
+  image: BlogPostImage | string | null;
+  isDraft: boolean | null;
+  category: "coden" | "finanzen" | "verschiedenes";
   tags: string[];
   series?: string;
   vgWortCode: string;

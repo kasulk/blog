@@ -33,7 +33,7 @@ const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export async function BlogCard({ blog }: BlogCardProps) {
   const { content, frontmatter, slug } = blog;
-  const { author, pubDate, image, category, codeChallengeData } = frontmatter;
+  const { author, pubDate, category, codeChallengeData } = frontmatter;
 
   // get API data
   const apiData = codeChallengeData

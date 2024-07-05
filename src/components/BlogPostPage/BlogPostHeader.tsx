@@ -12,7 +12,7 @@ const blogImageDir = siteConfig.dir.blogImages;
 
 export function BlogPostHeader({ blog }: Props) {
   const { frontmatter, content } = blog;
-  const { author, pubDate, image, category } = frontmatter;
+  const { author, pubDate, category } = frontmatter;
 
   return (
     <header>

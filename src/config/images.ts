@@ -1,4 +1,4 @@
-export const general = {
+const general = {
   "tropic workplace": {
     file: "rest-700156_1280.jpg",
     alt: "Rustikaler, tropischer Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
@@ -17,12 +17,12 @@ export const general = {
   },
 } as const;
 
-export const series = {
+const series = {
   "projekt-tagebuch blog": general["tropic workplace"],
   "code challenges": general["codewars mastery"],
 } as const;
 
-export const category = {
+const category = {
   code: {
     file: "",
     alt: "",
@@ -42,6 +42,15 @@ export const category = {
   verschiedenes: general["tropic workplace"],
 } as const;
 
+const _default = general["tropic workplace"];
+
+export const globalImages = {
+  _default,
+  general,
+  series,
+  category,
+} as const;
+
 export type GeneralImageData = typeof general;
 export type SeriesImageData = typeof series;
 export type CategoryImageData = typeof category;
@@ -50,8 +59,4 @@ export type GeneralType = keyof typeof general;
 export type SeriesType = keyof typeof series;
 export type CategoryType = keyof typeof category;
 
-export type GlobalImages = {
-  general: GeneralImageData;
-  series: SeriesImageData;
-  category: CategoryImageData;
-};
+export type GlobalImages = typeof globalImages;
