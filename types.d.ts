@@ -1,3 +1,4 @@
+import type { Platform } from "@/config/links";
 import type { StrippedApiData } from "@/lib/apiFetchers/types";
 
 export type Frontmatter = {
@@ -37,7 +38,7 @@ type BlogPostImage = {
 
 type CodeChallengeData = {
   id: string;
-  platform: string;
+  platform: Platform;
   language: string;
 };
 
