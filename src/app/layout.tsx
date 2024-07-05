@@ -30,7 +30,10 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning // recommended workaround from next-themes (only applies one level deep); https://github.com/pacocoursey/next-themes#with-app
+    >
       <body
         className={cn("min-h-screen font-sans antialiased", inter.variable)}
       >
