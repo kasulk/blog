@@ -9,6 +9,7 @@ export const siteConfig = {
   email: {
     questions: "frage@kasulk.com",
   },
+  categories: ["coden", "finanzen", "verschiedenes", "inspiration"] as const,
   github: {
     user: "kasulk",
     repos: {
@@ -104,6 +105,8 @@ export const calloutColorMap = {
     borderColor: "border-warning-600",
   },
 } as const;
+
+export type Category = (typeof siteConfig.categories)[number];
 
 export type SiteConfig = typeof siteConfig;
 export type PageConfig = typeof siteConfig.pages._defaultPageConfig;
