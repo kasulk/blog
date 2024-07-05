@@ -1,5 +1,4 @@
 import type { BlogPost } from "@/../types";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -8,9 +7,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link, AuthorLink } from "@/components/Links";
-import { CategoryBadge, CharCounter, ReadingTime } from "@/components";
 import {
-  createImageCreditsTag,
+  BlogPostImage,
+  CategoryBadge,
+  CharCounter,
+  ReadingTime,
+} from "@/components";
+import {
   createBlogPostDescription,
   formatDate,
   truncify,
@@ -30,7 +33,7 @@ const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export async function BlogCard({ blog }: BlogCardProps) {
   const { content, frontmatter, slug } = blog;
-  const { author, pubDate, image, category, codeChallengeData } = frontmatter;
+  const { author, pubDate, category, codeChallengeData } = frontmatter;
 
   // get API data
   const apiData = codeChallengeData
@@ -47,14 +50,7 @@ export async function BlogCard({ blog }: BlogCardProps) {
           <CategoryBadge className="rounded-b-none">{category}</CategoryBadge>
         </Link>
         <Link href={`/blog/${slug}`} className="relative h-36 sm:h-48">
-          <Image
-            src={`${blogImageDir}/${image?.file}`}
-            alt={image?.alt}
-            title={image.credits && createImageCreditsTag(image.credits)}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="my-0 object-cover"
-          />
+          <BlogPostImage frontmatter={frontmatter} />
           {showCharCounter && (
             <CharCounter
               className="absolute h-auto rounded-sm opacity-80"
@@ -71,11 +67,13 @@ export async function BlogCard({ blog }: BlogCardProps) {
           </Link>
         </CardTitle>
         <CardDescription className="flex flex-wrap justify-between">
-          <div className="my-0 flex flex-col sm:flex-row sm:space-x-2">
+          {/* use inline elements here only (no block elements), */}
+          {/* for CardDescription is a <p>-element! */}
+          <span className="my-0 flex flex-col sm:flex-row sm:space-x-2">
             <span className="whitespace-nowrap">{formatDate(pubDate)}</span>
             <span className="hidden sm:inline-block">•</span>
             <AuthorLink author={author} />
-          </div>
+          </span>
           <ReadingTime text={content} />
         </CardDescription>
       </CardHeader>

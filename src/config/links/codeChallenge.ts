@@ -14,3 +14,4 @@ export const codeChallenge = {
 } as const;
 
 export type CodeChallenge = typeof codeChallenge;
+export type Platform = keyof typeof codeChallenge;

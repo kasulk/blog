@@ -1,6 +1,6 @@
 import { Link } from "@/components/Links";
 import { siteConfig } from "@/config";
-import { slugify } from "@/lib/utils";
+import { getBlogPostAuthor, slugify } from "@/lib/utils";
 
 type Props = {
   author: string | null;
@@ -9,7 +9,7 @@ type Props = {
 const { owner } = siteConfig;
 
 export function AuthorLink({ author }: Props) {
-  author = !author || author === "icke" ? owner : author;
+  author = getBlogPostAuthor(author, owner);
   const href = author === owner ? "/aboutme" : `/author/${slugify(author)}`;
 
   return (

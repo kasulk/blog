@@ -23,7 +23,11 @@ import {
 } from "@/lib/blogFetchers";
 import { checkVGWortCode } from "@/lib/blogFetchers/utils";
 import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
-import { createBlogPostDescription, createBlogPostTitle } from "@/lib/utils";
+import {
+  createBlogPostDescription,
+  createBlogPostTitle,
+  getBlogPostAuthor,
+} from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -113,7 +117,7 @@ export async function generateMetadata({
   return {
     title: `${title} | ${siteConfig.name}`,
     description,
-    authors: { name: frontmatter.author },
+    authors: { name: getBlogPostAuthor(frontmatter.author, siteConfig.owner) },
 
     openGraph: {
       title,

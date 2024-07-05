@@ -1,13 +1,14 @@
+import type { Platform } from "@/config/links";
 import type { StrippedApiData } from "@/lib/apiFetchers/types";
 
 export type Frontmatter = {
-  title: string;
-  author: string;
+  title: string | null;
+  author: string | null;
   pubDate: Date;
-  description?: string;
-  image: BlogPostImage;
-  isDraft: boolean;
-  category: string;
+  description: string | null;
+  image: BlogPostImage | string | null;
+  isDraft: boolean | null;
+  category: "coden" | "finanzen" | "verschiedenes";
   tags: string[];
   series?: string;
   vgWortCode: string;
@@ -37,7 +38,7 @@ type BlogPostImage = {
 
 type CodeChallengeData = {
   id: string;
-  platform: string;
+  platform: Platform;
   language: string;
 };
 

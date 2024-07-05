@@ -13,6 +13,7 @@ export * from "./SupportButton";
 export * from "./VGWortMark";
 
 export * from "./BlogCard";
+export * from "./BlogPostImage";
 export * from "./BlogPostsList";
 export * from "./CategoryBadge";
 export * from "./CamelCaseHighlighter";
