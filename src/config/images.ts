@@ -23,6 +23,14 @@ const general = {
       source: "Pixabay",
     },
   },
+  "mountain eagle": {
+    file: "eagle-188086_1280.jpg",
+    alt: "Weißkopfseeadler im Flug vor einer Kulisse von bewaldeten Bergen und wolkigem Himmel.",
+    credits: {
+      creator: "rise-a-mui",
+      source: "Pixabay",
+    },
+  },
   "tropic workplace": {
     file: "rest-700156_1280.jpg",
     alt: "Rustikaler, tropischer Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
@@ -39,8 +47,9 @@ const series = {
 } as const;
 
 const category = {
-  code: general["defocussed codiverse"],
+  coden: general["defocussed codiverse"],
   finanzen: general["sunny moneygrow"],
+  inspiration: general["mountain eagle"],
   verschiedenes: general["tropic workplace"],
 } as const;
 
