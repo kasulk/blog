@@ -1,0 +1,204 @@
+---
+title:
+pubDate: 2024-07-10
+description:
+category: coden
+tags:
+  - codewars
+  - javascript
+series: code challenges
+vgWortCode: 0adfe701d57446a39ea5721b249e3b4c
+
+codeChallengeData:
+  platform: codewars
+  id: 5300901726d12b80e8000498
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst erstellen wir uns ein Array, das genauso lang ist wie `n`.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir durch dieses Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn der Index des aktuellen Elements plus 1 durch 3 und 5 teilbar ist, geben wir 'FizzBuzz' zurück.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn er nur durch 5 teilbar ist, geben wir nur 'Buzz' zurück.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn er nur durch 3 teilbar ist, geben wir nur 'Fizz' zurück.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Ansonsten geben wir den aktuellen Index plus 1 zurück.
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function fizzbuzz(n) {
+```
+
+</Accordion>
+<Accordion>
+
+Dann erstellen wir uns das Array, das genauso lang ist wie `n`:
+
+```js
+return Array(n);
+```
+
+Das `return`-Statement schreiben wir schon hierhin, denn hier kann man wunderbar chainen.
+
+</Accordion>
+<Accordion>
+
+Darum füllen wir es jetzt mit (beliebigem) Inhalt:
+
+```js
+    .fill("x")
+```
+
+Ich entscheide mich für ein mysteriöses `x`... Jetzt haben wir ein Array voll mit `x`en!
+
+(das `;` nach `Array(n)` musst du dann natürlich entfernen, mein Editor fuegt es leider automatisch hinzu...)
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```js
+    .map((_, i) => {
+```
+
+Da wir am Ende genauso viele Elemente haben wollen wir am Anfang passt hier wunderbar ein <ExternalLink href={docs.arrayMap}>.map()</ExternalLink>
+Das erste Argument nennen wir `_`, das ist Konvention für: 'Wir brauchen es nicht'.
+
+</Accordion>
+<Accordion>
+
+Jetzt brauchen wir den aktuellen Index plus 1:
+
+```js
+const curr = i + 1;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch die Bedingungen:
+
+```js
+      if (curr % 3 === 0 && curr % 5 === 0) return "FizzBuzz";
+      if (curr % 5 === 0) return "Buzz";
+      if (curr % 3 === 0) return "Fizz";
+      return curr;
+    });
+}
+```
+
+Wer schlauer ist als ich, hat sich hier den Fakt zunutze gemacht, dass etwas das durch 3 und 5 teilbar ist, auch durch 15 teilbar ist. 😉
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function fizzbuzz(n) {
+  return Array(n)
+    .fill("x")
+    .map((_, i) => {
+      const curr = i + 1;
+      if (curr % 3 === 0 && curr % 5 === 0) return "FizzBuzz";
+      if (curr % 5 === 0) return "Buzz";
+      if (curr % 3 === 0) return "Fizz";
+      return curr;
+    });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
