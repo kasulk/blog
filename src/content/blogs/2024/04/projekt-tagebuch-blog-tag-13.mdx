@@ -1,0 +1,64 @@
+---
+title: Projekt-Tagebuch Blog, Tag 13
+pubDate: 2024-05-02
+description: Donnerstag ist Jogging-Tag. Nach meinem Jog und dem täglichen Kata hab ich heute als Erstes die shadcn Card-Komponente installiert. Mit ihrer Hilfe hab ich dann eine BlobCard-Komponente für die Blog-Liste erstellt.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: c3a5cb1b84614f89abc721352603e7f3
+---
+
+Donnerstag, 2. Mai 2024
+
+**Wochen-Ziele:**
+
+- [ ] ersten echten Blog-Beitrag (MDX mit JavaScript) erstellen
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [x] ~[shadcn Card für Blog-Liste implementieren](#shadcn-card-fuer-blog-liste)~
+- [x] ~[eigene shadcn-Button-Variante erstellen](#eigene-shadcn-button-variante)~
+
+---
+
+## shadcn Card für Blog-Liste
+
+Donnerstag ist Jogging-Tag. Nach also jenem Jog und dem täglichen Kata hab ich heute als Erstes die `shadcn` `Card`-Komponente installiert. Mit ihrer Hilfe hab ich dann eine `BlogCard`-Komponente für die Blog-Liste erstellt.
+
+## Eigene shadcn-Button-Variante
+
+Dann hab ich eine Accent-Button-Variante in `shadcn` und eine `CategoryBadge`-Komponente erstellt.
+
+## Und dann?
+
+Danach hab ich eigentlich nur noch gefixt wie ein Weltmeister:
+
+- der Blog-Type heißt jetzt `BlogPost`
+- der `DonateButton` heißt jetzt `SupportButton`
+- die `SocialIcons` in der Navi verschwinden auf kleinen Bildschirmen
+- den Hydration-Error im `SupportButton`
+
+### Hydration Error
+
+Am fiesesten war aber der Hydration-Error. Zum Glück konnte ich relativ schnell herausfinden, wo der Fehler herkam. Das Problem war, dass ich 2 interaktive Elemente miteinander verschachtelt habe.
+
+Ich habe einen `shadcn`-Button mit einem `Next-Link` gewrappt. Die Lösung war hier stattdessen den Link in einen `shadcn`-Button zu wrappen und dem Button das `asChild`-Attribut zu verpassen. So wird es auch in den [Docs](https://ui.shadcn.com/docs/components/button) empfohlen:
+
+```tsx
+<Button asChild>
+  <Link href="/login">Login</Link>
+</Button>
+```
+
+Das machte dem Hydration-Error den Gar aus.
+
+## Dann tatsächlich: Der erste Blog-Artikel?! Naja fast...
+
+Dann hab ich angefangen den ersten Blog-Artikel in `MDX` zu schreiben. Dabei fielen mir noch reichlich Verbesserungsmöglichkeiten auf. Diese hab ich versucht in einem anderen Branch parallel zu fixen. Ich muss sagen, das ist ganz schön anstrengend und wird von mir nicht empfohlen.
+
+Ich habe vorallem das Frontmatter angepasst. Für die Bilder gibt man jetzt hier keine `src` mehr an, sondern nur noch den Filename. Die Source erstelle ich dann beim Rendern in der Blog-Komponente aus dem Pfad zum Bild-Verzeichnis (in der `siteConfig` hinterlegt) und dem Filename aus dem jeweilgen Blog-Frontmatter.
+
+So muss man nicht für jeden Blog, den kompletten Pfad zum Bild angeben, sondern nur noch den Dateinamen.
+
+Außerdem hab ich dem Bild-Objekt im Frontmatter jetzt eine `credit`-Property angehext. So kann man dann in der `BlogPost`-Komponente auf diese Angaben zugreifen.
