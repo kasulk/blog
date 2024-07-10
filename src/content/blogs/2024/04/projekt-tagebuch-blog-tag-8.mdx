@@ -1,0 +1,48 @@
+---
+title: Projekt-Tagebuch Blog, Tag 8
+pubDate: 2024-04-22
+description: Wie im letzten Beitrag festgestellt, wäre es an der Zeit, dass ich den ersten echten Blog-Beitrag schriebe. D.h., geschrieben hab ich ja schon. Die müssten jetzt nur noch “eingepflegt” werden.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 6208c97f3fc84e0aac3e854b2d45cbf2
+---
+
+Montag, 22. April 2024
+
+**Wochen-Ziele:**
+
+- [ ] ~ersten echten Blog-Beitrag (MDX mit JavaScript) erstellen~
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [x] ~[Affiliate-Link-Komponente erstellen](#)~
+- [ ] Frontmatter für Meta-Daten der Blog-Beiträge verwenden
+- [ ] Blogs auf der Übersichtsseite nach Datum sortieren
+
+---
+
+Wie im [letzten Beitrag](/blog/projekt-tagebuch-blog-tag-7) festgestellt, wäre es an der Zeit, dass ich den ersten echten Blog-Beitrag schriebe. D.h., geschrieben hab ich ja schon. Die müssten jetzt nur noch “eingepflegt” werden. Ich hab das schon mal auf die Todo-Liste geschrieben.
+
+Ansonsten war heute ein ganz schöner Krampftag. Ich hab immer noch schlechte Laune und nicht mal Bock das hier zu schreiben... Aber, et hilft ja allet nüscht.
+
+Erst mal hab ich den halben Tag an einem Kata gesessen ohne es zu lösen. Irgendwann hab ich es mit Gehirn-Knoten beiseite gepackt, damit ich noch ein bisschen mit meinem Blog vorwärts komme.
+
+## Affiliate-Link-Komponente erstellen
+
+Hier hab ich es zumindest geschafft eine `AffiliateLink`-Komponente zu erstellen. Das Besondere an dieser Komponente ist, dass automatisch ein Sternchen `*` nach dem Link erscheint, um es als Affiliate-Link zu kennzeichnen. 🤓
+
+Außerdem erscheint beim Hover über den Link ein entsprechender Hinweistext. Dazu habe ich die `Tooltip`-Komponente von `shadcn` installiert und einige (Demo-)Affiliate-Links in meine `siteConfig` geschrieben.
+
+Das ging alles relativ fix und ich hab es auch geschafft, dass die Komponente über `MDXRemote` von `next-mdx-remote` an das Markdown in meinen MDX-Dateien übergeben wird. Dort kann ich sie dann einfach ins Markdown einfügen und alles funktioniert wunderbar.
+
+Allerdings hab ich mir die Karten gelegt mit dem Importieren meiner `siteConfig`. Die brauche ich ja, um die statischen Link-Daten wie z.B. `href` zu laden. Mit `next-mdx-remote` kann man leider keine Imports und Exports in MDX-Dateien machen. Das wäre das Einfachste.
+
+Man muss Variablen genauso wie die Komponenten auch über `MDXRemote`, also als Prop einfügen. Auch das hab ich noch geschafft. Was ich allerdings nicht geschafft habe ist, auf diese Variable dann im Markdown zuzugreifen.
+
+Die Docs sind leider sehr schlecht für Server-Components. Wenn ich das nicht bald hinkriege, fliegt `next-mdx-remote` auch aus meinem Blog. Es gibt noch ein Package von Kent C. Dodds. [MDX-Bundler](https://github.com/kentcdodds/mdx-bundler). Das werde ich mir mal ankucken.
+
+## Fazit
+
+Eines meiner Tagesziele war “Affiliate-Link-Komponente erstellen”. Naja... das hab ich geschafft. Auch wenn sie so (noch) nicht nutzbar ist. Für die n&auml;chste Session schreibe ich mir also auf: “Affiliate-Link-Komponente nutzbar machen”...
