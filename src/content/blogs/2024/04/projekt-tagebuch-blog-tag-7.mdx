@@ -1,0 +1,91 @@
+---
+title: Projekt-Tagebuch Blog, Tag 7
+pubDate: 2024-04-19
+description: Wie im Blog von vorgestern geschrieben, kann ich jetzt die Blogs easy rendern und mit Custom Components anreichern. Leider bin ich immer noch nicht so richtig zufrieden...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: c4ea15f52ce54d81af576eaad2a2789d
+---
+
+Freitag, 19. April 2024
+
+**Wochen-Ziele:**
+
+- [x] ~Blog-Grundgerüst steht und ich kann bloggen bis der Arzt kommt~
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [x] ~[entscheiden ob ich @next/mdx von meinem Blog banne](#next-mdx-verbannen)~
+- [x] ~[Blog-Übersichtsseite erstellen](#blog-uebersichtsseite)~
+
+---
+
+## @next/mdx verbannen?
+
+Wie im [Blog von vorgestern](/blog/projekt-tagebuch-blog-tag-5) geschrieben, kann ich jetzt die Blogs easy rendern und mit Custom Components anreichern. Leider bin ich immer noch nicht so richtig zufrieden. 😂 Mit `@next/mdx` und `next-mdx-remote` hab ich jetzt 2 Packages, die auf verschiedene Weise mit den Markdown-Files umgehen.
+
+Das gefällt mir nicht. Ganz einfach weil es zu kompliziert ist. Es ist schwerer zu verstehen und ggf. auch schwerer zu warten. ‘K.I.S.S.’ sagt man so schön. ‘Keep It Simple, Stupid’. So soll dit ooch sein.
+
+Darum habe ich mich entschieden, `@next/mdx` - das Package direkt von Next.js - komplett rauszuschmeißen. Den Rest muss jetzt `next-mdx-remote` alleine stemmen. Dafür hab ich dann aber auch noch mal ein bisschen umgebaut.
+
+Ich verwende jetzt doch die `MDXRemote`-Komponente von `next-mdx-remote`. Um das möglich zu machen, habe ich `gray-matter` installiert. Mit `gray-matter` kann man eine MDX-Datei in Frontmatter und reines Markdown spalten, ohne es direkt in eine React-Komponente kompilieren zu müssen.
+
+Der Vorteil ist auch hier, dass jetzt alles ein bisschen klarer und übersichtlicher und damit leichter zu warten und zu verstehen ist. Die Custom Components injiziere ich jetzt standardmäßig in die `MDXRemote`-Komponente. Damit ich das nicht jedes Mal neu machen muss, habe ich mir eine `CustomStyledMDX`-Komponente erstellt:
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+import type { MDXComponents } from "mdx/types";
+import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote/rsc";
+
+export const customComponents: MDXComponents = {
+  /// Allows customizing built-in components, e.g. to add styling
+  h1: ({ children }) => <h1 className="text-warning">{children}</h1>,
+  h2: ({ children }) => <h2 className="text-danger">{children}</h2>,
+  h3: ({ children }) => <h3 className="text-success">{children}</h3>,
+};
+
+export function CustomStyledMDX(props: MDXRemoteProps) {
+  return (
+    <MDXRemote
+      {...props}
+      components={{ ...customComponents, ...(props.components || {}) }}
+    />
+  );
+}
+```
+
+Meine `SingleBlogPage` sieht dann damit vorerst so aus:
+
+```tsx
+// src/app/blog/[slug]/page.tsx
+export default async function SingleBlogPage({ params }: BlogPageProps) {
+  const blog = await getBlogBySlug(params.slug);
+
+  if (!blog) notFound();
+
+  const { content, frontmatter } = blog;
+  const { title, author, publishDate } = frontmatter;
+
+  return (
+    <article className="container prose mx-auto max-w-3xl py-6 dark:prose-invert">
+      <h1>{title}</h1>
+      <p className="flex justify-end space-x-1">
+        <span>by {author}, </span>
+        <span>{formatDate(publishDate, "de-DE")}</span>
+      </p>
+      <CustomStyledMDX source={content} /> // NEU
+    </article>
+  );
+}
+```
+
+So ist es für mich ein bisschen klarer was abgeht.
+
+## Blog-Übersichtsseite
+
+Dann hab ich noch ein bisschen refactored und die Blog-Übersichtsseite erstellt. Also die Seite, auf der man eine Liste mit allen Blogs finden kann. Und die Funktion `formatDate()` formatiert mir jetzt den Datums-String aus dem Frontmatter. Aus `2024-04-09` wird also `9. April 2024`. Sweeet!.
+
+Eigentlich kann ich so langsam anfangen die ersten Blogs zu erstellen...
