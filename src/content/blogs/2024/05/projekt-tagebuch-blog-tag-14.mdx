@@ -1,0 +1,90 @@
+---
+title: Projekt-Tagebuch Blog, Tag 14
+pubDate: 2024-05-03
+description:
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: d1f0ba92b8b24065ad1d3d10756ced82
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [x] ~[ersten echten Blog-Beitrag (MDX mit JavaScript) erstellen](#der-erste-echte-blog-beitrag-diesmal-echt)~
+
+**Tages-Ziele:**
+
+- [x] ~[Urheber-Credits zu Blog-Bildern hinzufügen](#urheber-credits-bei-blog-bildern)~
+- [x] ~[SideHeader refactoren (Responsiveness gefixt)](#sideheader-responsiveness)~
+- [ ] atemberaubende Readme erstellen
+
+---
+
+Nach der Ernüchterung, dass ich beim Plasma abgelehnt wurde, weil meine Werte nicht optimal waren, hab ich aus Frust ein 6er Kata in 15 Minuten gelöst. Zugegeben, die Lösung viel mir ausnahmsweise mal leicht.
+
+Aber nichts desto trotz gefällt mir [meine Lösung](/blog/codewars-the-vowel-code) ziemlich gut. Und wenn man ein Ei gelegt hat, dann kann man ruhig mal gackern. [Hier](https://www.codewars.com/kata/53697be005f803751e0015aa) kannst du es dir ankucken oder das Kata [ nachcoden](/blog/codewars-the-vowel-code).
+
+## Urheber-Credits bei Blog-Bildern
+
+Als nächstes hab ich mich daran gemacht, dass man die Urheber-Credits der Blog-Post-Bilder ordentlich nachvollziehen kann. Die schreibe ich jetzt immer zusammen mit dem Dateinamen und dem `alt`-Text ins Frontmatter. Und sieht dann so aus:
+
+```mdx
+---
+title: Der Erste Eintrag
+author: icke
+pubDate: 2024-05-02
+description: Das ist mein erster Blog-Post!
+isDraft: false
+category: verschiedenes
+tags: []
+image:
+  {
+    file: rest-700156_1280.jpg,
+    alt: "Rustikaler Arbeitsplatz mit einem Laptop auf einem Holztisch, daneben eine Hängematte.",
+    credits: { creator: Gabor Fejes, source: Pixabay },
+  }
+---
+```
+
+Von da aus werden die Urheber-Credits dann beim Rendern ausgelesen und in das `title`-Attribut vom Image geschrieben. Außerdem hab ich noch eine kleine Funktion geschrieben, die vor die Credits noch “Foto:” hinzufügt und die Values des Credit-Objekts mit einer Pipe (`|`) joint.
+
+Beim Hovern über das Blog-Post-Image kann der User dann z.B. folgenden Text sehen:
+
+`Foto: Gabor Fejes | Pixabay`
+
+## Der erste echte Blog-Beitrag (diesmal echt... )
+
+Dann hab ich endlich meinen ersten ordentlichen Blog-Post hochgeladen. 🥳
+
+Zu begutachten genau [hier](/blog/der-erste-eintrag).
+
+## @next/image optimiert
+
+Anschließend hab ich die Bilder noch etwas optimiert. Ich habe zur `Next-Image`-Komponente für’s Blog-Post-Bild in der `BlogCard` `fill`, `sizes` und `object-cover` hinzugefügt. Nachdem ich die sizes hinzugefügt hatte, waren die Bilder nur noch halb so groß!
+
+Und das, obwohl ich erst mal nur die [Standard-Werte aus den Next-Docs](https://nextjs.org/docs/pages/api-reference/components/image#sizes) übernommen habe. Ziemlich nice. Danke Next. Die implementierte Image-Komponente will ich euch nicht vorenthalten \*_gacker_\*:
+
+```tsx
+<Link href={`/blog/${slug}`} className="relative h-36 no-underline sm:h-48">
+  <Image
+    src={`${blogImageDir}/${image?.file}`}
+    alt={image?.alt}
+    title={image.credits && createImageCreditsTag(image.credits)}
+    fill
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    className="my-0 object-cover"
+  />
+</Link>
+```
+
+Dann hab ich die `@next/link`, `@next/image`, `SupportButton` und `blockquote`-Komponenten zur `CustomStyledMDX` hinzugefügt. Jetzt kann ich sie in meinen `MDX`-Files verwenden. \*_gacker\* \*gacker_\*
+
+## SideHeader / Responsiveness
+
+Zum Schluß hab ich nur noch den `SiteHeader` refaktoriert (oder wie auch immer das deutsche Wort dafür ist). Ich war mit der Responsiveness nicht zufrieden. Und ich habe alles eines bisschen größer gemacht. Vor allem für die Mobile-Ansicht. Damit man die Buttons leichter trifft.
+
+Bleibt mir nur noch zu sagen:
+
+"Kikeriki!" 🐔
