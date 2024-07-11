@@ -6,6 +6,7 @@ export * from "./Accordion";
 export * from "./BackButton";
 export * from "./Callout";
 export * from "./CharCounter";
+export * from "./DateFormatter";
 export * from "./EmailButton";
 export * from "./ReadingTime";
 export * from "./SocialLinks";
