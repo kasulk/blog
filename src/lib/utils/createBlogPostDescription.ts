@@ -26,9 +26,9 @@ export function createBlogPostDescription(
 
   if (!description) {
     if (codeChallengeData && apiData) {
-      const { platform } = codeChallengeData;
+      const { platform, language } = codeChallengeData;
       const { name, level } = apiData;
-      description = `Schritt für Schritt Lösung für die ${capitalize(platform)} Coding-Challenge "${name}" (${level})`;
+      description = `Schritt für Schritt Lösung für die ${capitalize(platform)} Coding-Challenge "${name}" (${level}) in ${language}`;
     }
   }
 
