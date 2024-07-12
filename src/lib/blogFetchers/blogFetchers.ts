@@ -1,4 +1,4 @@
-import type { BlogPost } from "@/../types";
+import type { BlogPost, Frontmatter } from "@/../types";
 import path from "path";
 import { siteConfig } from "@/config";
 import { sortObjectKeys } from "@/lib/utils";
@@ -55,4 +55,42 @@ export function getCategoriesWithCounts(blogs: BlogPost[]): {
   });
 
   return sortObjectKeys(catsWithCounts);
+}
+
+export function getTagsWithCounts(blogs: BlogPost[]): {
+  [key: string]: number;
+} {
+  const tagsWithCounts: { [key: string]: number } = {};
+
+  blogs.forEach((blog) => {
+    const { frontmatter } = blog;
+    const tags = frontmatter.tags || [];
+    const autoTags = getAutoTags(frontmatter);
+
+    const allTags = [...new Set([...tags, ...autoTags])];
+
+    allTags.forEach((tag) => {
+      if (tagsWithCounts[tag]) tagsWithCounts[tag]++;
+      else tagsWithCounts[tag] = 1;
+    });
+  });
+
+  return sortObjectKeys(tagsWithCounts);
+}
+
+function getAutoTags(frontmatter: Frontmatter): string[] {
+  return [...getAutoTagsFromCodeChallenge(frontmatter)];
+}
+
+function getAutoTagsFromCodeChallenge(
+  frontmatter: Frontmatter,
+): [string, string] | [] {
+  const { codeChallengeData } = frontmatter;
+
+  if (codeChallengeData) {
+    const { platform, language } = codeChallengeData;
+    return [platform.toLowerCase(), language.toLowerCase()];
+  }
+
+  return [];
 }
