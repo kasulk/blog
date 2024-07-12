@@ -56,6 +56,7 @@ export const siteConfig = {
   },
 
   showCategoryCount: true,
+  showTagCount: true,
 
   defaultTooltips: {
     affiliate: {

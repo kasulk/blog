@@ -5,6 +5,7 @@ import {
   Sidebar,
   SidebarContent,
   BlogCategoryCloud,
+  BlogTagsCloud,
 } from "@/components/Sidebar";
 import { getBlogs } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
@@ -32,6 +33,9 @@ export default async function Blog() {
         <Sidebar>
           <SidebarContent title="Kategorien">
             <BlogCategoryCloud />
+          </SidebarContent>
+          <SidebarContent title="Tags">
+            <BlogTagsCloud />
           </SidebarContent>
         </Sidebar>
       </div>
