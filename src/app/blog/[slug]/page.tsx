@@ -14,6 +14,7 @@ import {
   SidebarContent,
   BlogRelatedPosts,
   BlogCategoryCloud,
+  BlogTagsCloud,
 } from "@/components/Sidebar";
 import { BlogPostHeader } from "@/components/BlogPostPage";
 import {
@@ -74,6 +75,9 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
         <Sidebar>
           <SidebarContent title="Kategorien">
             <BlogCategoryCloud />
+          </SidebarContent>
+          <SidebarContent title="Tags">
+            <BlogTagsCloud />
           </SidebarContent>
           {hasRelatedBlogs && (
             <SidebarContent title="Verwandte Posts">

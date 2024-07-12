@@ -22,16 +22,14 @@ import {
 import { siteConfig } from "@/config";
 import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
 
-type BlogCardProps = {
+type Props = {
   blog: BlogPost;
 };
-
-const blogImageDir = siteConfig.dir.blogImages;
 
 const isDevMode = process.env.NODE_ENV === "development";
 const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
-export async function BlogCard({ blog }: BlogCardProps) {
+export async function BlogCard({ blog }: Props) {
   const { content, frontmatter, slug } = blog;
   const { author, pubDate, category, codeChallengeData } = frontmatter;
 
