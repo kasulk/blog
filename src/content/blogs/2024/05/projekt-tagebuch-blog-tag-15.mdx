@@ -1,0 +1,65 @@
+---
+title: Projekt-Tagebuch Blog, Tag 15
+pubDate: 2024-05-06
+description: Ich hab am Wochenende mal ein bisschen den Blog als User getestet. Rasend schnell. Man klickt auf einen Link und die Seite ist sofort da. Affengeil alter! AFFENGEIL ALTER!! Hab ich bisher noch auf keiner Webseite erlebt.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 049a3dc156b44e93979b1d48c7644f8d
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Emails per Kontaktformular erhalten
+
+**Tages-Ziele:**
+
+- [x] ~[Kategorie-Route erstellen](#kategorie-route)~
+- [ ] atemberaubende Readme erstellen
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Kontaktformular einrichten
+
+---
+
+Ich hab am Wochenende mal ein bisschen den Blog als User getestet. Rasend schnell. Man klickt auf einen Link und die Seite ist sofort da. Affengeil alter! AFFENGEIL ALTER!! Hab ich bisher noch auf keiner Webseite erlebt. Jedensfalls nicht dass ich mich erinner könnte (oder wöllte...)
+
+Genug gegackert. 🐔
+
+## Kategorie-Route
+
+Heute hab ich die Kategorie-Cloud erstellt. Also das, wo man alle Kategorien als Badges sehen und klicken kann. Wenn man auf eine Kategorie klickt, kommt man zu einer Liste aller Blog-Posts in dieser Kategorie.
+
+### Category-Route
+
+Dafür musste ich erst mal eine weitere dynamische Route `/category/[category]` und `page.tsx` erstellen. Mit `generateStaticParams()` und `generateMetadata()`. Da die Kategorien Bestandteil des Blogs sind, hab ich sie als Sub-Routes des Blogs eingerichtet.
+
+Dann hab ich ein bisschen refactored. Unter anderem hat das Mappen über die Blog-Posts seine eigene wiederverwendbare Komponente, `BlogPostsList` bekommen.
+
+### Category-Cloud
+
+Danach hab ich die `BlogCategoryCloud`-Komponente erstellt. Zuerst loope ich durch alle Blogs um die Kategorien zu extrahieren. Am Ende bekomme ich ein Objekt mit allen Kategorien und der Anzahl ihrer Vorkommnisse.
+
+Das wird dann noch alfabetisch sortiert und dann kann mit `Object.entries` durch die Kategorien gemappt und diese gerendert werden.
+
+Dann hab ich mich nur noch ein bisschen mit dem Styling rumgeärgert, aber jetzt ist alles schick.
+
+## Bugfix: aktive NavLinks
+
+Nach der Kategorie-Cloud hab ich mich noch mal an die Navigation gemacht. Die aktiven `NavLinks` wurden nicht hervorgehoben, wenn man sich auf einer Sub-Route befand.
+
+Also befand man sich z.B. direkt auf `/blog` war alles schick. Befand man sich aber auf `/blog/ein-toller-blog-beitrag`, wurde der `Blog`-NavLink nicht gehighlightet. Dem hab ich Abhilfe geschafft.
+
+Jetzt funztsts[^1] wie es soll. Obwohl der Code in der Komponente jetzt ein bisschen wild aussieht. Bitte nicht hinkucken...
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
+
+[^1]: sachdienliche Hinweise, für wie man dieses Wort nu tatsächlich richtig schreibt bitte an: <a href={`mailto:${email.questions}?subject=Frage zu ${title}`}>{email.questions}</a>
