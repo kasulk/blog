@@ -8,6 +8,7 @@ import {
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
+import { codeChallenge } from "@/config/links";
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
@@ -93,8 +94,14 @@ export function getTagsWithCounts(blogs: BlogPost[]): {
 
   blogs.forEach((blog) => {
     const { frontmatter } = blog;
+    const { codeChallengeData } = frontmatter;
     const tags = frontmatter.tags || [];
     const autoTags = getAutoTags(frontmatter);
+
+    tags.forEach((tag) => {
+      if (autoTags.includes(tag))
+        throwRedundantTagError(tag, codeChallengeData);
+    });
 
     const allTags = [...new Set([...tags, ...autoTags])];
 
@@ -134,4 +141,22 @@ function getAutoTagsFromCodeChallenge(
   }
 
   return [];
+}
+
+/**
+ * Throws an error indicating a redundant tag that is automatically generated from the code challenge data.
+ *
+ * @param {string} redundantTag - The redundant tag that was manually added.
+ * @param {Frontmatter["codeChallengeData"]} codeChallengeData - The code challenge data from which the tag is automatically generated.
+ * @throws {Error} Throws an error with a detailed message about the redundant tag.
+ */
+function throwRedundantTagError(
+  redundantTag: string,
+  codeChallengeData: Frontmatter["codeChallengeData"],
+): never {
+  throw new Error(`
+
+  No need to tag the article with '${redundantTag}'
+  because it's tagged automatically from it's codeChallengeData:\n
+  codeChallengeData: ${JSON.stringify(codeChallengeData, null, 4)} `);
 }
