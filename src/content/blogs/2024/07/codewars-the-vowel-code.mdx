@@ -129,7 +129,7 @@ Den Rest kriege ich in eine Zeile:
 ```
 
 Da wir genauso viele Zeichen zurückgeben wie reinkommen, schreit’s nach einem <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>-Loop. Der Rest ist wie oben beschrieben, mit folgendem Trick:
-Wenn `char` nicht in `”aeiou”` gefunden wird, gibt <ExternalLink href={docs.array.indexOf}>`.indexOf()`</ExternalLink> `-1` zurück. Jetzt machen wir uns zunutze, dass wir sowieso den Index + 1 brauchen. Denn wenn wir `-1` zurück bekommen und `+ 1` rechnen, bekommen wir `0`. `0` ist `falsy`. Damit wird der Code nach dem <ExternalLink href={docs.operators.logicalOr}>logischen Oder</ExternalLink> `||` ausgeführt und wir geben den unveränderten `char` zurück. Sweet!
+Wenn `char` nicht in `”aeiou”` gefunden wird, gibt <ExternalLink href={docs.array.indexOf}>`.indexOf()`</ExternalLink> `-1` zurück. Jetzt machen wir uns zunutze, dass wir sowieso den Index + 1 brauchen. Denn wenn wir `-1` zurück bekommen und `+ 1` rechnen, bekommen wir `0`. `0` ist <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink>. Damit wird der Code nach dem <ExternalLink href={docs.operators.logicalOr}>logischen Oder</ExternalLink> `||` ausgeführt und wir geben den unveränderten `char` zurück. Sweet!
 
 </Accordion>
 <Accordion>
@@ -153,7 +153,7 @@ Auch hier passt der Rest wieder in eine Zeile:
 
 Das Prinzip ist ähnlich. Nur hier prüfen wir, ob `char` eine Zahl ist.
 Wenn nicht, bekommen wir Murks (`NaN`) zurück. Murks (`NaN`) ist `falsy` und damit wird in diesem Fall auch hier wieder einfach der Ausgangs-`char` zurückgegeben.
-Ist `char` eine Zahl, aber größer als die Länge von `“aeiou”` kriegen wir `undefined` zurück. Ebenfalls `falsy` und wir springen wieder auf die rechte Seite des <ExternalLink href={docs.operators.logicalOr}>`logischen Oders`</ExternalLink>.
+Ist `char` eine Zahl, aber größer als die Länge von `“aeiou”` kriegen wir `undefined` zurück. Ebenfalls <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink> und wir springen wieder auf die rechte Seite des <ExternalLink href={docs.operators.logicalOr}>logischen Oders</ExternalLink>.
 Wenn `char` eine Zahl kleiner oder gleich der Länge des Vokal-Strings ist, z.B. `3`, wird aus dem Ausdruck in der eckigen Klammer ein Zahl. Hier z.B. `2` (`3` - `1`). Also haben wir dann `“aeiou”[2]`. Es wird also das Zeichen mit dem Index `2`, hier der Vokal `i`, zurückgegeben.
 
 Bääm! 💪
