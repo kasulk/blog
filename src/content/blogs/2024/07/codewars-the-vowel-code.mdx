@@ -1,0 +1,190 @@
+---
+title:
+pubDate: 2024-05-03
+description:
+category: coden
+tags:
+  - codewars
+  - typescript
+series: code challenges
+vgWortCode: 2e6eb19ddf134afa83670c555520ac16
+
+codeChallengeData:
+  platform: codewars
+  id: 53697be005f803751e0015aa
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes kümmern wir uns um die Encode-Funktion
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Hier brauchen wir einen Loop
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Es gibt viele Möglichkeiten, hier ist was mir eingefallen ist:
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Für jeden Buchstaben im Input-String testen wir, ob er im String “aeiou” vorhanden ist
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+wenn ja, geben wir dessen Index im Vokal-String + 1 zurück, sonst den Buchstaben
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Für die Decode-Funktion müssen wir den Loop leicht anpassen:
+
+</Accordion>
+
+<Accordion>
+Schritt 7
+
+Wenn das aktuelle Zeichen eine Zahl ist und ein Zeichen mit dieser Zahl minus 1 als Index im Vokal-String enthalten ist, geben wir genau dieses Zeichen/Vokal zurück
+
+</Accordion>
+
+<Accordion>
+Schritt 8
+
+Ansonsten geben wir das aktuelle Zeichen unverändert zurück
+
+Klingt komplizierter als es ist...
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile der Encode-Funktion (ich habe `string` in `str` umbenannt):
+
+```ts
+export function encode(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+Den Rest kriege ich in eine Zeile:
+
+```ts
+  return [...str].map((char) => "aeiou".indexOf(char) + 1 || char).join("");
+}
+```
+
+Da wir genauso viele Zeichen zurückgeben wie reinkommen, schreit’s nach einem <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>-Loop. Der Rest ist wie oben beschrieben, mit folgendem Trick:
+Wenn `char` nicht in `”aeiou”` gefunden wird, gibt <ExternalLink href={docs.array.indexOf}>`.indexOf()`</ExternalLink> `-1` zurück. Jetzt machen wir uns zunutze, dass wir sowieso den Index + 1 brauchen. Denn wenn wir `-1` zurück bekommen und `+ 1` rechnen, bekommen wir `0`. `0` ist <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink>. Damit wird der Code nach dem <ExternalLink href={docs.operators.logicalOr}>logischen Oder</ExternalLink> `||` ausgeführt und wir geben den unveränderten `char` zurück. Sweet!
+
+</Accordion>
+<Accordion>
+Weiter geht’s mit der Decode-Funktion:
+
+Meine erste Zeile der Decode-Funktion (ich hab wieder `string` in `str` umbenannt):
+
+```ts
+export function decode(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Auch hier passt der Rest wieder in eine Zeile:
+
+```ts
+  return [...str].map((char) => "aeiou"[Number(char) - 1] || char).join("");
+}
+```
+
+Das Prinzip ist ähnlich. Nur hier prüfen wir, ob `char` eine Zahl ist.
+Wenn nicht, bekommen wir Murks (`NaN`) zurück. Murks (`NaN`) ist `falsy` und damit wird in diesem Fall auch hier wieder einfach der Ausgangs-`char` zurückgegeben.
+Ist `char` eine Zahl, aber größer als die Länge von `“aeiou”` kriegen wir `undefined` zurück. Ebenfalls <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink> und wir springen wieder auf die rechte Seite des <ExternalLink href={docs.operators.logicalOr}>logischen Oders</ExternalLink>.
+Wenn `char` eine Zahl kleiner oder gleich der Länge des Vokal-Strings ist, z.B. `3`, wird aus dem Ausdruck in der eckigen Klammer ein Zahl. Hier z.B. `2` (`3` - `1`). Also haben wir dann `“aeiou”[2]`. Es wird also das Zeichen mit dem Index `2`, hier der Vokal `i`, zurückgegeben.
+
+Bääm! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function encode(str: string): string {
+  return [...str].map((char) => "aeiou".indexOf(char) + 1 || char).join("");
+}
+
+export function decode(str: string): string {
+  return [...str].map((char) => "aeiou"[Number(char) - 1] || char).join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
