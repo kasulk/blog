@@ -11,6 +11,11 @@ import {
 
 const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
 
+/**
+ * Fetches all blog posts from the blog directory.
+ *
+ * @returns {Promise<BlogPost[]>} A promise that resolves to an array of blog posts.
+ */
 export async function getBlogs(): Promise<BlogPost[]> {
   const allFilePaths = getAllFilesFromSubDirs(blogDir);
   const allBlogs = await Promise.all(
@@ -23,6 +28,12 @@ export async function getBlogs(): Promise<BlogPost[]> {
   return allBlogs;
 }
 
+/**
+ * Fetches a blog post by its slug.
+ *
+ * @param {string} slug - The slug of the blog post.
+ * @returns {Promise<BlogPost | null>} A promise that resolves to the blog post if found, otherwise null.
+ */
 export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   const allBlogs = await getBlogs();
   const blog = allBlogs.find((blog) => blog.slug === slug);
@@ -30,6 +41,12 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   return blog || null;
 }
 
+/**
+ * Fetches all blog posts in a given category.
+ *
+ * @param {string} category - The category to filter blog posts by.
+ * @returns {Promise<BlogPost[]>} A promise that resolves to an array of blog posts in the given category.
+ */
 export async function getBlogsByCategory(
   category: string,
 ): Promise<BlogPost[]> {
@@ -42,6 +59,12 @@ export async function getBlogsByCategory(
   return blogsByCategory;
 }
 
+/**
+ * Generates an object with categories as keys and the count of blog posts in each category as values.
+ *
+ * @param {BlogPost[]} blogs - An array of blog posts.
+ * @returns {{ [key: string]: number }} An object where keys are categories and values are counts.
+ */
 export function getCategoriesWithCounts(blogs: BlogPost[]): {
   [key: string]: number;
 } {
@@ -57,6 +80,12 @@ export function getCategoriesWithCounts(blogs: BlogPost[]): {
   return sortObjectKeys(catsWithCounts);
 }
 
+/**
+ * Generates an object with tags as keys and the count of blog posts with each tag as values.
+ *
+ * @param {BlogPost[]} blogs - An array of blog posts.
+ * @returns {{ [key: string]: number }} An object where keys are tags and values are counts.
+ */
 export function getTagsWithCounts(blogs: BlogPost[]): {
   [key: string]: number;
 } {
@@ -78,10 +107,22 @@ export function getTagsWithCounts(blogs: BlogPost[]): {
   return sortObjectKeys(tagsWithCounts);
 }
 
+/**
+ * Generates an array of automatically derived tags from the frontmatter.
+ *
+ * @param {Frontmatter} frontmatter - The frontmatter of a blog post.
+ * @returns {string[]} An array of automatically derived tags.
+ */
 function getAutoTags(frontmatter: Frontmatter): string[] {
   return [...getAutoTagsFromCodeChallenge(frontmatter)];
 }
 
+/**
+ * Generates an array of automatically derived tags based on code challenge data in the frontmatter.
+ *
+ * @param {Frontmatter} frontmatter - The frontmatter of a blog post.
+ * @returns {[string, string] | []} An array containing the platform and language tags if code challenge data is present, otherwise an empty array.
+ */
 function getAutoTagsFromCodeChallenge(
   frontmatter: Frontmatter,
 ): [string, string] | [] {
