@@ -118,6 +118,17 @@ export const customComponents: MDXComponents = {
       </Callout>
     );
   },
+  section: (props) => {
+    if (props.hasOwnProperty("data-footnotes")) {
+      return (
+        <>
+          <hr className="w-1/3" />
+          <section {...props}>{props.children}</section>
+        </>
+      );
+    }
+    return <section {...props}>{props.children}</section>;
+  },
 };
 
 export function CustomStyledMDX(props: MDXRemoteProps) {
