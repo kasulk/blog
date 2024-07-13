@@ -1,8 +1,8 @@
 /**
  * Truncates a text to a specified maximum length and appends '...'.
  * Ensures that the text is not cut off in the middle of a word.
- * If the last remaining character is not a letter (or `'"),
- * it is removed.
+ * If the last remaining characters are not letters (or `'"),
+ * they are removed.
  *
  * @param text - Text to be truncated
  * @param maxLength - Maximum length of the truncated text (default 200)
@@ -18,8 +18,9 @@ export function truncify(text: string, maxLength = 200): string {
     truncated = truncated.slice(0, truncated.lastIndexOf(" "));
   }
 
-  // remove last char, if it's not a letter (or `'")
-  if (!/[a-zA-ZäöüÄÖÜß`'"]/.test(truncated[truncated.length - 1])) {
+  // remove all trailing chars that are not letters (or `'")
+  const regex = /[a-zA-ZäöüÄÖÜß`'"]/;
+  while (truncated.length > 0 && !regex.test(truncated[truncated.length - 1])) {
     truncated = truncated.slice(0, -1);
   }
 
