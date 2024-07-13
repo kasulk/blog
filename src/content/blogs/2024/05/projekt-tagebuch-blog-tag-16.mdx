@@ -1,0 +1,68 @@
+---
+title: Projekt-Tagebuch Blog, Tag 16
+pubDate: 2024-05-08
+description: Heute wollte ich mich eigentlich um das Kontaktformular kümmern. Bei der Recherche wurde mir klar, wenn man das mit dem `resend`-Package machen möchte, braucht man erst mal eine fixe Domain. Da ich mich hier noch nicht entschieden habe, ist das Kontaktformular bis auf weiteres auf Eis gelegt.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: a4ebeaac0d4b4385a309ec1adf0344ad
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] ~Emails per Kontaktformular erhalten~ ❌
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] ~[Kontaktformular einrichten](#kontaktformular)~ ❌
+
+---
+
+## Kontaktformular ❌
+
+Heute wollte ich mich eigentlich um das Kontaktformular kümmern. Bei der Recherche wurde mir klar, wenn man das mit dem `resend`-Package machen möchte, braucht man erst mal eine fixe Domain. Da ich mich hier noch nicht entschieden habe, ist das Kontaktformular bis auf weiteres auf 🍦 gelegt.
+
+## Und nu?!
+
+Was hab ich stattdessen gemacht? Ich habe die `AffiliateLink`-Komponente überarbeitet. Ja man könnte fast schon sagen "optimiert".
+
+## AffiliateLink-Komponente refactored
+
+### href ODER partner
+
+Man kann jetzt einen `href` ODER einen `partner` angeben. Gibt man nur einen Partner, z.B. Amazon an, liest die Komponente den `href` aus der `siteConfig`, wo ich alle Links global hinterlege. Gibt man keines von beidem an, wird ein Fehler geworfen.
+
+### type ODER tooltip
+
+Dann hab ich noch mal etwas ähnliches für `type` und `tooltip`-Attribut eingerichtet. Auch hier muss man entweder den `type` ODER einen `tooltip` definieren. Und auch hier wird wieder ein Fehler geworfen, wenn man keines von beidem angibt.
+
+### AffiliateLink-Typen
+
+Bisher hab ich 2 Types. `order` und `register`. Zweck ist hier jeweils einen passenden Default-Tooltip zu ziehen, je nach Art des Affiliate-Links.
+
+So soll bei einem Affiliate-Link für einen Kauf bzw. Bestellung der Hinweis im Tooltip erscheinen, dass man beim **Kauf** über diesen Link den Blog unterstützt. Bei einer Anmeldung hingegen, dass man bei der **Anmeldung** über diesen Link den Blog unterstützt.
+
+Man kann natürlich weiterhin jederzeit einen Custom-Tooltip in die `AffiliateLink`-Komponente übergeben.
+
+Das war’s soweit für die `AffiliateLink`-Komponente.
+
+## Dann noch etwas "leichte" Kost
+
+Den Rest des Tages war ich ein bisl platt. Darum hab ich dann nur noch ‘leichte’ Dinge gemacht. Das Meiste hab ich bisher immer spontan entschieden und gecodet. Aber so langsam wird der Blog so groß, dass ich die Übersicht verliere.
+
+‘Leicht’, aber trotzdem enorm wichtig meiner Meinung nach, war darum das Anlegen eines Kanban-Projekts für den Blog. Das habe ich in [TickTick]($ticktick) gemacht. Ein simples, aber effektives Tool, das ich auch als Todo-Liste und Kalender nutze.
+
+![Test](/img/ticktick-blog-kanban.png)
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>

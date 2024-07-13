@@ -1,0 +1,121 @@
+---
+title: Projekt-Tagebuch Blog, Tag 17
+pubDate: 2024-05-10
+description: Als Erstes hab ich mich heute um das separate Repo für die Blog-Content-Drafts gekümmert. Die Idee ist, die Ideen und rudimentären Entwürfe für Blog-Artikel nicht im öffentlichen Blog-Repo zu lagern, sondern gesondert in einem privaten Repo.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 7e4f6bf8907a4fbd829be45a48df09e3
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [x] ~[Content-Drafts in privatem Repo verwalten](#privates-entwurfs-repo)~
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [x] ~[privates Repo für Content-Drafts anlegen](#privates-entwurfs-repo)~
+- [x] ~[SupportPage erstellen](#supportpage)~
+
+---
+
+## Privates Entwurfs-Repo
+
+Als Erstes hab ich mich heute um das separate Repo für die Blog-Content-Drafts gekümmert. Die Idee ist, die Ideen und rudimentären Entwürfe für Blog-Artikel nicht im öffentlichen Blog-Repo zu lagern, sondern gesondert in einem privaten Repo.
+
+Das kann ich dann mit Ideen und Entwürfen vollmüllen bis der Arzt kommt und hab mit dem öffentlichen Blog-Repo immer noch ein ordentliches Projekt zum Vorzeigen. Das hat auch ganz gut funktioniert.
+
+Die Idee war, beim Schreiben von Blog-Artikeln, die Vorschau schon auf der Webseite sehen zu können. Dazu hab ich also zuerst das Blog-Repo geklont. Dann hab ich im neuen privaten Repo alles in die `.gitignore` genommen außer dem `content`-Folder.
+
+Mit GitHub wird jetzt also nur der besagte `content`-Folder synchronisiert. In diesem Ordner hab ich im Unterordner `blogs` wiederum einen Unterordner `_drafts` angelegt.
+
+Sollte ich bahnbrechende Neuerungen im öffentlichen Original-Blog-Projekt haben, kann ich sie jederzeit in das private Entwurfs-Projekt mergen.
+
+Die fertigen Blog-Artikel kann ich dann händisch oder über CLI in das öffentliche Blog-Projekt kopieren bzw. verschieben.
+
+Find ich so erst mal ganz cool. Mal sehen wie es in der Praxis so funktioniert.
+
+## SupportPage
+
+Als nächstes hab ich mit der [`SupportPage`](/support) angefangen. Das ist die Seite, auf der ihr alle Informationen findet um den Blog (und seinen [Autor](/aboutme) _\*hüstel\*_) zu unterstützen. Erstmal gibt es die Möglichkeit zu spenden oder auf Affiliate-Links zu klicken. Später wird es noch [Merchandise](/support#merchandise) geben. Da freu ick ma schon druff!
+
+### Affiliate-Links / Config-Links
+
+Im Zuge der [`SupportPage`](/support)-Erstellung habe ich abermals die `AffiliateLink`-Komponente und die Link-Datenstruktur vereinfacht. Dafür habe ich im `config`-Verzeichnis die Datei `links.ts` angelegt und dorthin alle Links aus der `siteConfig` verschoben.
+
+Jetzt sieht es so aus:
+
+```ts
+// src/config/links.ts
+export const links = {
+  affiliate: [
+    {
+      name: "Amazon",
+      description: "",
+      url: "",
+      type: "order",
+    },
+    {
+      name: "Bondora",
+      description: "",
+      url: "",
+      type: "register",
+    },
+    {
+      name: "Honeypot",
+      // ...
+    },
+  ],
+};
+```
+
+Und so sah es vorher aus:
+
+```ts
+// src/config/siteConfig.ts
+export const siteConfig = {
+  //...
+  links: {
+    //...
+    affiliate: {
+      amazon: "",
+      bondora: "",
+      honeypot: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
+      //...
+    },
+    //...
+  },
+};
+```
+
+Jeder Anbieter hat jetzt also sein eigenes Objekt im Affiliate-Array. Das macht es leichter zu durchloopen und man kann leicht noch reichlich weitere Informationen hinzufügen.
+
+### AffiliateLink-Komponente optimiert
+
+Die `AffiliateLink`-Komponente habe ich soweit vereinfacht, dass man jetzt nur noch einen `partner` in _camelCase_ übergeben muss. Den Rest, also `URL`, `defaultTooltip` und ggf. eine Beschreibung einfügen macht dann die Komponente.
+
+Außerdem wird automatisch der hinterlegte Partner-Name als Link-Text genommen, wenn man keinen als `children` übergibt.
+
+```tsx
+// AffiliateLink-Komponente auf Speed
+<AffiliateLink partner=”tradeRepublic” />
+```
+
+Raus kommt: [Trade Republic]($tradeRepublic)
+
+### Uff.
+
+Die [`SupportPage`](/support) ist doch mehr Arbeit, als ich dachte. Das war’s aber erst mal für heute. Weiter geht’s nächste Woche!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
