@@ -9,7 +9,7 @@ export type Frontmatter = {
   image: BlogPostImage | string | null;
   isDraft: boolean | null;
   category: "coden" | "finanzen" | "verschiedenes";
-  tags: string[];
+  tags?: string[];
   series?: string;
   vgWortCode: string;
   type: string;
