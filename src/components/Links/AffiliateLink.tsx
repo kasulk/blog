@@ -5,11 +5,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { H6 } from "@/components/Headings";
 import { siteConfig, errors as allErrors } from "@/config";
 import * as links from "@/config/links";
 import { camelCasify, dashify } from "@/lib/utils";
+import { Link } from "./Link";
 
-type AffliateLinkProps = {
+type Props = {
   partner: string;
   tooltip?: string;
   children?: React.ReactNode;
@@ -18,12 +20,7 @@ type AffliateLinkProps = {
 const errors = allErrors.AffiliateLink;
 const tooltips = siteConfig.defaultTooltips.affiliate;
 
-export function AffiliateLink({
-  partner,
-  tooltip,
-  children,
-}: AffliateLinkProps) {
-  //
+export function AffiliateLink({ partner, tooltip, children }: Props) {
   const foundPartner = links.affiliate.find(
     ({ name }) => camelCasify(name) === partner,
   );
@@ -33,8 +30,6 @@ export function AffiliateLink({
 
   const defaultTooltip = tooltips[type as AffiliateType];
   if (!defaultTooltip) throw new Error(`${errors.wrongType}: '${type}'`);
-
-  tooltip = tooltip || `${dashify(name)}-${defaultTooltip}`;
 
   return (
     <TooltipProvider>
@@ -49,9 +44,18 @@ export function AffiliateLink({
           </a>
           <span className="sr-only">{tooltip}</span>*
         </TooltipTrigger>
-        <TooltipContent>
-          <p className="my-0">{tooltip}</p>
-        </TooltipContent>
+        <Link href="/support#affiliate-links" target="_blank">
+          <TooltipContent className="flex w-1/2 flex-col space-y-2 sm:w-2/3">
+            <H6 className="font-bold">
+              <span>{`${dashify(name)}-Affiliate-Link`}&nbsp;</span>
+              <span className="text-accent">❤</span>
+            </H6>
+            <span className="leading-normal">{defaultTooltip}</span>
+            <span className="self-end font-bold text-background hover:text-accent hover:underline">
+              mehr Infos...
+            </span>
+          </TooltipContent>
+        </Link>
       </Tooltip>
     </TooltipProvider>
   );
