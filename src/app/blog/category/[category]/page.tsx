@@ -9,6 +9,7 @@ import {
   Sidebar,
   SidebarContent,
   BlogCategoryCloud,
+  BlogTagsCloud,
 } from "@/components/Sidebar";
 
 type CategoryPageProps = {
@@ -36,6 +37,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <Sidebar>
           <SidebarContent title="Kategorien">
             <BlogCategoryCloud />
+          </SidebarContent>
+          <SidebarContent title="Tags">
+            <BlogTagsCloud />
           </SidebarContent>
         </Sidebar>
       </div>
