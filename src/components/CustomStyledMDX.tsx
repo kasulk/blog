@@ -16,7 +16,7 @@ import {
 } from "@/components";
 import { CalloutType, siteConfig } from "@/config";
 import * as links from "@/config/links";
-import { getAnchorFromLinkText } from "@/lib/utils/getAnchorFromLinkText";
+import { getAnchorFromLinkText, getPartnerFromLinkText } from "@/lib/utils";
 
 export const customComponents: MDXComponents = {
   /// nextjs components
@@ -84,12 +84,25 @@ export const customComponents: MDXComponents = {
     }
     // internal link; other page
     if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
-    if (href?.startsWith("$"))
+    if (href?.startsWith("$")) {
+      if (href === "$") {
+        const partner = getPartnerFromLinkText(children);
+        return (
+          <AffiliateLink
+            partner={partner.slice(1)}
+            tooltip={title}
+            {...restProps}
+          >
+            {children}
+          </AffiliateLink>
+        );
+      }
       return (
         <AffiliateLink partner={href.slice(1)} tooltip={title} {...restProps}>
           {children}
         </AffiliateLink>
       );
+    }
     return <ExternalLink {...props}>{children}</ExternalLink>;
   },
   blockquote: (props) => {
