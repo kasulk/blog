@@ -3,7 +3,7 @@ import { H2 } from "@/components/Headings";
 import { PageHeader, BlogPostsList } from "@/components";
 import { capitalize } from "@/lib/utils";
 import { siteConfig } from "@/config";
-import { getBlogs, getBlogsByCategory } from "@/lib/blogFetchers";
+import { getBlogs, getBlogsByTag } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 import {
   Sidebar,
@@ -12,14 +12,14 @@ import {
   BlogTagsCloud,
 } from "@/components/Sidebar";
 
-type CategoryPageProps = {
-  params: { category: string };
+type TagPageProps = {
+  params: { tag: string };
 };
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { category } = params;
-  const blogsByCategory = await getBlogsByCategory(category);
-  const formattedBlogs = formatBlogs(blogsByCategory);
+export default async function CategoryPage({ params }: TagPageProps) {
+  const { tag } = params;
+  const blogsByTag = await getBlogsByTag(tag);
+  const formattedBlogs = formatBlogs(blogsByTag);
 
   return (
     <>
@@ -28,8 +28,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
         <section className="flex-1">
           <H2 className="flex flex-col">
-            <span>Letzte Blogs in der Kategorie</span>
-            <span className="text-accent">{category.toUpperCase()}</span>
+            <span>Letzte Blogs mit dem Tag</span>
+            <span className="text-accent">{tag.toUpperCase()}</span>
           </H2>
           <BlogPostsList blogs={formattedBlogs} />
         </section>
@@ -47,19 +47,20 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   );
 }
 
-export async function generateStaticParams(): Promise<{ category: string }[]> {
+export async function generateStaticParams(): Promise<{ tag: string }[]> {
   const blogs = await getBlogs();
-  return blogs.map((blog) => ({ category: blog.frontmatter.category }));
+  const tags = blogs.flatMap((blog) => blog.frontmatter.tags ?? []);
+  return tags.map((tag) => ({ tag }));
 }
 
 export async function generateMetadata({
   params,
-}: CategoryPageProps): Promise<Metadata> {
-  const category = capitalize(params.category);
+}: TagPageProps): Promise<Metadata> {
+  const tag = capitalize(params.tag);
 
   return {
-    title: `${category} | ${siteConfig.name}`,
-    description: `Hier findest du eine Liste der Blog-Posts in der Kategorie ${category}`,
+    title: `${tag} | ${siteConfig.name}`,
+    description: `Hier findest du eine Liste der Blog-Posts mit dem Tag ${tag}`,
     authors: { name: siteConfig.owner },
   };
 }
