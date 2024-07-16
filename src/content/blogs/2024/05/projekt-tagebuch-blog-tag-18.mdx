@@ -1,0 +1,62 @@
+---
+title: Projekt-Tagebuch Blog, Tag 18
+pubDate: 2024-05-13
+description: Nach einer schönen Plasmaspende habe ich erst mal mein tägliches Kata gelöst. Danach ging es weiter mit meinem Blog. Ich muss zugeben meine Motivation war heute relativ gering. Trotzdem hab ich mich ordentlich durchgebissen.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: f6e859acaf6149dd88a65d1e11f6d3c7
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Spenden-Möglichkeiten und Affiliate-Links auf SupportPage implementieren
+
+**Tages-Ziele:**
+
+- [ ] atemberaubende Readme erstellen
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [x] ~[Verschieben-Bug mit AffiliateLink-Tooltip fixen](#)~
+
+---
+
+Nach einer schönen Plasmaspende habe ich erst mal mein tägliches Kata gelöst. Danach ging es weiter mit meinem Blog. Ich muss zugeben meine Motivation war heute relativ gering. Trotzdem hab ich mich ordentlich durchgebissen.
+
+## Viel Kleinkram
+
+### AffiliateLink-Tooltip
+
+Zuerst war da dieser komische Bug mit dem `Tooltip` von `shadcn`. Wenn der `Tooltip` erscheint, verschwindet ein Margin oder irgendwie sowas. Auf jeden Fall hüpfen dann alle Elemente, die unter dem Link stehen nach oben. Das gefiel mich nicht.
+
+Abhilfe hat erst mal ein leeres `div` unter dem Affiliate-Link gebracht.
+
+### AboutMe-Nav-Link, Callout und Datums-Funktion
+
+Dann hab ich noch einen Bug im `AboutMe`-Navigations-Link gefixt. Anschließend der `Callout`-Komponente noch ein `classNames`-Prop verpasst, damit man sie individualisieren kann. Und dann noch eine weitere Datums-Funktion für das Formatieren von Daten erstellt.
+
+Die Datums-Funktion lässt jetzt einfach den Tag weg. So bekommt man ein Datum in dem Format ‘Mai 2024’. Das reicht an einigen Stellen völlig aus.
+
+## Pimp my Affiliate-Links
+
+Dann haben meine Affiliate-Links noch ein paar weitere Eigenschaften bekommen. Unter anderem eine Kategorie, welche Prämien es jeweils für Werber und Geworbenen gibt, wann die Daten das letzte Mal aktualisiert wurden und den Slug zu einem Blog-Artikel (wenn es denn einen gibt) für weitere Informationen.
+
+Das alles lasse ich jetzt auf der `SupportPage` rendern, damit man einen schönen und transparenten Überblick über die Unternehmen hat.
+
+Dann hab ich noch einige Unternehmen hinzugefügt, wobei ich aber noch nicht alle Urls zusammen hatte. Das werde ich nach und nach einpflegen.
+
+## Plasma spenden
+
+Übrigens, wenn du auch Plasma spenden möchtest, kannst du dich [hier](/support#plasma-spenden) informieren.
+
+Und das war’s im Großen und Ganzen. Weiter geht’s am Mittwoch!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
