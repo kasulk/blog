@@ -1,3 +1,4 @@
+export * from "./addAutoTagsToFrontmatters";
 export * from "./checkForDuplicateSlugs";
 export * from "./checkVGWortCodes";
 export * from "./formatBlogs";
