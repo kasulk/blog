@@ -13,6 +13,7 @@ export * from "./getAffiliatePartnersNames";
 export * from "./getAnchorFromLinkText";
 export * from "./getBlogPostAuthor";
 export * from "./getCharCounterColor";
+// export * from "./getLastModifiedDateOfFile";
 export * from "./getPartnerFromLinkText";
 export * from "./getInitials";
 export * from "./getSocialUrl";
