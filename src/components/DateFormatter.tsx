@@ -1,5 +1,5 @@
 type Props = {
-  date: string;
+  date: string | Date;
   weekday?: boolean;
 };
 
@@ -32,8 +32,8 @@ const weekdays: string[] = [
   "Samstag",
 ];
 
-function formatDate(dateString: string, includeWeekday: boolean): string {
-  const dateObj = new Date(dateString);
+function formatDate(date: string | Date, includeWeekday: boolean): string {
+  const dateObj = typeof date === "string" ? new Date(date) : date;
   const day = dateObj.getDate();
   const month = months[dateObj.getMonth()];
   const year = dateObj.getFullYear();
