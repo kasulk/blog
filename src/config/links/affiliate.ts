@@ -185,7 +185,7 @@ export const affiliate = [
   {
     name: "Trade Republic",
     description:
-      "Schneller Zugang zu Handel und Sparenplänen von Aktien, ETFs und Kryptos. Einfaches, provisionsfreies Investieren Made in Germany.",
+      "Schneller Zugang zu Handel und Sparplänen von Aktien, ETFs und Kryptos. Einfaches, provisionsfreies Investieren Made in Germany.",
     url: "https://ref.trade.re/7g7k9z1g",
     type: "register",
     category: "Finanzen",
