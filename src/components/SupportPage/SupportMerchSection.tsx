@@ -4,7 +4,7 @@ export function SupportMerchSection() {
   return (
     <section id="merchandise" className="scroll-mt-12 text-muted-foreground/70">
       <H3 autoCopyable className="text-muted-foreground/70">
-        Merchandise (coming soon...)
+        Merchandise 👕 (coming soon...)
       </H3>
 
       <p>

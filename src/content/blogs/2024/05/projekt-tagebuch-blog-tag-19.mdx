@@ -1,0 +1,91 @@
+---
+title: Projekt-Tagebuch Blog, Tag 19
+pubDate: 2024-05-15
+description: Ich habe ja meine Links alle global in einem Objekt gespeichert. Auf diese greife ich dann auch über das Objekt zu. Das hat den Vorteil, dass man Links bei Bedarf nur an einer Stelle ändern muss...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 6c920b8f6e5543249101680cb491eabb
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [x] ~[Spenden-Möglichkeiten und Affiliate-Links auf SupportPage implementiert](#donate-links)~
+
+**Tages-Ziele:**
+
+- [x] ~[atemberaubende Readme erstellen](#atemberaubende-readme)~
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [x] ~[SupportPage zerstückeln](#supportpage-zerstueckelt)~
+
+---
+
+## HTML in Site-Links
+
+Ich habe ja meine Links alle global in einem Objekt gespeichert. Auf diese greife ich dann auch über das Objekt zu. Das hat den Vorteil, dass man Links bei Bedarf nur an einer Stelle ändern muss.
+
+Teilweise hab ich auch Beschreibungs-Texte mit in diesem Objekt, z.B. für die Affiliate-Links. Dort kann man jetzt auch ein bisschen Styling oder HTML-Entities (z.B. &nbsp;) einbauen.
+
+```ts
+const obj = {
+  description: "Das ist eine super Beschreibung für ein Objekt!",
+};
+```
+
+```ts
+const objMitHTML = {
+  description:
+    "Das ist eine super Beschreibung für ein Objekt <strong>mit HTML</strong>!",
+};
+```
+
+Dafür hab ich Reacts [`dangerouslySetInnerHTML`](https://react.dev/reference/react-dom/components/common#dangerously-setting-the-inner-html)-Attribut im `JSX ` verwendet, z.B. in der `AffiliateLink`-Description:
+
+```tsx
+// src/components/SupportPage/AffiliateLinkList/AffiliateLinkListItemDesc.tsx
+export function AffiliateLinkListItemDesc({ description, blog }: Props) {
+  return (
+    description && (
+      <div>
+        <div dangerouslySetInnerHTML={{ __html: description }} />{" "}
+        {blog && (
+          <div className="flex justify-end">
+            <Link
+              href={`blog/${blog}`}
+              className="whitespace-nowrap text-accent"
+            >
+              &rarr; Blog-Artikel lesen
+            </Link>
+          </div>
+        )}
+      </div>
+    )
+  );
+}
+```
+
+## SupportPage zerstückelt
+
+Als Nächstes hab ich die [`SupportPage`](/support) zerstückelt und in viele kleine, übersichtliche Komponenten unterteilt. Da gibt es jetzt eine [`Donate`](/support#spenden)-, eine [`AffiliateLink`](/support#affiliate-links)- und eine [`Merchandise`](/support#merchandise)-Section.
+Außerdem hab ich die `AffiliateLinkListe` ordentlich aufgeteilt. Hier gibt es jetzt für jeden Affiliate-Link eigene Komponenten für Header, Category, Description, Rewards, Terms und Date.
+
+Alles natürlich mit Barrel-Im- bzw. Exports.
+
+## Donate-Links
+
+Außerdem fehlten auf der [Support-Seite](/support) noch die Links zu den Spendenmöglichkeiten. Die hab ich jetzt eingefügt. Erst mal nur <ExternalLink href={donate.find(({name})=>name==='PayPal').url}>PayPal</ExternalLink> und <ExternalLink href={donate.find(({name})=>name==='Buy Me a Coffee').url}>Buy Me a Coffee</ExternalLink>. Dafür mit Icons. Vielleicht füg ich irgendwann noch mal Patreon hinzu.
+
+## Atemberaubende Readme
+
+Und dann hab ich endlich eine ordentliche Readme für das <ExternalLink href={`${social.find(({name})=>name==='GitHub').url}/${github.repos.blog}`}>GitHub-Repo</ExternalLink> erstellt! Da der Lighthouse-Score sich sehen lassen kann, hab ich einen Screenshot davon an die Readme angehängt.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>

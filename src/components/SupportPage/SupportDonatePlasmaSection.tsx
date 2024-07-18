@@ -19,13 +19,13 @@ const lastModified = getLastModifiedDateOfFile("src/config/links/csl.ts");
 export function SupportDonatePlasmaSection() {
   return (
     <section id="plasma-spenden" className="scroll-mt-12">
-      <H3 autoCopyable>Plasma-Spenden</H3>
+      <H3 autoCopyable>Plasma-Spenden 🩸</H3>
       <AffiliateLinkListItemCategory
         category={category}
         subCategory={subCategory}
       />
       <p>
-        Eine weitere Möglichkeit den Blog, seinen Autor und dich selbst zu
+        Eine weitere coole Möglichkeit den Blog, seinen Autor und dich selbst zu
         unterstützen sind Blutplasma-Spenden!
       </p>
       <p>Als Neuspender kannst du hier regelmäßig einen Bonus erhalten.</p>
@@ -51,20 +51,27 @@ export function SupportDonatePlasmaSection() {
       </p>
       <p>
         <span>
-          Weitere Infos und ob du fuer eine Plasmaspende in Frage kommst,
-          findest du z.B{" "}
+          Weitere Infos und ob du für eine Plasmaspende in Frage kommst, findest
+          du z.B{" "}
         </span>
         <ExternalLink href={links.infos}>hier</ExternalLink>.
+      </p>
+      <p>
+        <span>Wer weiss, vielleicht sehen wir uns ja mal im </span>
+        <ExternalLink href={links.maps[0].link}>
+          CSL-Center in Berlin
+        </ExternalLink>
+        <span> 😉</span>
       </p>
       <Callout title="Achtung" type="caution" className="my-8">
         Diese Aktionen gibt es leider immer nur in zeitlich unregelmäßigen
         Abständen. Je nach Neu-Spender-Bedarf halt.
         <br />
-        <br />
-        <p className="text-center">
-          👇 Hier drunter siehst du, ob gerade eine Aktion in deiner Nähe läuft.
-          👇
-        </p>
+        <div className="my-2 flex items-center justify-evenly gap-x-4 text-center md:justify-center md:gap-x-12">
+          <span>👇</span>
+          Hier drunter siehst du, ob gerade eine Aktion in deiner Nähe läuft.
+          <span>👇</span>
+        </div>
       </Callout>
       <H5 className="font-bold">
         <span>Aktuelle Aktion in </span>

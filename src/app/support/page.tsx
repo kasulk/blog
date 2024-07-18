@@ -30,24 +30,24 @@ export default function SupportPage() {
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
         <li>
-          <Link href="#spenden">Du spendest Bares</Link>
+          <Link href="#spenden">Du spendest Bares ☕</Link>
         </li>
         <li>
-          <Link href="#plasma-spenden">Du spendest Blutplasma</Link>
+          <Link href="#plasma-spenden">Du spendest Blutplasma 🩸</Link>
         </li>
         <li>
           <Link href="#affiliate-links">
-            Du klickst auf einen Affiliate-Link
+            Du klickst auf einen Affiliate-Link 🛍
           </Link>
         </li>
         <li>
           <Link href="#merchandise">
-            Du erwirbst sexy Merchandise (coming soon...)
+            Du erwirbst sexy Merchandise 👕 <em>(coming soon...)</em>
           </Link>
         </li>
         <li>
           Du sagst deiner <em>Oma</em> sie soll spenden, auf einen Link klicken
-          oder sexy Merchandise (coming soon...) erwerben!
+          oder sexy Merchandise <em>(coming soon...)</em> erwerben! 👵
         </li>
       </ol>
 
