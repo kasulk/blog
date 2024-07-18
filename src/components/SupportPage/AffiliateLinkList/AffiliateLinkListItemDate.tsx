@@ -1,7 +1,7 @@
 import { getMonthAndYearFromDate } from "@/lib/utils";
 
 type Props = {
-  lastUpdated: Date;
+  lastUpdated: Date | null;
 };
 
 export function AffiliateLinkListItemDate({ lastUpdated }: Props) {
