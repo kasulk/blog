@@ -5,6 +5,7 @@ import { H2 } from "@/components/Headings";
 import { PageHeader } from "@/components";
 import {
   SupportDonateSection,
+  SupportDonatePlasmaSection,
   SupportAffiliateSection,
   SupportMerchSection,
 } from "@/components/SupportPage/";
@@ -29,7 +30,10 @@ export default function SupportPage() {
       <p>Im Grunde gibt es 4 Möglichkeiten:</p>
       <ol>
         <li>
-          <Link href="#spenden">Du spendest</Link>
+          <Link href="#spenden">Du spendest Bares</Link>
+        </li>
+        <li>
+          <Link href="#plasma-spenden">Du spendest Blutplasma</Link>
         </li>
         <li>
           <Link href="#affiliate-links">
@@ -51,6 +55,7 @@ export default function SupportPage() {
 
       <div className="flex flex-col space-y-12">
         <SupportDonateSection />
+        <SupportDonatePlasmaSection />
         <SupportAffiliateSection />
         <SupportMerchSection />
       </div>

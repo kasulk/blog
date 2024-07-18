@@ -1,6 +1,7 @@
 type Props = {
   href?: string;
   rel?: string;
+  title?: string;
   className?: string;
   children?: React.ReactNode;
 };
@@ -8,6 +9,7 @@ type Props = {
 export function ExternalLink({
   href,
   rel = "noopener noreferrer",
+  title,
   className = "",
   children,
 }: Props) {
@@ -16,6 +18,7 @@ export function ExternalLink({
       href={href}
       target="_blank"
       rel={rel}
+      title={title}
       className={`text-accent no-underline hover:text-danger-600 ${className}`}
     >
       {children}

@@ -19,7 +19,7 @@ export function SupportAffiliateSection() {
       <p>
         Affiliate-Links auf diesem Blog sind immer{" "}
         <span className="font-bold text-warning">gelb</span>,{" "}
-        <u className="font-bold">unterstrichen</u> und mit einen{" "}
+        <u className="font-bold">unterstrichen</u> und mit einem{" "}
         <span className="font-bold">*</span> markiert.
       </p>
       <Callout type="warning" className="font-semibold">
