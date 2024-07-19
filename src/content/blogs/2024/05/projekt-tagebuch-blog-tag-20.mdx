@@ -1,0 +1,67 @@
+---
+title: Projekt-Tagebuch Blog, Tag 20
+pubDate: 2024-05-17
+description: Nachdem ich ein 7er Kata (mit Recursion! 💪) gelöst hatte, habe ich 2 kleine Link-Komponenten für den Blog erstellt. Eine für interne Links und eine für externe Links. So konnte ich die Styles und Attribute wie `target` und `rel` standardisieren.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 1daca718cf5e4d87a68bb0ed31dddcd8
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [x] ~Spenden-Möglichkeiten und Affiliate-Links auf SupportPage implementiert (bereits [Mittwoch](/blog/projekt-tagebuch-blog-tag-19#donate-links))~
+
+**Tages-Ziele:**
+
+- [x] ~[Link-Komponenten erstellen](#link-komponenten)~
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [x] ~[BlogPost-Header-Image einbauen](#BlogPost-Header-Image)~
+- [x] ~[Related Posts Box erstellen](#Related-Posts-Box)~
+
+---
+
+## Link-Komponenten
+
+Nachdem ich ein 7er Kata (mit Recursion! 💪) gelöst hatte, habe ich 2 kleine Link-Komponenten für den Blog erstellt. Eine für interne Links und eine für externe Links. So konnte ich die Styles und Attribute wie `target` und `rel` standardisieren.
+
+## Headings
+
+Danach hab ich mir eigene Komponenten für die Headings (`h1`, `h2`, `h3` & `h4`) erstellt. Die habe ich ausnahmsweise mal alle in eine Datei geballert (= geschrieben). Grund war hier ein einheitliches Styling festzulegen.
+
+Ich habe versucht das Ganze in der `tailwind-config` zu hinterlegen, aber irgendwie wollte es nicht so wie ich. Scheinbar stand da irgendwie das [`tailwindcss/typography`](https://github.com/tailwindlabs/tailwindcss-typography)-Plugin` im Wege. Da mir das Fixen zu lange dauerte, hab ich kurzer Hand die Komponenten erstellt.
+
+## Page-Layouts vereinheitlicht
+
+Teilweise waren die Page-Layouts unterschiedlich. Das hab ich angepasst, so dass jetzt jede Seite eine Überschrift an der selben Stelle und Größe hat.
+
+## Projekte-Seite
+
+Und ich hab schon mal die [Seite für die Liste meiner Werke](/portfolio) erstellt. Zu sehen gibt’s da allerdings noch nüscht.
+
+## BlogPost-Header-Image
+
+Außerdem hab ich noch das `BlogPost`-Bild, das schon in der Blog-Vorschau-Liste zu sehen war auch in die `SingleBlogPost`-Ansicht eingefügt. D.h., wenn man sich jetzt einen `BlogPost` ankuckt, dann mit Bild im Header.
+
+## Related Posts Box
+
+Zum Schluss hab ich noch die `RelatedPosts`-Komponente erstellt. Nachdem man einen Blog-Artikel gelesen hat, sieht man jetzt ganz unten ähnliche Posts zum weiter Schmökern. Im Verkauf nennt man das Cross-Selling. 🤓
+
+Hier erstelle ich eine Liste mit Posts der selben Kategorie und lass dann 3 zufällige anzeigen. Wenn es keine ähnlichen Posts gibt, wird die Box nicht angezeigt.
+
+Geplant ist, in die Liste ähnlicher Posts irgendwann auch Posts mit gleichen Tags mit aufzunehmen. Aber für jetzt reicht erst mal eine Liste mit Posts gleicher Kategorie.
+
+## That's it
+
+Dit war’t. Obwohl ich mein Wochenziel schon einen Tag vorher erreicht hatte, habe ich es heute wieder nicht geschafft mich etwas früher loszueisen...
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
