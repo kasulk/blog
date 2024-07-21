@@ -1,0 +1,121 @@
+---
+title: Projekt-Tagebuch Blog, Tag 21
+pubDate: 2024-05-23
+description: Da ich für gestern spontan einen Job reinbekommen habe, musste die mittwöchige Coding-Session leider ausfallen. Weiter gings dann zwar heute, aber durch Pfingsten am Montag und einen anderen Job am Dienstag ist eine ordentliche Coding-Pause von 6 Tagen zustande gekommen...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 954c083f4a6c4ad38f381cc19b6fd62d
+---
+
+<DateFormatter date={pubDate} weekday />
+
+~_Wochen-Ziele:_~
+
+**Tages-Ziele:**
+
+- [x] ~[LandingPage erstellen/gestalten](#landing-page)~
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Blog zu Projekten auf LinkedIn/Honeypot hinzufügen
+- [x] ~[Hintergrund-Verlauf einfügen](#hintergrund-verlauf-rumaergerung)~
+
+---
+
+## Nichts als Ausreden
+
+Da ich für gestern spontan einen Job reinbekommen habe, musste die mittwöchige Coding-Session leider ausfallen. Weiter gings dann zwar heute, aber durch Pfingsten am Montag und einen anderen Job am Dienstag ist eine ordentliche Coding-Pause von 6 Tagen zustande gekommen...
+
+Das und wenig Schlaf durch laute Nachbarn zerrte etwas an meiner Motivation. Nach meinem Jog um den Kanal und 2 kleinen Katas hab ich doch noch ein bisl was zustande gebracht. Auch wenn zwischendurch 2 Powernaps nötig waren um wieder fit zu werden.
+
+## Landing-Page
+
+Primäres Ziel war heute die Landing- bzw. `HomePage`. Da habe ich schnell etwas Baustellen-Überbrückungs-Text eingefügt. Später soll der Besucher da mal die Entscheidung haben ob er meinen Blog oder mein Portfolio besuchen möchte.
+
+Da es das Portfolio aber noch nicht gibt, gibt’s jetzt erst mal nur besagten Überbrückungs-Text. Danach habe ich mich ein bisschen mit dem Hintergrund-Verlauf rumgeärgert.
+
+## Hintergrund-Verlauf-Rumärgerung
+
+Einen einfarbigen Hintergrund find ich relativ fad. Um die Sache “schnell” etwas aufzupeppen, wollte ich einen linearen Verlauf einfügen. Mit `Tailwind` und `shadcn` gestaltete sich diese Mission aber ein bisschen herausfordernder als erwartet.
+
+Letztlich habe ich dann in die `@layer base` in der `globals.css` für Normal- und Dark-Mode jeweils eine weitere Variable `--bg-gradient` für den Verlauf hinzugefügt. Für die zweite Verlaufsfarbe hab ich dann noch jeweils eine weitere Background-Variable `--background2` hinzugefügt.
+
+In der `tailwind.config.ts` hab ich dann die `backgroundImage`-Property nach den `colors` eingefügt. Die Tailwind-Klasse `gradient` bekommt dann den Wert der Variable `--bg-gradient` zugewiesen.
+
+Dann hab ich die neue Tailwind-Klasse mit dem Prefix `bg-` wiederum in der `globals.css` zum `body` hinzugefügt.
+
+```css
+/* globals.css */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --background2: 40, 80%, 90%;
+
+    --bg-gradient: linear-gradient(
+      to bottom,
+      hsl(var(--background)),
+      80%,
+      hsl(var(--background2))
+    );
+
+    --foreground: 222 84% 5%;
+
+    /* ... */
+  }
+
+  .dark {
+    --background: 222 84% 5%;
+    --background2: 222 84% 10%;
+
+    --bg-gradient: linear-gradient(
+      to bottom,
+      hsl(var(--background)),
+      80%,
+      hsl(var(--background2))
+    );
+
+    --foreground: 210 40% 98%;
+
+    /* ... */
+  }
+
+  body {
+    @apply bg-gradient text-foreground;
+  }
+}
+```
+
+```ts
+// tailwind.config.ts
+const config = {
+  darkMode: ["class"],
+  content: ["./src/**/*.{ts,tsx}"],
+  prefix: "",
+  theme: {
+    extend: {
+      colors: {
+        // ...
+      },
+      backgroundImage: {
+        gradient: "var(--bg-gradient)",
+      },
+      fontFamily: {
+        // ...
+      },
+      // ...
+    },
+    // ...
+  },
+  // ...
+};
+```
+
+Letztlich hab ich es also geschafft. Ich bin stolz auf mich.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
