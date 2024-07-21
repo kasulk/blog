@@ -1,0 +1,66 @@
+---
+title: Projekt-Tagebuch Blog, Tag 22
+pubDate: 2024-05-24
+description:
+category: coden
+isDraft: true
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 228be1073ec744a5a7c6656520779124
+---
+
+<DateFormatter date={pubDate} weekday />
+
+~_Wochen-Ziele:_~
+
+**Tages-Ziele:**
+
+- [x] ~[Back-Button implementieren](#)~
+- [x] ~[doppelte Blog-Slugs entlarven](#)~
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Blog zu Projekten auf LinkedIn/Honeypot hinzufügen
+
+---
+
+## Kleines Plasma Drama
+
+Heute habe ich etwas später angefangen. Ich war vorher noch Plasma spenden. Und weil ich unglücklicherweise mein Portmonnaie samt Spenderausweis zu Hause liegen gelassen hab, musste ich noch mal zurück nach Hause radeln.
+
+Erstaunlicher Weise hab ich hin und zurück in 30 Minuten geschafft. Aber dann war es so voll im Plasma-Zentrum, dass ich ne Dreiviertelstunde warten musste... Um 11 war ich dann endlich im Co-Working-Space.
+
+## MobileNav Bugfix
+
+Als Erstes hab ich dann das CSS von gestern noch mal angepasst, da es mir die MobileNav transparent gemacht hat. Sah auch geil aus, aber lieber war mir die Hintergrundfarbe.
+
+## Back-Button
+
+Dann fühlte ich, es war an der Zeit einen Back-Button zu erstellen. Z.B. für die Single-Post-Ansicht. Also wenn man in der Blog-Liste auf einen interessanten Blog klickt, kann man jetzt mit dem BackButton schnell und einfacht wieder direkt zurück zur Blog-Liste. Man sollte den Artikel natürlich erst mal in Ruhe lesen ;)
+
+Dafür hab ich einfach den `useRouter()`-Hook von `next/navigation` implementiert.
+
+Leider hab ich vergessen, ihn auch für die Kategorien zu implementieren. Das kommt dann in Kürze.
+
+checkForDuplicateSlugs()
+
+Da ich für meinen Blog eine Verzeichnisstruktur gewählt habe, in der die Artikel in Jahres- und Monats-Unterordner verteilt werden (s. Artikel vom 15.4.24), kann es vorkommen, dass ein Dateiname bzw. Slug unbemerkt mehrfach vergeben wird. Dass wäre relativ hässlich und sollte möglichst nicht vorkommen.
+
+Aus diesem Grund hab ich Funktion `checkForDuplicateSlugs()` entwickelt, die sofort einen Fehler wirft, sobald ein Slug mehrfach vergeben wurde. Außerdem zeigt der Fehler auch direkt an, wo sich die Dateien genau befinden. Ziemlich nice!
+
+## Blog-Helpers-Refactor
+
+Zum Schluss hab ich noch ein bisschen refactored. Bisher hatte ich alle Funktionen die mit dem Fetchen der Blogs aus allen Verzeichnissen zu tun hatten innerhalb der Blog-Page im `/app`-Verzeichnis deponiert.
+
+Die hab ich jetzt ins `/src/lib`-Verzeichnis verschoben. So habe ich dann alle Funktionen an einem Ort. Nicht ganz an einem Ort. Ich habe für die Blog-Fetchers ein eigenes Unterverzeichnis erstellt.
+
+Die sind jetzt also in `/src/lib/blogFetchers` zu finden. Und die Helper-Funktions für die Blog-Fetchers in `/src/lib/blogFetchers/utils`.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
+
+{/* äöüÄÖUß */}
