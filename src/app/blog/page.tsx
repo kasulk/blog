@@ -1,16 +1,16 @@
+import type { SearchParams } from "@/../types";
 import { Metadata } from "next";
 import { H2 } from "@/components/Headings";
-import { PageHeader, BlogPostsList } from "@/components";
+import { PageHeader, BlogPostsList, PaginationControls } from "@/components";
 import {
   Sidebar,
   SidebarContent,
   BlogCategoryCloud,
   BlogTagsCloud,
 } from "@/components/Sidebar";
+import { siteConfig } from "@/config";
 import { getBlogs } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
-import { siteConfig } from "@/config";
-import { PaginationControls } from "@/components";
 
 export const metadata: Metadata = {
   title: `Mein Blog | ${siteConfig.name}`,
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: SearchParams;
 };
 
-export default async function Blog({ searchParams }: Props) {
+export default async function AllBlogPostsPage({ searchParams }: Props) {
   const blogs = await getBlogs();
   const formattedBlogs = formatBlogs(blogs);
 
