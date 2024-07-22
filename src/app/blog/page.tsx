@@ -28,8 +28,8 @@ export default async function Blog({ searchParams }: Props) {
   // pagination
   const page = Number(searchParams["page"] ?? "1");
   const per_page = Number(searchParams["per_page"] ?? "5");
-  const start = (page - 1) * per_page; // 0, 5, 10 ...
-  const end = start + per_page; // 5, 10, 15 ...
+  const start = (page - 1) * per_page;
+  const end = start + per_page;
 
   const paginatedBlogs = formattedBlogs.slice(start, end);
 

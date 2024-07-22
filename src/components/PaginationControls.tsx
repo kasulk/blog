@@ -28,8 +28,10 @@ export function PaginationControls({
   const per_page = Number(searchParams.get("per_page") ?? "5");
   const numPages = Math.ceil(numBlogPosts / per_page);
 
-  const buttonClass = "sm:py-0 sm:px-4 disabled:hover:cursor-not-allowed";
   const boxClass = "flex text-xs sm:text-sm";
+  const badgeClass = "sm:py-0 sm:px-4";
+  const hideIfNoPrev = !hasPrevPage ? "invisible" : "";
+  const hideIfNoNext = !hasNextPage ? "invisible" : "";
 
   function getNewSearchParams(newPage: number): string {
     return `${pathname}?page=${newPage}&per_page=${per_page}`;
@@ -39,21 +41,25 @@ export function PaginationControls({
     <div className="flex items-center justify-center">
       {numBlogPosts > 10 && (
         <div className="flex h-0 w-full flex-wrap justify-center gap-[2%] sm:gap-4">
-          <div className={`${boxClass} order-1 sm:order-1 `}>
+          <div className={`${boxClass} order-1 sm:order-1 ${hideIfNoPrev}`}>
             <CategoryBadge
-              className={buttonClass}
-              disabled={!hasPrevPage}
+              className={badgeClass}
               onClick={() => router.push(getNewSearchParams(1))}
             >
+              {hasPrevPage && (
+                <span className="sr-only">Gehe zur ersten Seite</span>
+              )}
               <PinLeftIcon />
             </CategoryBadge>
           </div>
-          <div className={`${boxClass} order-2 sm:order-2`}>
+          <div className={`${boxClass} order-2 sm:order-2 ${hideIfNoPrev}`}>
             <CategoryBadge
-              className={buttonClass}
-              disabled={!hasPrevPage}
+              className={badgeClass}
               onClick={() => router.push(getNewSearchParams(page - 1))}
             >
+              {hasPrevPage && (
+                <span className="sr-only">Gehe eine Seite zurück</span>
+              )}
               <ChevronLeftIcon />
             </CategoryBadge>
           </div>
@@ -64,21 +70,25 @@ export function PaginationControls({
               {page} / {numPages}
             </div>
           </div>
-          <div className={`${boxClass} order-3 sm:order-4`}>
+          <div className={`${boxClass} order-3 sm:order-4 ${hideIfNoNext}`}>
             <CategoryBadge
-              className={buttonClass}
-              disabled={!hasNextPage}
+              className={badgeClass}
               onClick={() => router.push(getNewSearchParams(page + 1))}
             >
+              {hasNextPage && (
+                <span className="sr-only">Gehe eine Seite vor</span>
+              )}
               <ChevronRightIcon />
             </CategoryBadge>
           </div>
-          <div className={`${boxClass} order-4 sm:order-5`}>
+          <div className={`${boxClass} order-4 sm:order-5 ${hideIfNoNext}`}>
             <CategoryBadge
-              className={buttonClass}
-              disabled={!hasNextPage}
+              className={badgeClass}
               onClick={() => router.push(getNewSearchParams(numPages))}
             >
+              {hasNextPage && (
+                <span className="sr-only">Gehe zur letzten Seite</span>
+              )}
               <PinRightIcon />
             </CategoryBadge>
           </div>
