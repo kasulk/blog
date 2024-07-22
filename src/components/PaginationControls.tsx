@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { CategoryBadge } from "./CategoryBadge";
 
 type Props = {
   numBlogPosts: number;
@@ -19,65 +20,66 @@ export function PaginationControls({
 
   const page = Number(searchParams.get("page") ?? "1");
   const per_page = Number(searchParams.get("per_page") ?? "5");
-
   const numPages = Math.ceil(numBlogPosts / per_page);
 
-  const buttonClass =
-    "bg-blue-500 p-1 px-2 text-white sm:px-4 disabled:hover:cursor-not-allowed";
-
-  const boxClass = "flex text-xs sm:text-sm sm:w-auto";
+  const buttonClass = "sm:py-0 sm:px-4 disabled:hover:cursor-not-allowed";
+  const boxClass = "flex text-xs sm:text-sm";
 
   function getNewSearchParams(newPage: number): string {
     return `${pathname}?page=${newPage}&per_page=${per_page}`;
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="flex w-full flex-wrap justify-center gap-[2%] sm:gap-4">
-        <div className={`${boxClass} order-1 sm:order-1`}>
-          <button
-            className={buttonClass}
-            disabled={!hasPrevPage}
-            onClick={() => router.push(getNewSearchParams(1))}
-          >
-            &lt;&lt;
-          </button>
-        </div>
-        <div className={`${boxClass} order-2 sm:order-2`}>
-          <button
-            className={buttonClass}
-            disabled={!hasPrevPage}
-            onClick={() => router.push(getNewSearchParams(page - 1))}
-          >
-            &lt;
-          </button>
-        </div>
-        <div
-          className={`${boxClass} order-5 mt-1 w-full items-center justify-center px-4 sm:order-3 sm:max-w-sm`}
-        >
-          <div className="p-1 px-4">
-            {page} / {numPages}
+    <>
+      {numBlogPosts > 10 && (
+        <div className="flex items-center justify-center">
+          <div className="flex h-0 w-full flex-wrap justify-center gap-[2%] sm:gap-4">
+            <div className={`${boxClass} order-1 sm:order-1 `}>
+              <CategoryBadge
+                className={buttonClass}
+                disabled={!hasPrevPage}
+                onClick={() => router.push(getNewSearchParams(1))}
+              >
+                &lt;&lt;
+              </CategoryBadge>
+            </div>
+            <div className={`${boxClass} order-2 sm:order-2`}>
+              <CategoryBadge
+                className={buttonClass}
+                disabled={!hasPrevPage}
+                onClick={() => router.push(getNewSearchParams(page - 1))}
+              >
+                &lt;
+              </CategoryBadge>
+            </div>
+            <div
+              className={`${boxClass} order-5 mt-1 w-full items-center justify-center px-4 sm:order-3 sm:mt-auto sm:w-auto sm:max-w-sm`}
+            >
+              <div className="p-1 px-4">
+                {page} / {numPages}
+              </div>
+            </div>
+            <div className={`${boxClass} order-3 sm:order-4`}>
+              <CategoryBadge
+                className={buttonClass}
+                disabled={!hasNextPage}
+                onClick={() => router.push(getNewSearchParams(page + 1))}
+              >
+                &gt;
+              </CategoryBadge>
+            </div>
+            <div className={`${boxClass} order-4 sm:order-5`}>
+              <CategoryBadge
+                className={buttonClass}
+                disabled={!hasNextPage}
+                onClick={() => router.push(getNewSearchParams(numPages))}
+              >
+                &gt;&gt;
+              </CategoryBadge>
+            </div>
           </div>
         </div>
-        <div className={`${boxClass} order-3 sm:order-4`}>
-          <button
-            className={buttonClass}
-            disabled={!hasNextPage}
-            onClick={() => router.push(getNewSearchParams(page + 1))}
-          >
-            &gt;
-          </button>
-        </div>
-        <div className={`${boxClass} order-4 sm:order-5`}>
-          <button
-            className={buttonClass}
-            disabled={!hasNextPage}
-            onClick={() => router.push(getNewSearchParams(numPages))}
-          >
-            &gt;&gt;
-          </button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
