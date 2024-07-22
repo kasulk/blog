@@ -43,3 +43,8 @@ type CodeChallengeData = {
 };
 
 export type AffiliateType = "order" | "register";
+
+export type SearchParams = {
+  page: string;
+  per_page: string;
+};
