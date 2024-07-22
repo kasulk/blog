@@ -8,6 +8,7 @@ export * from "./Callout";
 export * from "./CharCounter";
 export * from "./DateFormatter";
 export * from "./EmailButton";
+export * from "./PaginationControls";
 export * from "./ReadingTime";
 export * from "./SocialLinks";
 export * from "./SupportButton";
