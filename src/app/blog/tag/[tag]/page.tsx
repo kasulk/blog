@@ -1,25 +1,38 @@
+import type { SearchParams } from "@/../types";
 import { Metadata } from "next";
 import { H2 } from "@/components/Headings";
-import { PageHeader, BlogPostsList } from "@/components";
-import { capitalize } from "@/lib/utils";
-import { siteConfig } from "@/config";
-import { getBlogs, getBlogsByTag } from "@/lib/blogFetchers";
-import { formatBlogs } from "@/lib/blogFetchers/utils";
+import { PageHeader, BlogPostsList, PaginationControls } from "@/components";
 import {
   Sidebar,
   SidebarContent,
   BlogCategoryCloud,
   BlogTagsCloud,
 } from "@/components/Sidebar";
+import { siteConfig } from "@/config";
+import { capitalize } from "@/lib/utils";
+import { getBlogs, getBlogsByTag } from "@/lib/blogFetchers";
+import { formatBlogs } from "@/lib/blogFetchers/utils";
 
-type TagPageProps = {
+type BlogsByTagPageProps = {
   params: { tag: string };
+  searchParams: SearchParams;
 };
 
-export default async function CategoryPage({ params }: TagPageProps) {
+export default async function BlogsByTagPage({
+  params,
+  searchParams,
+}: BlogsByTagPageProps) {
   const { tag } = params;
   const blogsByTag = await getBlogsByTag(tag);
   const formattedBlogs = formatBlogs(blogsByTag);
+
+  // pagination
+  const page = Number(searchParams["page"] ?? "1");
+  const per_page = Number(searchParams["per_page"] ?? "5");
+  const start = (page - 1) * per_page;
+  const end = start + per_page;
+
+  const paginatedBlogs = formattedBlogs.slice(start, end);
 
   return (
     <>
@@ -31,7 +44,17 @@ export default async function CategoryPage({ params }: TagPageProps) {
             <span>Letzte Blogs mit dem Tag</span>
             <span className="text-accent">{tag.toUpperCase()}</span>
           </H2>
-          <BlogPostsList blogs={formattedBlogs} />
+          <PaginationControls
+            numBlogPosts={formattedBlogs.length}
+            hasPrevPage={start > 0}
+            hasNextPage={end < formattedBlogs.length}
+          />
+          <BlogPostsList blogs={paginatedBlogs} />
+          <PaginationControls
+            numBlogPosts={formattedBlogs.length}
+            hasPrevPage={start > 0}
+            hasNextPage={end < formattedBlogs.length}
+          />
         </section>
 
         <Sidebar>
@@ -55,7 +78,7 @@ export async function generateStaticParams(): Promise<{ tag: string }[]> {
 
 export async function generateMetadata({
   params,
-}: TagPageProps): Promise<Metadata> {
+}: BlogsByTagPageProps): Promise<Metadata> {
   const tag = capitalize(params.tag);
 
   return {
