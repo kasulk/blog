@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/../types";
+import fs from "fs";
 import path from "path";
 import { siteConfig } from "@/config";
 import {
@@ -21,14 +22,28 @@ const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
  * @returns {Promise<BlogPost[]>} A promise that resolves to an array of processed blog posts.
  */
 export async function getBlogs(): Promise<BlogPost[]> {
-  const allFilePaths = getAllFilesFromSubDirs(blogDir);
-  const allBlogs = await Promise.all(
-    allFilePaths.map(async (path) => await getBlogByFilePath(path)),
-  );
+  try {
+    if (!fs.existsSync(blogDir)) throwNoDirError(blogDir);
 
-  checkForDuplicateSlugs(allBlogs);
-  checkForDuplicateVGWortCodes(allBlogs);
-  const allBlogsWithAutoTags = addAutoTagsToFrontmatters(allBlogs);
+    const allFilePaths = getAllFilesFromSubDirs(blogDir);
+    if (!allFilePaths.length) throw new Error("No blog files found.");
 
-  return allBlogsWithAutoTags;
+    const allBlogs = await Promise.all(
+      allFilePaths.map(async (path) => await getBlogByFilePath(path)),
+    );
+
+    checkForDuplicateSlugs(allBlogs);
+    checkForDuplicateVGWortCodes(allBlogs);
+    const allBlogsWithAutoTags = addAutoTagsToFrontmatters(allBlogs);
+
+    return allBlogsWithAutoTags;
+    //
+  } catch (error) {
+    console.error("Error in getBlogs:", error);
+    return [];
+  }
+}
+
+function throwNoDirError(blogDir: string): never {
+  throw new Error(`Directory ${blogDir} does not exist.`);
 }
