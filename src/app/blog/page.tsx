@@ -26,13 +26,11 @@ export default async function AllBlogPostsPage({ searchParams }: Props) {
 
   try {
     const blogs = await getBlogs();
-    if (!blogs || blogs.length === 0) {
-      throw new Error("No blogs found");
-    }
-    console.log("Fetched blogs:", blogs);
+    if (!blogs || !blogs.length) throw new Error("No blogs found");
+    // console.log("Fetched blogs:", blogs);
 
     const formattedBlogs = formatBlogs(blogs);
-    console.log("Formatted blogs:", formattedBlogs);
+    // console.log("Formatted blogs:", formattedBlogs);
 
     // pagination
     const page = Number(searchParams["page"] ?? "1");
