@@ -29,7 +29,8 @@ export function PaginationControls({
   const numPages = Math.ceil(numBlogPosts / per_page);
 
   const boxClass = "flex text-xs sm:text-sm";
-  const badgeClass = "sm:py-0 sm:px-4";
+  const badgeClass =
+    "flex items-center justify-center sm:w-[50px] w-[40px] sm:py-0 sm:px-4";
   const hideIfNoPrev = !hasPrevPage ? "invisible" : "";
   const hideIfNoNext = !hasNextPage ? "invisible" : "";
 
@@ -66,8 +67,10 @@ export function PaginationControls({
           <div
             className={`${boxClass} order-5 mt-1 w-full items-center justify-center px-4 sm:order-3 sm:mt-auto sm:w-auto sm:max-w-sm`}
           >
-            <div className="p-1 px-4">
-              {page} / {numPages}
+            <div className="flex items-center justify-center p-1 px-4 sm:w-auto">
+              <div className="flex w-[60px] items-center justify-center">
+                {page} / {numPages}
+              </div>
             </div>
           </div>
           <div className={`${boxClass} order-3 sm:order-4 ${hideIfNoNext}`}>
