@@ -51,7 +51,7 @@ export const siteConfig = {
   },
 
   dir: {
-    blogs: "public/content/blogs",
+    // blogs: "public/content/blogs", // not working with pagination (anymore)
     blogImages: "/img/blogs",
   },
 

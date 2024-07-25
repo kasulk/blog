@@ -1,7 +1,6 @@
 import type { BlogPost } from "@/../types";
 import fs from "fs";
 import path from "path";
-import { siteConfig } from "@/config";
 import {
   checkForDuplicateSlugs,
   checkForDuplicateVGWortCodes,
@@ -10,7 +9,7 @@ import {
 } from "@/lib/blogFetchers/utils";
 import { addAutoTagsToFrontmatters } from "./utils/addAutoTagsToFrontmatters";
 
-const blogDir = path.join(process.cwd(), siteConfig.dir.blogs);
+const blogDir = path.join(process.cwd(), "public/content/blogs");
 
 /**
  * Retrieves all blog posts from the specified blog directory.
