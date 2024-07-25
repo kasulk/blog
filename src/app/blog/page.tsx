@@ -18,19 +18,15 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: SearchParams;
+  searchParams: Partial<SearchParams>;
 };
 
 export default async function AllBlogPostsPage({ searchParams }: Props) {
-  console.log("searchParams:", searchParams);
-
   try {
     const blogs = await getBlogs();
     if (!blogs || !blogs.length) throw new Error("No blogs found");
-    // console.log("Fetched blogs:", blogs);
 
     const formattedBlogs = formatBlogs(blogs);
-    // console.log("Formatted blogs:", formattedBlogs);
 
     // pagination
     const page = Number(searchParams["page"] ?? "1");
