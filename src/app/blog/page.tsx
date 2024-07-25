@@ -18,50 +18,62 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: SearchParams;
+  searchParams: Partial<SearchParams>;
 };
 
 export default async function AllBlogPostsPage({ searchParams }: Props) {
-  const blogs = await getBlogs();
-  const formattedBlogs = formatBlogs(blogs);
+  try {
+    const blogs = await getBlogs();
+    if (!blogs || !blogs.length) throw new Error("No blogs found");
 
-  // pagination
-  const page = Number(searchParams["page"] ?? "1");
-  const per_page = Number(searchParams["per_page"] ?? "5");
-  const start = (page - 1) * per_page;
-  const end = start + per_page;
+    const formattedBlogs = formatBlogs(blogs);
 
-  const paginatedBlogs = formattedBlogs.slice(start, end);
+    // pagination
+    const page = Number(searchParams["page"] ?? "1");
+    const per_page = Number(searchParams["per_page"] ?? "5");
+    const start = (page - 1) * per_page;
+    const end = start + per_page;
 
-  return (
-    <>
-      <PageHeader>Blog</PageHeader>
+    const paginatedBlogs = formattedBlogs.slice(start, end);
 
-      <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-        <section className="flex-1">
-          <H2 className="mb-12">Letzte Blogs</H2>
-          <PaginationControls
-            numBlogPosts={formattedBlogs.length}
-            hasPrevPage={start > 0}
-            hasNextPage={end < formattedBlogs.length}
-          />
-          <BlogPostsList blogs={paginatedBlogs} />
-          <PaginationControls
-            numBlogPosts={formattedBlogs.length}
-            hasPrevPage={start > 0}
-            hasNextPage={end < formattedBlogs.length}
-          />
-        </section>
+    return (
+      <>
+        <PageHeader>Blog</PageHeader>
 
-        <Sidebar>
-          <SidebarContent title="Kategorien">
-            <BlogCategoryCloud />
-          </SidebarContent>
-          <SidebarContent title="Tags">
-            <BlogTagsCloud />
-          </SidebarContent>
-        </Sidebar>
-      </div>
-    </>
-  );
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
+          <section className="flex-1">
+            <H2 className="mb-12">Letzte Blogs</H2>
+            <PaginationControls
+              numBlogPosts={formattedBlogs.length}
+              hasPrevPage={start > 0}
+              hasNextPage={end < formattedBlogs.length}
+            />
+            <BlogPostsList blogs={paginatedBlogs} />
+            <PaginationControls
+              numBlogPosts={formattedBlogs.length}
+              hasPrevPage={start > 0}
+              hasNextPage={end < formattedBlogs.length}
+            />
+          </section>
+
+          <Sidebar>
+            <SidebarContent title="Kategorien">
+              <BlogCategoryCloud />
+            </SidebarContent>
+            <SidebarContent title="Tags">
+              <BlogTagsCloud />
+            </SidebarContent>
+          </Sidebar>
+        </div>
+      </>
+    );
+  } catch (error) {
+    console.error("Error in AllBlogPostsPage:", error);
+    return (
+      <>
+        <PageHeader>Blog</PageHeader>
+        <div>Fehler beim Laden der Blogs. Bitte versuche es später erneut.</div>
+      </>
+    );
+  }
 }

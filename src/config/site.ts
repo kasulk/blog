@@ -51,7 +51,7 @@ export const siteConfig = {
   },
 
   dir: {
-    blogs: "src/content/blogs",
+    blogs: "public/content/blogs",
     blogImages: "/img/blogs",
   },
 
