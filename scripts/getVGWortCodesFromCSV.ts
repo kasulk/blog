@@ -2,8 +2,10 @@ const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
 
+//! change here
+const inputFilename = "VGWORT_Zaehlmarken_26072024-14_33_42.csv";
+
 const inputFolder = "/home/kasulk/Downloads";
-const inputFilename = "VGWORT_Zaehlmarken_05072024-17_47_52.csv";
 const outputFolder = process.cwd();
 const outputFilename = ".vgwort.txt";
 
@@ -24,6 +26,7 @@ async function getVGWortCodesFromCSV(
   outputFilePath: string,
   dateTime: string,
 ): Promise<void> {
+  let numCodes = 0;
   // create readable stream from the input CSV file with correct encoding
   const fileStream = fs.createReadStream(inputFilePath, { encoding: "latin1" });
 
@@ -50,12 +53,14 @@ async function getVGWortCodesFromCSV(
       if (codeMatch) {
         const code = codeMatch[0]; // extract the matched code
         outputStream.write(`${code}\n`);
+        numCodes++;
       }
     }
   }
+  outputStream.write(`(${numCodes})\n`);
 
   outputStream.close();
-  console.log(`Codes have been written to ${outputFilePath}`);
+  console.log(`${numCodes} codes have been written to ${outputFilePath}`);
 }
 
 getVGWortCodesFromCSV(inputFilePath, outputFilePath, dateTime);
