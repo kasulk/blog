@@ -9,7 +9,7 @@ import {
 } from "@/lib/blogFetchers/utils";
 import { addAutoTagsToFrontmatters } from "./utils/addAutoTagsToFrontmatters";
 
-const blogDir = path.join(process.cwd(), "public/content/blogs");
+const blogDir = path.join(process.cwd(), "src/content/blogs");
 
 /**
  * Retrieves all blog posts from the specified blog directory.
