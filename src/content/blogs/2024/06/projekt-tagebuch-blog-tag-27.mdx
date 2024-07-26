@@ -1,0 +1,94 @@
+---
+title: Projekt-Tagebuch Blog, Tag 27
+pubDate: 2024-06-05
+description: Mein tägliches Kata hat heute wieder etwas länger gedauert, das war wirklich ein Biest... Danach hab ich noch eine Bewerbung 'quick and dirty' rausgehauen und dann war schon wieder Mittach...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 1ba02715d0524050823d1059b3a5e690
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[zweiten echten Blog-Beitrag erstellen](#zweiter-blog-post)~
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Text (und Links) für AboutMe schreiben/einfügen](#about-page)~
+- [ ] VGWort einbinden
+
+---
+
+### Daily Kata und Bewerbung
+
+[Mein tägliches Kata](https://www.codewars.com/kata/5f25f475420f1b002412bb1f) hat heute wieder etwas länger gedauert, das war wirklich ein Biest... Danach hab ich noch eine Bewerbung 'quick and dirty' rausgehauen und dann war schon wieder Mittach.
+
+### Zweiter Blog-Post
+
+Danach hab ich den zweiten Blog-Post rausgehauen. Tag 1 vom Blog-Projekt-Tagebuch. 💪
+
+### About Page
+
+#### LinkExternal-Komponente
+
+Dann hab ich mich um die `About`-Page gekümmert. Als Erstes hab ich meine `LinkExternal`-Komponente noch in der `CustomStyledMDX` ergänzt, so dass ich diese jetzt im `Markdown` verwenden kann.
+
+Ich hab sie auf ein großes `A` geschlüsselt. D.h., ich muss nicht für jeden Link den Tag `<LinkExternal>` schreiben, sondern kann einfach `<A>` schreiben. Deutlich kürzer. Mit `href` sieht das dann so aus:
+
+```html
+<A href=”https://danielkaser.de”>Geile Seite</A>
+```
+
+Hier die Zeile in der `CustomStyledMDX`:
+
+```tsx
+export const customComponents: MDXComponents = {
+  // ...
+  A: (props) => <LinkExternal {...props}>{props.children}</LinkExternal>,
+  // ...
+};
+```
+
+> [!caution:Korrektur aus der Zukunft!]
+> Die Schlüsselung auf das 'A' funktioniert leider nicht wie oben behauptet.
+
+> [!note: ]
+> Leider kann man nur originäre HTML-Elemente (z.B. \<a> oder \<span>) in der CustomStyledMDX umschlüsseln bzw. erweitern.
+
+> [!tip:Alternative]
+> Man könnte hier eine extra 'A'-Komponente anlegen, die die 'LinkExternal'-Komponente rendert, aber das hab ich mir erst mal verkniffen.
+
+#### About-Text
+
+Dann hab ich den `About`-Text eingefügt, den ich heimlich schon vorbereitet hatte. Mit der `LinkExternali`-Komponente konnte ich dann auch direkt alle Links einfügen.
+
+#### getSocialUrl()
+
+Ich hab noch rasch eine `getSocialUrl()`-Funktion gebaut. Dieser übergibt man den gewünschten Anbieter, dessen in der Link-Config hinterlegten URL man haben möchte. Zurück bekommt man die richtige URL oder einen flotten Fehler:
+
+```ts
+export function getSocialUrl(socialName: string): string {
+  const social = links.social.find(({ name }) => socialName === name);
+  if (!social) {
+    throw new Error(
+      `Uh-oh! Social (link) for '${socialName}' does not exist...`,
+    );
+  }
+  return social.url;
+}
+```
+
+Cool. Dann kann ich mich doch demnächst mal daran machen, die `VG Wort` einzubinden!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
