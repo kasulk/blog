@@ -1,0 +1,55 @@
+---
+title: Projekt-Tagebuch Blog, Tag 23
+pubDate: 2024-05-27
+description: Heute ging eigentlich ganz gut los. Nach der Plasmaspende schnell ein 6er Kata gelöst und dann konnte ich weiter am Blog arbeiten. Ich hatte mir vorgenommen, die Sidebar zu bauen. In diese sollten dann Dinge wie die Category-Cloud, Verwandte Posts etc.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: e6d58ab916264415b0de034eb80a0acd
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Blog zu Projekten auf LinkedIn/Honeypot hinzufügen
+- [ ] [Sidebar implementieren](#sidbar)
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+
+---
+
+Heute ging eigentlich ganz gut los. Nach der [Plasmaspende](/support#plasma-spenden) schnell ein [6er Kata](https://www.codewars.com/kata/578aa45ee9fd15ff4600090d) gelöst und dann konnte ich weiter am Blog arbeiten. Ich hatte mir vorgenommen, die `Sidebar` zu bauen. In diese sollten dann Dinge wie die `CategoryCloud`, Verwandte Posts etc.
+
+## Sidebar
+
+Aber irgendwie bin ich gierig geworden. Anstatt einfach überall die `Sidebar`-Komponente hardzucoden wo sie hin sollte, wollte ich das dynamisch über die `siteConfig` steuern. D.h., wenn z.B. `showSidebar` für die Blog-Page im `siteConfig`-Objekt auf `true` gesetzt ist, soll sie auf der Blog-Page angezeigt werden, ansonsten nicht.
+
+Dafür muss man mit `usePathname()` checken welche Page gerade am Wickel ist. Die Herausforderung war, dass `usePathname()` ein Hook ist, der nur in Client-Komponenten funktioniert.
+
+Eigentlich nicht das Problem, aber irgendwas hat mir da was verhauen. Ich bekam ständig einen Fehler, dass ich versuche Node-Code im Client auszuführen. Was nicht funktionieren kann, da Node nur auf dem Server läuft.
+
+Ich hab keinen Plan, warum ich diesen Fehler bekomme, denn meiner Meinung nach verwendet meine `Sidebar`-Komponente und dessen Children keinen Node-Code. Den Fehler hab ich heute also trotz stundenlanger Suche nicht gefunden, was ziemlich frustrierend war.
+
+Es fiel mir ein bisschen schwer loszulassen. Aber irgendwann musste ich. Ich bin die ganze Zeit nur noch wie gegen eine Wand gelaufen. Morgen habe ich einen Job, so dass mein Unterbewusstsein in aller Ruhe bis übermorgen eine Lösung finden kann.
+
+Sollte ich den Fehler übermorgen nicht schnell finden, werde ich den Branch verwerfen und das Ganze noch mal probieren.
+
+Eine Möglichkeit wäre auch, die `Sidebar` erst mal undynamisch zu implementieren, damit es weiter geht. Dynamisieren kann man immer noch. Irgendwann.
+
+## Fazit
+
+Manchmal ist es besser eine Pause einzulegen und etwas Abstand zu gewinnen. Der Tag war trotzdem im Arsch. Ein bisschen konnte ich ihn mit einem Feierabend auf dem Balkon mit Chips & Eis und dann noch einem Eis retten. 🍨
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
