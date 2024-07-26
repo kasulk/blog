@@ -1,0 +1,74 @@
+---
+title: Projekt-Tagebuch Blog, Tag 25
+pubDate: 2024-05-31
+description: Erst 30 Minuten schreiben, dann Plasma spenden, dann Kata, dann Blog. Zwischendurch hab ich mir noch ein Akquise-Webinar für Freelancer reingezogen. Die Sidebar hat mich jetzt einige Tage aufgehalten. Heute hab ich sie fertiggestellt.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 2ab84dcbcddc4db18adc0140b447e87d
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Blog zu Projekten auf LinkedIn/Honeypot hinzufügen
+- [x] ~[Sidebar implementieren](#sidebar)~
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+
+---
+
+## As usual
+
+Erst 30 Minuten schreiben, dann [Plasma spenden](/support#plasma-spenden), dann [Kata](https://www.codewars.com/kata/58cda88814e65627c5000045/javascript), dann Blog. Zwischendurch hab ich mir noch ein Akquise-Webinar für Freelancer reingezogen.
+
+## Sidebar
+
+Die `Sidebar` hat mich jetzt einige Tage aufgehalten. Heute hab ich sie fertiggestellt. Vorerst. Ein paar mehr Gimmicks hab ich für die `Sidebar` noch im Sinn. Z.B. Suche und (automatisches) Inhaltsverzeichnis für jeden Blog etc. Erst mal egal. Die `Sidebar` steht. Bääm! 💥
+
+Hauptsächlich war sie nur noch für die Single-Blog-Pages anzupassen und dann alles ordentlich responsive zu machen. Letzteres hat erwartungsgemäß noch mal ordentlich Zeit gefressen.
+
+## Freelancer-Akquise-Webinar
+
+Das Webinar wurde gehalten von [OneCode](https://www.onecode.de)-Gründer Thomas Marbella. Ging ca. 45 Minuten und war eine Wiederholung seines Vortrages auf der [Freelancer Unlocked Conference](https://www.freelanceunlocked.com/) in Berlin. Es war äußerst inspirierend. Kuckstu selbst.
+
+## Blog-Projekt-Tagebuch
+
+Dann wollte ich den ersten Eintrag vom Blog-Projekt-Tagebuch einpflegen. Aber es gab einige Hürden.
+
+Erst mal musste ich mich für ein grundlegendes Design bzw. Aufbau entscheiden. Einmal für Blog-Post-Serien im Allgemeinen und dann für die Projekt-Tagebuch-Serie im Speziellen.
+
+Außerdem wurden nicht alle `Markdown`-Gimmicks ordentlich in `HTML` umgewandelt. Da musste ich noch mal ran.
+
+### remark-gfm
+
+Als Erstes hab ich dafür das Package [`remark-gfm`](https://github.com/remarkjs/remark-gfm) installiert. GFM steht für ‘GitHub-Flavored-Markdown’. Mit diesem Package soll man dann `Markdown` wie auf GitHub nutzen können.
+
+Genau - ‘soll’. Denn funktionieren tut das Ganze noch nicht. Zwar kann ich jetzt mit `[ ]` bzw. `[x]` Checkboxen erstellen oder mit `~` Strikethroughs. Aber bei einer Tabelle oder der einfachen Verwendung von Backticks um Inline-Code, bekomme ich einen fiesen Fehler.
+
+```bash
+Error: [next-mdx-remote] error compiling MDX:
+Cannot read properties of undefined (reading 'inTable')
+```
+
+Geil.
+
+Auf die Schnelle fand ich heute keine Lösung. Muss also vorerst auf die nächste Woche vertagt werden. Ich hab ausnahmsweise beim Friday-Beers bei Spiced mal ein bisschen socialized. Ganze 2 Jever Fun’s lang! Ick bin aber auch ein wildes Partyschwein...
+
+## Fazit
+
+Egal. Ich hab die `Sidebar` fertig. Damit sieht mein Projekt tatsächlich schon aus wie ein richtiger Blog. Jetzt nur noch Inhalte und allet wird jut!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
