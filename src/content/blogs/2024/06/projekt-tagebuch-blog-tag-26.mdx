@@ -1,0 +1,90 @@
+---
+title: Projekt-Tagebuch Blog, Tag 26
+pubDate: 2024-06-03
+description: Ich hatte letzte Woche das remark-gfm-Package installiert um erweitertes Markdown wie auf Github nutzen zu können. Das gab aber einen fiesen Fehler, wie ich >>hier bereits schrob. Da es sich nach meiner Recherche offensichtlich um einen Bug im Package handelt, habe ich es kurzer Hand von Version 4 auf die Version 3 downgegradet.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: c4d33a4b27bc4e9f92aca9e1fe075fa6
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] zweiten echten Blog-Beitrag erstellen
+- [ ] Blog zu Projekten auf LinkedIn/Honeypot hinzufügen
+- [x] ~[remark-gfm-Error fixen](#remark-gfm-error-workaround)~
+- [x] ~[Sidebar auf Kategorie-Listen-Seite implementieren](#sidebar-fuer-kategorie-liste)~
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+
+---
+
+## remark-gfm-Error Workaround
+
+Ich hatte letzte Woche das [`remark-gfm`](https://github.com/remarkjs/remark-gfm)-Package installiert um erweitertes `Markdown` wie auf Github nutzen zu können. Das gab aber einen fiesen Fehler, wie ich [hier bereits schrob](/blog/projekt-tagebuch-blog-tag-25#remark-gfm). Da es sich nach meiner Recherche offensichtlich um einen Bug im Package handelt, habe ich es kurzer Hand von Version 4 auf die Version 3 downgegradet. Jetzt funktioniert’s erst mal.
+
+```bash
+npm i remark-gfm@3
+```
+
+Aber die Backticks waren immer noch da bzw. schienen nicht in Inline-Text kompiliert zu werden. Bis ich darauf kam, dass das `tailwindcss-typography`-Plugin wieder Backticks zu `code`-Elementen hinzufügt... Halleluja!
+
+## Tailwind-Typography Workaround
+
+Als nächstes hab ich also das CSS für die `pre`- und `code`-Tags in der tailwind.config angepasst. Diese sieht jetzt so aus, und die Backticks sind endlich weg:
+
+```ts
+const config = {
+  //...
+  theme: {
+    extend: {
+      // Binding element 'theme' implicitly has an 'any' type.
+      // => tw-bug-workaround: https://github.com/tailwindlabs/tailwindcss-typography/issues/335
+      typography: (theme: any) => ({
+        DEFAULT: {
+          css: {
+            pre: {
+              color: theme("colors.foreground"),
+              backgroundColor: theme("colors.muted.DEFAULT"),
+            },
+            code: {
+              color: theme("colors.foreground"),
+              backgroundColor: theme("colors.muted.DEFAULT"),
+              padding: theme("borderRadius.sm"),
+              paddingBottom: 0,
+              borderRadius: theme("borderRadius.sm"),
+              // remove tw-typography (prose) auto-backticks from code-elements
+              "::before": {
+                content: "none",
+              },
+              "::after": {
+                content: "none",
+              },
+            },
+          },
+        },
+      }),
+      // ...
+    },
+  },
+  plugins: [require("@tailwindcss/typography"), require("tailwindcss-animate")],
+};
+```
+
+## Sidebar für Kategorie-Liste
+
+Zum Schluss hab ich nur noch die `Sidebar` in die dynamische `BlogsByCategoryPage` eingfügt. Also jene Seite, auf der alle Posts einer Kategorie in einer Liste angezeigt werden, wenn man auf eine Kategorie klickt. Das hatte ich beim Erstellen der `Sidebar` vergessen. Ist jetzt nachgeholt.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
