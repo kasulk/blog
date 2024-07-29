@@ -1,0 +1,89 @@
+---
+title: Projekt-Tagebuch Blog, Tag 33
+pubDate: 2024-06-17
+description: Eigentlich mag ich Montage... Als Erstes hab ich mich hochmotiviert an ein Kata gemacht. Aber irgendwie war heute der Wurm drin. Das hat heute wieder länger gedauert, als ich eigentlich vor hatte. Mehr dazu unten.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 460a5288e19a458abc23d69dfe580ca5
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [ ] [gfm-flavoured Callout-Box implementieren](#callout-box-implementieren)
+
+---
+
+## Daily Kata
+
+Eigentlich mag ich Montage...
+
+Als Erstes hab ich mich hochmotiviert an ein [Kata](https://www.codewars.com/kata/5420fc9bb5b2c7fd57000004) gemacht. Aber irgendwie war heute der Wurm drin. Das hat heute wieder länger gedauert, als ich eigentlich vor hatte. Mehr dazu unten.
+
+## Callout-Box implementieren
+
+Dann endlich weiter am Blog basteln!
+
+### Was zum Geier ist eine Callout-Box?!
+
+Auf [GitHub](https://github.com/kasulk) kann man mit `Markdown` relativ leicht eine Callout-Box erstellen. Etwa so:
+
+```md
+> [!NOTE]
+> Ich bin eine blaue Callout-Box mit ‘Note’ als Überschrift!
+```
+
+Sieht gerendert so aus:
+
+> [!NOTE]
+> Ich bin eine blaue Callout-Box mit ‘Note’ als Überschrift!
+
+Eine Callout-Box ist also quasi ein `<blockquote>` in fancigen Farben.
+
+### Neuanstrich
+
+Und das war auch der erste Schritt, den ich unternommen hab. Meine `Callout`-Komponente war nämlich ein schnödes `<div>`. Das hab ich schnell in ein `<blockquote>`-Element geändert. Dann hab ich noch etwas die Farben dynamisiert. Und fertig war der Lack.
+
+### CustomStyledMDX
+
+Jetzt musste die Callout-Box ‘nur’ noch mit dem `MDX-Blockquote` gemappt werden. Wenn man also ein `Blockquote` wie oben in `MDX` erstellt, soll die `Callout`-Komponente gerendert werden. Das war an sich auch nicht das Problem.
+
+Ich wollte es aber wieder etwas fancier haben. So sollte sich z.B. die Farbe der Callout-Box nach dem Text in den eckigen Klammern richten. Also bei [!NOTE] sollte sie blau sein, bei [!DANGER] rot, [!WARNING] gelb, [!SUCCESS] grün etc.
+
+Doch - nicht - nur - das!
+
+Ich wollte das Ganze so erweitern, dass das jeweilge Wort in den eckigen Klammern automatisch als Inhalt für einen Titel in der Box herangezogen wird. Außerdem sollte man optional einen individuellen Titel vergeben können.
+
+Dazu sollte ein Doppelpunkt als Trennzeichen herhalten.
+
+```md
+> [!NOTE:Individuelle Überschrift]
+> Ich bin eine blaue Callout-Box mit einer individuellen Überschrift!
+```
+
+gerendert:
+
+> [!NOTE:Individuelle Überschrift]
+> Ich bin eine blaue Callout-Box mit einer individuellen Überschrift!
+
+## Der Wurm 🪱
+
+Aber heute war wieder einer dieser Tage, wo man (also ich) nüscht gebacken kriegt. Und so hab ich mich ein paar Stunden erfolglos mit `Typescript` rumgeärgert und musste das Projekt dann leider auf die [nächste Session](/blog/projekt-tagebuch-blog-tag-34) verschieben. Dann etwas strukturierter.
+
+Mehr dazu also im [nächsten Blog](/blog/projekt-tagebuch-blog-tag-34)!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
