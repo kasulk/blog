@@ -1,0 +1,83 @@
+---
+title: Projekt-Tagebuch Blog, Tag 31
+pubDate: 2024-06-12
+description: Nice. Heute hab ich mein tägliches Kata so schnell gelöst, dass ich auf die Schnelle noch ein zweites lösen konnte. Danach hab ich mich wieder direkt an meinen Nextjs-Blog gemacht...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 9201a1e207f24d409b050d043d4cd56d
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Auto-Markdown-Ids](#auto-markdown-ids)~
+- [ ] Auto-Copy-to-Clipboard
+
+---
+
+Nice. Heute hab ich mein tägliches Kata so schnell gelöst, dass ich auf die Schnelle noch ein zweites lösen konnte. Danach hab ich mich wieder direkt an meinen Nextjs-Blog gemacht.
+
+## Link-Komponenten
+
+Zuerst hab ich den offenen Branch von vorgestern fertig gemacht. Ich hatte alle Link-Komponenten in einen dedizierten Links-Ordner verschoben. Und dort eine Barrel-Datei erstellt. Jetzt musste ich noch einige Importe anpassen. Mit Bedacht, damit es hier nicht wieder zu einem hässlichen ‘os’-Error kommt ([siehe letzte Session](/blog/projekt-tagebuch-blog-tag-30#link-komponenten-in-eigenes-links-verzeichnis-verschieben)).
+
+## Auto-Markdown-Ids
+
+Danach konnte ich mich daran machen, Headings im `Markdown` automatisch mit einer `id` auszustatten, damit man mit Anchor-Links direkt zu ihnen springen kann.
+
+Dafür hab ich zuerst eine Funktion `createId()` erstellt, die in der `CustomStyledMDX` beim Kompilieren von `MDX` zu `HTML` die `children` slugified und als `id` verwendet.
+
+```ts
+// lib/utils/createId.ts
+import { slugify } from "@/lib/utils";
+
+export function createId(children: string | React.ReactNode): string {
+  return typeof children === "string" ? slugify(children) : "";
+}
+```
+
+```tsx
+// components/CustomStyledMDX.tsx
+
+// ...
+export const customComponents: MDXComponents = {
+  Image,
+  h2: ({ children }) => <h2 id={createId(children)}>{children}</h2>,
+  h3: ({ children }) => <h3 id={createId(children)}>{children}</h3>,
+  h4: ({ children }) => <h4 id={createId(children)}>{children}</h4>,
+  h5: ({ children }) => <h5 id={createId(children)}>{children}</h5>,
+  h6: ({ children }) => <h6 id={createId(children)}>{children}</h6>,
+  a: (props) => // ...
+}
+// ...
+```
+
+Jetzt kann ich im `Markdown` easy geile Anchor-Links erstellen.
+
+```md
+[Ich bin ein Anchor-Link](#auto-copy-to-clipboard)
+```
+
+## Auto-Copy-to-Clipboard
+
+Angefixt von den geilen automatischen `id`’s sollte jetzt auch unbedingt eine automatische Copy-to-Clipboard-Funktion für meine Headings her.
+
+Dafür sollte beim Hovern über eine Überschrift erst mal ein Paste-Symbol daneben erscheinen. Beim Klick dann, sollte man den ‘Link kopiert!’ kurz eingeblendet bekommen.
+
+Das hat soweit auch wunderbar funktioniert. Allerdings will ich das Ganze noch refactoren und ein bisschen übersichtlicher gestalten. Mehr dazu dann morgen.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
