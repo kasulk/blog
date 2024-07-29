@@ -1,0 +1,134 @@
+---
+title: Projekt-Tagebuch Blog, Tag 29
+pubDate: 2024-06-07
+description: Ich habe bereits 3 spezielle Link-Komponenten erstellt. AffiliateLink, Link und LinkExternal. Die Link-Komponente war hauptsächlich gedacht, die internen NextLinks zu stylen. Die LinkExternal war gedacht, um den Links standardmäßig ein rel = “noopener noreferrer” und ein target=”_blank” zu verpassen.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: e883fbab34734f2e9635ec3a09a3330b
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+<span id="tages-ziele">**Tages-Ziele:**</span>
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Links fürs MDX refactoren](#links-fuer-mdx-refactoren)~
+
+---
+
+## Links für MDX refactoren
+
+### Ist-Zustand
+
+Ich habe bereits 3 spezielle Link-Komponenten erstellt. `AffiliateLink`, `Link` und `LinkExternal`.
+
+Die `Link`-Komponente war hauptsächlich gedacht, die internen `@next/link`'s zu stylen.
+
+Die `LinkExternal` war gedacht, um den Links standardmäßig ein `rel = “noopener noreferrer”` und ein `target=”_blank”` zu verpassen.
+
+Die `AffiliateLink`-Komponente sollte es erleichtern, einen Affiliate-Link (mit zugehörigem Tooltip) zu erstellen, indem man einfach ein `partner`-Attribut übergibt. Anhand des Wertes des `partner`-Attributes wird dann die zugehörige URL aus dem globalen `links`-Objekt gezogen. Außerdem wird an jeden Affiliate-Link automatisch das berühmte `*` angehängt.
+
+### Anchor-Links aka Jump-Links
+
+Jetzt fiel mir auf, dass es noch eine weitere Link-Kategorie gibt. Auch für interne Links. Aber nicht seitenübergreifend. Sondern interne Links, die auf eine andere Stelle auf der gleichen Seite verweisen. Sogenannte Anchor-Links oder Jump-Links.
+
+Findest du hier z.B. in meiner [Zielliste](#tages-ziele). Von dort aus kann man direkt zur entsprechenden Überschrift weiter unten springen.
+
+Diese wollte ich jetzt auch in der `CustomStyledMDX`-Komponente einbauen, damit auch diese im `MDX` verwendet werden können. Das ist mir tatsächlich auch gelungen.
+
+### JSX ade
+
+Außerdem wollte ich mir das `JSX` im `MDX` sparen. D.h., bisher musste ich, um z.B. die externe Link-Komponente im `MDX` zu verwenden, diese als `JSX` einfügen:
+
+```mdx
+<LinkExternal href="https://github.com/kasulk">
+  Hier geht’s auf’s externe GitHub
+</LinkExternal>
+```
+
+Das war mir zu umständlich. Denn in `Markdown` kann man Links eigentlich einfach so schreiben:
+
+```md
+[Hier geht’s auf’s externe GitHub](https://github.com/kasulk)
+```
+
+Auch das habe ich geschafft. Ich habe in die `CustomStyledMDX`-Komponente für Anchor-Tags (`a`-Tags) einfach eine Condition eingefügt:
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+export const customComponents: MDXComponents = {
+  // ...
+  a: (props) => {
+    if (props.href?.startsWith("#")) {
+      return <a {...props}>{props.children}</a>;
+    }
+
+    if (props.href?.startsWith("/")) {
+      return <Link {...props}>{props.children}</Link>;
+    }
+
+    return <LinkExternal {...props}>{props.children}</LinkExternal>;
+  },
+  // ...
+};
+```
+
+Dafür hab ich mir folgende Gegebenheiten zu Nutze gemacht:
+
+Da interne Verweise auf die _gleiche_ Seite immer die `id` eines anderen Elements ansprechen, fangen sie immer mit `#` an.
+Interne Links auf eine _andere interne_ Seite beginnen dagegen immer mit einem `/`.
+Und alles andere sind externe Links denen die `LinkExternal`-Komponente zugewiesen werden kann.
+
+```md
+[Interner Verweis](#interner-verweis)
+[Interner Link zur About-Page](/aboutme)
+[Hier geht’s auf’s externe GitHub](https://github.com/kasulk)
+```
+
+Fehlen noch die Affiliate-Links. Um die kümmere ich mich in der nächsten Session.
+
+### Achtung
+
+Zu beachten ist hier, dass die Verweise, die man für die Custom Components in der `MDXRemote`-Komponente anlegt, nur für die die vom `MDX` kompilierten `HTML`-Elemente und `JSX` gilt. Häh?! 🤔
+
+OK, noch mal langsam... 🐌
+
+Nur Links, die im `MD(X)` mit
+
+```md
+[Ich bin ein Link](https://www.youtube.com/watch?v=iIIuR-HjFho)
+```
+
+erstellt werden, werden in der `MDXRemote`-Komponente gemappt und in das entsprechende `HTML` kompiliert. Nicht Links, die man mit `a`-Tag, also
+
+```html
+<a href=”https://www.youtube.com/watch?v=iIIuR-HjFho”>Ich bin auch ein Link</a>
+```
+
+erstellt.
+
+Ausnahme sind (eigene) `JSX`-Komponenten. Also folgendes würde wiederum funktionieren:
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+
+// ...
+SupportButton: ({ className }) => (
+  <SupportButton className={`h-7 w-7 ${className}`} />
+);
+// ...
+```
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
