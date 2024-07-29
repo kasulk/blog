@@ -1,0 +1,129 @@
+---
+title: Projekt-Tagebuch Blog, Tag 32
+pubDate: 2024-06-13
+description: Gestern hab ich die automatischen `id`’s für Headings in Markdown eingerichtet. Heute sollte dann die Auto-Copy-to-Clipboard-Funktion her. Wenn man auf eine Überschrift klickt, soll ein fertiger Link, inklusive Anchor direkt zu der geklickten Überschrift in die Zwischenablage kopiert werden.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 2c11ef3310ec4053b2f2a90dbbf3c732
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Auto-Copy-to-Clipboard](#auto-copy-to-clipboard)~
+
+---
+
+Gestern hab ich die automatischen `id`’s für Headings in Markdown eingerichtet. Heute sollte dann die Auto-Copy-to-Clipboard-Funktion her.
+
+## Auto-Copy-to-Clipboard
+
+Wenn man auf eine Überschrift klickt, soll ein fertiger Link, inklusive Anchor direkt zu der geklickten Überschrift in die Zwischenablage kopiert werden. Außerdem soll beim Hovern über die Überschrift ein Link-Symbol daneben erscheinen.
+
+Dafür habe ich eine clientseitige [CopyableHeading-Komponente](https://github.com/kasulk/blog/commit/9bd6f795ca36af1679fdfa4a85f177954f30108e#diff-3f2c0a33250e8ca669de85077e44240f52acff38df169a8c4be4bf3aef26f0d5) erstellt.
+
+```tsx
+// CopyableHeading.tsx
+export function CopyableHeading({
+  id,
+  className,
+  children,
+  as: Tag,
+}: CopyableHeadingProps) {
+  const [confirmation, setConfirmation] = useState("");
+  const pathname = usePathname();
+  id = id || createId(children);
+
+  function handleCopy() {
+    const link = `${window.location.origin}${pathname}#${id}`;
+    navigator.clipboard.writeText(link).then(() => {
+      setConfirmation("Link kopiert!");
+      setTimeout(() => setConfirmation(""), 1000);
+    });
+  }
+
+  return (
+    <div
+      className="group cursor-pointer"
+      onClick={handleCopy}
+      title="Link kopieren"
+    >
+      <Tag
+        id={id}
+        className={`flex items-center space-x-[0.5em] hover:text-foreground/75 ${className}`}
+      >
+        <span>{children}</span>
+        <Link2Icon className="h-[1em] w-[1em] text-foreground/65 opacity-0 transition-opacity duration-500 hover:text-danger-600 group-hover:opacity-100" />
+        <CopyConfirmation confirmation={confirmation} />
+      </Tag>
+    </div>
+  );
+}
+```
+
+Bei der Gelegenheit hab ich die `createId()`-Funktion, die ich gestern erstellt und in die `CustomStyledMDX`-Komponente eingebaut bzw. gemappt habe, in die `CopyableHeading`-Kompnente mit eingebaut (`id = id || createId(children);`).
+
+D.h., sie konnte aus der [`CustomStyledMDX`-Komponente](https://github.com/kasulk/blog/commit/9bd6f795ca36af1679fdfa4a85f177954f30108e#diff-08542fcc7eb3f389b5b2a0b0d7a930be078744187017aa863a3f88e5a3cc7587) wieder raus. Dafür hab ich die Standard-HTML-Heading-Tags mit meinen `Heading`-Komponenten ersetzt:
+
+```tsx
+// src/components/CustomStyledMDX.tsx (alt)
+// ...
+export const customComponents: MDXComponents = {
+  Image,
+  h2: ({ children }) => <h2 id={createId(children)}>{children}</h2>,
+  h3: ({ children }) => <h3 id={createId(children)}>{children}</h3>,
+  h4: ({ children }) => <h4 id={createId(children)}>{children}</h4>,
+  // ...
+};
+```
+
+```tsx
+// components/CustomStyledMDX.tsx (neu)
+// ...
+export const customComponents: MDXComponents = {
+  Image,
+  h2: (props) => <H2 {...props}>{props.children}</H2>,
+  h3: (props) => <H3 {...props}>{props.children}</H3>,
+  h4: (props) => <H4 {...props}>{props.children}</H4>,
+  // ...
+};
+```
+
+Als nächstes musste ich dann meine bestehenden [`Heading`-Komponenten](https://github.com/kasulk/blog/commit/9bd6f795ca36af1679fdfa4a85f177954f30108e#diff-0a9198f9627cfb6ad77d0dc60ce5876670c761ba7b4aa31882c149bc4c9977ea) (`H2`-`H6`) anpassen. Da man die `h1`-Überschrift nur 1x pro Seite verwenden sollte und das am besten ganz oben, hab ich die Kopier-Funktion hier weggelassen. Hier als Beispiel meine `H2`-Komponente:
+
+```tsx
+// Headings.tsx
+// ...
+export function H2({ id, className = "", children }: HeadingProps) {
+  return (
+    <CopyableHeading
+      as="h2"
+      id={id}
+      className={`mb-6 mt-0 text-2xl sm:text-3xl lg:text-4xl ${className}`}
+    >
+      {children}
+    </CopyableHeading>
+  );
+}
+// ...
+```
+
+Jetzt kann man einfach auf jede Überschrift im Blog (außer `h1`) klicken und bekommt den Link dorthin in die Zwischenablage kopiert. Und das Beste ist: Diese Funktion, inklusive der dazugehörigen `id`’s wird vollautomatisch generiert. Ohne dass ich für jede Überschrift eine `id` setzen muss.
+
+Geil! 💪
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
