@@ -1,0 +1,129 @@
+---
+title: Projekt-Tagebuch Blog, Tag 28
+pubDate: 2024-06-06
+description: Da ich vorhabe demnächst ordentlich Blog-Artikel zu produzieren wollte ich heute gerne die Zählmarken für die VG Wort einbinden. Die VG Wort ist eine Verwertungsgesellschaft, ähnlich wie die GEMA für Musik...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: b2e493071a4d46b087197483eb583f6e
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[VG Wort einbinden](#vg-wort)~
+
+---
+
+Da ich vorhabe demnächst ordentlich Blog-Artikel zu produzieren wollte ich heute gerne die Zählmarken für die [VG Wort](https://www.vgwort.de) einbinden.
+
+## VG Wort
+
+### Was ist die VG Wort?
+
+Die VG Wort ist eine Verwertungsgesellschaft, ähnlich wie die GEMA für Musik, die Tantiemen für Autoren und Verlage für die Nutzung ihrer (kopierfähigen) Texte in Büchern, Zeitschriften und im Internet verwaltet und ausschüttet.
+
+Man kann sich hier also ein kleines Taschengeld dazuverdienen, wenn man Texte produziert, die die Voraussetzungen erfüllen. Grob gesagt muss ein Text mindestens 1.800 Zeichen haben und mindestens 1.500 im Kalenderjahr aus Deutschland aus aufgerufen worden sein.
+
+Genauere Informationen dazu findest du im [METIS-Pdf der VG Wort für Urheber](https://tom.vgwort.de/Documents/pdfs/dokumentation/metis/DOC_Urhebermeldung.pdf).
+
+### Wahrnehmungsvertrag
+
+Angemeldet habe ich mich bei der VG Wort bereits vor 4 Jahren. Anmelden heißt hier, dass man einen Wahrnehmungsvertrag mit der VG Wort abschließt. Bisher hatte ich es nie geschafft etwas verwertungswürdiges zu veröffentlichen. Jetzt ist es soweit!
+
+Um einen Text dann im Internet automatisiert von der VG Wort zählen lassen zu können, muss man eine sogenannte Zählmarke ins `HTML` einbinden. Die Zählmarken kann man bei der VG Wort bestellen und sehen so aus:
+
+```html
+<img
+  src="https://vg05.met.vgwort.de/na/57272aa6a66e4de7b84389dde48d0275"
+  width="1"
+  height="1"
+  alt=""
+/>
+```
+
+Es ist also einfach ein 1-Pixel großes Bild, das von einem Server bei der VG Wort abgerufen und so gezählt wird. Der Link besteht aus einer Base-URL und einem individuellen Code, der für jede Zählmarke anders ist.
+
+### VGWortMark-Komponente erstellen
+
+Ich habe also eine `VGWortMark`-Komponente angelegt, die einen Code empfängt und daraus einen Link erstellt. Die `baseUrl` habe ich global in meinem `links`-Objekt hinterlegt:
+
+```tsx
+// src/components/VGWortMark.tsx
+import { links } from "@/config";
+
+type Props = {
+  code?: string;
+};
+
+// recommended values by VGWort
+type ReferrerPolicy = "no-referrer-when-downgrade" | "unsafe-url";
+
+const baseUrl = links.vgWort.find(({ name }) => name === "Counting Mark")?.url;
+const referrerPolicy: ReferrerPolicy = "no-referrer-when-downgrade";
+
+export function VGWortMark({ code }: Props) {
+  if (!baseUrl) throw new Error("No 'baseUrl' found for VG Wort!");
+  if (!code) return;
+
+  return (
+    <img
+      src={`${baseUrl}/${code}`}
+      width="1"
+      height="1"
+      alt=""
+      referrerPolicy={referrerPolicy}
+      className="hidden"
+    />
+  );
+}
+```
+
+### VGWortMark-Komponente einbinden
+
+Eingebunden hab ich die Komponente dann in der `PageHeader`-Komponente. So kann ich sie auch für Pages wie z.B. die [`About`](/aboutme)- oder die [`Support`](/support)-Page verwenden. In die Pages habe ich jeweils einen VG-Wort-Zählmarken-Code hardgecodet.
+
+Für die dynamische `SingleBlogPage` wird der Zählmarken-Code aus dem jeweiligen `Markdown`-File des Blog-Artikels gezogen. Dafür muss ich natürlich für jeden Artikel den Zählmarken-Code im Frontmatter hinterlegen (s.u. `vgWortCode`):
+
+```mdx
+---
+title: Projekt-Tagebuch Blog, Tag 28
+pubDate: 2024-06-28
+description: Da ich vorhabe demnächst ordentlich Blog-Artikel zu produzieren wollte ich heute gerne die Zählmarken für die VG Wort einbinden. Die VG Wort ist eine Verwertungsgesellschaft, ähnlich wie die GEMA für Musik...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: b2e493071a4d46b087197483eb583f6e
+---
+
+<DateFormatter date={pubDate} weekday />
+
+{/* ... */}
+
+## VG Wort
+
+{/* ... */}
+```
+
+### Testen
+
+Jetzt muss ich das Ganze noch testen. Laut VG Wort kann es bis zu 4 Tage dauern, bis das System in der Lage ist die Views zu zählen. Schaun mer moi!
+
+### Nachtrag aus der Zukunft
+
+Links und Zählungen funktionieren einwandfrei! 🥳
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>

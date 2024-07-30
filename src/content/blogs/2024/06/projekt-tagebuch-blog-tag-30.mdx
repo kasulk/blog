@@ -1,0 +1,112 @@
+---
+title: Projekt-Tagebuch Blog, Tag 30
+pubDate: 2024-06-10
+description: In der letzten Session hab ich die verschiedenen Linkarten in der MDXRemote-Komponente (bei mir CustomStyledMDX) auf die entsprechenden Komponenten gemappt. Einzig fehlten noch die Affiliate-Links. Die waren heute fällig.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 751f74aa13514e1f8ff4c8ca8e2f67fa
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Affiliate-Links in MDXRemote mappen](#affiliate-links-in-der-mdxremote-mappen)~
+
+---
+
+## Affiliate-Links in der MDXRemote mappen
+
+In der [letzten Session](/blog/projekt-tagebuch-blog-tag-29#links-fuer-mdx-refactoren) hab ich die verschiedenen Linkarten in der `MDXRemote`-Komponente (bei mir `CustomStyledMDX`) auf die entsprechenden Komponenten gemappt. Einzig fehlten noch die Affiliate-Links. Die waren heute fällig.
+
+Affiliate-Links füttere ich normalerweise nicht mit einer URL, sondern mit einer Partner-Variablen. Die Partner haben in meinem globalen `links`-Objekt jeweils die URL hinterlegt. Dort kann ich sie dann raussuchen und an die `AffiliateLink`-Komponente übergeben.
+
+```tsx
+<AffiliateLink partner={tradeRepublic}>Trade Republic</AffliateLink>
+```
+
+Um nicht immer den kompletten `JSX`-Tag ausschreiben zu müssen, würde ich gerne die Affiliate-Links auch in der `MDXRemote`-Komponente mappen.
+
+Damit der Kompiler die Affiliate-Links erkennt, setze ich beim Erstellen eines Links im `MD(X)` künftig ein `$`-Zeichen vor den Partner.
+
+```md
+[Trade Republic]($tradeRepublic)
+```
+
+Meine `customComponents` in der `MDXRemote` sehen jetzt also so aus:
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+
+// ...
+export const customComponents: MDXComponents = {
+  /// nextjs components
+  Image,
+  /// html-elements compiled from md(x)
+  a: (props) => {
+    const { href, title, children, ...restProps } = props;
+    if (href?.startsWith("#")) return <a {...props}>{children}</a>;
+    if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
+    if (href?.startsWith("$"))
+      return (
+        <AffiliateLink partner={href.slice(1)} tooltip={title} {...restProps}>
+          {children}
+        </AffiliateLink>
+      );
+    return <LinkExternal {...props}>{children}</LinkExternal>;
+  },
+  /// custom components
+  SupportButton: ({ className }) => (
+    <SupportButton className={`h-7 w-7 ${className}`} />
+  ),
+  // ...
+};
+
+// ...
+```
+
+## Mögliche Affiliate Partner in Fehlermeldung
+
+Dann hab ich noch schnell die möglichen Affiliate-Partner in die Fehlermeldung eingefügt. Bekommt man jetzt also einen Fehler, weil man einen falschen Affiliate-Partner verwendet bzw. sich verschrieben hat, kriegt man direkt noch eine Liste mit möglichen Partnern, die im globalen `links`-Objekt hinterlegt sind. Sweet! 😎
+
+![Fehler bei Eingabe von falschem Affiliate-Partner](/img/blogs/screenshots/affiliate-partner-error.png)
+
+Dafür habe ich auch die Fehler, also das `errors`-Objekt aus der `siteConfig` getrennt und ein eigenes Objekt bzw. eine eigene Datei gegeben.
+
+## Link-Komponenten in eigenes Links-Verzeichnis verschieben
+
+Um meine Komponenten übersichtlicher zu halten, hab ich die 3 Link-Komponenten (`Link`, `LinkExternal` und `AffiliateLink`) in ein eigenes Unterverzeichnis verschoben.
+
+Bis hierhin lief alles gut, dann aber bekam ich etwas Probleme...
+
+Ich wollte nämlich bei dieser Gelegenheit auch gleich die `LinkExternal`-Komponente wieder in `ExternalLink` umbenennen. Nachdem ich fertig war, bekam ich beim Deployen bzw. beim Erstellen eines Builds folgenden fiesen Fehler:
+
+```
+./node_modules/next-mdx-remote/dist/rsc.js:6:0
+Module not found: Can't resolve 'os'
+```
+
+Da ich keine Ahnung hatte, was hier passiert war, hab ich den Commit zurückgesetzt und bin noch einmal systematisch alle Schritte durchgegangen. Um zu checken wo der genau der Fehler auftritt, habe ich nach jedem Schritt einen neuen Build erstellt.
+
+### O la la
+
+Der Fehler trat in meiner `SocialLinks`-Komponente auf und wurde von den Barrel-Imports ausgelöst. Durch die Barrel-Imports importiert man anscheinend immer alle Dateien in der Barrel-Datei. Das kann dann bei der Verwendung von Server- und Client-Komponenten zu unerwarteten Ergebnissen führen.
+
+Der Fehler sagt nämlich, dass `Node` nicht ausgeführt werden kann, weil versucht wird, `Node` clientseitig auszuführen. `Node` funzt aber nur auf dem Server.
+
+Diese Erkenntnis hat mich wieder ein paar Stunden gekostet. Aber der Bug ist gefixt und ich bin wieder etwas schlauer geworden.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
