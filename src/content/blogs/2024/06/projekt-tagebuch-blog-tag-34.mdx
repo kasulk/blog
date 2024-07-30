@@ -1,0 +1,95 @@
+---
+title: Projekt-Tagebuch Blog, Tag 34
+pubDate: 2024-06-19
+description: Heute hab ich endlich die Callout-Box fertiggestellt. Hat ein bisschen länger gedauert, dafür ist sie richtig geil geworden. Ich hatte in der letzten Session ein bisschen Probleme mit der Map-Logik in der CustomStyledMDX-Komponente.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 3b04c2ad23784b8dad1b510b15f67dd8
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[gfm-Callout-Box implementieren](#)~
+
+---
+
+Heute hab ich endlich die Callout-Box fertiggestellt. Hat ein bisschen länger gedauert, dafür ist sie richtig geil geworden.
+
+> [!Caution:Richtig geil]
+> Ich hatte in der letzten Session ein bisschen Probleme mit der Map-Logik in der CustomStyledMDX-Komponente.
+
+Die hatte ich auch heute noch, aber heute habe ich allen den Garaus gemacht.
+
+## Tailwind-Variablen
+
+Eine Herausforderung hatte ich mit dynamisch zusammengesetzten `Tailwind`-Klassen.
+
+```tsx
+const color = “blue”
+const dynamischeKlasse = `text-${color}-500`
+
+<div className={dynamischeKlasse}>Mag Tailwind nicht so sehr...</div>
+```
+
+Die sind ein bisschen tricky. Die funktionieren mal und dann wieder nicht. Die hab ich jetzt komplett rausgeschmissen und das Ganze mit einem Objekt gelöst:
+
+```ts
+// config/site.ts
+// ...
+export const calloutColorMap = {
+  default: {
+    titleColor: "text-muted-foreground",
+    textColor: "text-muted-foreground",
+  },
+  caution: {
+    titleColor: "text-danger-600",
+    textColor: "text-danger-900",
+  },
+  important: {
+    titleColor: "text-fuchsia-600",
+    textColor: "text-fuchsia-900",
+  },
+  // ...
+};
+// ...
+```
+
+```tsx
+// components/MeineKomponente.tsx
+const type = ‘caution’
+const { textColor } = calloutColorMap[type]
+
+<div className={textColor}>Liebt Tailwind!</div>
+```
+
+Hier muss man zwar jede Farbe einzeln definieren, aber es hat einen interessanten Vorteil: Es funktioniert.
+
+GitHub: <ExternalLink href={`${social.find(({ name }) => name === "GitHub").url}/${github.repos.blog}/blob/main/src/components/Callout.tsx`} > Code der Callout-Komponente </ExternalLink>
+
+## CustomStyledMDX
+
+Die Herausforderungen, die ich mit dem Mappen der `<blockquote>`s in der `CustomStyledMDX`-Komponente hatte, habe ich [in der letzten Session](/blog/projekt-tagebuch-blog-tag-33#customstyledmdx) schon ausführlich beschrieben.
+
+Den fertigen Code kannst du dir hier ankucken: <ExternalLink
+href={`${social.find(({ name }) => name === "GitHub").url}/${github.repos.blog}/blob/main/src/components/CustomStyledMDX.tsx`}>Code der CustomStyledMDX-Komponente</ExternalLink>
+
+## Fazit
+
+Alles in Allem also zwischendurch mal wieder ein runder Tag. Die `Callout`-Implementation ist fertig. Auf zu neuen Ufern! 🎺
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
