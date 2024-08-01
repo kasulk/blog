@@ -111,3 +111,9 @@ code::after,
 code::before {
   content: none !important;
 }
+
+@layer utilities {
+  .border-outset {
+    border-style: outset;
+  }
+}
