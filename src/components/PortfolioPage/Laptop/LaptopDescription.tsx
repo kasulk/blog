@@ -6,14 +6,17 @@ type Props = {
 
 export function LaptopDescription({ name, description, technologies }: Props) {
   return (
-    <div className="absolute left-2/4 flex w-full flex-col justify-center">
-      <h4 className="m-0 mt-2 text-[1.4rem] font-bold uppercase not-italic">
+    <div className="absolute left-2/4 flex w-full -translate-x-1/2 flex-col justify-center">
+      <h4 className="m-0 mt-2 bg-accent text-xl font-bold uppercase not-italic">
         {name}
       </h4>
       <p className="mx-0 my-4">{description}</p>
-      <ul className="m-0 flex flex-wrap justify-center p-0 text-[0.8rem]">
+      <ul className="m-0 flex list-none flex-wrap justify-center p-0 text-sm">
         {technologies.map((tech, i) => (
-          <li key={name + "tech" + (i + 1)} className="mb-1 whitespace-nowrap">
+          <li
+            key={name + "tech" + (i + 1)}
+            className="not-last:after:content-['\2022'] not-last:after:px-1 mb-1 whitespace-nowrap p-0 align-middle"
+          >
             {tech}
           </li>
         ))}
@@ -21,21 +24,3 @@ export function LaptopDescription({ name, description, technologies }: Props) {
     </div>
   );
 }
-
-//todo: add missing (custom) classes
-
-// .laptop-description {
-// transform: translateX(-50%); /* center horizontally */
-// }
-
-// .laptop-description h4 {
-// background-color: var(--main-red);
-// text-shadow: none;
-// }
-
-// .laptop-description ul > li:not(:last-child)::after {
-// content: "\2022";
-// font-size: 0.6rem;
-// vertical-align: middle;
-// padding: 0.35rem;
-// }
