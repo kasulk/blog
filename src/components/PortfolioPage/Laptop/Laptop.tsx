@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Children, ReactNode } from "react";
 
 type Props = {
   imageSrc: string;
@@ -21,7 +20,7 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
             src={imageSrc}
             alt={imageAlt}
             fill
-            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 640px) 75vw, (max-width: 768px) 40vw, (max-width: 1024px) 20vw, (max-width: 1280px) 30vw, 25vw"
             className="m-0 h-full w-full rounded-[2%]"
           />
           <LaptopScreenEffects />
@@ -39,7 +38,7 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
   );
 }
 
-function LaptopTop({ children }: { children: ReactNode }) {
+function LaptopTop({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`flex h-full w-4/5 items-center justify-center rounded-[2%] shadow-[5px_0_8px_-4px] ${shadowColor} ${laptopColor1} ${borders}`}
@@ -48,7 +47,7 @@ function LaptopTop({ children }: { children: ReactNode }) {
     </div>
   );
 }
-function LaptopScreen({ children }: { children: ReactNode }) {
+function LaptopScreen({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative h-[90%] w-[93%] rounded-[2%]">{children}</div>
   );
@@ -67,7 +66,7 @@ function LaptopScreenEffects() {
   );
 }
 
-function LaptopBottom({ children }: { children: ReactNode }) {
+function LaptopBottom({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`absolute bottom-0 flex h-[8%] w-full shadow-[0_5px_5px_-5px] ${shadowColor}`}
@@ -85,7 +84,7 @@ function LaptopBottomLeft() {
   );
 }
 
-function LaptopBottomMiddle({ children }: { children: ReactNode }) {
+function LaptopBottomMiddle({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`${borders} flex h-full w-4/5 justify-center border-l-0 border-r-0 ${laptopColor1}`}
