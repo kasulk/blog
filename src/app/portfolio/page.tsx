@@ -26,7 +26,7 @@ export default function PortfolioPage() {
           id="grid-container"
           className="mb-40 grid grid-cols-1 gap-12 gap-y-72 p-0 sm:mb-24 sm:gap-y-60 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-72 xl:grid-cols-2 xl:gap-y-60"
         >
-          {projects.map((project) => {
+          {projects.map((project, i) => {
             const { name, description, title, url, image, technologies } =
               project;
 
@@ -41,6 +41,7 @@ export default function PortfolioPage() {
                   <Laptop
                     imageSrc={image.src}
                     imageAlt={image.alt || title || description}
+                    position={i + 1}
                   />
                 </ExternalLink>
                 <LaptopDescription

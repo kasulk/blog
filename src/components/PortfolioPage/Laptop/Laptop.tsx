@@ -3,6 +3,7 @@ import Image from "next/image";
 type Props = {
   imageSrc: string;
   imageAlt: string;
+  position: number;
 };
 
 const laptopColor1 = "bg-zinc-700";
@@ -10,7 +11,7 @@ const laptopColor2 = "bg-zinc-800/70";
 const shadowColor = "shadow-zinc-800";
 const borders = `border-outset border border-gray-900/60 border-b-gray-800 border-r-gray-800`;
 
-export function Laptop({ imageSrc, imageAlt }: Props) {
+export function Laptop({ imageSrc, imageAlt, position }: Props) {
   return (
     <div className="absolute left-0 top-0 flex h-[90%] w-full flex-col items-center">
       <LaptopTop>
@@ -21,6 +22,7 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
             alt={imageAlt}
             fill
             sizes="(max-width: 640px) 75vw, (max-width: 768px) 40vw, (max-width: 1024px) 20vw, (max-width: 1280px) 30vw, 25vw"
+            priority={position <= 3}
             className="m-0 h-full w-full rounded-[2%]"
           />
           <LaptopScreenEffects />
