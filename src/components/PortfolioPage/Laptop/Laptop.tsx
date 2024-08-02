@@ -28,11 +28,8 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
             src={imageSrc}
             alt={imageAlt}
             fill
-            // width={1000}
-            // height={1000}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // className={`my-0 rounded-t-sm object-cover`}
-            className="h-full w-full rounded-[2%]"
+            // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="m-0 h-full w-full rounded-[2%]"
           />
           {/* screen-effects */}
           <div className="absolute top-0 h-full w-full rounded-[2%] opacity-[0.02]"></div>
@@ -66,21 +63,6 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
 ///   box-shadow: 5px 0px 8px -4px var(--laptop-shadow-color);
 /// }
 
-///-- .laptop-lock {
-///--   border: 1px outset var(--laptop-border-color1);
-///--  border-right: 1px outset var(--laptop-border-color2);
-///--   border-bottom: 1px outset var(--laptop-border-color2);
-///-- }
-
-///-- .laptop-top,
-///-- .laptop-bottom-left,
-///-- .laptop-bottom-middle,
-///-- .laptop-bottom-right {
-///--   border: 1px outset var(--laptop-border-color1);
-///--   border-right: 1px outset var(--laptop-border-color2);
-///--   border-bottom: 1px outset var(--laptop-border-color2);
-///-- }
-
 /// .screen-effects {
 ///   background: linear-gradient(33deg, transparent 60%, var(--main-white) 40%);
 /// }
@@ -88,11 +70,3 @@ export function Laptop({ imageSrc, imageAlt }: Props) {
 /// .laptop-bottom {
 ///   box-shadow: 0 5px 5px -5px var(--laptop-shadow-color);
 /// }
-
-///-- .laptop-bottom-left {
-///--   border-radius: 20% 0 0 50%;
-///-- }
-
-///-- .laptop-bottom-right {
-///--   border-radius: 0 20% 50% 0;
-///-- }
