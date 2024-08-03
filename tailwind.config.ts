@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { PluginAPI } from "tailwindcss/types/config";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
@@ -157,6 +158,9 @@ const config = {
   plugins: [
     require("@tailwindcss/typography"), // use prose class to add styles from tailwind/typography
     require("tailwindcss-animate"),
+    ({ addVariant }: PluginAPI) => {
+      addVariant("not-last", "&:not(:last-child)");
+    },
   ],
 } satisfies Config;
 
