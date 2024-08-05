@@ -8,6 +8,7 @@ export type Project = {
     src: string;
     alt?: string;
   };
+  isActive: boolean;
 };
 
 export const projects: Project[] = [
@@ -30,26 +31,7 @@ export const projects: Project[] = [
       src: "/img/portfolio/blog.png",
       alt: "",
     },
-  },
-  {
-    name: "Art Gallery",
-    description:
-      "This collaboration with the great Spreekaiser fetches and displays disputable art pieces.",
-    title: "This exquisit art gallery app is itself a fine piece of art...",
-    url: "https://art-gallery-2000.vercel.app",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Next.js",
-      "Rest API",
-      "Node.js",
-      "Styled Components",
-      "Jest",
-    ],
-    image: {
-      src: "/img/portfolio/art-gallery.png",
-      alt: "",
-    },
+    isActive: true,
   },
   {
     name: "Ursula 3000",
@@ -71,10 +53,33 @@ export const projects: Project[] = [
       src: "/img/portfolio/uschi.png",
       alt: "",
     },
+    isActive: true,
   },
   {
-    name: "Daniel Kaser",
-    description: "Do you recognize it?",
+    name: "Art Gallery",
+    description:
+      "This collaboration with the great Spreekaiser fetches and displays disputable art pieces.",
+    title: "This exquisit art gallery app is itself a fine piece of art...",
+    url: "https://art-gallery-2000.vercel.app",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Rest API",
+      "Node.js",
+      "Styled Components",
+      "Jest",
+    ],
+    image: {
+      src: "/img/portfolio/art-gallery.png",
+      alt: "",
+    },
+    isActive: true,
+  },
+  {
+    name: "Single Page Portfolio",
+    description:
+      "A simple yet responsive single page portfolio page with pop-ups.",
     title: "Exactly! I build this very portfolio page! Cool huh?!",
     url: "https://www.danielkaser.de",
     technologies: ["JavaScript", "HTML5", "CSS3", "Rest API"],
@@ -82,54 +87,7 @@ export const projects: Project[] = [
       src: "/img/portfolio/portfolio-page.png",
       alt: "",
     },
-  },
-  {
-    name: "Drögemeier Fahrzeugteile",
-    description:
-      "Customized JTL-Online-Shop for a motor vehicle car parts e-commerce business in Berlin.",
-    title: "",
-    url: "https://www.droegemeier-fahrzeugteile.de",
-    technologies: ["JTL-Shop 4", "HTML5", "CSS3"],
-    image: {
-      src: "/img/portfolio/dft-shop.png",
-      alt: "",
-    },
-  },
-  {
-    name: "Original Dirt",
-    description:
-      "On this responsive landing page you'll get mesmerized to buy expensive dirt.",
-    title: "",
-    url: "https://www.danielkaser.de/portfolio/original-dirt",
-    technologies: ["HTML5", "CSS3"],
-    image: {
-      src: "/img/portfolio/original-dirt.png",
-      alt: "",
-    },
-  },
-  {
-    name: "A Form Survey Form",
-    description:
-      "Probably the best survey form about forms in the world. Handmade.",
-    title: "One of the best survey forms in the world, handmade.",
-    url: "https://www.danielkaser.de/portfolio/survey-form",
-    technologies: ["HTML5", "CSS3"],
-    image: {
-      src: "/img/portfolio/survey-form.png",
-      alt: "",
-    },
-  },
-  {
-    name: "Simple Personal Website",
-    description:
-      "Simple sunny personal website with animations, lots of chili and a mustache.",
-    title: "",
-    url: "https://www.danielkaser.de/portfolio/sunny-mustache",
-    technologies: ["HTML5", "CSS3"],
-    image: {
-      src: "/img/portfolio/sunny-mustache.png",
-      alt: "",
-    },
+    isActive: true,
   },
   {
     name: "YT UI Clone",
@@ -142,6 +100,46 @@ export const projects: Project[] = [
       src: "/img/portfolio/yt-clone.png",
       alt: "",
     },
+    isActive: true,
+  },
+  {
+    name: "Drögemeier Fahrzeugteile",
+    description:
+      "Customized JTL-Online-Shop for a motor vehicle car parts e-commerce business in Berlin.",
+    title: "",
+    url: "https://www.droegemeier-fahrzeugteile.de",
+    technologies: ["JTL-Shop 4", "HTML5", "CSS3"],
+    image: {
+      src: "/img/portfolio/dft-shop.png",
+      alt: "",
+    },
+    isActive: true,
+  },
+  {
+    name: "Original Dirt",
+    description:
+      "On this responsive landing page you'll get mesmerized to buy expensive dirt.",
+    title: "",
+    url: "https://www.danielkaser.de/portfolio/original-dirt",
+    technologies: ["HTML5", "CSS3"],
+    image: {
+      src: "/img/portfolio/original-dirt.png",
+      alt: "",
+    },
+    isActive: false,
+  },
+  {
+    name: "A Form Survey Form",
+    description:
+      "Probably the best survey form about forms in the world. Handmade.",
+    title: "One of the best survey forms in the world, handmade.",
+    url: "https://www.danielkaser.de/portfolio/survey-form",
+    technologies: ["HTML5", "CSS3"],
+    image: {
+      src: "/img/portfolio/survey-form.png",
+      alt: "",
+    },
+    isActive: false,
   },
   {
     name: "Stand-Up",
@@ -153,6 +151,7 @@ export const projects: Project[] = [
       src: "/img/portfolio/dk-comedy.png",
       alt: "",
     },
+    isActive: true,
   },
   {
     name: "Naturheilpraxis Lorbach",
@@ -164,5 +163,19 @@ export const projects: Project[] = [
       src: "/img/portfolio/naturheilpraxis-lorbach.png",
       alt: "",
     },
+    isActive: true,
+  },
+  {
+    name: "Simple Personal Website",
+    description:
+      "Simple sunny personal website with animations, lots of chili and a mustache.",
+    title: "",
+    url: "https://www.danielkaser.de/portfolio/sunny-mustache",
+    technologies: ["HTML5", "CSS3"],
+    image: {
+      src: "/img/portfolio/sunny-mustache.png",
+      alt: "",
+    },
+    isActive: true,
   },
 ];
