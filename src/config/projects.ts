@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     name: "Blog",
     description:
-      "This high-performance markdown blog is not made with love. It's made with Next.js 14.",
+      "Dieser high-performance Markdown-Blog ist nicht 'Made with ❤', sondern mit Next.js 14.",
     title: "",
     url: "https://kasulks-blog.vercel.app",
     technologies: [
@@ -38,10 +38,10 @@ export const projects: Project[] = [
   {
     name: "Ursula 3000",
     description:
-      "Processes and renders data of 3000 stocks of the US Russell Index. NextAuth and darkmode.",
+      "Verarbeitet und rendert die Daten von 3000 Aktien aus dem US Russell Index. NextAuth und Darkmode.",
     title:
-      "Ursula helps you to screen dividend stocks in the US Russell 3000 index.",
-    url: "https://ursula-kasulk.vercel.app",
+      "Ursula hilft dir Dividenden-Aktien im US Russell 3000 Index zu finden.",
+    url: "https://ursula-3000.vercel.app",
     technologies: [
       "React",
       "TypeScript",
@@ -52,7 +52,7 @@ export const projects: Project[] = [
       "Tailwind",
     ],
     image: {
-      src: imageDir + "uschi.png",
+      src: imageDir + "uschi-3000.png",
       alt: "",
     },
     isActive: true,
@@ -60,8 +60,8 @@ export const projects: Project[] = [
   {
     name: "Art Gallery",
     description:
-      "This collaboration with the great Spreekaiser fetches and displays disputable art pieces.",
-    title: "This exquisit art gallery app is itself a fine piece of art...",
+      "Diese Zusammenarbeit mit dem großen Spreekaiser empfängt und zeigt streitbare Kunstwerke.",
+    title: "Diese exquisite Kunst-Gallerie-App ist selbst ein Kunstwerk...",
     url: "https://art-gallery-2000.vercel.app",
     technologies: [
       "React",
@@ -81,8 +81,8 @@ export const projects: Project[] = [
   {
     name: "Single Page Portfolio",
     description:
-      "A simple yet responsive single page portfolio page with pop-ups.",
-    title: "Exactly! I build this very portfolio page! Cool huh?!",
+      "Eine einfache, aber responsive Single-Page-Portfolio-Webseite mit Animationen und Pop-Ups.",
+    title: "",
     url: "https://www.danielkaser.de",
     technologies: ["JavaScript", "HTML5", "CSS3", "Rest API"],
     image: {
@@ -94,7 +94,7 @@ export const projects: Project[] = [
   {
     name: "YT UI Clone",
     description:
-      "Fully responsive UI clone of a kind of well known video streaming service. Using CSS Grid & Flexbox.",
+      "Komplett responsiver UI-Klon eines mehr oder weniger bekannten Video-Streaming-Dienstes.",
     title: "",
     url: "https://www.danielkaser.de/portfolio/ytclone",
     technologies: ["HTML5", "CSS3"],
@@ -107,7 +107,7 @@ export const projects: Project[] = [
   {
     name: "Drögemeier Fahrzeugteile",
     description:
-      "Customized JTL-Online-Shop for a motor vehicle car parts e-commerce business in Berlin.",
+      "Individuell angepasster JTL-Online-Shop für einen Kfz-Teile-Online-Handel in Berlin.",
     title: "",
     url: "https://www.droegemeier-fahrzeugteile.de",
     technologies: ["JTL-Shop 4", "HTML5", "CSS3"],
@@ -120,7 +120,7 @@ export const projects: Project[] = [
   {
     name: "Original Dirt",
     description:
-      "On this responsive landing page you'll get mesmerized to buy expensive dirt.",
+      "Nachdem du diese responsive Landing Page gesehen hast, kaufst du willenlos teuren Kehricht.",
     title: "",
     url: "https://www.danielkaser.de/portfolio/original-dirt",
     technologies: ["HTML5", "CSS3"],
@@ -131,10 +131,11 @@ export const projects: Project[] = [
     isActive: false,
   },
   {
-    name: "A Form Survey Form",
+    name: "Formular-Umfrage-Formular",
     description:
-      "Probably the best survey form about forms in the world. Handmade.",
-    title: "One of the best survey forms in the world, handmade.",
+      "Wahrscheinlich das beste Umfrage-Formular für Umfrage-Formulare der Welt. Handgemacht.",
+    title:
+      "Eines der besten Umfrage-Formulare für Umfrage-Formulare der Welt. Handgemacht.",
     url: "https://www.danielkaser.de/portfolio/survey-form",
     technologies: ["HTML5", "CSS3"],
     image: {
@@ -145,7 +146,8 @@ export const projects: Project[] = [
   },
   {
     name: "Stand-Up",
-    description: "Customized Wordpress page for an aspiring stand-up comedian.",
+    description:
+      "Individuell angepasste Wordpress-Seite für einen aufstrebenden Stand-Up-Comedian.",
     title: "",
     url: "https://www.danielkaser.de/comedy",
     technologies: ["Wordpress", "HTML5", "CSS3"],
@@ -157,7 +159,8 @@ export const projects: Project[] = [
   },
   {
     name: "Naturheilpraxis Lorbach",
-    description: "Customized Worpress page for a naturopath in Berlin.",
+    description:
+      "Individuell angepasste Wordpress-Seite für eine Naturheilpraktikerin in Berlin.",
     title: "",
     url: "https://www.naturheilpraxis-lorbach.de",
     technologies: ["Wordpress", "HTML5", "CSS3"],
@@ -168,9 +171,9 @@ export const projects: Project[] = [
     isActive: true,
   },
   {
-    name: "Simple Personal Website",
+    name: "Sonniger Schnurrbart",
     description:
-      "Simple sunny personal website with animations, lots of chili and a mustache.",
+      "Einfache, sonnige, persönliche Webseite mit Animationen, jeder Menge Chili und einem Schnurrbart.",
     title: "",
     url: "https://www.danielkaser.de/portfolio/sunny-mustache",
     technologies: ["HTML5", "CSS3"],
