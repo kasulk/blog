@@ -1,0 +1,156 @@
+---
+title: Projekt-Tagebuch Blog, Tag 36
+pubDate: 2024-06-24
+description: Nach meiner Plasmaspende und einem 6er Kata hab ich mich daran gemacht, meine erste Code-Challenge-Lösung hochzuladen. Wie immer viel mir dabei eine Möglichkeit auf etwas zu optimieren und so habe ich dafür gesorgt, dass Anchor-Links von nun an automatisch generiert werden können.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 02101e1dcfb8451d86bc5fb2379446ac
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Automatische MDX-Anchor-Links](#automatische-mdx-anchor-links)~
+- [x] ~[ersten Coding-Challenge Blog-Artikel hochladen](#)~
+
+---
+
+Nach meiner [Plasmaspende](/support/#plasma-spenden) und einem [6er Kata](https://www.codewars.com/kata/5503013e34137eeeaa001648) hab ich mich daran gemacht, meine erste Code-Challenge-Lösung hochzuladen. Wie immer viel mir dabei eine Möglichkeit auf etwas zu optimieren und so habe ich dafür gesorgt, dass Anchor-Links von nun an automatisch generiert werden können.
+
+## Automatische MDX-Anchor-Links
+
+Zur Erinnerung, einen Anchor Link in `MDX` erstellt man so:
+
+```md
+[Hurra!](#hurra)
+```
+
+Man gibt also die `id` des Zieles, z.B. eine Überschrift, in den runden Klammern an und bekommt:
+
+```html
+<a href="”#hurra”">Hurra!</a>
+```
+
+Wie du [hier](/blog/projekt-tagebuch-blog-tag-31#auto-markdown-ids) nachlesen kannst, hab ich ja bereits dafür gesorgt, das für Headings automatisch eine `id` aus dem Heading-Text generiert wird.
+
+Da in vielen Fällen (z.B. bei Überschriften/Inhaltsverzeichnissen) der Link-Text nicht vom Ziel abweicht, wird der Anchor-Link nun automatisch generiert, wenn in den runden Klammern nur ein `#` steht.
+
+```md
+[Hurra!](#)
+```
+
+Trotzdem kommt ein vollständiger Anchor-Link dabei raus:
+
+```html
+<a href="”#hurra”">Hurra!</a>
+```
+
+Cool oder?!
+
+Wie hab ich das gemacht?
+
+In der `CustomStyledMDX`-Komponente kann man ja beeinflussen, was beim Rendern des `MDX` zu `HTML` am Ende raus kommt. Genau hier hab ich meine Logik platziert.
+
+Bereits vorher hatte ich eine Bedingung für `a`-Tags, nach der, je nach `href`-Art eine andere Komponente rendert:
+
+```tsx
+// src/components/CustomStyledMDX.tsx; vorher
+  // ...
+  a: (props) => {
+    const { href, title, children, ...restProps } = props;
+         if (href?.startsWith("#")) return <a {...props}>{children}</a>;
+    if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
+    if (href?.startsWith("$"))
+      return (
+        <AffiliateLink partner={href.slice(1)} tooltip={title} {...restProps}>
+          {children}
+        </AffiliateLink>
+      );
+    return <ExternalLink {...props}>{children}</ExternalLink>;
+  },
+  // ...
+```
+
+Jetzt haben die Links, die mit `#` beginnen eine zusätzliche Bedingung bekommen:
+
+```tsx
+// src/components/CustomStyledMDX.tsx; nachher
+  // ...
+  a: (props) => {
+    const { href, title, children, ...restProps } = props;
+    // internal link; same page (i.e. anchor link)
+    if (href?.startsWith("#")) {
+      if (href === "#") {
+        const anchor = getAnchorFromLinkText(children);
+        return (
+          <a href={anchor} title={title} {...restProps}>
+            {children}
+          </a>
+        );
+      }
+      return <a {...props}>{children}</a>;
+    }
+    // internal link; other page
+    if (href?.startsWith("/")) return <Link {...props}>{children}</Link>;
+    if (href?.startsWith("$"))
+      return (
+        <AffiliateLink partner={href.slice(1)} tooltip={title} {...restProps}>
+          {children}
+        </AffiliateLink>
+      );
+    return <ExternalLink {...props}>{children}</ExternalLink>;
+  },
+  // ...
+```
+
+Wenn das `href` also nur aus einem einzelnen `#` besteht, wird der Anchor-`href` aus dem Link-Text generiert. Dafür hab ich folgende `getAnchorFromLinkText()`-Funktion erstellt:
+
+```ts
+// lib/utils/getAnchorFromLinkText.ts
+import React from "react";
+import { slugify } from "@lib/utils";
+
+export function getAnchorFromLinkText(
+  children: React.ReactNode,
+  maxDepth: number = 3,
+): string {
+  let currNode = children;
+  let currDepth = 0;
+
+  while (currDepth < maxDepth) {
+    const childrenArr = React.Children.toArray(currNode);
+    if (!childrenArr.length) break;
+
+    currNode = childrenArr[0];
+
+    if (typeof currNode === "string") return "#" + slugify(currNode);
+    else if (!React.isValidElement(currNode)) break;
+
+    currNode = (currNode as React.ReactElement).props.children;
+    currDepth++;
+  }
+
+  throw new Error("No string content found within the specified depth.");
+}
+```
+
+Der Trick ist hier, sich erstmal durch die ganzen Children-Nodes durchzuwühlen, bis man einen String findet. Hier suche ich bis zu einer maximalen Tiefe von 3 Ebenen.
+
+> [!tip:Übrigens]
+> Die JSDoc-Kommentare für Funktionen kann man sich wunderbar von ChatGPT erstellen lassen! Nicht vergessen nochmal rüberzukucken 🧐
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
