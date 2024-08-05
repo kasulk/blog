@@ -11,6 +11,8 @@ export type Project = {
   isActive: boolean;
 };
 
+const imageDir = "/img/portfolio/";
+
 export const projects: Project[] = [
   {
     name: "Blog",
@@ -28,7 +30,7 @@ export const projects: Project[] = [
       "Tailwind",
     ],
     image: {
-      src: "/img/portfolio/blog.png",
+      src: imageDir + "blog.png",
       alt: "",
     },
     isActive: true,
@@ -50,7 +52,7 @@ export const projects: Project[] = [
       "Tailwind",
     ],
     image: {
-      src: "/img/portfolio/uschi.png",
+      src: imageDir + "uschi.png",
       alt: "",
     },
     isActive: true,
@@ -71,7 +73,7 @@ export const projects: Project[] = [
       "Jest",
     ],
     image: {
-      src: "/img/portfolio/art-gallery.png",
+      src: imageDir + "art-gallery.png",
       alt: "",
     },
     isActive: true,
@@ -84,7 +86,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de",
     technologies: ["JavaScript", "HTML5", "CSS3", "Rest API"],
     image: {
-      src: "/img/portfolio/portfolio-page.png",
+      src: imageDir + "portfolio-page.png",
       alt: "",
     },
     isActive: true,
@@ -97,7 +99,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de/portfolio/ytclone",
     technologies: ["HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/yt-clone.png",
+      src: imageDir + "yt-clone.png",
       alt: "",
     },
     isActive: true,
@@ -110,7 +112,7 @@ export const projects: Project[] = [
     url: "https://www.droegemeier-fahrzeugteile.de",
     technologies: ["JTL-Shop 4", "HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/dft-shop.png",
+      src: imageDir + "dft-shop.png",
       alt: "",
     },
     isActive: true,
@@ -123,7 +125,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de/portfolio/original-dirt",
     technologies: ["HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/original-dirt.png",
+      src: imageDir + "original-dirt.png",
       alt: "",
     },
     isActive: false,
@@ -136,7 +138,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de/portfolio/survey-form",
     technologies: ["HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/survey-form.png",
+      src: imageDir + "survey-form.png",
       alt: "",
     },
     isActive: false,
@@ -148,7 +150,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de/comedy",
     technologies: ["Wordpress", "HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/dk-comedy.png",
+      src: imageDir + "dk-comedy.png",
       alt: "",
     },
     isActive: true,
@@ -160,7 +162,7 @@ export const projects: Project[] = [
     url: "https://www.naturheilpraxis-lorbach.de",
     technologies: ["Wordpress", "HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/naturheilpraxis-lorbach.png",
+      src: imageDir + "naturheilpraxis-lorbach.png",
       alt: "",
     },
     isActive: true,
@@ -173,7 +175,7 @@ export const projects: Project[] = [
     url: "https://www.danielkaser.de/portfolio/sunny-mustache",
     technologies: ["HTML5", "CSS3"],
     image: {
-      src: "/img/portfolio/sunny-mustache.png",
+      src: imageDir + "sunny-mustache.png",
       alt: "",
     },
     isActive: true,
