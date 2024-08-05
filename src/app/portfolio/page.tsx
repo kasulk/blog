@@ -55,6 +55,7 @@ export default function PortfolioPage() {
                   <LaptopDescription
                     name={name}
                     description={description}
+                    url={url}
                     technologies={technologies}
                   />
                 </div>
