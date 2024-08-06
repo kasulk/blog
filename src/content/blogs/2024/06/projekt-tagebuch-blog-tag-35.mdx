@@ -1,0 +1,84 @@
+---
+title: Projekt-Tagebuch Blog, Tag 35
+pubDate: 2024-06-21
+description: Ich hab ja die Headings so eingerichtet, dass die Anker-Links dorthin automatisch bei Klick auf die Überschrift in die Zwischenablage kopiert werden. Das Problem war jetzt, dass ich vergaß, dass so natürlich alle Headings in der App dieses Feature bekommen.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: a7343c2219c047d2a8c2ad1ee8cd7c7a
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[Fix für auto-kopierbare Headings](#)~
+- [x] ~[Zeichen-Zähler erstellen](#zeichen-zaehler)~
+- [x] ~[Bonus: truncify-Funktion erstellen](#truncify)~
+
+---
+
+## Blog-Projekt-Tagebuch-Einträge Tag 3 bis 5
+
+Gestern hab ich schon heimlich ein bisschen vorgearbeitet und die Blog-Projekt-Tagebucheinträge Tag 3 bis 5 erstellt.
+
+## Fix für auto-kopierbare Headings
+
+Ich hab ja die Headings so eingerichtet, dass die Anker-Links dorthin automatisch bei Klick auf die Überschrift in die Zwischenablage kopiert werden.
+
+Das Problem war jetzt, dass ich vergaß, dass so natürlich alle Headings in der App dieses Feature bekommen. In der `Sidebar` fand ich das etwas unpassend. Darum hab ich die Headings schwuppdiwupp um eine `autocopyable`-Property ergänzt, die standardmäßig auf `false` gesetzt ist.
+
+Jetzt kann man wieder unbesorgt Headings ohne dieses Feature erstellen.
+
+## Zeichen-Zähler
+
+Als nächstes hab ich mich an einen Zeichen-Zähler gemacht. Bei der VG Wort sind nur Beiträge relevant, die mehr als 1.800 Zeichen lang sind. Da ich keinen Bock hatte, immer den Text zu kopieren und in eine Word-Datei einzufügen um die Zeichenanzahl zu checken, hab ich kurzer Hand eine `CharCounter`-Komponente gebaut.
+
+Da die Zeichenanzahl wiederum für den gemeinen Leser eher von peripherem Interesse sein dürfte, hab ich ihn so eingerichtet, dass er nur im Dev-Modus angezeigt wird. Wenn die Anzahl Zeichen unter 1.800 ist, ist der Counter rot, bis 2.000 gelb und ab 2.000 grün.
+
+So hab ich immer im Blick, ob ein Artikel für eine VG-Wort-Meldung tendenziell in Frage kommt oder nicht.
+
+Einziges Manko: Es werden nur die Zeichen im `Markdown` gezählt. Nicht die im tatsächlich gerenderten Text. Das `Markdown` für diese Zwecke extra noch mal in Text umzuwandeln war mir jetzt zu anstrengend. Vielleicht zu einem späteren Zeitpunkt mal. Zur groben Orientierung reicht's so.
+
+Der Zeichen-Zähler wird auf jedem individuellen Blog-Artikel und in der Blog-Liste, also der Liste mit einer Vorschau aller Blog-Artikel für jeden Blog-Artikel angezeigt. Außerdem kann man ihn bei temporärem Nicht-Gefallen entspannt in der `siteConfig` deaktivieren.
+
+### Screenhot SingleBlogPost mit CharCounter
+
+![Screenhot SingleBlogPost mit CharCounter](/img/blogs/2024/screenshots/char-counter-single-blogpost.png)
+
+### Screenhot BlogList mit CharCounter
+
+![Screenhot BlogList mit CharCounter](/img/blogs/2024/screenshots/char-counter-bloglist.png)
+
+[Zeichen-Zähler-Code auf GitHub](https://github.com/kasulk/blog/blob/main/src/components/CharCounter.tsx)
+
+## truncify()
+
+Zum Schluss hab ich noch mit `ChatGPT`'s tatkräftiger Unterstützung auf die Schnelle eine `truncify`-Funktion erstellt. In meiner Blog-Liste mit einer Vorschau aller Blog-Artikel wird immer ein kleiner Ausschnitt vom Anfang des jeweiligen Artikels angezeigt.
+
+Diesen Ausschnitt wollte ich jetzt mit einer Funktion automatisch zurechtgeschnitten wissen. Folgende Kriterien schwebten mir vor:
+
+- Der Vorschautext sollte nicht länger als 200 Zeichen sein
+- Es sollte kein Wort in der Mitte einfach abgeschnitten werden und
+- das letzte Zeichen sollte immer ein Buchstabe (oder ein `` ` ``, `’`, oder `”`) sein.
+
+Das hat wunderbar geklappt. Nur in die `BlogCard` implementieren und fertig!
+
+**GitHub:**
+
+- [BlogCard](https://github.com/kasulk/blog/blob/main/src/components/BlogCard.tsx)
+- [truncify()](https://github.com/kasulk/blog/blob/main/src/lib/utils/truncify.ts)
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
