@@ -1,0 +1,255 @@
+---
+title:
+pubDate: 2024-07-14
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: a70c3e1ea36042879e63774596aadbca
+
+codeChallengeData:
+  platform: codewars
+  id: 5d23d89906f92a00267bb83d
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes erstellen wir uns unsere Speisekarte
+
+</Accordion>
+
+<Accordion>
+Schritt 2
+
+Dann brauchen wir noch ein Ergebnis-Array (und eine Variable für das, was von der Bestellung jeweils übrig bleibt)
+
+</Accordion>
+
+<Accordion>
+Schritt 3
+
+Dann loopen wir durch die Speisekarte
+
+</Accordion>
+
+<Accordion>
+Schritt 4
+
+Wir entfernen alle Vorkommnisse des jeweils aktuellen Elements der Speisekarte im Bestell-String
+
+</Accordion>
+
+<Accordion>
+Schritt 5
+
+Dann vergleichen wir die Länge des Bestell-Strings vor dem Entfernen und danach (so kriegen wir raus, wie oft das Element im Bestell-String vorkam)
+
+</Accordion>
+
+<Accordion>
+Schritt 6
+
+Jetzt können wir die aktuellen Entfernungen in der richtigen Anzahl an unser Ergebnis-Array anhängen
+
+</Accordion>
+
+<Accordion>
+Schritt 7
+
+Zum Schluss nur noch das Ergebnis als String zurückgeben
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `input` in `order` umbenannt):
+```js
+function getOrder(order) {
+```
+
+</Accordion>
+<Accordion>
+
+Meine Speisekarte:
+
+```js
+const menu =
+  "Burger,Fries,Chicken,Pizza,Sandwich,Onionrings,Milkshake,Coke".split(",");
+```
+
+Ich war zu faul für jedes Element Gänsefüßchen zu tippen. Du kannst die Speisekarte hier natürlich auch manuell als `Array` erstellen.
+
+```js
+const menu = [“Burger”, “Fries”, ... ]
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt Ergebnis-Array und temporäre Restliche-Bestellung-Variablen initialisieren:
+
+```js
+let remainingOrder = order;
+let readableOrder = [];
+```
+
+</Accordion>
+<Accordion>
+
+Und schon geht’s los mit dem Loop durch die Speisekarte:
+
+```js
+  menu.forEach((item) => {
+```
+
+</Accordion>
+<Accordion>
+
+Dann speichern wir uns die aktuelle Länge der übrigen Bestellung in einer Variablen ab:
+
+```js
+const curr = item.toLowerCase();
+const orderLenBefore = remainingOrder.length;
+```
+
+Der Übersichtlichkeit halber speichere ich mir auch das aktuelle Element in einer Variablen ab.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir alle Vorkommnisse des jeweils aktuellen Elements der Speisekarte im Bestell-String entfernen:
+
+```js
+remainingOrder = remainingOrder.replaceAll(curr, "");
+```
+
+</Accordion>
+<Accordion>
+
+Danach können wir die Länge des Bestell-Strings vor dem Entfernen und danach vergleichen:
+
+```js
+const orderLenAfter = remainingOrder.length;
+const numItems = (orderLenBefore - orderLenAfter) / curr.length;
+```
+
+Indem wir durch die Länge des aktuellen Elements teilen, kriegen wir raus, wie oft das Element im Bestell-String vorkam.
+
+</Accordion>
+<Accordion>
+
+Diese Elemente können wir dann an das Ergebnis-Array anhängen:
+
+```js
+    readableOrder.push(...Array(numItems).fill(item));
+  });
+```
+
+Mit `Array()` erstelle ich neues Array mit der Länge `numItems`. Dann setze ich an jede Stelle, das aktuelle Element der Speisekarte ein. Das Ganze wird dann mit `...` gespreadet, damit wir die Elemente einzeln an das Ergebnis-Array anhängen können.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das Ergebnis als String zurückgeben:
+
+```js
+  return readableOrder.join(" ");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function getOrder(order) {
+  const menu =
+    "Burger,Fries,Chicken,Pizza,Sandwich,Onionrings,Milkshake,Coke".split(",");
+
+  let remainingOrder = order;
+  let readableOrder = [];
+
+  menu.forEach((item) => {
+    const curr = item.toLowerCase();
+    const orderLenBefore = remainingOrder.length;
+
+    remainingOrder = remainingOrder.replaceAll(curr, "");
+
+    const orderLenAfter = remainingOrder.length;
+    const numItems = (orderLenBefore - orderLenAfter) / curr.length;
+
+    readableOrder.push(...Array(numItems).fill(item));
+  });
+
+  return readableOrder.join(" ");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
