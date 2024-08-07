@@ -1,0 +1,276 @@
+---
+title:
+pubDate: 2024-07-29
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 5ccc9f13d06148e0b57575d509240dd7
+
+codeChallengeData:
+  platform: codewars
+  id: 598106cb34e205e074000031
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Um die Ratten auseinanderhalten zu können, können wir zwischen jede Ratte ein Leerzeichen schieben, dafür erstelle ich mir eine Helfer-Funktion
+
+</Accordion>
+
+<Accordion>
+Schritt 2
+
+Hier loope ich einmal durch alle Ratten, hänge sie an ein Array, wandele das Array in einen String um und platziere ein Leerzeichen zwischen jeder Ratte
+
+</Accordion>
+
+<Accordion>
+Schritt 3
+
+Als Erstes erstellen wir uns eine Variable um die tauben Ratten zu zählen
+
+</Accordion>
+
+<Accordion>
+Schritt 4
+
+Dann bereinigen wir uns die `town`-Variable und speichern die Ratten links und rechts vom Pfeifer jeweils in einer eigenen Variablen ab
+
+</Accordion>
+
+<Accordion>
+Schritt 5
+
+Jetzt schieben wir mit unserer Helfer-Funktion die Leerzeichen zwischen die Ratten
+
+</Accordion>
+
+<Accordion>
+Schritt 6
+
+Dann können wir die tauben Ratten zählen und in unserer Taube-Ratten-Zähl-Variablen speichern
+
+</Accordion>
+
+<Accordion>
+Schritt 7
+
+Zum Schluss nur noch die Anzahl der tauben Ratten zurückgeben
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Zuerst die erste Zeile meiner Helfer-Funktion, die Leerzeichen zwischen die Ratten schiebt:
+
+```js
+function spacifyRats(rats) {
+```
+
+</Accordion>
+<Accordion>
+
+Wir brauchen ein Array für unser Ergebnis:
+
+```js
+const spacedRats = [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch die Ratten:
+
+```js
+  for (let i = 0; i < rats.length; i += 2) {
+```
+
+Da jede Ratte aus 2 Zeichen besteht, gehen wir hier immer 2 Schritte (`i += 2`).
+
+</Accordion>
+<Accordion>
+
+Wie schnappen uns jede Ratte (Kopf und Schwanz) und fügen sie zu unserem Ergebnis-Array hinzu:
+
+```js
+    spacedRats.push(rats[i] + rats[i + 1]);
+  }
+```
+
+Eine weitere Möglichkeit sich jede Ratte zu schnappen wäre z.B. `rats.slice(i, 2)`. Geschmackssache.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss die Leerzeichen nicht vergessen, dafür machen wir ja das ganze Theater:
+
+```js
+  return spacedRats.join(" ");
+}
+```
+
+Jetzt haben wir einen String mit Leerzeichen-getrennten Ratten. Weiter geht’s mit der Hauptfunktion:
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```js
+function countDeafRats(town) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst erstellen wir uns einen Zähler für die tauben Ratten:
+
+```js
+let numDeafRats = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt extrahieren wir die linken und die rechten Ratten in eigene Variablen:
+
+```js
+const [leftRats, rightRats] = town.replace(/[\s]/g, "").split("P");
+```
+
+Mit `.replace(/[\s]/g, "")` entfernen wir jegliche Leerzeichen und .split(“P”) gibt uns ein Array mit 2 Elementen zurück, die wir sofort deconstructen.
+
+Wenn der Pfeifer ganz links oder ganz rechts steht, erhalten wir ein auf einer Seite einen leeren String.
+
+</Accordion>
+<Accordion>
+
+Dann schieben wir die Leerzeichen zwischen die Ratten:
+
+```js
+const leftSpacedRats = spacifyRats(leftRats);
+const rightSpacedRats = spacifyRats(rightRats);
+```
+
+Dabei hilft uns unsere Helfer-Funktion von oben.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die tauben Ratten zählen und in unserer Taube-Ratten-Zähl-Variable speichern:
+
+```js
+numDeafRats += (leftSpacedRats.match(/O~/g) || []).length;
+numDeafRats += (rightSpacedRats.match(/~O/g) || []).length;
+```
+
+Wenn wir auf einer Seite keine taube Ratte finden, messen wir die Länge eines leeren Arrays, also `0`.
+
+</Accordion>
+<Accordion>
+
+Geil, jetzt nur noch unsere gezählten tauben Ratten zurückgeben:
+
+```js
+  return numDeafRats;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function countDeafRats(town) {
+  let numDeafRats = 0;
+
+  const [leftRats, rightRats] = town.replace(/[\s]/g, "").split("P");
+  const leftSpacedRats = spacifyRats(leftRats);
+  const rightSpacedRats = spacifyRats(rightRats);
+
+  numDeafRats += (leftSpacedRats.match(/O~/g) || []).length;
+  numDeafRats += (rightSpacedRats.match(/~O/g) || []).length;
+
+  return numDeafRats;
+}
+
+function spacifyRats(rats) {
+  const spacedRats = [];
+
+  for (let i = 0; i < rats.length; i += 2) {
+    spacedRats.push(rats[i] + rats[i + 1]);
+  }
+
+  return spacedRats.join(" ");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
