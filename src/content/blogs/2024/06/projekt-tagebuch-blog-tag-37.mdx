@@ -1,0 +1,134 @@
+---
+title: Projekt-Tagebuch Blog, Tag 37
+pubDate: 2024-06-26
+description: Als Erstes hab ich mich heute an die Accordion-Komponente fürs MDX gemacht. Accordion ist quasi eine Art Dropdown-Menü im Text, wo man weiteren Text hinter einer Überschrift verstecken kann. Beim Klick auf diese Überschrift wird der versteckte Text sichtbar.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 9839ea15e42f41ddb52c27bdd57668d6
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] Artikel-View-Count zu jedem Artikel anzeigen
+- [x] ~[MDX-Accordion bauen und einbinden](#mdx-accordion)~
+- [x] ~[Syntax Highlighting für Code-Blöcke implementieren](#syntax-highlighting)~
+
+---
+
+## MDX-Accordion
+
+Als Erstes hab ich mich heute an die `Accordion`-Komponente fürs `MDX` gemacht. Accordion ist quasi eine Art Dropdown-Menü im Text, wo man weiteren Text hinter einer Überschrift verstecken kann. Beim Klick auf diese Überschrift wird der versteckte Text sichtbar.
+
+Das bietet sich an für die Code-Challenge-Lösungen auf dem Blog. So sieht der gemeine lösende Leser die Lösungen erst, wenn er auf sie klickt und werden nicht schon vorher gespoilert.
+
+Mit `HTML` kann man so eine simple Form eines Accordions relativ leicht mit `<details>` und `<summary>` zaubern:
+
+```html
+<details>
+  <summary>Wo bist denn du?</summary>
+  Hier!
+</details>
+```
+
+Da ich möglichst wenig `HTML` in meine `MDX`-Dateien schreiben möchte, habe ich dafür eine `Accordion`-Komponente gebaut. So wird das erste `Child` automatisch als `summary` verwendet und der Rest als (versteckter) Content und ich brauche nicht mehr 2 Tags, sondern nur noch einen.
+
+```md
+<Accordion>
+Na wo denn?!!
+
+Na hier!!
+
+</Accordion>
+```
+
+Hier muss man darauf achten, dass man die leeren Zeilen nicht vergisst. Denn diese machen in `Markdown` aus einer befüllten Zeile darüber ein `<p>`-Element und damit ein neues `Child`.
+
+Hier meine `Accordion`-Komponente:
+
+```tsx
+// src/components/Accordion.tsx
+type Props = {
+  className?: string;
+  summary: React.ReactNode;
+  content: React.ReactNode;
+};
+
+export function Accordion({ className = "", summary, content }: Props) {
+  return (
+    <details className={`mb-1 ${className}`}>
+      <summary className="bg-danger/5 hover:cursor-pointer hover:bg-danger/10 dark:bg-danger/15 dark:hover:bg-danger/20">
+        {summary}
+      </summary>
+      {content}
+    </details>
+  );
+}
+```
+
+Und so mappe isch dat Janze in der `CustomStyledMDX`:
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+// ...
+  Accordion: (props) => {
+    const { children, ...restProps } = props;
+    // extract the first line/children to be the summary
+    const [firstParagraph, ...content] = children;
+    const summary = firstParagraph.props.children;
+
+    return (
+      <Accordion {...restProps} summary={summary} content={content}></Accordion>
+    );
+  },
+// ...
+```
+
+Eine gerenderte `Accordion`-Komponente in Action findest du auch unten unter [Feedback](#)
+
+## Syntax Highlighting
+
+Als nächstes war endlich das Syntax-Highlighting dran. D.h., Code-Schnipsel sind jetzt schön bunt, wie im Code-Editor.
+
+### rehype-highlight und hightlight-js installieren
+
+Dafür hab ich die Packages `rehype-highlight` und `highlight-js` installiert. Die wollten aber nicht so richtig harmonieren. Vor allem nicht mit den bereits installierten Packages `remark-gfm` und `next-mdx-remote`.
+
+Das Problem war hier, dass all diese Packages unterschiedliche Versionen von `vfile` verwendeten. Die Lösung war hier `remark-gfm` auf Version `4.0.0` upzudaten und `next-mdx-remote` auf Version `5.0.0`.
+
+Allerdings kann ich mich erinnern, dass ich diese beiden Packages bewusst bisher nicht auf die aktuellste Version upgedated hatte, weil es an anderer Stelle ein Problem mit den neuen Versionen gab. Ich weiß nur nicht mehr wo - dammit...
+
+Bisher läuft alles rund, aber ich rechne mit einer bösen Überraschung...
+
+> [!tip:Nachtrag aus der Zukunft]
+> Läuft immernoch alles rund!  
+> (Stand: August 2024)
+
+### Styles einfügen
+
+Dann hab ich mir ein Style-Paket ausgesucht. [Hier](https://highlightjs.org/demo) kann man sich durch einen Haufen vorgestylter Presets durchwühlen. Wenn man sich dann für eins entschieden hat, kann man es [auf GitHub downloaden](https://github.com/highlightjs/highlight.js/tree/main/src/styles). Ich habe mich erst mal für `github-dark` entschieden.
+
+Dann musste ich die Datei nur noch in meinem `/styles-Verzeichnis` unterbringen und in die dynamische (Single) `BlogPage` importieren.
+
+```tsx
+// src/app/blog/[slug]/page.tsx
+import "@/styles/highlight-js/github-dark.css";
+// ...
+```
+
+Zack. Nu hab ich bunte Code-Schnipsel!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>

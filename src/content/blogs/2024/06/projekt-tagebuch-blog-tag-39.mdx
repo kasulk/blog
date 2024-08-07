@@ -1,0 +1,67 @@
+---
+title: Projekt-Tagebuch Blog, Tag 39
+pubDate: 2024-06-28
+description: Da ich gestern bereits eine E-Mail-Adresse eingerichtet hatte, fehlte heute nur noch der dazugehörige Button. Der war auch schnell erstellt. Einfach den SupportButton kopiert und etwas angepasst. Dann konnte ich den E-Mail-Button in die SocialLinks integrieren.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 95d1378b647544fb999f7735f31a8eee
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[E-Mail-Button erstellen](#e-mail-button)~
+- [ ] [Daten von Codewars-API fetchen](#daten-von-codewars-api-fetchen)
+
+---
+
+## E-Mail-Button
+
+Da ich [gestern](/blog/projekt-tagebuch-blog-tag-38#e-mail-in-die-siteconfig) bereits eine E-Mail-Adresse eingerichtet hatte, fehlte heute nur noch der dazugehörige Button. Der war auch schnell erstellt. Einfach den `SupportButton` kopiert und etwas angepasst.
+
+Dann konnte ich den E-Mail-Button in die `SocialLinks` integrieren. Da ich aber nicht überall wo die `SocialLinks` angezeigt werden, zwingend den E-Mail-Button mit anzeigen möchte, hab ich die `SocialLinks` fix um eine `showEmail`-Property ergänzt.
+
+### Codewars-Button
+
+Da ich gerade dabei war, hab ich [Codewars](/blog/tag/codewars) zu den `SocialLinks` hinzugefügt. Auch diesen Button brauche ich nicht überall, darum hab ich auch für [Codewars](/blog/tag/codewars) eine entsprechende `showCodewars`-Property zu den `SocialLinks` hinzugefügt.
+
+### Auto-Betreff
+
+Weil ich Automatisierung so geil finde, hab ich den E-Mail-Button so eingerichtet, dass automatisch eine Betreff-Zeile für die E-Mail generiert wird wenn man drauf klickt. Abhängig davon, wo auf der Seite man sich gerade befindet.
+
+## Feedback-Section
+
+Danach hab ich ans [Ende jedes Blog-Artikels](#feedback) eine Feedback-Section angehängt, die hinter einem Accordion versteckt ist. Wenn man es öffnet, findet man die `SocialLinks` inklusive E-Mail und [Codewars](/blog/tag/codewars).
+
+Wie ich das `Accordion` erstellt hab findest du [hier](/blog/projekt-tagebuch-blog-tag-37#mdx-accordion).
+
+## Daten von Codewars-API fetchen
+
+Dann hab ich angefangen mich um das automatische Fetchen der[Codewars](/blog/tag/codewars)-Daten, vor allem der Kata-Beschreibung, zu kümmern.
+
+Da ich [gestern](/blog/projekt-tagebuch-blog-tag-38#blog-typ-spezifisches-frontmatter) bereits die Kata-`id` in das Frontmatter integriert habe, kann jetzt mit dieser `id` das richtige Kata gefetcht werden.
+
+### react-markdown
+
+Einzig das Rendern des `Markdowns` in der Beschreibung wollte noch nicht so richtig funktionieren. Darum hab ich das Package `react-markdown` von `remarkjs` installiert.
+
+Dazu hab ich noch eine Komponente erstellt, die die gefetchten Daten rendert. Je nachdem ob es normaler Text oder `Markdown` ist, werden die Daten von `react-markdown` gerendert oder einfach nur dargestellt.
+
+Jetzt kann die `API` beim Build-Prozess angezapft und die Daten automatisch gerendert werden. Ich muss also nicht mehr jede einzelne Kata-Beschreibung in die Blog-Posts kopieren. Nice 😎
+
+So richtig fertig bin ich aber nicht geworden, weiter geht’s damit dann nächste Woche!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
