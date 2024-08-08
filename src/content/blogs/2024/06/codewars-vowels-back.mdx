@@ -1,0 +1,242 @@
+---
+title:
+pubDate: 2024-06-07
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: b5bc941b13f74214976242154893fbb4
+
+codeChallengeData:
+  platform: codewars
+  id: 57cfd92c05c1864df2001563
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes definieren wir unser Alphabet
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch die einzelnen Buchstaben
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt können wir jeden Buchstaben checken und die Anzahl Schritte je nach Buchstaben in einer Variablen speichern
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann suchen wir den neuen Buchstaben aus dem Alphabet raus
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn der Buchstabe im “code” enthalten ist, geben wir den ursprünglichen Buchstaben zurück
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Ansonsten den Neuen
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `s` in `str` umbenannt):
+```ts
+export function vowelBack(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Erst das Alphabet definieren:
+
+```ts
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  return [...str]
+    .map((letter) => {
+```
+
+Dazu spreaden wir erst den String in ein Array und verwenden dann .map(), da wir genauso viele Elemente zurückhaben wollen, wie wir reingeben.
+
+Da wir nicht viel mehr brauchen bzw. das Ding hier komplett mit Method-Chaining lösen wollen, können wir das `return` direkt hier hinballern. Bäääm! 🤘
+
+</Accordion>
+<Accordion>
+
+Der Übersichtlichkeit halber speichere ich mir den Index des aktuellen Buchstaben im Alphabet in einer Variablen ab. Außerdem definiere ich mir eine weitere Variable in der die Anzahl zu machender Schritte gespeichert wird.
+
+```ts
+const currIndex = alphabet.indexOf(letter);
+let steps: number;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir uns an die Logik für die Anzahl der Schritte machen:
+
+```ts
+if (letter === "c" || letter === "o") steps = -1;
+else if (letter === "d") steps = -3;
+else if (letter === "e") steps = -4;
+else if ("aeiou".includes(letter)) steps = -5;
+else steps = 9;
+```
+
+</Accordion>
+<Accordion>
+
+Mit der Anzahl der Schritte können wir den neuen Index berechnen:
+
+```ts
+const newIndex = (currIndex + 26 + steps) % 26;
+```
+
+Mit dem Modulo-Operator `%` sorgen wir dafür, dass wir auch den richtigen Index bekommen wenn er über 0 oder 26 hinausgeht.
+Damit der Modulo auch funktioniert, wenn der Index negativ wird, addieren wir vorsichtshalber 26 zum aktuellen Index hinzu.
+
+</Accordion>
+<Accordion>
+
+Mit dem neuen Index können wir jetzt den neuen Buchstaben bestimmen:
+
+```ts
+const newLetter = alphabet[newIndex];
+```
+
+</Accordion>
+<Accordion>
+
+Der letzte Test. Wenn der neue Buchstabe in “code” enthalten ist, geben wir den alten Buchstaben zurück. Ansonsten den Neuen:
+
+```ts
+      if ("code".includes(newLetter)) return letter;
+      return newLetter;
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch das Array wieder zu einem String zusammenfügen:
+
+```ts
+    .join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function vowelBack(str: string): string {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  return [...str]
+    .map((letter) => {
+      const currIndex = alphabet.indexOf(letter);
+      let steps: number;
+
+      if (letter === "c" || letter === "o") steps = -1;
+      else if (letter === "d") steps = -3;
+      else if (letter === "e") steps = -4;
+      else if ("aeiou".includes(letter)) steps = -5;
+      else steps = 9;
+
+      const newIndex = (currIndex + 26 + steps) % 26;
+      const newLetter = alphabet[newIndex];
+
+      if ("code".includes(newLetter)) return letter;
+      return newLetter;
+    })
+    .join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
