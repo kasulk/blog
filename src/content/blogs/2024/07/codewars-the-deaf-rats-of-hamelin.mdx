@@ -150,7 +150,7 @@ Eine weitere Möglichkeit sich jede Ratte zu schnappen wäre z.B. `rats.slice(i,
 </Accordion>
 <Accordion>
 
-Zum Schluss die Leerzeichen nicht vergessen, dafür machen wir ja das ganze Theater:
+Zum Schluss die Leerzeichen nicht vergessen, dafür machen wa ja dit janze Theater:
 
 ```js
   return spacedRats.join(" ");
@@ -186,9 +186,9 @@ Jetzt extrahieren wir die linken und die rechten Ratten in eigene Variablen:
 const [leftRats, rightRats] = town.replace(/[\s]/g, "").split("P");
 ```
 
-Mit `.replace(/[\s]/g, "")` entfernen wir jegliche Leerzeichen und .split(“P”) gibt uns ein Array mit 2 Elementen zurück, die wir sofort deconstructen.
+Mit <ExternalLink href={docs.string.replace}>`.replace(/[\s]/g, "")`</ExternalLink> entfernen wir jegliche Leerzeichen und <ExternalLink href={docs.string.split}>`.split(“P”)`</ExternalLink> gibt uns ein Array mit 2 Elementen zurück, die wir sofort <ExternalLink href={docs.operators.deconstruct}>deconstructen</ExternalLink>.
 
-Wenn der Pfeifer ganz links oder ganz rechts steht, erhalten wir ein auf einer Seite einen leeren String.
+Wenn der Pfeifer ganz links oder ganz rechts steht, erhalten wir auf einer Seite einen leeren String.
 
 </Accordion>
 <Accordion>
@@ -274,3 +274,4 @@ function spacifyRats(rats) {
 />
 
 </Accordion>
+import { resolveTripleslashReference } from "typescript"
