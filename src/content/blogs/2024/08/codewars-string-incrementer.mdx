@@ -1,0 +1,253 @@
+---
+title:
+pubDate: 2024-08-08
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 4d3bfe2e48d04580b4487244f454b934
+
+codeChallengeData:
+  platform: codewars
+  id: 54a91a4883a7de5d7800009c
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst brauchen wir den Index des letzten Buchstaben im Input-String. Dafür macht es Sinn sich eine kleine Helferfunktion anzulegen
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+In der Helferfunktion loopen wir von Hinten durch alle Zeichen des Input-Strings
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn wir das erste Zeichen finden, das keine Zahl ist, können wir Loop und Funktion (vorzeitig) beenden und das Zeichen zurückgeben
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+In der Hauptfunktion suchen wir uns mit Hilfe der Helferfunktion zuerst den letzten Buchstaben im Input-String und bestimmen dann dessen Index
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Mit dem Index des letzten Buchstaben können wir dann den Input-String in 2 Teile schneiden. Den Teil mit der Zahl am Ende und den Teil ohne die Zahl am Ende
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Dann erhöhen wir die Zahl um 1
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Zum Schluss noch die Zahl wieder in einen String umwandeln, etwaige Nullen wieder voranstellen, den Teil ohne die Zahl davor und alles zusammen zurückgeben
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion (ich habe `strng` in `str` umbenannt):
+
+```js
+function getLastLetter(str) {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes den String umdrehen:
+
+```js
+const reversedStr = [...str].reverse();
+```
+
+Damit wir den String reversieren koennen, muessen wir ihn zuerst arrayfizieren. Das machen wir hier mit dem <ExternalLink href={docs.operators.spread}>`Spread-Operator`</ExternalLink>
+in eckigen Klammern.
+
+</Accordion>
+<Accordion>
+
+Dann durch den umgedrehten String loopen:
+
+```js
+  for (let char of reversedStr) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Zeichen keine Zahl ist, geben wir es direkt zurück und beenden Loop und Funktion:
+
+```js
+    if (!Number.isInteger(Number(char))) return char;
+  }
+}
+```
+
+Das war's schon für's Helferlein. Weiter geht's mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die Erste Zeile meiner Hauptfunktion (ich habe `strng` in `str` umbenannt):
+
+```js
+function incrementString(str) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst holen wir uns mit unserer Hilfsfunktion den letzten Buchstaben im Input-String und bestimmen dann dessen Index:
+
+```js
+const lastLetter = getLastLetter(str);
+const lastLetterIndex = str.lastIndexOf(lastLetter);
+```
+
+**Cool**:
+Sollte der Input-String keinen Buchstaben enthalten, gibt uns `getLastLetter()` hier `undefined` zurück. <ExternalLink href={docs.string.lastIndexOf}>`.lastIndexOf()`</ExternalLink> von `undefined` wiederum gibt uns `-1` zurück. Das wird uns gleich von Nutzen sein...
+
+</Accordion>
+<Accordion>
+
+Dann teilen wir den Input-String in 2 Teile, 1x die Zahlen und 1x den Rest ohne die Zahlen:
+
+```js
+const strWithoutTrailingNum = str.slice(0, lastLetterIndex + 1);
+const trailingNumStr = str.slice(lastLetterIndex + 1);
+```
+
+Sollte es keinen Buchstaben im String geben, ist `lastLetterIndex` hier wie oben beschrieben `-1`. In diesem Fall ist `lastLetterIndex + 1` also `0` und `strWithoutTrailingNum` ein leerer String `""`. Nice.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Zahl um `1` erhöhen und das Ergebnis wieder in einen String umwandeln:
+
+```js
+const newNum = Number(trailingNumStr) + 1;
+const newNumStr = newNum.toString().padStart(trailingNumStr.length, "0");
+```
+
+Durch das Umwandeln eines Strings in ein Zahl mit `Number()` werden voranstehende Nullen entfernt.
+
+Nicht vergessen diese etwaigen fehlenden Nullen wieder vorne dran zu stellen! (z.B. mit <ExternalLink href={docs.string.padStart}> `padStart()`</ExternalLink>)
+
+</Accordion>
+<Accordion>
+
+Zu guter Letzt geben wir nur noch den zusammengesetzten String zurück:
+
+```js
+  return strWithoutTrailingNum + newNumStr;
+}
+```
+
+Sollte wie oben beschrieben kein Buchstabe im Input-String enthalten sein, ist `strWithoutTrailingNum` ein leerer String `""`. So geht unsere Funktion auch für diese Fälle wunderbar auf!
+
+</Accordion>
+
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function incrementString(str) {
+  const lastLetter = getLastLetter(str);
+  const lastLetterIndex = str.lastIndexOf(lastLetter);
+
+  const strWithoutTrailingNum = str.slice(0, lastLetterIndex + 1);
+  const trailingNumStr = str.slice(lastLetterIndex + 1);
+
+  const newNum = Number(trailingNumStr) + 1;
+  const newNumStr = newNum.toString().padStart(trailingNumStr.length, "0");
+
+  return strWithoutTrailingNum + newNumStr;
+}
+
+function getLastLetter(str) {
+  const reversedStr = [...str].reverse();
+  for (let char of reversedStr) {
+    if (!Number.isInteger(Number(char))) return char;
+  }
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
