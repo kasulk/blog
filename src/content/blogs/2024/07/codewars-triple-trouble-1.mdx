@@ -1,0 +1,320 @@
+---
+title:
+pubDate: 2024-07-25
+description:
+category: coden
+#isDraft: false
+tags:
+series: code challenges
+vgWortCode: 076ddf30813040c793f06c4505622f3f
+
+codeChallengeData:
+  platform: codewars
+  id: 55d5434f269c0c3f1b000058
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Wenn man sich ordentlich mit <ExternalLink href={docs.guide.regex}>`RegEx`</ExternalLink> auskennt, kann man dieses Kata locker mit weniger Zeilen lösen. Wir lösen es hier ohne <ExternalLink href={docs.guide.regex}>`RegEx`</ExternalLink>.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir erstellen uns 2 Funktionen. Eine Helfer-Funktion um die Triples im ersten Array zu ermitteln und die Hauptfunktion um zu prüfen, ob es das entsprechende Double im zweiten Array gibt
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Für die Helfer-Funktion brauchen wir erst mal eine Variable um die gefundenen Triples zu speichern
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann noch eine um zu zählen, wie oft die aktuelle Ziffer jetzt schon hintereinander kam
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Nachdem wir die Zahl in ein Array umgewandelt haben, können wir durch die Ziffern loopen
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn die nächste Ziffer der aktuellen entspricht, erhöhen wir unseren Zähler um `1`
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn der Zähler `3` erreicht, können wir die aktuelle Zahl an unser Ergebnis-Array hängen
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann sollten wir den Zähler wieder zurücksetzen, wenn die aktuelle Zahl nicht mit der vorigen übereinstimmt
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Zum Schluss das Ergebnis-Array zurückgeben
+
+Weiter geht’s mit der Hauptfunktion!
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+In unserer Hauptfunktion holen wir uns die gefunden Triples und speichern sie in einer Variablen
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Damit wir die zweite Zahl durchsuchen können, wandeln wir sie in einen String um
+
+</Accordion><Accordion>
+Schritt 11
+
+Dann loopen wir durch die gefundenen Triples
+
+</Accordion><Accordion>
+Schritt 12
+
+Wenn eines in der zweiten Zahl zweimal hintereinander vorkommt, können wir `1` zurückgeben
+
+</Accordion><Accordion>
+Schritt 13
+
+Sollten wir kein Double in der zweiten Zahl finden, geben wir nach dem Loop `0` zurück
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Helferfunktion zum Finden der Triples:
+```js
+function getTripleDigits(num) {
+```
+
+</Accordion>
+<Accordion>
+Jetzt unsere beiden Variablen. Eine für unsere gefundenen Triples und eine zum Zählen wie oft die aktuelle Ziffer bereits vorkam:
+```js
+  const tripleDigits = [];
+  let count = 1;
+```
+
+Da die jeweils aktuelle Zahl ja bereits 1x vorgekommen ist, initialisiere ich den Zähler mit `1`.
+
+</Accordion>
+<Accordion>
+Dann wandeln wir die Input-Zahl in ein Array mit Ziffern um:
+```js
+  num
+    .toString()
+    .split("")
+```
+
+Hier können wir die Methods schön chainen.
+
+</Accordion>
+<Accordion>
+Dann der Loop durch die Ziffern:
+```js
+    .forEach((currDigit, i, arr) => {
+      const prevDigit = arr[i - 1];
+```
+
+Die jeweils vorherige Ziffer speichere ich mir der Lesbarkeit halber in einer Variablen ab.
+
+</Accordion>
+<Accordion>
+Jetzt prüfen wir, ob die aktuelle Ziffer der vorigen entspricht:
+```js
+      if (currDigit === prevDigit) {
+```
+
+</Accordion>
+<Accordion>
+Wenn ja, erhöhen wir unseren Counter um `1`:
+```js
+        count++;
+```
+
+</Accordion>
+<Accordion>
+Wenn der Counter `3` ist, können wir die aktuelle Zahl an unser Ergebnis-Array hängen:
+```js
+        if (count === 3) tripleDigits.push(currDigit);
+      }
+```
+
+</Accordion>
+<Accordion>
+Wenn die aktuelle Zahl und die vorige nicht übereinstimmen setzen wir unseren Counter zurück:
+```js
+else count = 1;
+    });
+```
+
+</Accordion>
+<Accordion>
+Nach dem Loop geben wir unser Ergebnis-Array zurück:
+```js
+  return tripleDigits;
+}
+```
+
+So, das war die Helfer-Funktion. Weiter geht’s mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+Hier die erste Zeile meiner Hauptfunktion:
+```js
+function tripledouble(num1, num2) {
+```
+
+</Accordion>
+<Accordion>
+Zuerst holen wir uns mit unserer Helfer-Funktion die Triples der ersten Zahl und speichern sie in einer Variablen:
+```js
+  const tripleDigits = getTripleDigits(num1);
+```
+
+</Accordion>
+<Accordion>
+Die zweite Zahl wandeln wir in einen String um, damit wir sie durchsuchen können:
+```js
+  const num2Str = num2.toString();
+```
+
+</Accordion>
+<Accordion>
+Dann der Loop durch die gefundenen Triples:
+```js
+  for (let digit of tripleDigits) {
+```
+
+</Accordion>
+<Accordion>
+Wenn ein Triple zweimal hintereinander in der zweiten Zahl vorkommt, geben wir `1` zurück:
+```js
+    if (num2Str.includes(digit + digit)) return 1;
+  }
+```
+
+</Accordion>
+<Accordion>
+Sollten wir kein Double in der zweiten Zahl finden, geben wir nach dem Loop `0` zurück:
+```js
+  return 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function tripledouble(num1, num2) {
+  const tripleDigits = getTripleDigits(num1);
+  const num2Str = num2.toString();
+
+  for (let digit of tripleDigits) {
+    if (num2Str.includes(digit + digit)) return 1;
+  }
+
+  return 0;
+}
+
+function getTripleDigits(num) {
+  const tripleDigits = [];
+  let count = 1;
+
+  num
+    .toString()
+    .split("")
+    .forEach((currDigit, i, arr) => {
+      const prevDigit = arr[i - 1];
+
+      if (currDigit === prevDigit) {
+        count++;
+        if (count === 3) tripleDigits.push(currDigit);
+      } else count = 1;
+    });
+
+  return tripleDigits;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>

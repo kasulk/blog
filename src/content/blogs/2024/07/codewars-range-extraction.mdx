@@ -1,0 +1,294 @@
+---
+title:
+pubDate: 2024-07-31
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: fd25f4b894eb4b82be8fdc378502583c
+
+codeChallengeData:
+  platform: codewars
+  id: 51ba717bb08c1cd60f00002f
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir 2 Variablen, genauer Arrays. Eine um unser Endergebnis zu speichern und eine zum Zwischenspeichern der aktuellen potentiellen Range
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch die Zahlen des Input-Arrays
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In jeder Iteration berechnen wir den Abstand der aktuellen zur nächsten Zahl
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn dieser Abstand `1` ist, können wir die aktuelle Zahl ruhigen Gewissens an unser Zwischenspeicher-Array hängen
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn der Abstand nicht `1` ist, prüfen wir ob unser Zwischenspeicher-Array leer ist
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn es nicht leer ist, haben wir gerade die letzte Zahl der aktuellen Range und hängen sie noch ans Zwischenspeicher-Array an
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann prüfen wir, ob die aktuelle Range im Zwischenspeicher-Array 3 oder mehr Zahlen beeinhaltet
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wenn ja, können wir die erste und die letzte Zahl der aktuellen Range, getrennt mit einem Bindestrich an unser Endergebnis-Array hängen
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Ansonsten hängen wir nur die beiden Zahlen an, die im Zwischenspeicher-Array sind
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Nachdem wir eine Range hatten, dürfen wir nicht vergessen, das Zwischenspeicher-Array wieder zu leeren
+
+</Accordion><Accordion>
+Schritt 11
+
+Wenn der Abstand nicht `1` war und das Zwischenspeicher-Array aktuell leer ist, hängen wir die Zahl wie sie ist an das Endergebnis-Array
+
+</Accordion><Accordion>
+Schritt 12
+
+Nach dem Loop noch Endergebnis komma-getrennt ausgeben, fertig!
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `list` in `nums` umbenannt):
+```js
+function solution(nums) {
+```
+
+</Accordion>
+<Accordion>
+Zuerst unsere beiden Arrays für Endergebnis und zum Zwischenspeichern einer potentiellen aktuellen Range:
+```js
+  const output = [];
+  let currRange = [];
+```
+
+</Accordion>
+<Accordion>
+Dann der Loop durch die Zahlen des Input-Arrays:
+```js
+  for (let i = 0; i < nums.length; i++) {
+    const currNum = nums[i];
+    const nextNum = nums[i + 1] ?? Infinity;
+```
+
+Die aktuell und die nächste Zahl speichere ich mir der Übersichtlichkeit halber jeweils in einer Variablen zwischen.
+
+Sollte die nächste Zahl `null` oder `undefined`, also _nicht existent_ sein, setze ich sie auf Unendlich. Damit ist sie in jedem Fall ‘pseudo’-größer als die aktuelle Zahl.
+
+Da sie `0` sein kann und `0` <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink> ist, kann ich hier nicht einfach das <ExternalLink href={docs.operators.logicalOr}>`logische ODER (||)`</ExternalLink> verwenden, sondern verwende den <ExternalLink href={docs.operators.nullish}>`Nullish coalescing operator (??)`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+Dann berechnen wir den Abstand zwischen der aktuellen und der nächsten Zahl:
+```js
+    const distance = Math.abs(currNum - nextNum);
+```
+
+Den reinen Abstand zwischen den beiden Zahlen berechnen wir mit dem _Betrag_ ihrer Differenz ([`Math.abs()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs)). Wir streichen also quasi ein potentielles (negatives) Vorzeichen.
+
+</Accordion>
+<Accordion>
+Dann prüfen wir, ob der Abstand `1` ist:
+```js
+    if (distance === 1) {
+      currRange.push(currNum);
+      continue;
+    }
+```
+
+Dann können wir die aktuelle Zahl an das Zwischenspeicher-Array anhängen.
+
+Mit <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink> beenden wir die aktuelle Iteration und springen direkt zur nächsten Zahl. Ohne dass der restliche Code in der <ExternalLink href={docs.statements.for}>`For-Schleife`</ExternalLink> ausgeführt wird.
+
+Ich bin ein großer Fan dieses Keywords, denn so kann man sich jede Menge unübersichtlicher if-else-Konstruktionen sparen. Mehr dazu findest du <ExternalLink href={docs.statements.continue}>hier</ExternalLink>.
+
+</Accordion>
+<Accordion>
+Wenn der Abstand *nicht* `1` ist, prüfen wir, ob unser Zwischenspeicher-Array gerade leer ist:
+```js
+    if (currRange.length) {
+      currRange.push(currNum);
+```
+
+Wenn also beides zutrifft hieße das, dass die aktuelle Zahl auch die letzte Zahl der aktuellen Range ist. Die können wir auch noch ans aktuelle Zwischenspeicher-Array anhängen.
+
+</Accordion>
+<Accordion>
+Dann müssen wir noch prüfen, ob die aktuelle Range lang genug ist, um als Range definiert werden zu können:
+```js
+      if (currRange.length >= 3) output.push(currRange[0] + "-" + currNum);
+```
+
+Wenn ja, können wir die erste Zahl der Range und die letzte (also die aktuelle) verbunden mit einem `-` an unser Ergebnis-Array anhängen.
+
+</Accordion>
+<Accordion>
+Wenn nicht, hängen wir nur die erste und die letzte Zahl ohne `-` an:
+```js
+      else output.push(currRange[0], currNum);
+```
+
+</Accordion>
+<Accordion>
+Nicht vergessen die aktuelle Range, also das Zwischenspeicher-Array zurückzusetzen:
+```js
+      currRange = [];
+      continue;
+    }
+```
+
+</Accordion>
+<Accordion>
+Wenn der Abstand nicht `1` ist und auch das Zwischenspeicher-Array leer ist, hängen wir unsere aktuelle Zahl schnöde an das Ergebnis-Array:
+```js
+    output.push(currNum);
+  }
+```
+
+</Accordion>
+<Accordion>
+Nach dem Loop nur noch das Ergebnis-Array in einen String umwandeln und zurückgeben:
+```js
+  return output.join(",");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function solution(nums) {
+  const output = [];
+  let currRange = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    const currNum = nums[i];
+    const nextNum = nums[i + 1] ?? Infinity;
+    const distance = Math.abs(currNum - nextNum);
+
+    if (distance === 1) {
+      currRange.push(currNum);
+      continue;
+    }
+
+    if (currRange.length) {
+      currRange.push(currNum);
+
+      if (currRange.length >= 3) output.push(currRange[0] + "-" + currNum);
+      else output.push(currRange[0], currNum);
+
+      currRange = [];
+      continue;
+    }
+
+    output.push(currNum);
+  }
+
+  return output.join(",");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
