@@ -1,0 +1,220 @@
+---
+title:
+pubDate: 2024-08-07
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: f821f88ea689411f912d468695e942b0
+
+codeChallengeData:
+  platform: codewars
+  id: 55c04b4cc56a697bb0000048
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Hier müssen wir ein bisschen auf die Performance achten. Wenn wir durch das Alphabet loopen, brauchen wir nur 26 Iterationen, das könnte klappen...
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dafür können wir uns als Erstes eine Hilfsfunktion basteln, die die Anzahl eines Zeichens in einem String zählt
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In der Hauptfunktion brauchen wir als Erstes eine Variable mit dem Alphabet
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann der Loop durch das Alphabet
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wir prüfen für jeden Buchstaben im Alphabet, ob der aktuelle Buchstabe im zweiten String öfter vorkommt als im Ersten
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn ja, geben wir `false` zurück
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Ansonsten können wir nach dem Loop `true` zurückgeben
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion:
+```ts
+function countCharInStr(char: string, str: string): number {
+```
+
+</Accordion>
+<Accordion>
+Zum Zählen können wir z.B. den String am gegebenen Buchstaben bzw. Zeichen splitten und dann die Anzahl der Elemente zählen:
+```ts
+  return str.split(char).length - 1;
+}
+```
+
+Vom Ergebnis ziehen wir noch `1` ab. Fertig.
+
+> [!warning:Hinweis]
+> Die Hilfsfunktion ist hier nicht unbedingt nötig, hilft aber bei der Lesbarkeit.
+
+Weiter geht’s mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+Die erste Zeile meiner Hauptfunktion:
+```ts
+export function scramble(str1: string, str2: string): boolean {
+```
+
+</Accordion>
+<Accordion>
+Das Alphabet definieren:
+```ts
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+```
+
+</Accordion>
+<Accordion>
+Dann der Loop durchs Alphabet:
+```ts
+  for (let letter of alphabet) {
+```
+
+Da wir kein `i` o.ä. brauchen können wir einen <ExternalLink href={docs.statements.forOf}>`for...of-Loop`</ExternalLink> verwenden. <ExternalLink href={docs.array.forEach}>`.forEach()`</ExternalLink> ginge nicht, den können wir bei Bedarf leider nicht vorzeitig beenden.
+
+</Accordion>
+<Accordion>
+Der Lesbarkeit halber speichere ich mir die Anzahl des aktuellen Buchstabens in `str1` und `str2` jeweils in einer Variablen ab:
+```ts
+    const numLetterInStr1 = countCharInStr(letter, str1);
+    const numLetterInStr2 = countCharInStr(letter, str2);
+```
+
+</Accordion>
+<Accordion>
+Dann der Test ob in `str2` mehr des aktuellen Buchstabens als in `str1` sind:
+```ts
+    if (numLetterInStr1 < numLetterInStr2) return false;
+  }
+```
+
+Wenn ja, können wir direkt `false` zurückgeben und damit den Loop und die Funktion vorzeitig beenden.
+
+</Accordion>
+<Accordion>
+Ansonsten geben wir nach dem Loop `true` zurück:
+```ts
+  return true;
+}
+```
+
+</Accordion>
+
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function scramble(str1: string, str2: string): boolean {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  for (let letter of alphabet) {
+    const numLetterInStr1 = countCharInStr(letter, str1);
+    const numLetterInStr2 = countCharInStr(letter, str2);
+    if (numLetterInStr1 < numLetterInStr2) return false;
+  }
+
+  return true;
+}
+
+function countCharInStr(char: string, str: string): number {
+  return str.split(char).length - 1;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
+
+<ExternalLink href={docs.string.string}>blub</ExternalLink>
