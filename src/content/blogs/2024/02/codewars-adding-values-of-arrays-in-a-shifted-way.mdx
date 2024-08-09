@@ -1,0 +1,242 @@
+---
+title:
+pubDate: 2024-02-03
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 181d490a284a4b1980728ac7b41bc2f9
+
+codeChallengeData:
+  platform: codewars
+  id: 57c7231c484cf9e6ac000090
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst müssen wir rauskriegen, wie lang unser Ergebnis-Array sein wird
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir dieses schon mal erstellen
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Danach können wir loopen
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wir werden 2 Loops brauchen
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Der äußere so lange, wie unser Ergebnis-Array lang ist
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Der innere so lange, wie die Anzahl der Unter-Arrays
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann können wir die Zahlen untereinander zusammenrechnen
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Und dann im Ergebnis-Array speichern
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich fand `arrayOfArrays` etwas unglücklich und habe es in `arrays` umbenannt):
+
+```ts
+export function addingShifted(arrays: number[][], shift: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+Die Länge des Ergebnis-Arrays berechnen:
+
+```ts
+const subArrLength = arrays[0].length;
+const resultLength = subArrLength + (arrays.length - 1) * shift;
+```
+
+Dafür kucken wir zuerst wie lang ein inneres Array ist. An diese Länge hängen wir so oft `shift` dran, wie wir innere Arrays haben - aber ein Mal weniger. OK?! Jut.
+
+Wenn wir also einen `shift` von `3` haben und unser `array` `2` innere Arrays hat, die jeweils `6` Elemente haben, ist die Länge des Ergebnis-Arrays:
+
+`6` + (`2` - `1`) \* `3` = `9`
+
+Bei `3` inneren Arrays:
+
+`6` + (`3` - `1`) \* `3` = `12`
+
+</Accordion>
+<Accordion>
+Jetzt erstellen wir unser Ergebnis-Array:
+
+```ts
+const sums = Array(resultLength).fill(0);
+```
+
+Das Array hat die Länge `resultLength` und wir füllen es mit Nullen.
+
+</Accordion>
+<Accordion>
+Jetzt der erste, der äußere Loop:
+
+```ts
+  for (let i = 0; i < resultLength; i++) {
+```
+
+Hier iterieren wir horizontal, also von links nach rechts, durch unser Ergebnis-Array.
+
+</Accordion>
+<Accordion>
+Und der zweite, der innere Loop:
+
+```ts
+    for (let j = 0; j < arrays.length; j++) {
+```
+
+Hier iterieren wir vertikal, also von oben nach unten, durch das Input-Array. D.h., von einem inneren Array zum nächsten.
+
+</Accordion>
+<Accordion>
+Jetzt checken wir das jeweilige Element im aktuellen inneren Array:
+
+```ts
+const k = i - shift * j;
+```
+
+Dafür bauen wir uns zunächst den Index des aktuellen Elements im aktuellen inneren Array.
+
+Beispiel: `0` - `3` \* `1` = `-3`
+
+</Accordion>
+<Accordion>
+Und addieren den Wert des Elements an die aktuelle Stelle in unserem Ergebnis-Array:
+
+```ts
+      sums[i] += arrays[j][k] || 0;
+    }
+  }
+```
+
+Im obigen Beispiel befindet sich unter der ersten Stelle (das Element mit Index `0`) des ersten Arrays das `-3.` Element des zweiten Arrays. Das gibt es natürlich nicht. Darum addieren wir in diesem Fall nüscht. Nüscht ist `0`. <ExternalLink href={docs.operators.logicalOr}>Logisch, oder?!</ExternalLink>
+
+</Accordion>
+<Accordion>
+Nach den Loops noch unsere Summen zurückgeben: 🐝💤
+
+```ts
+  return sums;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function addingShifted(arrays: number[][], shift: number): number[] {
+  const subArrLength = arrays[0].length;
+  const resultLength = subArrLength + (arrays.length - 1) * shift;
+
+  const sums = Array(resultLength).fill(0);
+
+  for (let i = 0; i < resultLength; i++) {
+    for (let j = 0; j < arrays.length; j++) {
+      const k = i - shift * j;
+      sums[i] += arrays[j][k] || 0;
+    }
+  }
+
+  return sums;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
