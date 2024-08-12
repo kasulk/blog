@@ -51,15 +51,17 @@ export async function GET(req: NextRequest) {
             </div>
             <div tw="flex text-[80px] font-bold text-[50px]">{heading}</div>
           </div>
-          <div tw="flex items-center w-full justify-between">
-            <div tw="flex text-xl">{siteConfig.url}</div>
-            <div tw="flex items-center text-xl">
-              {/* <div tw="flex ml-2">{links.social.github}</div> */}
-              {links.social.map((link) => (
-                <div key={link.name} tw="flex ml-2">
-                  {link.name}/kasulk
-                </div>
-              ))}
+          <div tw="flex items-end w-full justify-between">
+            <div tw="flex justify-end text-xl">{siteConfig.url}</div>
+            <div tw="flex flex-col items-end text-xl">
+              {links.social.map(({ url }) => {
+                const shortUrl = url.replace(/https?:\/\/(www\.)?|www\./gi, "");
+                return (
+                  <div key={shortUrl} tw="flex ml-2">
+                    {shortUrl}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
