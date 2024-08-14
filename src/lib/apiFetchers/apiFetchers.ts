@@ -1,5 +1,5 @@
 import type { CodeChallengeData } from "@/../types";
-import type { ApiData, CodewarsApiData, StrippedApiData } from "./types";
+import type { CodewarsApiData, StrippedApiData } from "./types";
 import { codeChallenge } from "@/config/links";
 import { universalizeCodewarsApiData } from "./utils";
 
@@ -31,7 +31,7 @@ export async function fetchCodeChallengeAPIs(
  * @param {string} [id] - The unique identifier of the coding challenge on Codewars.
  * @returns {Promise<StrippedApiData | undefined>} - The stripped API data or undefined if the fetch fails.
  */
-async function fetchCodewarsChallengeAPI(
+export async function fetchCodewarsChallengeAPI(
   id?: string,
 ): Promise<StrippedApiData | undefined> {
   const url = `${codewarsApiURL}/${id}`;
