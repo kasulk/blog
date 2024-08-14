@@ -1,8 +1,6 @@
 import { Link } from "@/components/Links";
 import { CamelCaseHighlighter } from "../CamelCaseHighlighter";
-import { siteConfig } from "@/config";
-
-const branding = `${siteConfig.name}${siteConfig.type.toUpperCase()}`;
+import { branding } from "@/config";
 
 export function Branding() {
   return (

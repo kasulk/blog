@@ -68,6 +68,8 @@ export const siteConfig = {
   },
 };
 
+export const branding = `${siteConfig.name}${siteConfig.type.toUpperCase()}`;
+
 export const calloutColorMap = {
   default: {
     titleColor: "text-muted-foreground",
