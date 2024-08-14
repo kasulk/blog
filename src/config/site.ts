@@ -3,7 +3,7 @@ export const siteConfig = {
   name: "kasulks",
   type: "blog",
   url: "https://kasulks-blog.vercel.app",
-  description: "Hier findest du Geschwafel über Finanzen, Coden & Motivation",
+  description: "Warme Worte über Finanzen, Coden & Motivation",
   owner: "Daniel Kaser",
   personalSite: "https://danielkaser.de",
   email: {
