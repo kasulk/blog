@@ -54,7 +54,7 @@ export default async function AboutMePage() {
             Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
             aufgehübscht hatte und ca. 650{" "}
             <ExternalLink href={getSocialUrl("Codewars")}>
-              Coding-Challenges
+              Code-Challenges
             </ExternalLink>{" "}
             später, habe ich mit diesem Blog begonnen. Das Projekt-Tagebuch dazu
             findest du{" "}

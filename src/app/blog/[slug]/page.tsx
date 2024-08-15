@@ -117,6 +117,12 @@ export async function generateMetadata({
 
   const ogSearchParams = new URLSearchParams();
   ogSearchParams.set("title", title);
+  ogSearchParams.set("desc", description);
+
+  if (codeChallengeData) {
+    const { id, platform } = codeChallengeData;
+    if (id) ogSearchParams.set(platform, id);
+  }
 
   return {
     title: `${title} | ${siteConfig.name}`,
