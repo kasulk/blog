@@ -19,18 +19,17 @@ const interBoldPromise = fetch(
 ).then((res) => res.arrayBuffer());
 
 // fetch icons
-// loop (i.e. dynamic url) not working with fetch here, hence individual fetches...
-const jsIconPromise = fetch(
-  new URL("../../../assets/img/og-icons/js.png", import.meta.url),
-).then((res) => res.arrayBuffer());
-const tsIconPromise = fetch(
-  new URL("../../../assets/img/og-icons/ts.png", import.meta.url),
-).then((res) => res.arrayBuffer());
-
-const iconPromises = {
-  JavaScript: jsIconPromise,
-  TypeScript: tsIconPromise,
+const iconURLs = {
+  JavaScript: new URL("../../../assets/img/og-icons/js.png", import.meta.url),
+  TypeScript: new URL("../../../assets/img/og-icons/ts.png", import.meta.url),
 };
+
+const iconPromises = Object.fromEntries(
+  Object.entries(iconURLs).map(([key, url]) => {
+    const iconPromise = fetch(url).then((res) => res.arrayBuffer());
+    return [key, iconPromise];
+  }),
+);
 
 export async function GET(req: NextRequest) {
   try {
