@@ -120,8 +120,9 @@ export async function generateMetadata({
   ogSearchParams.set("desc", description);
 
   if (codeChallengeData) {
-    const { id, platform } = codeChallengeData;
+    const { id, platform, language } = codeChallengeData;
     if (id) ogSearchParams.set(platform, id);
+    if (language) ogSearchParams.set("lang", language);
   }
 
   return {
