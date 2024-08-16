@@ -8,6 +8,7 @@ export * from "./createBlogPostTitle";
 export * from "./createId";
 export * from "./createImageCreditsTag";
 export * from "./dashify";
+export * from "./filterObjProperties";
 export * from "./formatDate";
 export * from "./getAffiliatePartnersNames";
 export * from "./getAnchorFromLinkText";
