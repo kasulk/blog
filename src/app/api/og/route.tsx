@@ -13,10 +13,12 @@ type ObjWithArrayBuffers = { [key: string]: ArrayBuffer };
 
 export const runtime = "edge"; // if hosted on Vercel
 
+// fetch font
 const interBoldPromise = fetch(
   new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url),
 ).then((res) => res.arrayBuffer());
 
+// fetch icons
 // loop (i.e. dynamic url) not working with fetch here, hence individual fetches...
 const jsIconPromise = fetch(
   new URL("../../../assets/img/og-icons/js.png", import.meta.url),
@@ -35,11 +37,11 @@ export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
 
     const title = searchParams.get("title");
-    if (!title) return new Response("No title provided", { status: 500 });
-
     const description = searchParams.get("desc");
     const language = searchParams.get("lang") || "";
     const id = searchParams.get("codewars");
+
+    if (!title) return new Response("No title provided", { status: 500 });
 
     // heading
     const heading = title.split("|");
@@ -52,7 +54,8 @@ export async function GET(req: NextRequest) {
     // level
     const codeChallengeData = id ? await fetchCodewarsChallengeAPI(id) : null;
     const level = codeChallengeData?.level;
-    const levelArr = level?.split(" ");
+    const levelLines = level?.split(" ");
+    const levelColors = level ? getLevelColors(level) : "";
 
     // Todo:
     // read time
@@ -87,8 +90,10 @@ export async function GET(req: NextRequest) {
             {/* icons */}
             <div tw="flex justify-end items-center">
               {level && (
-                <div tw="flex flex-col w-[64px] h-[64px] border-[3px] border-white rounded-xl justify-center items-center text-2xl">
-                  {levelArr?.map((line, i) => (
+                <div
+                  tw={`flex flex-col w-[64px] h-[64px] border-[3px] rounded-xl justify-center items-center text-2xl ${levelColors}`}
+                >
+                  {levelLines?.map((line, i) => (
                     <span key={i} tw="-m-1 p-0">
                       {line}
                     </span>
@@ -187,4 +192,31 @@ async function resolveIconPromises(iconPromises: {
   );
 
   return Object.fromEntries(resolvedEntries);
+}
+
+/**
+ * Returns the appropriate Tailwind classes for a given Codewars Kata level.
+ *
+ * @param {string} level - The level as a string, which is converted to an integer. If the string is empty, it returns an empty string.
+ * @returns {string} A string containing the Tailwind classes for the text and border colors corresponding to the given level.
+ *
+ * @example
+ * const levelColor = getLevelColors("3 kyu");
+ * console.log(levelColor); // "text-blue-500 border-blue-500"
+ */
+function getLevelColors(level: string): string {
+  switch (parseInt(level)) {
+    case 1:
+    case 2:
+      return "text-purple-400/70 border-purple-400/70";
+    case 3:
+    case 4:
+      return "text-blue-500 border-blue-500";
+    case 5:
+    case 6:
+      return "text-yellow-500 border-yellow-500";
+
+    default:
+      return "";
+  }
 }
