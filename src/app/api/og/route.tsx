@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 import { branding, siteConfig } from "@/config";
 import * as links from "@/config/links";
-// import { fetchCodewarsChallengeAPI } from "@/lib/apiFetchers";
+import { fetchCodewarsChallengeAPI } from "@/lib/apiFetchers";
 import { filterObjProperties } from "@/lib/utils";
 
 // docs: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
 
     const description = searchParams.get("desc");
     const language = searchParams.get("lang") || "";
-    // const id = searchParams.get("codewars");
+    const id = searchParams.get("codewars");
 
     // heading
     const heading = title.split("|");
@@ -50,8 +50,9 @@ export async function GET(req: NextRequest) {
     // font
     const fontBuffer = await interBoldPromise;
     // level
-    // const codeChallengeData = id ? await fetchCodewarsChallengeAPI(id) : null;
-    // const level = codeChallengeData?.level;
+    const codeChallengeData = id ? await fetchCodewarsChallengeAPI(id) : null;
+    const level = codeChallengeData?.level;
+    const levelArr = level?.split(" ");
 
     // Todo:
     // read time
@@ -84,7 +85,16 @@ export async function GET(req: NextRequest) {
               <span tw="ml-2 text-2xl">{branding}</span>
             </h1>
             {/* icons */}
-            <div tw="flex justify-end">
+            <div tw="flex justify-end items-center">
+              {level && (
+                <div tw="flex flex-col w-[64px] h-[64px] border-[3px] border-white rounded-xl justify-center items-center text-2xl">
+                  {levelArr?.map((line, i) => (
+                    <span key={i} tw="-m-1 p-0">
+                      {line}
+                    </span>
+                  ))}
+                </div>
+              )}
               {Object.entries(iconBuffers).map(([key, value]) => (
                 <img
                   key={`icon-${key}`}
