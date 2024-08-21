@@ -40,6 +40,7 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get("type");
     const language = searchParams.get("lang") || "";
     const id = searchParams.get("codewars");
+    const readingTime = searchParams.get("readingTime");
 
     if (!title) return new Response("No title provided", { status: 500 });
 
@@ -56,9 +57,6 @@ export async function GET(req: NextRequest) {
     const level = codeChallengeData?.level;
     const levelLines = level?.split(" ");
     const levelColors = level ? getLevelColors(level) : "";
-
-    // Todo:
-    // read time
 
     return new ImageResponse(
       (
@@ -113,8 +111,11 @@ export async function GET(req: NextRequest) {
             </div>
           </div>
 
-          <header tw="flex flex-col mt-8 mb-10">
-            <h2 tw="flex m-0 mb-2 text-xl uppercase tracking-tight">{type}</h2>
+          <header tw="flex flex-col w-full mt-8 mb-10">
+            <h2 tw="flex justify-between m-0 mb-2 text-xl tracking-tight">
+              <span tw="uppercase">{type}</span>
+              {readingTime && <span>Lesezeit ca. {readingTime} min.</span>}
+            </h2>
             {heading.map((line, i) => (
               <h3
                 key={`title-part-${i}`}
