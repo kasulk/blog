@@ -13,6 +13,7 @@ export type Frontmatter = {
   series?: string;
   vgWortCode: string;
   type: string;
+  readingTime: number;
   codeChallengeData?: CodeChallengeData;
 };
 

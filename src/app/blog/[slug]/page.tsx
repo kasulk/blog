@@ -104,7 +104,7 @@ export async function generateMetadata({
   if (!blog) return {};
 
   const { frontmatter } = blog;
-  const { codeChallengeData } = frontmatter;
+  const { codeChallengeData, readingTime } = frontmatter;
 
   // get API data
   const apiData = codeChallengeData
@@ -118,6 +118,7 @@ export async function generateMetadata({
   ogSearchParams.set("title", title);
   ogSearchParams.set("desc", description);
   ogSearchParams.set("type", "Blog Post");
+  ogSearchParams.set("readingTime", readingTime.toString());
 
   if (codeChallengeData) {
     const { id, platform, language } = codeChallengeData;

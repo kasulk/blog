@@ -1,18 +1,15 @@
 import type { BlogPost } from "@/../types";
 import { BlogPostImage, CategoryBadge, ReadingTime } from "@/components";
 import { Link, AuthorLink } from "@/components/Links";
-import { siteConfig } from "@/config";
 import { formatDate } from "@/lib/utils";
 
 type Props = {
   blog: BlogPost;
 };
 
-const blogImageDir = siteConfig.dir.blogImages;
-
 export function BlogPostHeader({ blog }: Props) {
-  const { frontmatter, content } = blog;
-  const { author, pubDate, category } = frontmatter;
+  const { frontmatter } = blog;
+  const { author, pubDate, category, readingTime } = frontmatter;
 
   return (
     <header>
@@ -29,7 +26,7 @@ export function BlogPostHeader({ blog }: Props) {
         <span className="space-x-2">|</span>
         <span>{formatDate(pubDate)}</span>
       </div>
-      <ReadingTime text={content} />
+      <ReadingTime time={readingTime} />
     </header>
   );
 }

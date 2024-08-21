@@ -1,15 +1,15 @@
-import { getReadingTime } from "@/lib/utils";
-
 type Props = {
-  text: string;
+  time: number;
   className?: string;
 };
 
-export function ReadingTime({ text, className = "" }: Props) {
+export function ReadingTime({ time, className = "" }: Props) {
   return (
-    <span className={`flex justify-end ${className}`}>
-      <span className="hidden sm:flex">Lesedauer: ca.&nbsp;</span>
-      <span>{getReadingTime(text)} min.</span>
-    </span>
+    time && (
+      <span className={`flex justify-end ${className}`}>
+        <span className="hidden sm:flex">Lesedauer: ca.&nbsp;</span>
+        <span>{time} min.</span>
+      </span>
+    )
   );
 }
