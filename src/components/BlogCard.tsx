@@ -31,7 +31,8 @@ const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export async function BlogCard({ blog }: Props) {
   const { content, frontmatter, slug } = blog;
-  const { author, pubDate, category, codeChallengeData } = frontmatter;
+  const { author, pubDate, category, readingTime, codeChallengeData } =
+    frontmatter;
 
   // get API data
   const apiData = codeChallengeData
@@ -72,7 +73,7 @@ export async function BlogCard({ blog }: Props) {
             <span className="hidden sm:inline-block">•</span>
             <AuthorLink author={author} />
           </span>
-          <ReadingTime text={content} />
+          <ReadingTime time={readingTime} />
         </CardDescription>
       </CardHeader>
       <CardContent className="text-lg text-muted-foreground sm:text-xl">
