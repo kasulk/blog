@@ -12,6 +12,7 @@ const mozillaDocsJSReference = `${mozillaDocsBase}Web/JavaScript/Reference/`;
 
 const baseLinks = {
   array: `${mozillaDocsJSReference}Global_Objects/Array/`,
+  math: `${mozillaDocsJSReference}Global_Objects/Math/`,
   number: `${mozillaDocsJSReference}Global_Objects/Number/`,
   object: `${mozillaDocsJSReference}Global_Objects/Object/`,
   set: `${mozillaDocsJSReference}Global_Objects/Set/`,
@@ -19,7 +20,7 @@ const baseLinks = {
   operators: `${mozillaDocsJSReference}Operators/`,
   statements: `${mozillaDocsJSReference}Statements/`,
   glossary: `${mozillaDocsBase}Glossary/`,
-  guide: `${mozillaDocsBase}JavaScript/Guide/`,
+  guide: `${mozillaDocsBase}Web/JavaScript/Guide/`,
   other: `${mozillaDocsJSReference}Global_Objects/`,
 } as const;
 
@@ -54,6 +55,21 @@ const preDocs: DocLinks = {
     splice: "splice",
     toLocaleString: "toLocaleString",
     unshift: "unshift",
+  },
+  math: {
+    abs: "abs",
+    ceil: "ceil",
+    cos: "cos",
+    floor: "floor",
+    max: "max",
+    min: "min",
+    pow: "pow",
+    random: "random",
+    round: "round",
+    sin: "sin",
+    sqrt: "sqrt",
+    tan: "tan",
+    trunc: "trunc",
   },
   number: {
     number: "Number", // Number Constructor
