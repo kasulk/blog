@@ -1,5 +1,4 @@
 import "@/styles/highlight-js/github-dark.css";
-import path from "path";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/config";
@@ -134,7 +133,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      url: path.join(process.cwd(), blog.slug),
+      url: `${siteConfig.url}/blog/${blog.slug}`,
       images: [
         {
           url: `/api/og?${ogSearchParams.toString()}`,
