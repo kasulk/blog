@@ -37,6 +37,7 @@ export async function GET(req: NextRequest) {
 
     const title = searchParams.get("title");
     const description = searchParams.get("desc");
+    const type = searchParams.get("type");
     const language = searchParams.get("lang") || "";
     const id = searchParams.get("codewars");
 
@@ -113,9 +114,7 @@ export async function GET(req: NextRequest) {
           </div>
 
           <header tw="flex flex-col mt-8 mb-10">
-            <h2 tw="flex m-0 mb-2 text-xl uppercase tracking-tight">
-              BLOG POST
-            </h2>
+            <h2 tw="flex m-0 mb-2 text-xl uppercase tracking-tight">{type}</h2>
             {heading.map((line, i) => (
               <h3
                 key={`title-part-${i}`}

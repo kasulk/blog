@@ -117,6 +117,7 @@ export async function generateMetadata({
   const ogSearchParams = new URLSearchParams();
   ogSearchParams.set("title", title);
   ogSearchParams.set("desc", description);
+  ogSearchParams.set("type", "Blog Post");
 
   if (codeChallengeData) {
     const { id, platform, language } = codeChallengeData;
