@@ -1,21 +1,20 @@
 import type { BlogPost, Frontmatter } from "@/../types";
 import { getAutoTags } from "../getAutoTags";
+import { getReadingTime } from "@/lib/utils";
 
 /**
- * Adds automatically generated tags to the frontmatter of each blog post.
+ * Adds automatically generated tags and estimated reading time to the frontmatter of each blog post.
  *
- * This function iterates over each blog post, generates automatic tags based on the frontmatter,
- * and combines them with existing tags. If any redundant tags are found, it throws an error.
- * The resulting blog posts contain updated frontmatter with all tags.
+ * @param {BlogPost[]} blogs - An array of blog posts, where each post contains content and frontmatter.
+ * @returns {BlogPost[]} - An array of blog posts with updated frontmatter, including additional tags and the reading time.
  *
- * @param {BlogPost[]} blogs - An array of blog posts to process.
- * @returns {BlogPost[]} An array of blog posts with updated frontmatter including automatic tags.
- *
- * @throws {Error} Throws an error if a redundant tag is found in the auto-generated tags.
+ * @throws {Error} - Throws an error if a redundant tag is found, which is already present in both the manually added tags and the automatically generated tags.
  */
-export function addAutoTagsToFrontmatters(blogs: BlogPost[]): BlogPost[] {
+export function addAutoTagsAndReadingTimeToFrontmatters(
+  blogs: BlogPost[],
+): BlogPost[] {
   return blogs.map((blog) => {
-    const { frontmatter } = blog;
+    const { content, frontmatter } = blog;
     const { codeChallengeData } = frontmatter;
     const tags = frontmatter.tags || [];
     const autoTags = getAutoTags(frontmatter);
@@ -28,7 +27,14 @@ export function addAutoTagsToFrontmatters(blogs: BlogPost[]): BlogPost[] {
 
     const allTags = [...new Set([...tags, ...autoTags])];
 
-    return { ...blog, frontmatter: { ...frontmatter, tags: allTags } };
+    return {
+      ...blog,
+      frontmatter: {
+        ...frontmatter,
+        tags: allTags,
+        readingTime: getReadingTime(content),
+      },
+    };
   });
 }
 
