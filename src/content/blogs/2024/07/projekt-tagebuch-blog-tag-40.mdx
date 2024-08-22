@@ -1,0 +1,113 @@
+---
+title: Projekt-Tagebuch Blog, Tag 40
+pubDate: 2024-07-01
+description: So richtig gefiel mir das nicht mit der `Fetch`-Komponente von Freitag... Einmal der Name selbst. Sie fetcht ja nüscht, sie rendert das Gefetchte. Und zum anderen, dass ich dafür eine komplette eigene Komponente angelegt habe.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: e01384e1bc564c98aec9190e1baaf510
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Daten von Codewars-API fetchen](#)~
+
+---
+
+## Daten von Codewars-API fetchen
+
+### Fetch-Komponente
+
+So richtig gefiel mir das nicht mit der `Fetch`-Komponente von Freitag... Einmal der Name selbst. Sie fetcht ja nüscht, sie rendert das Gefetchte. Und zum anderen, dass ich dafür eine komplette eigene Komponente angelegt habe.
+
+Nach einigem hin und her hab ich mich jetzt dafür entschieden das Ding direkt in die `CustomStyledMDX` einzubauen und `FetchedMarkdown` zu nennen. Keine eigene Komponente bzw. Datei nötig.
+
+```tsx
+// src/components/CustomStyledMDX.tsx
+...
+  ExternalLink,
+  // neccessary to render dynamically/API-fetched markdown
+  FetchedMarkdown: ({ children }) => <ReactMarkdown>{children}</ReactMarkdown>,
+  SocialLinks,
+...
+```
+
+### Dynamisierung der Blog-Posts
+
+Nachdem ich jetzt die Codewars-API anzapfen und Daten wie den Namen des Katas, Level und Beschreibung automatisch ziehen kann, konnte ich mehr Dinge automatisieren.
+
+Als Erstes hab ich mich um die Post-Titel und die Kurzbeschreibung gekümmert. Dafür hatte ich bereits Funktionen, die das so halb-automatisch aus den vorhandenen Daten generieren. Jetzt hab ich sie so refactored, dass sie die Daten von der API nehmen. Cool.
+
+Da ich nicht weiß, ob ich irgendwann noch eine andere Code-Challenge-API anzapfe, hab ich versucht das Ganze so universell wie möglich zu halten. Das war ein bisschen fummelig, vor allem mit `TypeScript`, aber letztlich hab ich es gut hinbekommen.
+
+Hier mal ein Auszug aus einem Code-Challenge-Blog-Post:
+
+```mdx
+{/* src/content/blogs/2024/06/codewars-a-rule-of-divisibility-by-13.mdx */}
+
+---
+
+title:
+author: icke
+pubDate: 2024-06-24
+description:
+isDraft: false
+category: coden
+tags:
+
+- codewars
+- typescript
+  series: Code Challenges
+  image:
+  file: codewars.png
+  alt: Codewars. Achieve mastery through challenge.
+  credits:
+  creator: Codewars
+  source: codewars.com
+  vgWortCode: efe21e31562042f7a35266da30e00a40
+
+codeChallengeData:
+platform: codewars
+id: 564057bc348c7200bd0000ff
+language: TypeScript
+
+---
+
+{/* ... */}
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+{/* ... */}
+```
+
+Das sind zum Teil ganz schön lange Links. Aber wenn alles gut läuft muss ich da nie wieder ran. Denn die Tabelle kann ich so für alle Code-Challenges wiederverwenden! Geil.
+
+## Fazit
+
+So. Also heute stand ordentlich refactoren auf dem Plan. Muss auch mal sein. Dafür hab ich jetzt ein gutes Stück der Code-Challenge-Blog-Posts automatisiert und kann jetzt raushauen bis der Arzt kommt.
+
+Hajime! 🙏
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
