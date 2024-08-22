@@ -135,6 +135,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
+      publishedTime: frontmatter.pubDate.toString(),
       url: `${siteConfig.url}/blog/${blog.slug}`,
       images: [
         {
