@@ -135,6 +135,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
+      publishedTime: frontmatter.pubDate.toString(),
       url: `${siteConfig.url}/blog/${blog.slug}`,
       images: [
         {
@@ -144,12 +145,6 @@ export async function generateMetadata({
           alt: title,
         },
       ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`/api/og?${ogSearchParams.toString()}`],
     },
   };
 }
