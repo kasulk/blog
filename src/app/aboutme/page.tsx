@@ -3,14 +3,18 @@ import { Link, ExternalLink } from "@/components/Links";
 import { PageHeader, SocialLinks } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
-import { getInitials, getSocialUrl } from "@/lib/utils";
+import {
+  getInitials,
+  getSocialUrl,
+  createLinksJoinedWithCommasAndOrAnd,
+} from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `About Me | ${siteConfig.name}`,
   description: "Einige Informationen über mich",
 };
 
-const { owner, email } = siteConfig;
+const { owner, email, categories } = siteConfig;
 const vgWortCode = "347c1cd684b448f8a709c8570bd55340";
 
 export default async function AboutMePage() {
@@ -69,13 +73,9 @@ export default async function AboutMePage() {
           </p>
           <p>Der Rest ist noch recht lose und ich schau mal wo es hingeht.</p>
           <p>
-            Ich hab also erst mal 4 Kategorien eingerichtet:{" "}
-            <Link href="/blog/category/finanzen">Finanzen</Link>,{" "}
-            <Link href="/blog/category/coden">Coden</Link>,{" "}
-            <Link href="/blog/category/inspiration">Inspiration</Link> und{" "}
-            <Link href="/blog/category/verschiedenes">Verschiedenes</Link>. Was
-            Coden angeht, findest du meinen aktuellen Tech-Stack außerdem auf
-            GitHub.
+            Ich hab also erst mal {categories.length} Kategorien eingerichtet:{" "}
+            {createLinksJoinedWithCommasAndOrAnd(categories)}. Was Coden angeht,
+            findest du meinen aktuellen Tech-Stack außerdem auf GitHub.
           </p>
           <p>
             Wenn du eine Frage hast, von der Du überzeugt bist, ich könnte sie
