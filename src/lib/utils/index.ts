@@ -18,6 +18,7 @@ export * from "./getCharCounterColor";
 export * from "./getPartnerFromLinkText";
 export * from "./getInitials";
 export * from "./getSocialUrl";
+// export * from "./createLinksJoinedWithCommasAndOrAnd"; //! unapplicable (creates circular dependency with Link component)
 export * from "./replaceUmlauts";
 export * from "./slugify";
 export * from "./sortObjectKeys";
