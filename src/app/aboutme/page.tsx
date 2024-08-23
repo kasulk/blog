@@ -47,7 +47,7 @@ export default async function AboutMePage() {
           <p className="m-0">
             Ich heiße Daniel und bin verantwortlich für das was Du hier lesen
             musst. Im Folgenden findest Du ein bisschen Info über mich. Danach
-            noch ein bisschen Lorem Ipsum, damit es nicht so leer aussieht.
+            noch ein bisschen Lorem Ipsum, damit es etwas voller aussieht.
           </p>
           <p>
             2022 habe ich mich endlich entschlossen JavaScript zu lernen. Nach
@@ -58,16 +58,16 @@ export default async function AboutMePage() {
           <p>
             Nachdem ich noch ein bisschen mein Bootcamp-Abschluss-Projekt
             aufgehübscht hatte (und ca. 650{" "}
-            <ExternalLink href={getSocialUrl("Codewars")}>
+            <ExternalLink href={getSocialUrl("codewars")}>
               Code-Challenges
             </ExternalLink>{" "}
             später), habe ich mit diesem Blog begonnen. Das Projekt-Tagebuch
-            dazu findest du{" "}
+            dazu findest Du{" "}
             <Link href="/blog/projekt-tagebuch-blog-tag-1">hier</Link>.
           </p>
           <p>
             Neben dem Coden kann ich noch ganz gut mit Geld umgehen und mich
-            selbst ganz gut geißeln. Darum wirst du hier hauptsächlich
+            selbst ganz gut geißeln. Darum wirst Du hier hauptsächlich
             Geschwafel über Finanzen, Coden und Inspiration bzw. Motivation
             finden. Vielleicht auch mal was Sportliches.
           </p>
@@ -75,10 +75,11 @@ export default async function AboutMePage() {
           <p>
             Ich hab also erst mal {categories.length} Kategorien eingerichtet:{" "}
             {createLinksJoinedWithCommasAndOrAnd(categories)}. Was Coden angeht,
-            findest du meinen aktuellen Tech-Stack außerdem auf GitHub.
+            findest Du meinen aktuellen Tech-Stack außerdem auf{" "}
+            <ExternalLink href={getSocialUrl("github")}>GitHub</ExternalLink>.
           </p>
           <p>
-            Wenn du eine Frage hast, von der Du überzeugt bist, ich könnte sie
+            Wenn Du eine Frage hast, von der Du überzeugt bist, ich könnte sie
             qualifiziert beantworten,{" "}
             <a
               href={`mailto:${email.questions}?subject=Öööhm, was frag' ich denn...?`}
@@ -89,8 +90,8 @@ export default async function AboutMePage() {
             gibt’s vielleicht sogar ‘nen neuen Blog-Artikel.
           </p>
           <p>
-            Wenn du meine Arbeit (finanziell) unterstützen möchtest, findest du
-            jederzeit Inspiration dazu, wenn du auf das
+            Wenn Du meine Arbeit (finanziell) unterstützen möchtest, findest Du
+            jederzeit Inspiration dazu, wenn Du auf das
             <Link href="/support" className="mx-2">
               ♥
             </Link>
@@ -107,7 +108,7 @@ export default async function AboutMePage() {
           <p>So, und jetzt viel Spaß beim lesen, lesen, lesen!</p>
           <p className="flex flex-col">
             <span>Beste Grüße aus Berlin,</span>
-            <span className="line-through">Icke</span>
+            <span className="italic line-through">Icke</span>
             <span>Daniel</span>
           </p>
           <p>&nbsp;</p>
