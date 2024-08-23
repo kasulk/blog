@@ -1,4 +1,4 @@
-export * from "./addAutoTagsToFrontmatters";
+export * from "./addAutoTagsAndReadingTimeToFrontmatters";
 export * from "./checkForDuplicateSlugs";
 export * from "./checkVGWortCodes";
 export * from "./formatBlogs";

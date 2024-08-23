@@ -7,7 +7,7 @@ import {
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
-import { addAutoTagsAndReadingTimeToFrontmatters } from "./utils/addAutoTagsToFrontmatters";
+import { addAutoTagsAndReadingTimeToFrontmatters } from "./utils/addAutoTagsAndReadingTimeToFrontmatters";
 
 const blogDir = path.join(process.cwd(), "src/content/blogs");
 
