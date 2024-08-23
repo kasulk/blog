@@ -3,11 +3,8 @@ import { Link, ExternalLink } from "@/components/Links";
 import { PageHeader, SocialLinks } from "@/components";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { siteConfig } from "@/config";
-import {
-  getInitials,
-  getSocialUrl,
-  createLinksJoinedWithCommasAndOrAnd,
-} from "@/lib/utils";
+import { getInitials, getSocialUrl } from "@/lib/utils";
+import { createLinksJoinedWithCommasAndOrAnd } from "@/lib/utils/createLinksJoinedWithCommasAndOrAnd";
 
 export const metadata: Metadata = {
   title: `About Me | ${siteConfig.name}`,

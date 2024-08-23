@@ -1,5 +1,5 @@
 import type { Categories } from "@/config";
-import { Link } from "@/components/Links";
+import { Link } from "@/components/Links/Link";
 import { capitalize } from "./capitalize";
 
 /**
