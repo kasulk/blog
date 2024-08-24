@@ -8,7 +8,7 @@ This high-performance blog is not made with love. It's made with Next.js 14! It 
 
 JavaScript &bull; TypeScript &bull; React &bull; Next.js &bull; Tailwind &bull; Markdown/MDX &bull; HTML5 &bull; CSS3
 
-## Features
+## Top Features
 
 - [x] High performant because of `Next.js` `SSG` technology
 - [x] No database needed
@@ -18,6 +18,8 @@ JavaScript &bull; TypeScript &bull; React &bull; Next.js &bull; Tailwind &bull; 
 - [x] Fetch Codewars' `Rest API` at build time
 - [x] Pagination
 - [x] Responsive
+- [x] Portfolio page
+- [x] Mesmerizing auto-generated OG-Images for blog posts
 - [x] Darkmode
 - [x] A zillion speling erorrs
 
@@ -33,7 +35,6 @@ JavaScript &bull; TypeScript &bull; React &bull; Next.js &bull; Tailwind &bull; 
 - [ ] Search/filter/sort blog posts by title, author and/or date
 - [ ] Contact form
 - [ ] FAQ
-- [ ] Portfolio page
 - [ ] Dynamic table of contents in the sidebar
 
 ---
