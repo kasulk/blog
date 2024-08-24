@@ -1,0 +1,144 @@
+---
+title: Projekt-Tagebuch Blog, Tag 41
+pubDate: 2024-07-03
+description:
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 93684e882a0c403b9e0256b05971d8af
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[VG-Wort-Codes prüfen](#)~
+- [x] ~[Lesezeit anzeigen](#)~
+
+---
+
+## VG-Wort-Codes prüfen
+
+Heute hab ich mich noch mal um die VG-Wort-Codes gekümmert. Was die VG Wort ist hatte [hier](/blog/projekt-tagebuch-blog-tag-28#vg-wort) schon ein Mal grob beschrieben.
+
+Kurz: Wenn man als Autor bei der VG Wort angemeldet ist, kann man unter bestimmten Voraussetzungen mit seinen Blog-Artikeln an der jährlichen Ausschüttung teilnehmen.
+
+Damit die VG Wort die Aufrufe zählen kann, baut man in jeden Blog-Post einen individuellen Bild-Link ein. Jeder dieser Links wiederum beeinhaltet einen individuellen Code.
+
+Diesen Code trage ich in jedem Frontmatter ein. Von da aus wird er dann von meiner `VGWortMark`-Komponente abgegriffen um den Link zum Bild zu generieren.
+
+So weit, so gut. Nun kann es aber vorkommen, dass man so einen Code mehrfach vergibt, ein paar Zeichen fehlen oder dass man ihn womöglich komplett vergisst im Frontmatter anzulegen.
+
+Für alle diese Fälle habe ich heute Funktionen angelegt, die die VG-Wort-Codes prüfen und ggf. einen Fehler werfen, der auch noch genau mitteilt, wo genau der Fehler auftritt.
+
+### Fehlende VG-Wort-Codes
+
+Hier das Ganze mal beispielhaft für fehlende Codes. Die ganze Datei findest du [hier](https://github.com/kasulk/blog/blob/main/src/lib/blogFetchers/utils/checkVGWortCodes.ts).
+
+```ts
+// src/lib/blogFetchers/utils/checkVGWortCodes.ts
+// ...
+
+function checkForMissingVGWortCode(post: BlogPost): void {
+  const { frontmatter, slug } = post;
+  const { vgWortCode } = frontmatter;
+
+  if (!vgWortCode)
+    throw new Error(`
+    Missing VGWortCode!\n
+    On: ${slug}
+    In: ${path.dirname(post.relativeFilePath).slice(1)}
+    `);
+}
+
+// ...
+```
+
+## Lesezeit anzeigen
+
+Dann hab ich mich endlich um die Anzeige der Lesezeit für jeden Blog-Artikel gekümmert. Da bin ich schon etwas länger scharf drauf gewesen. Leider war es dann doch einfacher als erwartet...
+
+Als Erstes hab ich die Funktion `getReadingTime()` erstellt. Dann die `ReadingTime`-Komponente und diese dann in die Blog-Liste und den `SingleBlogPost` implementiert.
+
+Am schlimmsten war es Tailwind vernünftig anzupassen, so dass alles am Ende schön responsive ist.
+
+```ts
+// src/lib/utils/getReadingTime.ts;
+export function getReadingTime(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  const AVERAGE_WORDS_PER_MINUTE = 200;
+  return Math.ceil(words / AVERAGE_WORDS_PER_MINUTE);
+}
+```
+
+Da ich eher ein Langsam-Leser bin, hab ich die Wörter pro Minute auf 200 gesetzt. `ChatGPT` behauptet, der Durchschnitt liegt so bei 200-300.
+
+```tsx
+// src/components/ReadingTime.tsx;
+import { getReadingTime } from "@/lib/utils";
+
+type Props = {
+  text: string;
+  className?: string;
+};
+
+export function ReadingTime({ text, className = "" }: Props) {
+  return (
+    <span className={`flex justify-end ${className}`}>
+      <span className="hidden sm:flex">Lesedauer: ca.&nbsp;</span>
+      <span>{getReadingTime(text)} min.</span>
+    </span>
+  );
+}
+```
+
+Das Lesedauer-Element verschwindet aus kleinen Bildschirmen, so dass nur noch die Zeit in Minuten dasteht, z.B. “2 min.”
+
+## AuthorLink
+
+Danach hab ich eine `AuthorLink`-Komponente erstellt. Diese Komponente zeichnet sich für das Anzeigen des Blog-Autors verantwortlich und für das Generieren eines entsprechenden Links zum Autoren-Profil.
+
+Ich habe sie so eingerichtet, dass automatisch der Owner, also ich, aus der `siteConfig` gezogen wird, wenn kein expliziter Autor angegeben wurde.
+
+Wem’s interessiert, der Vollständigkeit halber hier auch der Code dafür:
+
+```tsx
+// src/components/Links/AuthorLink.tsx;
+import { Link } from "@/components/Links";
+import { siteConfig } from "@/config";
+import { slugify } from "@/lib/utils";
+
+type Props = {
+  author: string | null;
+};
+
+const { owner } = siteConfig;
+
+export function AuthorLink({ author }: Props) {
+  author = !author || author === "icke" ? owner : author;
+  const href = author === owner ? "/aboutme" : `/author/${slugify(author)}`;
+
+  return (
+    <Link href={href} className="whitespace-nowrap">
+      {author}
+    </Link>
+  );
+}
+```
+
+## Yamlfy Frontmatters
+
+Zum Schluss was Leichtes. Ich hab dann noch schnell alle Frontmatters einheitlich yamlfiziert, also in `Yaml` verwandelt. Vorher war es ein komischer Mix aus `Yaml` und `JSON`.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
