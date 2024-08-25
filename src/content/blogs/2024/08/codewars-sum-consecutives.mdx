@@ -43,7 +43,7 @@ Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[co
 
 > [!warning:Eines vorweg]
 > Auch wenn der Autor des Katas hier für einzeilige Lösungen großzügig Respekt verteilt. So einen Quark machen wir hier nicht. Wir kreieren eine lesbare, übersichtliche und ggf. wartbare Lösung.
-> So genug gepöbelt, los geht’s!
+> So, genug gepöbelt, los geht’s!
 
 ### Pseudo-Code
 
@@ -67,13 +67,13 @@ Dann brauchen wir einen Loop! Wir loopen durch alle Zahlen im Input-Array
 <Accordion>
 Schritt 3
 
-Wenn die aktuelle Zahl gleich der nächsten, oder gleich der vorigen ist, addieren wir sie zu unserer Zwischensumme
+Wenn die aktuelle Zahl gleich der nächsten, _ODER_ gleich der vorigen ist, addieren wir sie zu unserer Zwischensumme
 
 </Accordion>
 <Accordion>
 Schritt 4
 
-Sollte sie dann allerdings nicht gleich der nächsten sein, können wir das Zwischenergebnis ans Endergebnis-Array anhängen
+Sollte sie dann allerdings nicht gleich der nächsten sein, können wir die Zwischensumme ans Endergebnis-Array anhängen
 
 </Accordion>
 <Accordion>
@@ -107,7 +107,7 @@ function sumConsecutives(nums) {
 </Accordion>
 <Accordion>
 
-:
+Zuerst die Variablen für Zwischensumme und Endergebnis initalisieren:
 
 ```js
 const result = [];
@@ -117,27 +117,21 @@ let sum = 0;
 </Accordion>
 <Accordion>
 
-:
+Dann der Loop durch die Input-Zahlen:
 
 ```js
   for (let i = 0; i < nums.length; i++) {
+    const prev = nums[i - 1];
+    const curr = nums[i];
+    const next = nums[i + 1];
 ```
+
+Der Übersicht und Lesbarkeit halber erstelle ich mir jeweils eine Variable für das vorige, das aktuelle und das nächste Element.
 
 </Accordion>
 <Accordion>
 
-:
-
-```js
-const prev = nums[i - 1];
-const curr = nums[i];
-const next = nums[i + 1];
-```
-
-</Accordion>
-<Accordion>
-
-:
+Jetzt unsere erste Bedingung. Sind das nächste _ODER_ das vorige Element gleich dem aktuellen?:
 
 ```js
     if (curr === next || curr === prev) {
@@ -146,19 +140,31 @@ const next = nums[i + 1];
 </Accordion>
 <Accordion>
 
-:
+Wenn ja, können wir das aktuelle Element zu unserer Zwischensumme addieren:
 
-```js
-sum += curr;
+{/* 'js'-codeblock not working here with prettier... */}
+
+```txt
+      sum += curr;
 ```
 
 </Accordion>
 <Accordion>
 
-:
+Und checken dann noch mal extra, ob es _nicht_ dem nächsten Element entspricht:
 
 ```js
       if (curr !== next) {
+```
+
+Wenn es _nicht_ dem nächsten Element enspricht heißt das, dass das aktuelle Element das letzte gleichartige seiner Art ist.
+
+</Accordion>
+<Accordion>
+
+Wenn das zutrifft, können wir die aktuelle Zwischensumme ans Endergebnis hängen:
+
+```js
         result.push(sum);
         sum = 0;
       }
@@ -167,20 +173,24 @@ sum += curr;
     }
 ```
 
+Nach dem Pushen nicht vergessen die Zwischensumme zurück zu setzen. Außerdem können wir dann direkt mit dem nächsten Element im Loop fortfahren. Dafür ist das <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink>.
+
 </Accordion>
 <Accordion>
 
-:
+Wenn das aktuelle Element weder dem vorigen noch dem nächsten entspricht, können wir es direkt an unser Endergebnis-Array hängen:
 
 ```js
     result.push(curr);
   }
 ```
 
+Das war's mit dem Loop.
+
 </Accordion>
 <Accordion>
 
-:
+Nach dem Loop nur noch das Endergebnis zurückgeben:
 
 ```js
 return result;
