@@ -1,0 +1,130 @@
+---
+title: Projekt-Tagebuch Blog, Tag 44
+pubDate: 2024-07-11
+description: Ich hatte ja bereits eine Funktion gebaut, die für Code-Challenges die Kurz-Beschreibung für die Blog-Übersichtsliste generiert. Die Daten wie das Level und den Titel zieht sie sich aus der codeChallenge-Property im Frontmatter.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 453c10e5c24440d09e8d8388d7bb5553
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Sprache in automatische Blog-Post-Kurz-Beschreibung](#)~
+- [x] ~[Automatisches Datum in Blog-Posts](#automatisches-datum-in-blog-posts-dateformatter-komponente)~
+- [x] ~[2 Blog-Posts hochladen](#content-content-content)~
+
+---
+
+## Sprache in automatische Blog-Post-Kurz-Beschreibung
+
+Ich hatte ja bereits eine Funktion gebaut, die für Code-Challenges die Kurz-Beschreibung für die Blog-Übersichtsliste generiert. Die Daten wie das Level und den Titel zieht sie sich aus der `codeChallenge`-Property im Frontmatter.
+
+Hier wollte ich jetzt noch gerne die Programmiersprache rein haben. So dass der User sofort sehen kann um welche Sprache es sich bei diesem Code-Challenge-Artikel handelt. Das war auch recht schnell gemacht. Hier die Funktion:
+
+```ts
+// src/lib/utils/createBlogPostDescription.ts
+export function createBlogPostDescription(
+  frontmatter: Frontmatter,
+  apiData?: StrippedApiData | null,
+): string {
+  const { codeChallengeData } = frontmatter;
+  let { description } = frontmatter;
+
+  if (!description) {
+    if (codeChallengeData && apiData) {
+      const { platform, language } = codeChallengeData;
+      const { name, level } = apiData;
+      description = `Schritt für Schritt Lösung für die ${capitalize(platform)} Coding-Challenge "${name}" (${level}) in ${language}`;
+    }
+  }
+
+  return description || "";
+}
+```
+
+## Automatisches Datum in Blog-Posts / DateFormatter-Komponente
+
+Bisher hab ich bei Blog-Tagebucheinträgen das Datum (und den Wochentag) mit der Hand reingeschrieben 🤣 Im Frontmatter steht aber schon immer ein Datum drin. Und da ich faul bin und es nicht jedes Mal zwei Mal schreiben möchte, habe ich heute die `DateFormatter`-Komponente gebastelt.
+
+Wie ihr seht, ist die eigentliche Komponente recht kurz. Der Rest sind Monatsnamen, Wochentagsnamen und eine Funktion:
+
+```tsx
+// src/components/DateFormatter.tsx
+type Props = {
+  date: string;
+  weekday?: boolean;
+};
+
+export function DateFormatter({ date, weekday = false }: Props) {
+  return <>{formatDate(date, weekday)}</>;
+}
+
+const months: string[] = [
+  "Januar",
+  "Februar",
+  "März",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Dezember",
+];
+
+const weekdays: string[] = [
+  "Sonntag",
+  "Montag",
+  "Dienstag",
+  "Mittwoch",
+  "Donnerstag",
+  "Freitag",
+  "Samstag",
+];
+
+function formatDate(dateString: string, includeWeekday: boolean): string {
+  const dateObj = new Date(dateString);
+  const day = dateObj.getDate();
+  const month = months[dateObj.getMonth()];
+  const year = dateObj.getFullYear();
+  const weekdayString = weekdays[dateObj.getDay()];
+
+  return includeWeekday
+    ? `${weekdayString}, ${day}. ${month} ${year}`
+    : `${day}. ${month} ${year}`;
+}
+```
+
+Da `weekday` hier standardmäßig `false` ist, brauch ich das Argument nur zu übergeben, wenn ich den Wochentag angezeigt haben möchte.
+
+So sieht das Ganze in Action im `MDX` aus:
+
+```md
+<DateFormatter date={pubDate} weekday />
+```
+
+Und raus kommt z.B. `Donnerstag, 11. Juni 2024`
+
+Traum.
+
+## Content, Content, Content
+
+Und dann hab ich noch ein bisschen Content geschliffen und hochgeladen. Die Lösung für die Codewars-Challenge [The Vowel Code](/blog/codewars-the-vowel-code) und den [Blog Tagebuch Tag 14](/blog/projekt-tagebuch-blog-tag-14). Aber den kennst du wahrscheinlich schon, denn heute schreiben wir ja schon Tag 44 🫢
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
