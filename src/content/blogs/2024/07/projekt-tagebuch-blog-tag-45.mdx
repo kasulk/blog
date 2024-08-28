@@ -1,0 +1,97 @@
+---
+title: Projekt-Tagebuch Blog, Tag 45
+pubDate: 2024-07-12
+description: Als Erstes hab ich heute das Refactoren für die Docs-Links abgeschlossen. Gestern hatte ich bereits angefangen, aber nach etwas Ärger mit den Typen hab ich die Lösung auf heute verschoben. Was ich da gemacht hab, ist ein bisschen schwer zu erklären.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: bcf94085af604235960a980f753d184c
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Docs-Links refactoren](#docs-links-refactor)~
+- [x] ~[Tag-Cloud erstellen](#tag-cloud)~
+- [x] ~[2 Blog-Posts hochladen](#content)~
+
+---
+
+## Docs-Links-Refactor
+
+Als Erstes hab ich heute das Refactoren für die Docs-Links abgeschlossen. Gestern hatte ich bereits angefangen, aber nach etwas Ärger mit den Typen hab ich die Lösung auf heute verschoben.
+
+Was ich da gemacht hab ist ein bisschen schwer zu erklären. <ExternalLink href={social.find(({ name }) => name === "GitHub").url + "/" + github.repos["blog"] + "/blob/main/src/config/links/docs.ts" }>Am besten du kuckst dir die Datei mal an.</ExternalLink>[^fn1]
+
+Da ich [keine Lust](https://www.youtube.com/watch?v=1M4ADcMn3dA) habe, jeden Link jedes Mal wieder komplett mit `http` und `www` etc. zu tippen, bzw. zu kopieren, hatte ich bereits vor einiger Zeit die Docs-Links in einer Variablen gespeichert, auf die ich dann im `MDX` zugreifen kann.
+
+Das war mir aber nicht genug! Ich hatte nämlich nicht mal Lust die Links dort alle einzufügen. Also hab ich es so gedeichselt, dass ich nur noch das entscheidende Link-Ende dort hinterlege. Ein Beispiel:
+
+Die URL zu `Array-map()` von Mozilla wäre ungefähr, ziemlich genau, in etwa so:
+
+```mdx
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+```
+
+Wirklich entscheidend ist hier aber nur `map`. Vielleicht noch `Array`.
+
+In meine `preDocs`-Variable schreibe ich jetzt also:
+
+```ts
+// src/config/links/docs.ts
+const preDocs: DocLinks = {
+  array: {
+    map: "map",
+  },
+};
+```
+
+Dann starte ich meine `generateDocLinks()`-Funktion, die aus allen Properties in der `preDocs`-Variablen eine neue `docs`-Variable mit den kompletten Links generiert.
+
+Wie gesagt, am besten du kuckst dir die ganze Datei mal an. Entweder im <ExternalLink href={`https://github.com/${github.user}/${github.repos.blog}/commit/411d79a22f897474993f978459e8e88fdb48b765`}>Commit</ExternalLink> oder direkt in der Datei <ExternalLink href={ social.find(({ name }) => name === "GitHub").url + "/" + github.repos["blog"] + "/blob/main/src/config/links/docs.ts" }>docs.ts</ExternalLink>[^fn1]
+
+Im `MDX` kann ich dann auf diese URLs ganz einfach zugreifen:
+
+```mdx
+{docs.array.map}
+```
+
+Sweet!
+
+## Tag-Cloud
+
+Als nächstes hab ich mich direkt an die Tag-Cloud gemacht. Die hatte ich bisher vor mir her geschoben, aber heute war es soweit!
+
+Im Prinzip war das der [Category-Cloud](/blog/projekt-tagebuch-blog-tag-15) sehr ähnlich, darum will ich dich hier nicht mit dem fast ähnlichen Code langweilen.
+
+Aber was ich mir nicht verkneifen konnte war, Auto-Tags zu generieren. Ihr wisst, ich bin faul und ich habe keine Lust, Dinge zweimal zu tippen. Darum werden jetzt aus der `codeChallenge`-Property im Frontmatter automatisch die `language` und die `platform` gezogen und für die Tags verwurstet.
+
+Das Ganze wird dann in der `BlogTagsCloud`-Komponente gerendert, die auch wieder sehr ähnlich zur `BlogCategoryCloud`-Komponente ist.
+
+Dann hab ich die Komponente nur noch in die `Sidebar` von `SingleBlogPage` und Blog-Liste geballert und aus allen Code-Challenge-Frontmatters die jetzt überflüssigen Tags entfernt.
+
+Außerdem bekommt man einen freundlichen Fehler, sollte man doch versehentlich die Sprache oder die Plattform noch mal in die Tags schreiben. Mit dem Hinweis, dass dies doch bitteschön überflüssig ist.
+
+## Content
+
+Dann hab ich noch [Tag 15 fürs Blog-Tagebuch](/blog/projekt-tagebuch-blog-tag-15) hochgeladen und die [Feedback-Section](#) in alle Blog-Posts eingefügt.
+
+## _Nachtrag:_
+
+_Da ich mir ja eigentlich vorgenommen hatte, 2 Blog-Posts hochzuladen, hab ich vor Wut Samstag noch 2 extra fertig gemacht. Das waren [Blog-Tagebuch Tag 16](/blog/projekt-tagebuch-blog-tag-16) und [17](/blog/projekt-tagebuch-blog-tag-17)._ 💪
+
+[^fn1]: Es kann sein, dass sich Datei- und Verzeichnisnamen geändert haben, wenn du das hier liest. Darum ist es sicherer sich den <ExternalLink href={`https://github.com/${github.user}/${github.repos.blog}/commit/411d79a22f897474993f978459e8e88fdb48b765`}>Commit</ExternalLink> anzukucken.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>

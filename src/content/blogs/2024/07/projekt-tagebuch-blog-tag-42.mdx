@@ -1,0 +1,127 @@
+---
+title: Projekt-Tagebuch Blog, Tag 42
+pubDate: 2024-07-04
+description: Mit Docker hatte ich mich schon mal beschäftigt. Heute wollte ich noch mal angreifen. Eigentlich ist es für so ein kleines Projekt eher lästig, aber ich denke, es kann nicht schaden Docker “nebenbei” zu lernen.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 1f579b54e4f44db48733897af22fb130
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Den Blog dockerizen](#)~
+- [x] ~[Blog-Bilder global hinterlegen](#)~
+
+---
+
+## Den Blog dockerizen
+
+Mit Docker hatte ich mich schon mal beschäftigt. Heute wollte ich noch mal angreifen. Eigentlich ist es für so ein kleines Projekt eher lästig, aber ich denke, es kann nicht schaden Docker “nebenbei” zu lernen.
+
+Also habe ich kurzer Hand eine `Dockerfile` und eine `.dockerignore` angelegt, ein Image erstellt und ein paar Container gestartet. Zwar war es erst mal ein bisschen huddelig, aber der Container lief dann tatsächlich ohne Probleme.
+
+Allerdings musste ich den Branch dann doch erst mal zur Seite legen, denn so kann man nicht vernünftig arbeiten. Im Container wird immer nur ein Build generiert und gestartet. Das dauert natürlich zu lange um beim Entwickeln schnell kucken zu können, wie sich die gerade gemachten Änderungen auswirken.
+
+Also muss ich mir doch noch mal ein Tutorial dazu ankucken. Dann erst kann ich mit dem Einrichten weiter machen.
+
+## Blog-Bilder global hinterlegen
+
+Als nächstes hatte ich mir vorgenommen, Blog-Bilder global zu hinterlegen. Bisher hatte ich das Frontmatter so eingerichtet, dass man für jeden Blog-Post ein Bild hinterlegen kann.
+
+```txt
+## src/content/2024/06/hallo-welt.mdx
+
+title: Hallo Welt
+pubDate: 2024-06-24
+description: Ein Gruß an die Welt
+category: verschiedenes
+tags:
+  - hallo
+  - welt
+image:
+  file: hallo-welt.png
+  alt: Die Wörter “Hallo” und “Welt” in weißer Schrift, auf dunklem Hintergrund.
+  credits:
+    creator: Willy Vogel
+    source: Pixabay
+series: Grüße aus aller Welt
+vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
+
+---
+```
+
+Wenn man allerdings ein Bild in mehreren Artikeln verwendet und es irgendwann mal ändern möchte, muss man das Frontmatter jeder Datei einzeln ändern. Außerdem ist es ein bisschen anstrengend, dann jedes Mal die Bilddaten komplett wieder eingeben zu müssen.
+
+Darum habe ich die Bilddaten in einer `images.ts`-[Datei](https://github.com/kasulk/blog/blob/main/src/config/images.ts) hinterleget.
+
+```ts
+// src/config/images.ts
+const general = {
+  "hallo welt": {
+    file: "hallo-welt.png",
+    alt: "Die Wörter “Hallo” und “Welt” in weißer Schrift, auf dunklem Hintergrund.",
+    credits: {
+      creator: "Willy Vogel",
+      source: "Pixabay",
+    },
+  },
+  // ...
+};
+
+const series = {
+  "projekt-tagebuch blog": general["tropic workplace"],
+  "code challenges": general["codewars mastery"],
+} as const;
+
+const category = {
+  coden: general["defocussed codiverse"],
+  finanzen: general["sunny moneygrow"],
+  inspiration: general["mountain eagle"],
+  verschiedenes: general["tropic workplace"],
+} as const;
+
+const _default = general["tropic workplace"];
+
+// ...
+```
+
+Dann hab ich eine `BlogPostImage`-[Komponente](https://github.com/kasulk/blog/blob/main/src/components/BlogPostImage.tsx) angelegt. Dort wird mit der `getBlogPostImage()`-Funktion das Frontmatter gecheckt.
+
+Wenn Bilddaten im Frontmatter hinterlegt sind, werden diese wie bisher verarbeitet. Wenn nicht, wird gekuckt, ob es eine Serie ist und ein entsprechendes Serien-Bild hinterlegt ist. Ansonsten wird auf das Bild für die Kategorie zurückgegriffen.
+
+Außerdem hab ich es so eingerichtet, dass man auf die Bilder in der `images.ts` auch per einfachem String zugreifen kann. D.h., in obigem Beispiel kann ich jetzt einfach `image: hallo welt` ins Frontmatter schreiben.
+
+Dann wird das Bild mit der Property `hallo welt` gesucht und nach den entsprechenden Bilddaten gerendert. Cool oder?!
+
+```
+## src/content/2024/06/hallo-welt.mdx
+
+title: Hallo Welt
+pubDate: 2024-06-24
+description: Ein Gruß an die Welt
+category: verschiedenes
+tags:
+  - hallo
+  - welt
+image: hallo welt
+series: Grüße aus aller Welt
+vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
+
+---
+```
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
