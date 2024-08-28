@@ -1,9 +1,8 @@
 ---
 title: Projekt-Tagebuch Blog, Tag 42
 pubDate: 2024-07-04
-description:
+description: Mit Docker hatte ich mich schon mal beschäftigt. Heute wollte ich noch mal angreifen. Eigentlich ist es für so ein kleines Projekt eher lästig, aber ich denke, es kann nicht schaden Docker “nebenbei” zu lernen.
 category: coden
-isDraft: true #######################
 tags:
 series: projekt-tagebuch blog
 vgWortCode: 1f579b54e4f44db48733897af22fb130
@@ -18,7 +17,7 @@ vgWortCode: 1f579b54e4f44db48733897af22fb130
 **Tages-Ziele:**
 
 - [x] ~[Den Blog dockerizen](#)~
-- [x] ~[Bilder global hinterlegen](#)~
+- [x] ~[Blog-Bilder global hinterlegen](#)~
 
 ---
 
@@ -32,29 +31,28 @@ Allerdings musste ich den Branch dann doch erst mal zur Seite legen, denn so kan
 
 Also muss ich mir doch noch mal ein Tutorial dazu ankucken. Dann erst kann ich mit dem Einrichten weiter machen.
 
-## Bilder global hinterlegen
+## Blog-Bilder global hinterlegen
 
-Als nächstes hatte ich mir vorgenommen, Bilder global zu hinterlegen. Bisher hatte ich das Frontmatter so eingerichtet, dass man für jeden Blog-Post ein Bild hinterlegen kann.
+Als nächstes hatte ich mir vorgenommen, Blog-Bilder global zu hinterlegen. Bisher hatte ich das Frontmatter so eingerichtet, dass man für jeden Blog-Post ein Bild hinterlegen kann.
 
-```mdx
-## // src/content/2024/06/hallo-welt.mdx
+```txt
+## src/content/2024/06/hallo-welt.mdx
 
 title: Hallo Welt
 pubDate: 2024-06-24
 description: Ein Gruß an die Welt
 category: verschiedenes
 tags:
-
-- hallo
-- welt
-  image:
+  - hallo
+  - welt
+image:
   file: hallo-welt.png
   alt: Die Wörter “Hallo” und “Welt” in weißer Schrift, auf dunklem Hintergrund.
   credits:
-  creator: Willy Vogel
-  source: Pixabay
-  series: Grüße aus aller Welt
-  vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
+    creator: Willy Vogel
+    source: Pixabay
+series: Grüße aus aller Welt
+vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
 
 ---
 ```
@@ -75,7 +73,7 @@ const general = {
     },
   },
   // ...
-}
+};
 
 const series = {
   "projekt-tagebuch blog": general["tropic workplace"],
@@ -90,33 +88,31 @@ const category = {
 } as const;
 
 const _default = general["tropic workplace"];
-}
 
 // ...
 ```
 
-Dann hab ich eine BlogPostImage-[Komponente](https://github.com/kasulk/blog/blob/main/src/components/BlogPostImage.tsx) angelegt. Dort wird mit der getBlogPostImage()-Funktion das Frontmatter gecheckt.
+Dann hab ich eine `BlogPostImage`-[Komponente](https://github.com/kasulk/blog/blob/main/src/components/BlogPostImage.tsx) angelegt. Dort wird mit der `getBlogPostImage()`-Funktion das Frontmatter gecheckt.
 
 Wenn Bilddaten im Frontmatter hinterlegt sind, werden diese wie bisher verarbeitet. Wenn nicht, wird gekuckt, ob es eine Serie ist und ein entsprechendes Serien-Bild hinterlegt ist. Ansonsten wird auf das Bild für die Kategorie zurückgegriffen.
 
-Außerdem hab ich es so eingerichtet, dass man auf die Bilder in der images.ts auch per einfachem String zugreifen kann. D.h., in obigem Beispiel kann ich jetzt einfach `image: hallo welt` ins Frontmatter schreiben.
+Außerdem hab ich es so eingerichtet, dass man auf die Bilder in der `images.ts` auch per einfachem String zugreifen kann. D.h., in obigem Beispiel kann ich jetzt einfach `image: hallo welt` ins Frontmatter schreiben.
 
 Dann wird das Bild mit der Property `hallo welt` gesucht und nach den entsprechenden Bilddaten gerendert. Cool oder?!
 
-```mdx
-## // src/content/2024/06/hallo-welt.mdx
+```
+## src/content/2024/06/hallo-welt.mdx
 
 title: Hallo Welt
 pubDate: 2024-06-24
 description: Ein Gruß an die Welt
 category: verschiedenes
 tags:
-
-- hallo
-- welt
-  image: hallo welt
-  series: Grüße aus aller Welt
-  vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
+  - hallo
+  - welt
+image: hallo welt
+series: Grüße aus aller Welt
+vgWortCode: 835ee8d02f5c4ffabf9b2bfa8947300e
 
 ---
 ```
