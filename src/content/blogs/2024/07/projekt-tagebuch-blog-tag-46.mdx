@@ -1,0 +1,153 @@
+---
+title: Projekt-Tagebuch Blog, Tag 46
+pubDate: 2024-07-15
+description: Eigentlich will ich ordentlich Content uploaden. Aber immer wenn ich dabei bin einen Blog-Post fertig zu machen fällt mir auf, was an Funktionalität noch fehlt bzw. ganz geil wäre. Heute hab ich deshalb das Erstellen von Affiliate-Links im MDX vereinfacht.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 89bdfe8be8c74becb7b7055753c736df
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Erstellen von Affiliate-Links in MDX vereinfachen](#vereinfachtes-erstellen-von-affiliate-links)~
+- [x] ~[Tag-Route erstellen](#tag-route)~
+
+---
+
+Eigentlich will ich ordentlich Content uploaden. Aber immer wenn ich dabei bin einen Blog-Post fertig zu machen fällt mir auf, was an Funktionalität noch fehlt bzw. ganz geil wäre. Heute hab ich deshalb das Erstellen von Affiliate-Links im `MDX` vereinfacht.
+
+## Vereinfachtes Erstellen von Affiliate-Links
+
+Affiliate-Links im `Markdown` hatte ich ursprünglich so eingerichtet:
+
+```md
+[Trade Republic]($tradeRepublic)
+```
+
+Sieht dann letztlich so aus:
+
+[Trade Republic]($tradeRepublic)
+
+Der Text in den runden Klammern wird dann in der Config nachgeschlagen und ein dort hinterlegter (wenn vorhanden) `href` für den entsprechenden Link gezogen. Das Wort in die runde Klammer schreiben war mir aber immer noch zu viel.
+
+Darum hab ich es jetzt so gedeichselt, dass man es komplett weglassen kann, wenn der Link-Text (in den eckigen Klammern) sowieso dem camelCasified Partner entspricht. In den runden Klammern steht dann nur noch das `$`-Zeichen, das den Affiliate-Link identifiziert.
+
+```md
+[Trade Republic]($)
+```
+
+→ [Trade Republic]($)
+
+Das geht nicht:
+
+```md
+[Toller Link zu Trade Republic]($)
+```
+
+In diesem Fall muss man dann noch den camelCasified Partner angeben:
+
+```md
+[Toller Link zu Trade Republic]($tradeRepublic)
+```
+
+[Toller Link zu Trade Republic]($tradeRepublic)
+
+## target zu Links-Komponente
+
+Beim Anlegen meiner benutzerdefinierten Link-Komponente habe ich wohl (absichtlich oder unbeabsichtigt) das `target`-Attribut vergessen. Ursprünglich dachte ich, ich würde es für interne Links, also Links, die nur zu Seiten innerhalb des Blogs führen, nicht brauchen.
+
+Im Nachhinein fiel mir auf, dass es gar nicht so schlecht ist, einen internen Link auch mal mit einem `target="_blank"` auszustatten, wenn der User nur schnell etwas nachkucken, aber gleich an der alten Stelle weiter lesen möchte.
+
+## Affiliate-Link Tooltips optimiert
+
+Und weil ich gerade an den Links war, hab ich die Tooltips für die Affiliate-Links optimiert. Optimiert heißt hier hauptsächlich das Styling gepimpt, einen weiterführenden Link eingefügt und ein bisi Responsiveness ergänzt.
+
+## Tag-Route
+
+Dann hab ich die Tag-Route erstellt. So dass man jetzt auf einen Tag klicken kann und auf der entsprechenden Tag-Seite eine Liste von Posts mit diesem Tag präsentiert bekommt.
+
+Aber vorher wollte ich noch "schnell" die Auto-Tags pimpen. Bisher hatte ich Tags und Auto-Tags nur für die [Tag-Cloud](/blog/projekt-tagebuch-blog-tag-45#tag-cloud) gemerged. Jetzt werden die Auto-Tags direkt beim Fetchen aller Blogs in die Frontmatter-Tags gemerged. Stehen also dort wie normale Tags zur Weiterverarbeitung zur Verfügung.
+
+```ts
+//src/lib/blogFetchers/utils/addAutoTagsToFrontmatters.ts
+export function addAutoTagsToFrontmatters(blogs: BlogPost[]): BlogPost[] {
+  return blogs.map((blog) => {
+    const { frontmatter } = blog;
+    const { codeChallengeData } = frontmatter;
+    const tags = frontmatter.tags || [];
+    const autoTags = getAutoTags(frontmatter);
+
+    tags.forEach((tag) => {
+      if (autoTags.includes(tag)) {
+        throwRedundantTagError(tag, codeChallengeData);
+      }
+    });
+
+    const allTags = [...new Set([...tags, ...autoTags])];
+
+    return { ...blog, frontmatter: { ...frontmatter, tags: allTags } };
+  });
+}
+```
+
+Hier noch meine `getAutoTags()` und `getAutoTagsFromCodeChallenge()`-Funktionen:
+
+```ts
+// src/lib/blogFetchers/getAutoTags.ts
+export function getAutoTags(frontmatter: Frontmatter): string[] {
+  return [...getAutoTagsFromCodeChallenge(frontmatter)];
+}
+
+function getAutoTagsFromCodeChallenge(
+  frontmatter: Frontmatter,
+): [string, string] | [] {
+  const { codeChallengeData } = frontmatter;
+
+  if (codeChallengeData) {
+    const { platform, language } = codeChallengeData;
+    return [platform.toLowerCase(), language.toLowerCase()];
+  }
+
+  return [];
+}
+```
+
+Und so sieht jetzt meine `getBlogs()`-Funktion aus:
+
+```ts
+// src/lib/blogFetchers/getBlogs.ts
+export async function getBlogs(): Promise<BlogPost[]> {
+  const allFilePaths = getAllFilesFromSubDirs(blogDir);
+  const allBlogs = await Promise.all(
+    allFilePaths.map(async (path) => await getBlogByFilePath(path)),
+  );
+
+  checkForDuplicateSlugs(allBlogs);
+  checkForDuplicateVGWortCodes(allBlogs);
+  const allBlogsWithAutoTags = addAutoTagsToFrontmatters(allBlogs);
+
+  return allBlogsWithAutoTags;
+}
+```
+
+Zum Schluss hab ich nur noch die Tag-Cloud zur `Sidebar` der `category`- und `tag`-Route hinzugefügt.
+
+## Uiuiui
+
+Gefühlt hab ich heute ein bisschen was geschafft, aber ich muss auf jeden Fall die Uploadrate von Blog-Posts weiter deutlich erhöhen, sonst komm ich irgendwann nicht mehr hinterher... 🫢
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
