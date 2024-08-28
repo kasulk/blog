@@ -1,0 +1,92 @@
+---
+title: Projekt-Tagebuch Blog, Tag 43
+pubDate: 2024-07-05
+description: Heute hab ich erst mal weiter an den automatischen Blog-Post-Bildern gearbeitet. Den Branch hatte ich ja bereits angefangen. Die Bilder sind jetzt global in der Config hinterlegt und benannt. D.h., man muss im Frontmatter nicht mehr ein Objekt mit Bilddaten hinterlegen.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: b9f67c253ba24bc39c3f356331e0e8c8
+---
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Automatische Blog-Post-Bilder fertigstellen](#)~
+- [x] ~[Hydration-Warning fixen](#)~
+
+---
+
+## Automatische Blog-Post-Bilder fertigstellen
+
+### Globale Bilder & Error Handling
+
+Heute hab ich erst mal weiter an den automatischen Blog-Post-Bildern gearbeitet. Den Branch hatte ich ja bereits[ gestern](/blog/projekt-tagebuch-blog-tag-42#blog-bilder-global-hinterlegen) angefangen.
+
+Die Bilder sind jetzt global in der Config hinterlegt und benannt. D.h., man muss im Frontmatter nicht mehr ein Objekt mit Bilddaten hinterlegen. Man kann, aber man muss nicht.
+
+Stattdessen kann man auch auf die Bilder in der Config einfach über deren hinterlegten Namen, also über einen String, zugreifen.
+
+Das geht natürlich in die Hose, wenn man einen falschen Namen angibt. Vor allem für diese Fälle hab ich hier umfängliches Error-Handling ergänzt.
+
+### Kategorie-Bilder
+
+Als nächstes hab ich Default-Bilder für die Kategorien hinzugefügt. Jede Kategorie hat jetzt also ihr eigenes Bild.
+
+Auf dieses Bild wird immer dann zugegriffen, wenn im Frontmatter kein Bild angegeben ist und es sich nicht um eine Serie handelt. Handelt es sich um eine Serie, wird zuerst auf das Serien-Bild zurückgegriffen.
+
+### Build-Time-Errors
+
+Als ich den Branch mergen wollte, gab es noch ein paar Build-Time-Errors die ich rasch gefixt hab.
+
+## Kategorien in die siteConfig
+
+Danach hab ich die 4 Kategorien in die `siteConfig` eingetragen und damit quasi fixiert. Daraus kann ich jetzt z.B. einen Type ableiten und die Eingabe der Kategorie im Frontmatter ueberprüfen.
+
+Gibt man eine falsche Kategorie ein, bekommt man einen Fehler.
+
+## Inspiration-Kategorie
+
+Das Arbeiten mit den Kategorien hat mich dann inspiriert noch schnell eine [Inspiration-Kategorie](/blog/category/inspiration) anzulegen. Das entsprechende Kategorie-Bild dafür hab ich bei Pixabay rausgesucht.
+
+Diese Kategorie soll z.B. für Posts sein, die inspirierend, aber auch motivierend sind. Also quasi für meinen Beitrag, diese Welt besser zu machen. 🌻
+
+## Hydration-Warning fixen
+
+Zwischendurch hab ich noch endlich die Hydration-Warning in der Browser-Konsole gefixt. Bzw. eher unterdrückt als gefixt. Aber so ist die offizielle Empfehlung von `next-themes`, das diese Warnung verursacht.
+
+`next-themes` hab ich ganz am Anfang installiert und eingerichtet um schnell einen Dark-Mode aufzusetzen. Das ging auch alles recht gut, bis auf diese hässliche rote Warnung ständig.
+
+Aber damit ist jetzt Schluss. Laut `next-themes`-[Readme](https://github.com/pacocoursey/next-themes#with-app) soll man einfach die Hydration-Warning im `HTML`-Element mit `suppressHydrationWarning` unterdrücken. Das wirkt auch nur auf Ebene des `HTML`-Elements. D.h., alle anderen Hydration-Warnings bekommt man bei Bedarf trotzdem noch unter die Nase gerieben. Da bin ich aber froh.
+
+Meine `layout.tsx` sieht jetzt also foljendermaßen aus:
+
+```tsx
+// src/app/layout.tsx
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning // recommended workaround from next-themes (only applies one level deep);
+    >
+      <body
+        className={cn("min-h-screen font-sans antialiased", inter.variable)}
+      >
+        <Providers>
+          <div className="relative flex min-h-dvh flex-col">
+            <SiteHeader />
+            <main className="container prose mx-auto max-w-6xl py-6 dark:prose-invert">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
+        </Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+Nicht schön, aber selten. Die Warnung ist zumindest weg.
