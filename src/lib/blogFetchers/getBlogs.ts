@@ -7,7 +7,7 @@ import {
   getAllFilesFromSubDirs,
   getBlogByFilePath,
 } from "@/lib/blogFetchers/utils";
-import { addAutoTagsAndReadingTimeToFrontmatters } from "./utils/addAutoTagsAndReadingTimeToFrontmatters";
+import { addAdditionalDataToFrontmatters } from "./utils/addAdditionalDataToFrontmatters";
 
 const blogDir = path.join(process.cwd(), "src/content/blogs");
 
@@ -16,7 +16,8 @@ const blogDir = path.join(process.cwd(), "src/content/blogs");
  *
  * This function reads all files from the subdirectories within the blog directory,
  * processes each file to extract blog post data, checks for duplicate slugs and VG Wort codes,
- * and adds automatically generated tags and reading time to the frontmatter of each blog post.
+ * and adds automatically generated tags, title, description and reading time as well as optional apiData
+ * to the frontmatter of each blog post.
  *
  * @returns {Promise<BlogPost[]>} - A promise that resolves to an array of processed blog posts with updated frontmatter.
  *
@@ -37,7 +38,7 @@ export async function getBlogs(): Promise<BlogPost[]> {
     checkForDuplicateSlugs(allBlogs);
     checkForDuplicateVGWortCodes(allBlogs);
 
-    return addAutoTagsAndReadingTimeToFrontmatters(allBlogs);
+    return addAdditionalDataToFrontmatters(allBlogs);
     //
   } catch (error) {
     console.error("Error in getBlogs:", error);
