@@ -1,4 +1,5 @@
 import "@/styles/highlight-js/github-dark.css";
+import type { FrontmatterWithApiData } from "@/../types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/config";
@@ -22,12 +23,7 @@ import {
   getBlogsByCategory,
 } from "@/lib/blogFetchers";
 import { checkVGWortCode } from "@/lib/blogFetchers/utils";
-import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
-import {
-  createBlogPostDescription,
-  createBlogPostTitle,
-  getBlogPostAuthor,
-} from "@/lib/utils";
+import { getBlogPostAuthor } from "@/lib/utils";
 
 type BlogPageProps = {
   params: { slug: string };
@@ -43,18 +39,12 @@ export default async function SingleBlogPage({ params }: BlogPageProps) {
   checkVGWortCode(blog);
 
   const { content, frontmatter, slug } = blog;
-  const { category, vgWortCode, codeChallengeData } = frontmatter;
+  const { title, category, vgWortCode, apiData } =
+    frontmatter as FrontmatterWithApiData;
 
   const relatedBlogs = await getBlogsByCategory(category);
   const otherBlogs = relatedBlogs.filter((blog) => blog.slug !== slug);
   const hasRelatedBlogs = otherBlogs.length > 0;
-
-  // get API data
-  const apiData = codeChallengeData
-    ? await fetchCodeChallengeAPIs(codeChallengeData)
-    : null;
-
-  const title = createBlogPostTitle(frontmatter, apiData);
 
   return (
     <>
@@ -104,19 +94,11 @@ export async function generateMetadata({
   if (!blog) return {};
 
   const { frontmatter } = blog;
-  const { codeChallengeData, readingTime } = frontmatter;
-
-  // get API data
-  const apiData = codeChallengeData
-    ? await fetchCodeChallengeAPIs(codeChallengeData)
-    : null;
-
-  const title = createBlogPostTitle(frontmatter, apiData);
-  const description = createBlogPostDescription(frontmatter, apiData);
+  const { title, description, codeChallengeData, readingTime } = frontmatter;
 
   const ogSearchParams = new URLSearchParams();
-  ogSearchParams.set("title", title);
-  ogSearchParams.set("desc", description);
+  ogSearchParams.set("title", title || "");
+  ogSearchParams.set("desc", description || "");
   ogSearchParams.set("type", "Blog Post");
   ogSearchParams.set("readingTime", readingTime.toString());
 
@@ -132,8 +114,8 @@ export async function generateMetadata({
     authors: { name: getBlogPostAuthor(frontmatter.author, siteConfig.owner) },
 
     openGraph: {
-      title,
-      description,
+      title: title || "",
+      description: description || "",
       type: "article",
       publishedTime: frontmatter.pubDate.toString(),
       url: `${siteConfig.url}/blog/${blog.slug}`,
@@ -142,7 +124,7 @@ export async function generateMetadata({
           url: `/api/og?${ogSearchParams.toString()}`,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: title || "",
         },
       ],
     },
