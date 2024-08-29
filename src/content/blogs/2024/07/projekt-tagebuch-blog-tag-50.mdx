@@ -1,0 +1,99 @@
+---
+title: Projekt-Tagebuch Blog, Tag 50
+pubDate: 2024-07-25
+description: Gestern hab ich gefühlt nicht so viel geschafft. Ich hab mal wieder ein 4er Kata gelöst, das hat mich allerdings etwas Zeit gekostet. Noch dazu kommt, dass mein Laptop ständig abstürzt. So kann man eigentlich nicht arbeiten...
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: b48fe845d95f43cf97fabf5909f72c3d
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Mysteriösen Server-Error fixen](#mysterioeser-server-error)~
+- [x] ~[Zappelnde Pagination-Buttons fixen](#zappelnde-pagination-buttons)~
+
+---
+
+Gestern hab ich gefühlt nicht so viel geschafft. Ich hab mal wieder ein [4er Kata](https://www.codewars.com/kata/52742f58faf5485cae000b9a) gelöst, das hat mich allerdings etwas Zeit gekostet. Noch dazu kommt, dass mein Laptop ständig abstürzt. So kann man eigentlich nicht arbeiten...
+
+## Mysteriöser Server-Error
+
+### Tag 1 (gestern)
+
+Nach dem Mittag hab ich mich dann an den Server-Error in der `AllBlogPostsPage` gemacht. Durch Versuch und Irrtum konnte ich ihn immer weiter eingrenzen und schließlich umzingeln.
+
+Lösen konnte ich ihn allerdings noch nicht. Ich weiß jetzt, an welcher Stelle er vermutlich ausgelöst wird, aber noch nicht warum. Die Fehlermeldung ist irgendwie widersprüchlich und passt so gar nicht.
+
+Angeblich wird das Content-Verzeichnis und damit die Blog-Artikel-Dateien nicht gefunden. Wenn man aber einen Artikel direkt aufruft, dann funktioniert alles. Nur die Liste aller Blog-Artikel funktioniert nicht.
+
+### Tag 2 (heute)
+
+Aus Verzweiflung habe ich heute alle Blog-Artikel-Dateien von `src/content` nach `public/content` verschoben. Zwischendurch war der Fehler weg, dann wieder da. 🫣
+
+Dann stellte sich raus, dass der Fehler doch eine etwas andere Ursache hatte. Ich habe den Verzeichnis-Pfad wo die Dateien mit den Blog-Artikeln gespeichert sind in der `siteConfig` hinterlegt:
+
+```ts
+// src/config/site.ts
+export const siteConfig = {
+  // ...
+  dir: {
+    blogs: "src/content/blogs",
+    blogImages: "/img/blogs",
+  },
+  // ...
+};
+```
+
+Die `siteConfig` wird dann in die `getBlogs.ts` importiert um den Pfad zusammen zu schrauben und dann in der `getBlogs()`-Funktion verwendet:
+
+```ts
+// src/lib/blogFetchers/getBlogs.ts
+import { siteConfig } from "@/config/site.ts";
+// ...
+const blogDir = path.join(process.cwd(), siteConfig.dir.blogs); // funktioniert nicht
+
+export async function getBlogs(): Promise<BlogPost[]> {
+  const allFilePaths = getAllFilesFromSubDirs(blogDir);
+  // ...
+}
+```
+
+Ja. Und genau das funktioniert nicht (mehr) mit der neuen Pagination. Wenn ich den Pfad direkt in die `join()`-Methode schreibe funktioniert es:
+
+```ts
+// src/lib/blogFetchers/getBlogs.ts
+import { siteConfig } from "@/config/site.ts";
+// ...
+const blogDir = path.join(process.cwd(), "public/content/blogs"); // funktioniert
+
+export async function getBlogs(): Promise<BlogPost[]> {
+  const allFilePaths = getAllFilesFromSubDirs(blogDir);
+  // ...
+}
+```
+
+Warum weiß der Kuckuck. Und ist wahrscheinlich auch Wurscht. Hauptsache ist, dass es jetzt wieder einwandfrei funzt. Bug adé! 🫡
+
+## Zappelnde Pagination-Buttons
+
+Dann fiel mir auf, dass sich beim Blättern durch die einzelnen Seiten, die Pagination-Buttons bewegen. Da die sich verändernden Seitenzahlen unterschiedlich breit sind, verändert sich die relative Größe der Buttons. Das sollte natürlich nicht sein.
+
+Also hab ich rasch die Größen der Buttons und der Seitenanzeige fixiert. Erledigt.
+
+Außerdem hab ich noch die `cursor-pointer`-Klasse in den Category-Badges ergänzt. Feierabend.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
