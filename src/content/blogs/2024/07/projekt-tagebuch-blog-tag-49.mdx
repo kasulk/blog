@@ -1,0 +1,69 @@
+---
+title: Projekt-Tagebuch Blog, Tag 49
+pubDate: 2024-07-22
+description: Nachdem ich letzte Woche die Pagination grundlegend implementiert hatte, wollte ich mich heute weiter um die PaginationControls kümmern. Da war noch einiges zu tun. Vor allem Responsiveness, Style und das Einbinden in die BlogsByCategory- und BlogsByTagsPage standen heute auf dem Plan.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 69b5079313a646ff9cebb7623a9b13f1
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Pagination Controls responsive machen](#responsify-pagination-controls)~
+- [x] ~[Pagination Controls stylen](#)~
+- [x] ~[Pagination Controls in BlogsByTags- und BlogsByCategoryPage einbinden](#pagination-controls-auf-blogsbycategory-und-blogsbytagpage)~
+
+---
+
+Nachdem ich [letzte Woche](/blog/projekt-tagebuch-blog-tag-48) die Pagination grundlegend implementiert hatte, wollte ich mich heute weiter um die `PaginationControls` kümmern. Da war noch einiges zu tun. Vor allem Responsiveness, Style und das Einbinden in die `BlogsByCategory`- und `BlogsByTagsPage` standen heute auf dem Plan.
+
+Aber zuerst war heute wieder eine [Plasmaspende](/support#plasma-spenden) fällig. Denn mit der coolen EM-Bonusaktion gab es heute insgesamt 55 Euro. Wenn ich diese Woche noch mal gehe gibt es sogar 80 Euro. Und man tut auch noch was verdammt Gutes damit. Jut. Los geht’s:
+
+## The Daily Kata
+
+In der Spiced-Academy angekommen hab ick mir erst mal n Kaffe jezoren und [mein tägliches Kata](https://www.codewars.com/kata/52de553ebb55d1fca3000371) angegriffen. Angeblich eins von Facebook. 20 Minuten später war ich damit durch und konnte mich an den Blog schmeißen.
+
+## Responsify Pagination Controls
+
+Mit der Responsiveness hatte ich ja [letzte Woche](/blog/projekt-tagebuch-blog-tag-48) schon angefangen. Heute gab’s eine kleine Planänderung. Statt der beiden äußeren Elemente wollte ich jetzt nur noch, dass die Seitenanzeige auf kleinen Bildschirmen in die nächste Zeile rutscht.
+
+Hier hab ich mich mal mit den `order`-Klassen von Tailwind probiert. Obwohl ich das hier eigentlich auch mit einem weiteren versteckten Seitenanzeige-Element hätte lösen können. Also das Mittlere wird nur auf großen Bildschirmen angezeigt und das Untere nur auf kleinen.
+
+## Pagination Controls stylen
+
+Dann konnte ich mich an die Styles machen. Dafür hab ich einfach statt der Buttons die `CatergoryBadge`-Komponente verwendet. Noch ein paar Icons rein und fertig.
+
+## Pagination Controls auf BlogsByCategory- und BlogsByTagPage
+
+Da bis hierhin alles ganz gut vorbereitet war, konnte ich jetzt einfach die `PaginationControls`-Komponente auf der `BlogsByCategory`- bzw. `BlogsByTagPage` einsetzen. Anpassungen waren keine mehr nötig.
+
+Ich hab nur noch dafür gesorgt, dass die `PaginationControl` ausgeblendet wird, wenn es weniger als 10 Posts gibt. Das war’s.
+
+Nu hab ich eine geile, simple Pagination auf meinem Blog.
+
+## Serverfehler
+
+Einen kleinen Wermutstropfen gab es dann aber noch: Nachdem ich die fertige Pagination upgeloaded und gemerged hatte, gab es einen Fehler in meiner `AllBlogPostsPage`:
+
+```txt
+Application error: a server-side exception has occurred (see the server logs for more information).
+Digest: 850736632
+```
+
+Das war mir ein bisschen unheimlich. Konnte ich doch nirgendwo einen Fehler finden. Auch beim `Build` gab es keinen. Weder auf `Vercel` noch auf dem `Localhost`. Außerdem erscheint die Fehlermeldung nicht auf dem `Localhost`. Da freu ich mich schon in der nächsten Session drauf.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
