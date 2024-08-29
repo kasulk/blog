@@ -13,14 +13,8 @@ import {
   CharCounter,
   ReadingTime,
 } from "@/components";
-import {
-  createBlogPostDescription,
-  formatDate,
-  truncify,
-  createBlogPostTitle,
-} from "@/lib/utils";
+import { formatDate, truncify } from "@/lib/utils";
 import { siteConfig } from "@/config";
-import { fetchCodeChallengeAPIs } from "@/lib/apiFetchers";
 
 type Props = {
   blog: BlogPost;
@@ -31,16 +25,8 @@ const showCharCounter = isDevMode && siteConfig.vgWort.showCharCounterInDevMode;
 
 export async function BlogCard({ blog }: Props) {
   const { content, frontmatter, slug } = blog;
-  const { author, pubDate, category, readingTime, codeChallengeData } =
+  const { title, author, description, pubDate, category, readingTime } =
     frontmatter;
-
-  // get API data
-  const apiData = codeChallengeData
-    ? await fetchCodeChallengeAPIs(codeChallengeData)
-    : null;
-
-  const title = createBlogPostTitle(frontmatter, apiData);
-  const description = createBlogPostDescription(frontmatter, apiData);
 
   return (
     <Card className="w-full">
