@@ -1,0 +1,77 @@
+---
+title: Projekt-Tagebuch Blog, Tag 47
+pubDate: 2024-07-17
+description: Für Heute hatte ich mir vorgenommen "schnell" Plasmaspenden in die SupportPage einzubinden. Genauer, die "Spenden werben Spender"-Aktion. So kannst du etwas Gutes tun UND etwas Gutes tun! Wenn dich interessiert wie, hier steht’s geschrieben.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: f686d919438640f1b68397a8e3bcedf6
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [x] ~[Plasma spenden in die SupportPage einbinden](#plasma-spenden-in-die-supportpage)~
+- [ ] Pagination einfügen
+
+---
+
+## Plasma spenden in die SupportPage
+
+Für Heute hatte ich mir vorgenommen "schnell" [Plasmaspenden](/support#plasma-spenden) in die [`SupportPage`](/support) einzubinden. Genauer: Die "Spenden werben Spender"-Aktion. So kannst du etwas Gutes tun UND etwas Gutes tun! Wenn dich interessiert wie, [hier](/support#plasma-spenden) steht’s geschrieben.
+
+Das Ganze hat sich wieder länger hingezogen als erwartet. Das lag an den coolen Features, die ich mir für diesen Abschnitt auf der [`SupportPage`](/support) ausgedacht hatte. Die oben genannte Aktion gibt es bei CSL nämlich leider nicht dauerhauft, sondern immer nur nach Bedarf. D.h., ich muss sie ständig aktuell halten.
+
+Um das so angenehm wie möglich zu gestalten, habe ich mir folgende Gimmicks ausgeknobelt:
+
+1. individueller Text und farbige Hinterlegung je nach Aktualität der laufenden Aktion
+1. automatisches Last-Modified-Datum
+
+### Dynamischer Text und Formattierung
+
+Da eine laufende Aktion auslaufen kann, sollte der User darauf hingewiesen werden, ob die aktuell angezeigte Aktion noch aktuell ist. Dies soll durch individuellen Text und eine farbige Hinterlegung passieren.
+
+Da der Blog im Kern ein statischer ist, er wird beim Build-Prozess gerendert (`SSG`), muss ich einen Weg finden die Dynamik in eine statische Seite einzubinden. Die entsprechende Komponente kann also nicht `SSG` sein, sondern muss eine Client-Komponente sein. Das wird spannend.
+
+Soweit erst mal der Plan für die Dynamik. Weiter bin ich hier noch nicht gekommen. Zuerst hab ich mich um das automatische Last-Modified-Datum gekümmert.
+
+### Automatisches Last-Modified-Datum
+
+Wie bei den anderen Affiliate-Links auch, kommen die variablen Daten für die [Plasma-Spenden](/support#plasma-spenden) und Aktionen in eine globale Datei. Von da aus kann ich die Daten zentral ändern ohne mir überall auf den Seiten die richtigen Stellen im `HTML` raussuchen zu müssen.
+
+Damit der User die Aktualität der Daten einschätzen kann, hab ich für jeden Affiliate-Link ein Datum für die letzte vorgenomme Änderung vorgesehen. Das Problem ist hierbei, dass ich bei jeder Änderung auch dieses Datum anfassen muss. Hab ich natürlich keinen Bock drauf.
+
+Also warum nicht einfach das Datum der letzten Änderung an der Datei auslesen lassen?! Einfach aber genial, gelle?!. Hier die Funktion dazu:
+
+```ts
+// src/lib/utils/getLastModifiedDateOfFile.ts
+import fs from "fs";
+import path from "path";
+
+export function getLastModifiedDateOfFile(filePath: string): Date | null {
+  try {
+    const fullPath = path.resolve(process.cwd(), filePath);
+    const stats = fs.statSync(fullPath);
+    return stats.mtime;
+  } catch (error) {
+    console.error("Error getting file stats:", error);
+    return null;
+  }
+}
+```
+
+Und der Knaller: **Es funktioniert!** 🥳
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
