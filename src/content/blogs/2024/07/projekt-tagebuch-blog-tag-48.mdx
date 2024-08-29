@@ -1,0 +1,89 @@
+---
+title: Projekt-Tagebuch Blog, Tag 48
+pubDate: 2024-07-19
+description: Gestern hab ich den Inhalt der SupportPage insb. der Plasma-Spenden-Section noch mal angepasst. Dann noch mal die Blog-Post-Tagebuch Tag 18 geupdatet und den Tag hochgeladen. Ich hab da zwar den ganzen Tag dran gesessen, aber irgendwie fällt mir dazu nicht mehr ein.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: a6e2e47dd5a2436a825ed37e50719de5
+---
+
+<DateFormatter date={pubDate} weekday />
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Mai) in den Blog uploaden
+
+**Tages-Ziele:**
+
+- [ ] [Pagination einfügen](#pagination)
+
+---
+
+## Gestern
+
+Gestern hab ich den Inhalt der [`SupportPage`](/support) insb. der [Plasma-Spenden-Section](/support#plasma-spenden) noch mal angepasst. Dann noch mal die [Blog-Post-Tagebuch Tag 18](/blog/projekt-tagebuch-blog-tag-18) geupdatet und den Tag hochgeladen.
+
+Ich hab da zwar den ganzen Tag dran gesessen, aber irgendwie fällt mir dazu nicht mehr ein. Drum hab ich gestern und heute in einem Post zusammengefasst.
+
+Dafür hab ich heute wieder ein bisschen zu erzählen.
+
+## Pagination
+
+Nach meinem täglichen [Kata](https://www.codewars.com/kata/593a061b942a27ac940000a7) hab ich mich endlich an die Pagination gemacht. Ich muss sagen, ein bisschen scheißerte mir davor und die Prokrastination drohte mich zu übermannen.
+
+Heute waren gut 30°, was noch ein weiterer guter Grund zur Prokrastination war. Aber nicht mit mir! In so einem Fall ist es gut erst mal anzufangen. Auch wenn die Schritte noch so klein sind.
+
+### Der Plan
+
+Mein erster Baby-Schritt bestand darin, mich erst mal ein bisschen darüber zu informieren, wie man es denn in einer `Next.js`-App mit App-Router und `SSG` umsetzen könnte. Dieser Schritt war schon ordentlich herausfordernd.
+
+- server-side
+- static-site-generation
+- oder doch im Client?
+
+Ich bin auch ziemlich schnell fündig geworden und hab nach der Mittagspause beschlossen, das Ganze server-side umzusetzen. Ändern geht immer noch. Mit `searchParams`.
+
+So kann man sich jederzeit die `URL` kopieren oder Bookmarks an diese Stelle setzen. Das sieht dann ungefähr so aus:
+
+```bash
+https://www.kasulks-blog.vercel.app/blog?page=1&per_page=5
+```
+
+### Die Grundlage
+
+Für die Grundlage dazu hab ich ein gutes kurzes Video von [Josh tried coding](https://www.youtube.com/watch?v=SXmni_7B0r4&pp=ygURbmV4dGphIHBhZ2luYXRpb24%3D) gefunden. Den Rest des Tages hab ich dann damit verbracht die Grundlage nach meinem Gutdünken zu veredeln.
+
+### Die Veredelung
+
+#### Noch 2 Buttons
+
+Als Erstes hab ich noch Buttons erstellt um zur ersten und zur letzten Seite zu kommen.
+
+#### Recycling
+
+Da ich die `PaginationControls`-Komponente nicht nur für die `BlogPage`, also die Seite mit der Liste aller Blog-Posts einsetzen möchte, war der nächste Schritt, sie wiederverwendbar zu machen. Z.B. für die Listen nach Category- bzw. Tags.
+
+Damit ich den Pfad dynamisch erstellen kann, hab ich den `usePathname()`-Hook von `next/navigation` implementiert. Um alles möglichst übersichtlich zu halten, hab ich das Ganze in eine Funktion verpackt:
+
+```tsx
+// src/components/PaginationControls.tsx
+function getNewSearchParams(newPage: number): string {
+  return `${pathname}?page=${newPage}&per_page=${per_page}`;
+}
+```
+
+#### Responsiveness
+
+Dann war die Responsiveness dran. Insgesamt hat die Pagination-Navi 5 Elemente. Ich wollte, dass die beiden äußeren, also die Buttons um auf die erste bzw. letzte Seite zu kommen, auf kleinen Bildschirmen eine Zeile tiefer rutschen.
+
+Das hab ich auch grob geschafft. Mehr dazu in der nächsten Session!
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
