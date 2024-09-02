@@ -1,0 +1,201 @@
+---
+title:
+pubDate: 2024-08-31
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 90394ac7a24143ca98e5c364c497c412
+
+codeChallengeData:
+  platform: codewars
+  id: 59b72376460387017e000062
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt es reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir die Länge des Start-Teils, also den Teil _ohne_ Nullen
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir die Länge des Mittel-Teils berechnen
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Mit diesen beiden Werten können wir dann Anfang, Mitte und Ende extrahieren
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann nur noch prüfen, ob der Mittel-Teil nur Nullen enthält, die Länge des Mittel-Teils länger oder gleich `3` ist und ob Anfang und Ende jeweils keine Nullen enthalten.
+
+Das war's schon!
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `x` in `nums` umbenannt):
+
+```ts
+export function isHollow(nums: number[]): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Dann ermitteln wir die Länge des Anfangs:
+
+```ts
+const startLen = nums.indexOf(0);
+```
+
+Da der Anfang keine Nullen enthalten darf, definiert sich das Ende unseres Anfangs durch die erste `0`. Wir suchen also einfach den Index der ersten `0`. Danach muss dann der Mittel-Teil los gehen.
+
+</Accordion>
+<Accordion>
+
+Mit der Länge des Anfangs können wir dann die Länge des Mittel-Teils berechnen:
+
+```ts
+const middleLen = nums.length - startLen * 2;
+```
+
+Da Anfang und Ende gleich lang sein müssen, können wir einfach 2x die Länge des Start-Teils von der Gesamtlänge abziehen.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir Anfang, Mitte und Ende extrahieren:
+
+```ts
+const [start, middle, end] = [
+  nums.slice(0, startLen),
+  nums.slice(startLen, middleLen + 1),
+  nums.slice(nums.length - startLen),
+];
+```
+
+Ich deconstructe hier ein Array, weil ich das übersichtlicher finde. Du kannst auch gerne manuell für jeden Wert eine Variable erstellen und befüllen.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die Mitte wirklich ausschließlich aus Nullen besteht:
+
+```ts
+const isMiddleAllZeros = middle.every((num) => num === 0);
+```
+
+Das schreit nach einer <ExternalLink href={docs.array.every}>`.every()`</ExternalLink>
+-Methode von JavaScript. Das Ergebnis speichern wir in einer Variablen und verwenden es im nächsten Schritt.
+
+</Accordion>
+<Accordion>
+
+Außerdem prüfen wir noch, ob Anfang und Ende Nullen enthalten und die Mitte länger oder gleich `3` lang ist:
+
+```ts
+  return (
+    isMiddleAllZeros && middleLen >= 3 && !start.includes(0) && !end.includes(0)
+  );
+}
+```
+
+Das Ergebnis können wir direkt zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function isHollow(nums: number[]): boolean {
+  const startLen = nums.indexOf(0);
+  const middleLen = nums.length - startLen * 2;
+
+  const [start, middle, end] = [
+    nums.slice(0, startLen),
+    nums.slice(startLen, middleLen + 1),
+    nums.slice(nums.length - startLen),
+  ];
+
+  const isMiddleAllZeros = middle.every((num) => num === 0);
+
+  return (
+    isMiddleAllZeros && middleLen >= 3 && !start.includes(0) && !end.includes(0)
+  );
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
