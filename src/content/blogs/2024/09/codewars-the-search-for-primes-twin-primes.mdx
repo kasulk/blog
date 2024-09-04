@@ -1,0 +1,262 @@
+---
+title:
+pubDate: 2024-09-04
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 84919b8574534957bcefadf14d858f70
+
+codeChallengeData:
+  platform: codewars
+  id: 596549c7743cf369b900021b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes basteln wir uns eine (effektive) Hilfsfunktion, die testet, ob eine gegebene Zahl eine Primzahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+In dieser Hilfsfunktion loopen wir durch die Zahlen von `2`[^1] bis zu ihr selbst und testen, ob sie unsere zu testende Primzahl sauber teilen kann.
+
+> [!tip:Tipp]
+> Hier gibt es einen kleinen Trick. Wir müssen nicht unbedingt bis zur Zahl selbst loopen... 😉
+
+Weiter geht’s mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In unserer Hauptfunktion brauchen wir als Erstes einen Counter um die gefundenen Twin-Primes zu zählen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann loopen wir durch die Zahlen von `1` (bzw. `2`)[^1] bis `n`.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Jetzt testen wir die aktuelle Zahl, ob sie eine Primzahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn ja, testen wir auch die übernächste Zahl, ob sie eine Primzahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn beides zutrifft, können wir unseren Zähler um `1` erhöhen und zur nächsten Iteration übergehen.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Nach dem Loop geben wir nur noch den Inhalt unseres Zählers zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion:
+
+```ts
+function isPrime(n: number): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Dann direkt der Loop:
+
+```ts
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+```
+
+Wir starten den Loop erst bei `2`[^1].
+
+Und um das Ganze effektiver zu machen, loopen wir nur bis zur Wurzel der aktuellen Zahl. Wenn die Zahl bis hierhin nicht sauber teilbar war, ist sie es danach auch nicht mehr.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die aktuelle Zahl `n` durch das aktuelle `i` teilbar ist:
+
+```ts
+    if (n % i === 0) return false;
+  }
+```
+
+Wenn ja, ist es keine Primzahl. Wir können den Loop und die Funktion sofort beenden und `false` zurückgeben.
+
+Das war's schon für den Loop.
+
+</Accordion>
+<Accordion>
+
+Ansonsten geben wir nach dem Loop `true` zurück:
+
+```ts
+  return true;
+}
+```
+
+Und das war's auch schon für die Hilfsfunktion. Weiter geht’s mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function twinPrime(n: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Dann unseren Zähler initialisieren:
+
+```ts
+let numTwinPrimes = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Danach direkt der Loop durch die Zahlen von `2` bis `n`:
+
+```ts
+  for (let i = 2; i < n; i++) {
+```
+
+Auch hier starten wir den Loop wieder erst ab der `2`.
+
+Außerdem brauchen wir nur bis einschließlich `n-1` loopen. Warum wird im nächsten Schritt klar.
+
+</Accordion>
+<Accordion>
+
+Jetzt testen wir, ob die aktuelle und die übernächste Zahl Primzahlen sind:
+
+```ts
+    if (isPrime(i) && isPrime(i + 2)) numTwinPrimes++;
+  }
+```
+
+Wenn ja, erhöhen wir unseren Zähler um `1`.
+
+Und das war's schon für den Loop!
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch den Inhalt des Zählers zurückgeben:
+
+```ts
+  return numTwinPrimes;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function twinPrime(n: number): number {
+  let numTwinPrimes = 0;
+
+  for (let i = 2; i < n; i++) {
+    if (isPrime(i) && isPrime(i + 2)) numTwinPrimes++;
+  }
+
+  return numTwinPrimes;
+}
+
+function isPrime(n: number): boolean {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false;
+  }
+
+  return true;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
+
+[^1]: Eine Primzahl ist eine natürliche Zahl, die genau **_ZWEI_** positive Teiler hat (`1` und sich selbst). Da diese bei der `1` zusammenfallen und sie damit nur **_EINEN_** Teiler hat, wird sie nicht als Primzahl betrachtet.
