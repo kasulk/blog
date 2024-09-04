@@ -1,0 +1,61 @@
+---
+title: Projekt-Tagebuch Blog, Tag 52
+pubDate: 2024-08-01
+description: Eigentlich gar keiner. Nachdem ich mir diesmal mit dem täglichen Kata übelst einen abgebrochen hab, hab ich noch ein paar neue Blog-Posts fürs Blog-Projekt-Tagebuch refactored und hochgeladen. 6, um genau zu sein.
+category: coden
+tags:
+series: projekt-tagebuch blog
+vgWortCode: 65ff80c2ded94276b71df16e23afce22
+---
+
+<DateFormatter date={"2024-07-29"} weekday /> // <DateFormatter
+  date={pubDate}
+  weekday
+/>
+
+**Wochen-Ziele:**
+
+- [ ] Blog-Projekt-Tagebuch (Juni) in den Blog uploaden
+
+**Tages-Ziele:**
+
+_keine größeren Ziele heute..._
+
+---
+
+## Montag, 29. Juli 2024
+
+### Nicht viel neuer Code
+
+Eigentlich gar keiner. Nachdem ich mir diesmal mit dem [täglichen Kata](https://www.codewars.com/kata/598106cb34e205e074000031) ([Schritt-für-Schritt-Lösung](/blog/codewars-the-deaf-rats-of-hamelin)) übelst einen abgebrochen hab, hab ich noch ein paar neue Blog-Posts fürs Blog-Projekt-Tagebuch refactored und hochgeladen. 6, um genau zu sein.
+
+Damit brauch ich jetzt zwar nur noch 5 aus dem Juni fertig machen, aber mehr hab ich dann heute auch nicht geschafft. Trotzdem cool. Denn dann kann ich mich dann bald schon an den Upload der Juli-Posts machen.
+
+## Mittwoch, 1. August 2024
+
+### Kata, Kata, Kata
+
+Als Erstes hab ich heute wieder ein [Kata](https://www.codewars.com/kata/51ba717bb08c1cd60f00002f) ([Schritt-für-Schritt-Lösung](/blog/codewars-range-extraction)) gelöst. Ausnahmsweise mal wieder ein 4er. Die Basis ging relativ flott und easy von der Hand. Zeit gekostet hat mich dann aber die Details zu debuggen und zum Schluss ordentlich zu refactoren.
+
+### Portfolio-Page
+
+Dann hab ich heute in einem Anflug von Größenwahn beschlossen die `PortfolioPage` zu bauen. Bzw. gebaut war sie ja schon. Nämlich in `HTML` und `CSS` auf meiner alten Homepage. Jetzt sollte das Ganze in `React` und `Tailwind` in den `Next.js`-Blog überführt werden.
+
+Eigentlich eine coole Idee. Denn für jedes einzelne Projekt hab ich damals immer das komplette `HTML` neu geschrieben bzw. kopiert. Mit `React` kann ich jetzt einfach durch ein `Array` von Projekten loopen und jedes in einer Projekt-Komponente rendern.
+
+Besser gesagt in einer `Laptop`-Komponente. Denn jedes Projekt wird in einem komplett responsive gecodeten Laptop präsentiert. Den Laptop so responsive zu machen war ein ordentliches Gefummel damals. Das hatte ich irgendwie verdrängt. Und jetzt muss ich das Ganze in `Tailwind` übersetzen...
+
+Doch genug gejammert. Projekt-`Array` und Komponenten hab ich erstellt. Das `CSS` im Großen und Ganzen auch nach `Tailwind` übersetzt. Es ist allerdings noch nicht alles am richtigen Platz. Es gibt leider nicht für alle Eigenschaften eine passende `Tailwind`-Klasse.
+
+Die muss ich teilweise noch extra anlegen oder versuchen, ob ich die vielleicht sogar mit sogenannten [arbitrary Values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) (z.B. `m-[93%]`) hinkriege.
+
+Schaun mer mal. Weiter geht’s dann [morgen](/blog/projekt-tagebuch-blog-tag-53). Wenn Gott will.
+
+## Feedback
+
+<Accordion>
+Schreib mir!
+
+<SocialLinks emailSubject={`Frage zu ${title}`} />
+
+</Accordion>
