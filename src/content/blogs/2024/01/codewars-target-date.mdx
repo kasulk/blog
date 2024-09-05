@@ -1,0 +1,192 @@
+---
+title:
+pubDate: 2024-01-08
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 185dab25acc84b0f905c08b8c196b68e
+
+codeChallengeData:
+  platform: codewars
+  id: 569218bc919ccba77000000b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes definieren wir 3 Variablen. Das Start-Datum, den aktuellen Betrag und die Anzahl der Tage.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Jetzt können wir die täglichen Zinsen berechnen und zum Ursprungsbetrag hinzu addieren.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Das machen wir solange bis der Betrag `a` erreicht ist.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Die Tage zählen wir mit unserem Tages-Counter.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Nach dem Loop müssen wir nur noch das End-Datum berechnen und ausgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function dateNbDays(a0: number, a: number, p: number): string {
+```
+
+</Accordion>
+<Accordion>
+
+3 Variablen definieren:
+
+```ts
+ const startDate = new Date("2016-01-01");
+ let currAmount = a0;
+ let numDays = 0;`
+```
+
+</Accordion>
+<Accordion>
+
+Für die Berechnung der täglichen Zinsen nehme ich einen `while`-Loop:
+
+```ts
+  while (currAmount <= a) {
+    const dailyInterest = (currAmount * p) / 100 / 360;`
+```
+
+</Accordion>
+<Accordion>
+
+Tägliche Zinsen summieren und Tage zählen:
+
+```ts
+    currAmount += dailyInterest;
+    numDays++;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop berechnen wir das End-Datum:
+
+```ts
+  const endDate = startDate.setDate(startDate.getDate() + numDays);`
+```
+
+</Accordion>
+<Accordion>
+
+Und geben das End-Datum als String im Format `JJJJ-MM-TT` aus:
+
+```ts
+  return new Date(endDate).toISOString().slice(0, 10);`
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function dateNbDays(a0: number, a: number, p: number): string {
+  const startDate = new Date("2016-01-01");
+  let currAmount = a0;
+  let numDays = 0;
+
+  while (currAmount <= a) {
+    const dailyInterest = (currAmount * p) / 100 / 360;
+
+    currAmount += dailyInterest;
+    numDays++;
+  }
+
+  const endDate = startDate.setDate(startDate.getDate() + numDays);
+
+  return new Date(endDate).toISOString().slice(0, 10);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
