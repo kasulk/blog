@@ -1,0 +1,270 @@
+---
+title:
+pubDate: 2024-02-28
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: c46b7eceb0de4935977c7ad0500657bc
+
+codeChallengeData:
+  platform: codewars
+  id: 5539fecef69c483c5a000015
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als erstes macht es Sinn eine Helfer-Funktion zu basteln, die (effektiv) checkt, ob eine Zahl eine Primzahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dazu können wir die Trial-Devision bzw. [Probedivision](https://www.wikiwand.com/de/Probedivision) anwenden.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir in unserer Hauptfunktion von `start` bis `stop` loopen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn die aktuelle Zahl eine Primzahl ist, prüfen wir, ob sie auch rückwärts eine Primzahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Außerdem soll es rückwärts nicht die gleiche Zahl wie vorwärts sein.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn beides zutrifft, fügen wir die Zahl zu einem Array hinzu.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Helfer-Funktion:
+
+```ts
+function isPrime(num: number): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Als erstes schließen wir alles aus, was kleiner als 1 ist:
+
+```ts
+if (num <= 1) return false;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt loopen wir (effizient) bis zur Wurzel unserer zu prüfenden Zahl:
+
+```ts
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+```
+
+Siehe Trial Division, bzw. [Probedivision](https://www.wikiwand.com/de/Probedivision).
+
+</Accordion>
+<Accordion>
+
+Wenn unsere Zahl durch eine der aktuellen Zahlen teilbar ist, ist es keine Primzahl:
+
+```ts
+    if (num % i === 0) return false;
+  }
+```
+
+Und wir können den Loop (und die Funktion) mit `return` sofort beenden.
+
+</Accordion>
+<Accordion>
+
+Ansonsten schon:
+
+```ts
+  return true;
+}
+```
+
+Das war unserer Helferlein. Weiter geht's mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function backwardsPrime(start: number, stop: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Ich erstelle mir das Array für die gesammelten Rückwärts-Primzahlen:
+
+```ts
+const backwardsPrimes: number[] = [];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  for (let i = start; i <= stop; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Wir prüfen jede Zahl, ob es eine Primzahl ist:
+
+```ts
+    if (isPrime(i)) {
+```
+
+Dabei hilft uns unser Helferlein von oben.
+
+</Accordion>
+<Accordion>
+
+Wenn es eine Primzahl ist, können wir sie umdrehen:
+
+```ts
+const revNum = Number([...String(i)].reverse().join(""));
+```
+
+Wir spreaden die Ziffern der String-Zahl in ein Array, das wir dann umdrehen, wieder zusammenfügen und zurück in eine Zahl umwandeln.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die Rückwärts-Zahl auch eine Primzahl und nicht die gleiche Zahl wie vorwärts ist:
+
+```ts
+      if (isPrime(revNum) && revNum !== i) backwardsPrimes.push(i);
+    }
+  }
+```
+
+Wenn das passt, fügen wir die Zahl zu unserem Ergebnis-Array hinzu.
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch das Ergebnis zurückgeben:
+
+```ts
+  return backwardsPrimes;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Fertsch! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function backwardsPrime(start: number, stop: number): number[] {
+  const backwardsPrimes: number[] = [];
+
+  for (let i = start; i <= stop; i++) {
+    if (isPrime(i)) {
+      const revNum = Number([...String(i)].reverse().join(""));
+      if (isPrime(revNum) && revNum !== i) backwardsPrimes.push(i);
+    }
+  }
+
+  return backwardsPrimes;
+}
+
+function isPrime(num: number): boolean {
+  if (num <= 1) return false;
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
