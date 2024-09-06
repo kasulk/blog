@@ -1,0 +1,226 @@
+---
+title:
+pubDate: 2023-09-30
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 2fb3ad0360d44caa813d339738cfa2be
+
+codeChallengeData:
+  platform: codewars
+  id: 5727bb0fe81185ae62000ae3
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als erstes drehen wir den Input-String um.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch alle Zeichen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn das aktuelle Zeichen ein `#` ist, erhöhen wir einen Zähler um `1` und entfernen das `#`.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ansonsten prüfen wir den `#`-Zähler.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn der `#`-Zähler positiv ist, entfernen wir das Zeichen und prüfen das nächste.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Ansonsten fügen wir das Zeichen an den Anfang einer Output-Variablen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function cleanString(s: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann erstellen wir uns zuerst unseren Zähler und die Output-Variable:
+
+```ts
+let backspaceCount = 0;
+let output = "";
+```
+
+</Accordion>
+<Accordion>
+
+Als nächstes wandeln wir den Input-String in ein Array, drehen es um und speichern es in einer Variablen:
+
+```ts
+const reversedChars = s.split("").reverse();
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch alle Zeichen:
+
+```ts
+  for (let char of reversedChars) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Zeichen ein `#` ist, erhöhen wir unseren Zähler um `1` und gehen zum nächsten:
+
+```ts
+if (char === "#") {
+  backspaceCount++;
+  continue;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob unser Zähler `positiv` ist. Wenn ja, verringern wir unseren Zähler um `1` und gehen zur nächsten Iteration:
+
+```ts
+if (backspaceCount > 0) {
+  backspaceCount--;
+  continue;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Wenn beides _nicht_ zutrifft, können wir das aktuelle Zeichen an den Anfang unseres Outputs setzen:
+
+```ts
+    output = char + output;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch unsere Output-Variable zurückgeben:
+
+```ts
+  return output;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function cleanString(s: string): string {
+  let backspaceCount = 0;
+  let output = "";
+
+  const reversedChars = s.split("").reverse();
+
+  for (let char of reversedChars) {
+    if (char === "#") {
+      backspaceCount++;
+      continue;
+    }
+
+    if (backspaceCount > 0) {
+      backspaceCount--;
+      continue;
+    }
+
+    output = char + output;
+  }
+
+  return output;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
