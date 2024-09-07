@@ -1,0 +1,165 @@
+---
+title:
+pubDate: 2024-01-22
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 49ddf0b4dece4100a06bf4fcd4b810e1
+
+codeChallengeData:
+  platform: codewars
+  id: 570523c146edc287a50014b1
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als erstes sollten wir die Summe der Ziffern berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir diese Summe mit ihren Ziffern in umgekehrter Reihenfolge.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Und dann nur noch vergleichen, ob das Produkt dieser beiden Zahlen dem Input `n` entspricht.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `n` in `num` umbenannt):
+
+```ts
+export const numberJoy = (num: number): boolean => {
+```
+
+</Accordion>
+<Accordion>
+
+Berechnen wir die Summe der Ziffern von `num` (Stichwort: Method-Chaining):
+
+```ts
+const digitSum = num
+  .toString()
+  .split("")
+  .reduce((sum, digit) => sum + Number(digit), 0);
+```
+
+Erst müssen wir die Zahl in einen String umwandeln. Dann können wir mit <ExternalLink href={docs.string.split}>`.split("")`</ExternalLink> aus diesem String ein Array machen. Und zum Schluss jede Ziffer mit <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> zu einer Summe aufaddieren (als Startwert wählen wir 0). In TypeScript müssen wir die jeweils aktuelle Ziffer immer noch in eine Zahl umwandeln, z.B. mit <ExternalLink href={docs.number.number}>`Number()`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Ziffern der Quersumme umdrehen (Stichwort: Method-Chaining):
+
+```ts
+const digitSumReversed = Number(
+  digitSum.toString().split("").reverse().join(""),
+);
+```
+
+Wir wandeln unsere Zahl wieder in einen String um und machen ein Array draus. Auf dieses können wir jetzt <ExternalLink href={docs.array.reverse}>`.reverse()`</ExternalLink> anwenden, um das Array umzudrehen. Jetzt noch mit <ExternalLink href={docs.array.join}>`join("")`</ExternalLink> wieder zu einem String zusammenfügen und zum Schluss wandeln wir mit <ExternalLink href={docs.number.number}>`Number()`</ExternalLink> das ganze Ding noch wieder in eine Zahl zurück.
+
+</Accordion>
+<Accordion>
+
+Jetzt noch checken ob das Produkt von `digitSum` und `digitSumReversed` gleich der Input-Zahl ist:
+
+```ts
+  return digitSum * digitSumReversed === num;
+};
+```
+
+Das Ergebnis des Checks können wir direkt mit `return` zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Traum! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export const numberJoy = (num: number): boolean => {
+  const digitSum = num
+    .toString()
+    .split("")
+    .reduce((sum, digit) => sum + Number(digit), 0);
+
+  const digitSumReversed = Number(
+    digitSum.toString().split("").reverse().join(""),
+  );
+
+  return digitSum * digitSumReversed === num;
+};
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
