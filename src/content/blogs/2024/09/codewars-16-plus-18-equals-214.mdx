@@ -1,0 +1,229 @@
+---
+title:
+pubDate: 2023-09-30
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 3cf5e4b6423e405e9df966204e166845
+
+codeChallengeData:
+  platform: codewars
+  id: 5effa412233ac3002a9e471d
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Erst wandeln beide Input-Zahlen in Arrays mit ihren Ziffern um.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann drehen wir die Arrays um.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt loopen wir durch die Ziffern,
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+addieren die beiden korrespondierenden Ziffern beider Arrays
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+und fügen das jeweilige Ergebnis (an den Anfang) einer Ergebnis-Variablen hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Nach dem Loop müssen wir noch unser Ergebnis zu einer Zahl umwandeln.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function add(num1: number, num2: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Definieren wir unsere Ergebnis-Variable:
+
+```ts
+let result = "";
+```
+
+Ich habe mich hier für einen String entschieden. Es ginge auch ein Array.
+
+</Accordion>
+<Accordion>
+
+Jetzt beide Zahlen in Ziffern-Arrays umwandeln:
+
+```ts
+const reversedNumArr1 = num1.toString().split("").reverse();
+const reversedNumArr2 = num2.toString().split("").reverse();
+```
+
+Ich habe sie auch gleich mit <ExternalLink href={docs.array.reverse}>`.reverse()`</ExternalLink> umgedreht, damit wir die Ziffern beider Arrays an der selben Stelle haben und addieren können. Also Einer mit Einer, Zehner mit Zehner usw...
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  const longerNumLength = Math.max(
+    reversedNumArr1.length,
+    reversedNumArr2.length
+  );
+
+  for (let i = 0; i < longerNumLength; i++) {
+```
+
+Damit wir immer so lange loopen, wie die größere beider Zahlen lang ist, ermitteln wir vorher mit <ExternalLink href={docs.math.max}>`Math.max()`</ExternalLink> die Länge des längeren Arrays.
+
+</Accordion>
+<Accordion>
+
+Jetzt die jeweiligen Ziffern beider Arrays addieren:
+
+```ts
+const digitArr1 = Number(reversedNumArr1[i]) || 0;
+const digitArr2 = Number(reversedNumArr2[i]) || 0;
+const digitSum = digitArr1 + digitArr2;
+```
+
+Sollte eine der beiden Ziffern nicht vorhanden, also `undefined` sein, setzen wir sie auf `0`. Mit <ExternalLink href={docs.number.number}>`Number()`</ExternalLink> wandeln wir die String-Zahl in eine echte Zahl um.
+
+</Accordion>
+<Accordion>
+
+Jetzt setzen wir die Summe an den Anfang unseres Ergebnisses:
+
+```ts
+    result = digitSum + result;
+  }
+```
+
+Da `result` ein String ist, können wir hier einfach die Summe mit `+` anfügen.
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch unser Ergebnis zurückgeben:
+
+```ts
+  return Number(result);
+}
+```
+
+Vorher noch in eine Zahl umwandeln.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function add(num1: number, num2: number): number {
+  let result = "";
+
+  const reversedNumArr1 = num1.toString().split("").reverse();
+  const reversedNumArr2 = num2.toString().split("").reverse();
+
+  const longerNumLength = Math.max(
+    reversedNumArr1.length,
+    reversedNumArr2.length,
+  );
+
+  for (let i = 0; i < longerNumLength; i++) {
+    const digitArr1 = Number(reversedNumArr1[i]) || 0;
+    const digitArr2 = Number(reversedNumArr2[i]) || 0;
+    const digitSum = digitArr1 + digitArr2;
+
+    result = digitSum + result;
+  }
+
+  return Number(result);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
