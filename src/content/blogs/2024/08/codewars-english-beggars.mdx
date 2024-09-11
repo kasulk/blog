@@ -1,0 +1,235 @@
+---
+title:
+pubDate: 2024-08-15
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: d75e0cf0d4144f8c8cf03b63988979cd
+
+codeChallengeData:
+  platform: codewars
+  id: 59590976838112bfea0000fa
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst schauen wir, ob wir überhaupt Bettler haben.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wenn nicht, geben wir ein leeres Array zurück.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Ansonsten erstellen wir uns ein Outcomes-Array, in dem wir die Ergebnisse für jeden Bettler speichern.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Außerdem brauchen wir eine Bettler-Variable.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann der Loop.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wir addieren den jeweils aktuellen Wert im `values`-Array zu dem aktuellen Bettler.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann müssen wir zum nächsten Bettler wechseln.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Und nach dem Loop alles noch brav zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `values` und `n` in `earnings` und `numBeggars` umbenannt):
+
+```js
+function beggars(earnings, numBeggars) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst der Check, ob es überhaupt Bettler gibt:
+
+```js
+if (!numBeggars) return [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann unser Outcomes-Array und die Bettler-Variable:
+
+```js
+const outcomes = Array(numBeggars).fill(0);
+let beggar = 0;
+```
+
+Unser `outcomes`-Array wird genauso lang, wie wir Bettler haben. Wir füllen es erst mal mit Nullen.
+
+Um durch die Bettler zu switchen brauchen wir eine Variable für den Index des jeweils aktuellen Bettlers. Der erste ist `0`.
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch die Einkommen (`earnings`):
+
+```js
+  earnings.forEach((earning, i) => {
+```
+
+</Accordion>
+<Accordion>
+
+Wir suchen uns den passenden Bettler raus und erhöhen sein Einkommen um `1`:
+
+```js
+outcomes[beggar] += earning;
+```
+
+</Accordion>
+<Accordion>
+
+Dann wechseln wir zum nächsten Bettler:
+
+```js
+beggar++;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn wir den letzten Bettler erreicht haben, wechseln wir wieder zum ersten:
+
+```js
+    if (beggar === numBeggars) beggar = 0;
+  });
+```
+
+Alternativ kannst du hier auch gerne den Remainder/Modulo-Operator (`%`) verwenden.
+
+```js
+    beggar = beggar % numBeggars
+  });
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch die Ergebnisse zurückgeben:
+
+```js
+  return outcomes;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function beggars(earnings, numBeggars) {
+  if (!numBeggars) return [];
+
+  const outcomes = Array(numBeggars).fill(0);
+  let beggar = 0;
+
+  earnings.forEach((earning, i) => {
+    outcomes[beggar] += earning;
+    beggar++;
+    if (beggar === numBeggars) beggar = 0;
+  });
+
+  return outcomes;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
