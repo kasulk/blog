@@ -1,0 +1,174 @@
+---
+title:
+pubDate: 2024-01-19
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 5fffb659bb51420e8913bb1c1310408a
+
+codeChallengeData:
+  platform: codewars
+  id: 580a1a4af195dbc9ed00006c
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Erstmal rauskriegen was hier überhaupt Masse is...
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+OK, ich habs! Und du?
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Die erste Zahl im Input Array wird von jeder Zahl im Array abgezogen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Richtig, das ist noch nicht alles...
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Die jeweilige Zahl kommt als String ins Output Array, und zwar mit Vorzeichen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `array` in `nums` umbenannt):
+
+```ts
+export function equalize(nums: number[]): string[] {
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop. Da wir sonst nichts weiter mit dem Array planen, können wir das Resultat direkt zurückgeben:
+
+```ts
+  return nums.map((num) => {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Differenz zwischen aktuellem und erstem Element berechnen und in einen String umwandeln. Da wir die Differenz ein paar mal brauchen, speichern wir die jeweilige aktuelle Differenz in einer Variablen zwischen:
+
+```ts
+const difference = (num - nums[0]).toString();
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt kümmern wir uns um das Vorzeichen. Wenn unsere Variable ein `-` enthält, ist alles gut. Dann geben wir dem neuen Array einfach die Variable zurück:
+
+```ts
+if (difference.includes("-")) return difference;
+```
+
+</Accordion>
+<Accordion>
+
+Ein `+` enthält es aber nicht automatisch. Das müssen wir manuell hinzufügen, wenn kein Vorzeichen vorhanden ist.
+
+Tipp: Das `else` können wir uns sparen:
+
+```ts
+    return `+${difference}`;
+  });
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function equalize(nums: number[]): string[] {
+  return nums.map((num) => {
+    const difference = (num - nums[0]).toString();
+
+    if (difference.includes("-")) return difference;
+    return `+${difference}`;
+  });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
