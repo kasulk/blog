@@ -1,0 +1,249 @@
+---
+title:
+pubDate: 2024-05-08
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 513ebb10bde2470c9598653182e1529e
+
+codeChallengeData:
+  platform: codewars
+  id: 541a354c39c5efa5fa001372
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+Als Erstes die Funktion `ipToNum()`
+
+<Accordion>
+Schritt 1
+
+Wir entfernen die Punkte und wandeln den String in ein Array um.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch das Array und wandeln jedes Element in seine 8-stellige Binär-Version um.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt können wir die Elemente wieder zu einem String zusammenführen und diesen 32-Bit-Binär-String dann in einen Integer umwandeln.
+
+</Accordion>
+
+Dann die Funktion `numToIP()`
+
+<Accordion>
+Schritt 4
+
+Zuerst wandeln wir die Input-Zahl in eine 32-stellige Binär-Zahl um.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann teilen wir diese in 4 Teile bzw. Bytes à 8 Zeichen bzw. Bits.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Diese 4 Bytes wandeln wir dann jeweils in ein Integer um.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Am Ende wandeln wir das Array in einen String mit einem Punkt als Trennzeichen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner `ipToNum()`-Funktion:
+
+```ts
+export function ipToNum(ip: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes machen wir aus dem String die 8-stellige Binär-Version ohne Punkte:
+
+```ts
+const binary32bit = ip
+  .split(".")
+  .map(Number)
+  .map((num) => num.toString(2).padStart(8, "0"))
+  .join("");
+```
+
+Das geht hier wunderbar mit Method-Chaining.
+[`.map(Number)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#using_parseint_with_map) loopt hier ein Mal durch alle Elemente und wandelt die String-Zahlen in richtige Zahlen um.
+[`.toString(2)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString) macht aus einer Zahl ihre Binär-Version.
+Mit [`.padStart(8, “0”)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) sorgen wir dafür, dass wir immer eine 8-stelliege Binärzahl bzw. ein Byte erhalten.
+Und mit [`.join()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) fügen wir alle 4 Bytes zu einer 32-stelligen Zahl zusammen.
+
+</Accordion>
+<Accordion>
+
+Nur noch in einen Integer konvertieren und zurückgeben:
+
+```ts
+  return parseInt(binary32bit, 2);
+}
+```
+
+Das war sie schon, die `ipToNum()`-Funktion. Weiter geht’s mit der `numToIp()`-Funktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner `numToIp()`-Funktion:
+
+```ts
+export function numToIp(num: number): string {
+```
+
+</Accordion>
+<Accordion>
+
+Input-Zahl in eine 32-stellige Binärzahl umwandeln:
+
+```ts
+const binary32bit = num.toString(2).padStart(32, "0");
+```
+
+Um sicherzustellen, dass wir 32-Bits bekommen, fügen wir mit [`.padStart(32, "0")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) wieder eventuell noch fehlende Nullen hinzu.
+
+</Accordion>
+<Accordion>
+
+Dann die Binärzahl in 4 Teile/Bytes á 8 Bits teilen:
+
+```ts
+const bytes = ["", "", "", ""].map((_, i) => {
+  const byteStart = i * 8;
+  const byteEnd = (i + 1) * 8;
+  return binary32bit.slice(byteStart, byteEnd);
+});
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die Bytes in Integer umwandeln:
+
+```ts
+const nums = bytes.map((byte) => parseInt(byte, 2));
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss das Ganze in einen String mit Punkten konvertieren und zurückgeben:
+
+```ts
+  return nums.join(".");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function ipToNum(ip: string): number {
+  const binary32bit = ip
+    .split(".")
+    .map(Number)
+    .map((num) => num.toString(2).padStart(8, "0"))
+    .join("");
+
+  return parseInt(binary32bit, 2);
+}
+
+export function numToIp(num: number): string {
+  const binary32bit = num.toString(2).padStart(32, "0");
+
+  const bytes = ["", "", "", ""].map((_, i) => {
+    const byteStart = i * 8;
+    const byteEnd = (i + 1) * 8;
+    return binary32bit.slice(byteStart, byteEnd);
+  });
+
+  const nums = bytes.map((byte) => parseInt(byte, 2));
+
+  return nums.join(".");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
