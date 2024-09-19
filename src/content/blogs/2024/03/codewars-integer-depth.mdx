@@ -1,0 +1,216 @@
+---
+title:
+pubDate: 2024-03-17
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: a233b38316314bdabf98f96338247cc3
+
+codeChallengeData:
+  platform: codewars
+  id: 59b401e24f98a813f9000026
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Ich werde das Feld von hinten aufrollen, darum erstelle ich mir zuerst ein Array mit allen Ziffern drin.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann erstelle ich einen unendlichen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In jeder Iteration wird der Faktor um `1` erhöht.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ich berechne das Produkt von Faktor und Input-Zahl und wandele es in ein Array mit Ziffern um.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann loope ich durch diese Ziffern.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn die aktuelle Ziffer noch in meinem oben erstellten Array mit Ziffern ist, wird sie aus dem Array entfernt.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn mein oben erstelltes Array leer ist, gebe ich den Faktor zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `n` zu `num` umbenannt):
+
+```ts
+export function computeDepth(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als erstes erstelle ich mir mein Array mit allen Ziffern:
+
+```ts
+let digits = [..."0123456789"];
+```
+
+Da ich faul bin und keine Lust habe die ganzen Gänsefüßchen und Kommas zu tippen, spreade ich einen String mit den Ziffern.
+
+</Accordion>
+<Accordion>
+
+Dann der äußere Loop:
+
+```ts
+  for (let i = 1; ; i++) {
+```
+
+Die Bedingung in der Mitte lasse ich weg, damit der Loop unendlich ist. Ist also quasi ein ` while`-Loop mit `i`.
+
+</Accordion>
+<Accordion>
+
+Jetzt kann man den aktuellen Wert berechnen und das Array aus den Ziffern des Wertes erstellen:
+
+```ts
+const value = num * i;
+const valueDigits = [...value.toString()];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der innere Loop durch die Ziffern des aktuellen Wertes:
+
+```ts
+    valueDigits.forEach((valueDigit) => {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn die Ziffer (noch) im oben erstellen Array vorhanden ist, wird sie entfernt:
+
+```ts
+      digits = digits.filter((digit) => digit !== valueDigit);
+    });
+```
+
+Hier wird ein neues Array zurückgegeben, das nur Werte enthält, die nicht der aktuellen Wert-Ziffer entsprechen.
+
+</Accordion>
+<Accordion>
+
+Jetzt noch der Ausstieg, wenn das Array leer ist:
+
+```ts
+    if (!digits.length) return i;
+  }
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function computeDepth(num: number): number {
+  let digits = [..."0123456789"];
+
+  for (let i = 1; ; i++) {
+    const value = num * i;
+    const valueDigits = [...value.toString()];
+
+    valueDigits.forEach((valueDigit) => {
+      digits = digits.filter((digit) => digit !== valueDigit);
+    });
+
+    if (!digits.length) return i;
+  }
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
