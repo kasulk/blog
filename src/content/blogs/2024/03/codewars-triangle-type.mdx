@@ -1,0 +1,185 @@
+---
+title:
+pubDate: 2024-03-10
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 63799c74602b4483b657dd1f9b8f4395
+
+codeChallengeData:
+  platform: codewars
+  id: 53907ac3cd51b69f790006c5
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+OK, versuchen wir’s ohne Cosinus...
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Der Satz von Pythagoras könnte uns helfen, dafür müssen wir erst mal rauskriegen, welche der Seiten die Längste ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wenn die zwei kürzeren Seiten zusammen kürzer oder gleich lang sind als die längste Seite, kann es kein Dreieck ergeben. In diesem Fall können wir `0` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn die Summe der Quadrate der beiden kürzeren Seiten größer ist als das Quadrat der längsten Seite, haben wir ein spitzwinkliges Dreieck und können `1` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn die Summe der Quadrate der beiden kürzeren Seiten gleich dem Quadrat der längsten Seite ist, haben wir einen rechten Winkel (Satz von Pythagoras: c<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup>). In diesem Fall können wir `2` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+In allen anderen Fällen erhalten wir ein stumpfwinkliges Dreieck und geben `3` zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function triangleType(a: number, b: number, c: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes ermitteln wir die längste, mittlere und kürzeste Seite:
+
+```ts
+const [short, middle, long] = [a, b, c].sort((a, b) => a - b);
+```
+
+Wir stopfen alle Seiten in ein Array, sortieren es (aufsteigend) und deconstructen es in `3` Variablen.
+
+</Accordion>
+<Accordion>
+
+Wenn die beiden kürzeren Seiten zusammen kürzer oder gleich lang wie die längste Seite sind, geben wir `0` zurück:
+
+```ts
+if (short + middle <= long) return 0;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn die Summe der Quadrate der kürzeren Seiten größer ist als das Quadrat der längsten Seite geben wir `1` zurück:
+
+```ts
+if (short ** 2 + middle ** 2 > long ** 2) return 1;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn die Summe der Quadrate der kürzeren Seiten gleich dem Quadrat der längsten Seite ist geben wir `2` zurück (Satz von Pythagoras):
+
+```ts
+if (short ** 2 + middle ** 2 === long ** 2) return 2;
+```
+
+</Accordion>
+<Accordion>
+
+In allen anderen Fällen geben wir `3` zurück:
+
+```ts
+  return 3;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function triangleType(a: number, b: number, c: number): number {
+  const [short, middle, long] = [a, b, c].sort((a, b) => a - b);
+
+  if (short + middle <= long) return 0;
+  if (short ** 2 + middle ** 2 > long ** 2) return 1;
+  if (short ** 2 + middle ** 2 === long ** 2) return 2;
+
+  return 3;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
