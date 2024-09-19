@@ -1,0 +1,305 @@
+---
+title:
+pubDate: 2024-03-30
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 60f7fac4299442f0b8c2063a4ce7ac80
+
+codeChallengeData:
+  platform: codewars
+  id: 56dbeec613c2f63be4000be6
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Für die Diagonal-Version erstelle ich mir zuerst ein Ergebnis-Array, das genauso lang ist, wie die "Wörter" im Input und fülle es mit leeren Strings.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loope ich durch die "Wörter".
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Und dann noch mal durch jedes "Wort".
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Jedes Zeichen hänge ich an den String mit dem gleichen Index im Ergebnis-Array.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Für die Rotierte-Version erstelle ich erst die Diagonal-Version.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Dann drehe ich jedes "Wort" einfach um.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Für die Selfie-und-Diagonal-Version erstelle ich auch wieder erst die Diagonal-Version.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Dann gebe ich einfach das Original-Wort, gefolgt von Pipe und Diagonal-Wort zurück.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+In der Oper-Funktion gebe ich einfach die Input-Funtion mit dem Input-String als Argument zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Na denn... übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Diagonal-Funktion (ich habe in jeder Funktion `strng` zu `str` umbenannt):
+
+```ts
+export function diag1Sym(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann erstellen wir das Ergebnis-Array mit der Länge bzw. Anzahl der "Wörter" im Input-String:
+
+```ts
+const words = str.split("\n");
+const result: string[] = Array(words.length).fill("");
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop durch die "Wörter":
+
+```ts
+  words.forEach((word) =>
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch die Zeichen jedes einzelnen Wortes:
+
+```ts
+    word.split("").forEach((char, i) => (result[i] += char))
+  );
+```
+
+Jedes Zeichen hängen wir an den korrespondierenden String im Ergebnis-Array. Dafür nutzen wir den Index `i`.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch das Ergebnis-Array als String zurückgeben:
+
+```ts
+  return result.join("\n");
+}
+```
+
+Als nächstes kümmern wir uns um die Rotations-Version.
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile meiner Rotations-Funktion:
+
+```ts
+export function rot90Clock(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Das kriegen wir mit Method-Chaining hin:
+
+```ts
+  return diag1Sym(str)
+    .split("\n")
+    .map((word) => word.split("").reverse().join(""))
+    .join("\n");
+}
+```
+
+Erst wenden wir unsere Diagonal-Funktion auf den Input-String an. Dann drehen wir die einzelnen "Wörter" einfach um.
+
+Weiter geht’s mit der Selfie-Diagonal-Funktion:
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile der Selfie-Diagonal-Funktion:
+
+```ts
+export function selfieAndDiag1(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann wenden wir wieder unsere Diagonal-Funktion an:
+
+```ts
+const diagWords = diag1Sym(str).split("\n");
+```
+
+Außerdem splitte ich hier die "Wörter" in ein Array und speichere es in einer Variablen.
+
+</Accordion>
+<Accordion>
+
+Den Rest kriegen wir wieder mit Method-Chaining hin:
+
+```ts
+  return str
+    .split("\n")
+    .map((word, i) => `${word}|${diagWords[i]}`)
+    .join("\n");
+}
+```
+
+Hier ersetzen wir jedes "Wort" im Input-String mit dem Original-Wort, einer Pipe und dem entsprechenden Diagonal-Wort.
+
+Zum Schluss nur noch die Oper-Funktion.
+
+</Accordion>
+<Accordion>
+
+Die erste der Oper-Funktion Zeile:
+
+```ts
+export function oper(fct: (str: string) => string, str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Wir geben einfach die Input-Funktion mit dem Input-String als Argument zurück:
+
+```ts
+  return fct(str);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function diag1Sym(str: string): string {
+  const words = str.split("\n");
+  const result: string[] = Array(words.length).fill("");
+
+  words.forEach((word) =>
+    word.split("").forEach((char, i) => (result[i] += char)),
+  );
+
+  return result.join("\n");
+}
+
+export function rot90Clock(str: string): string {
+  return diag1Sym(str)
+    .split("\n")
+    .map((word) => word.split("").reverse().join(""))
+    .join("\n");
+}
+
+export function selfieAndDiag1(str: string): string {
+  const diagWords = diag1Sym(str).split("\n");
+
+  return str
+    .split("\n")
+    .map((word, i) => `${word}|${diagWords[i]}`)
+    .join("\n");
+}
+
+export function oper(fct: (str: string) => string, str: string): string {
+  return fct(str);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
