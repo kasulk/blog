@@ -1,0 +1,196 @@
+---
+title:
+pubDate: 2024-08-12
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: e828865795684e6e83d22c4c93ff1332
+
+codeChallengeData:
+  platform: codewars
+  id: 586538146b56991861000293
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Später soll zwischen jeden übersetzten Buchstaben ein Leerzeichen, darum können wir jetzt schon mal alle Spaces entfernen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir alle Zeichen im Input-String in Großbuchstaben umwandeln.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt können wir den Input-String in ein Array umwandeln.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wir tauschen jeden Buchstaben durch das Wort im Nato-Alphabet; wenn es ein Satzzeichen ist, lassen wir es wie es ist.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Zum Schluss nur noch wieder in einen String umwandeln und zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `words` in `str` umbenannt):
+
+```js
+function toNato(str) {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes also alle Leerzeichen entfernen:
+
+```js
+return str.replace(/ /g, "");
+```
+
+Hier können wir wunderbar chainen. Darum platziere ich das `return` schon hier.
+
+</Accordion>
+<Accordion>
+
+Was übrig bleibt wandeln wir in Großbuchstaben um:
+
+```js
+    .toUpperCase()
+```
+
+</Accordion>
+<Accordion>
+
+Dann machen wir ein Array draus:
+
+```js
+    .split("")
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt das Herzstück - der Loop:
+
+```js
+    .map((char) => (/[,.!?]/.test(char) ? char : NATO[char]))
+```
+
+Hier bietet sich ein <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an, da wir genauso viele Zeichen zurückbekommen wollen, wie wir reingeben.
+
+Mit der <ExternalLink href={docs.guide.regex}>RegEx</ExternalLink> und dem <ExternalLink href={docs.operators.ternary}>Ternary</ExternalLink> testen wir, ob das aktuelle Zeichen ein Sonderzeichen ist. Wenn ja, geben wir es unverändert zurück. Ansonsten schlagen wir das entsprechende Wort im Nato-Alphabet mit dem Buchstaben als Key nach.
+
+(Die Klammern haben VSCode und Prettier automatisch hinzugefügt.)
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das Array wieder zu einem String zusammenfügen:
+
+```js
+    .join(" ");
+}
+```
+
+Zurückgeben brauchen wir nichts mehr, das `return` hatten wir ja bereits direkt oben platziert.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function toNato(str) {
+  return str
+    .replace(/ /g, "")
+    .toUpperCase()
+    .split("")
+    .map((char) => (/[,.!?]/.test(char) ? char : NATO[char]))
+    .join(" ");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
