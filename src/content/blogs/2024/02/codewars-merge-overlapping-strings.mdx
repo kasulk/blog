@@ -1,0 +1,183 @@
+---
+title:
+pubDate: 2024-02-02
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: b34864fdd75940a3ad25d76b1e067ecc
+
+codeChallengeData:
+  platform: codewars
+  id: 61c78b57ee4be50035d28d42
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir loopen durch den ersten String.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wir kucken, ob der zweite String mit dem ersten String beginnt.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn nicht, nehmen wir in jeder Iteration einen Buchstaben vom Anfang des ersten Strings weg und checken nochmal.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn ja, können wir den zweiten String anhängen an den Anfang vom ersten String bis zu diesem Punkt.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export const mergeStrings = (first: string, second: string): string => {
+```
+
+</Accordion>
+<Accordion>
+
+Erstmal den Loop durch den ersten String aufsetzen:
+
+```ts
+  for (let i = 0; i < first.length; i++) {
+```
+
+Standard `for`-Loop. Nüscht Besonderes.
+
+</Accordion>
+<Accordion>
+
+Das jeweils aktuelle Ende des ersten Strings speichere ich mir der Lesbarkeit halber in einer Variablen ab (optional):
+
+```ts
+const firstEnd = first.slice(i, first.length); // optional
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir prüfen, ob der zweite String mit dem jeweils aktuellen Ende des ersten Strings übereinstimmt:
+
+```ts
+    if (second.startsWith(firstEnd)) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, können wir den zweiten String zum Anfang des ersten Strings bis zum aktuellen Zeichen hinzufügen:
+
+```ts
+      return first.slice(0, i) + second;
+    }
+  }
+```
+
+Das Ergebnis können wir gleich zurückgeben und damit Loop und Funktion beenden.
+
+</Accordion>
+<Accordion>
+
+Wenn nicht, geben wir nach dem Loop einfach den ersten `+` den zweiten String zurück:
+
+```ts
+  return first + second;
+};
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export const mergeStrings = (first: string, second: string): string => {
+  for (let i = 0; i < first.length; i++) {
+    const firstEnd = first.slice(i, first.length);
+
+    if (second.startsWith(firstEnd)) {
+      return first.slice(0, i) + second;
+    }
+  }
+
+  return first + second;
+};
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
