@@ -1,0 +1,228 @@
+---
+title:
+pubDate: 2024-03-04
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 8069e174621f48408dabb53c6a1f26bc
+
+codeChallengeData:
+  platform: codewars
+  id: 57b6f5aadb5b3d0ae3000611
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes sollten wir die Länge jedes Elements ermitteln. Am besten in einem Loop.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir die Längen sortieren.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann brauchen wir einen weiteren Loop.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn ein Element `0` ist, können wir direkt abbrechen und `0` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Ansonsten kucken wir, ob die aktuelle Zahl gleich ihrem Index + der ersten Zahl im Array ist\*.
+
+\* Die erste Zahl addieren wir, weil wir nicht wissen, mit welcher Länge es losgeht. Im Beispiel in der Kata-Beschreibung geht es bei `1` los. Es kann aber auch bei z.B `7` losgehen. Fies, ich weiß.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn nicht, können wir direkt abbrechen und den Index `+` der ersten Zahl zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn der Loop es schafft komplett durchzulaufen, können wir `0` zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `arrayOfArrays` umbenannt):
+
+```ts
+export function getLengthOfMissingArray(arrays: any[]): number {
+```
+
+</Accordion>
+<Accordion>
+
+Erst ermitteln wir die Längen jedes Elements und sortieren danach:
+
+```ts
+const sortedLengths = arrays.map((arr) => arr.length).sort((a, b) => a - b);
+```
+
+Das können wir mit <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> und <ExternalLink href={docs.array.sort}>`.sort()`</ExternalLink> in einer Zeile mit Method-Chaining machen.
+
+</Accordion>
+<Accordion>
+
+Der Übersichtlichkeit halber, speichere ich mir das erste Element in eine Variable:
+
+```ts
+const start = sortedLengths[0];
+```
+
+Wir werden es später brauchen.
+
+</Accordion>
+<Accordion>
+
+Jetzt der zweite Loop:
+
+```ts
+  for (let i = 0; i < sortedLengths.length; i++) {
+```
+
+Hier nehme ich einen `for`-Loop, damit wir ihn unter bestimmten Voraussetzungen vorzeitig beenden können. Das geht leider nicht mit einer Array-Method.
+
+</Accordion>
+<Accordion>
+
+Der Lesbarkeit halber, speichere ich das aktuelle Element wieder in eine Variable:
+
+```ts
+const curr = sortedLengths[i];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Test, ob das Element `0` ist:
+
+```ts
+if (!curr) return 0;
+```
+
+Wenn ein Element `0` ist, also ein leeres Array dabei ist, sollen wir `0` zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir testen, ob das aktuelle Element gleich seinem Index `+` der ersten Zahl (`start`) ist:
+
+```ts
+    if (curr !== i + start) return i + start;
+  }
+```
+
+Wenn sie es nicht ist, können wir sofort die fehlende Länge, also den Index `+` start zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Ansonsten geben wir nach dem Loop `0` zurück:
+
+```ts
+  return 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function getLengthOfMissingArray(arrays: any[]): number {
+  const sortedLengths = arrays.map((arr) => arr.length).sort((a, b) => a - b);
+  const start = sortedLengths[0];
+
+  for (let i = 0; i < sortedLengths.length; i++) {
+    const curr = sortedLengths[i];
+
+    if (!curr) return 0;
+    if (curr !== i + start) return i + start;
+  }
+
+  return 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
