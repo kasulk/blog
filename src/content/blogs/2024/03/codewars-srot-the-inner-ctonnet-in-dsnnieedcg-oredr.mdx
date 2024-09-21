@@ -1,0 +1,225 @@
+---
+title:
+pubDate: 2024-03-12
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 7c443ba21b3e431590d618fafba2e73e
+
+codeChallengeData:
+  platform: codewars
+  id: 5898b4b71d298e51b600014b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir loopen durch alle Wörter.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Da unser Ergebnis-Array genauso lang sein wird wie das Ausgangs-Array können wir hier <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> verwenden.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn ein Wort `2` oder weniger Buchstaben hat, brauchen wir es nicht verändern, da sie keinen Mittelteil haben.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wir extrahieren den mittleren Teil des aktuellen Wortes und sortieren ihn.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wir setzen das neue Wort zusammen und geben es ans Array zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function sortTheInnerContent(words: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+return words
+    .split(" ")
+    .map((word) => {
+```
+
+Wahrscheinlich können wir hier das Ganze mit Method-Chaining lösen, darum setze ich das `return`-Keyword direkt an den Anfang.
+
+</Accordion>
+<Accordion>
+
+Wörter die `2` oder weniger Buchstaben haben, brauchen wir nicht verändern:
+
+```ts
+if (word.length <= 2) return word;
+```
+
+</Accordion>
+<Accordion>
+
+Wir teilen das Wort auf in seine Bestandteile:
+
+```ts
+const first = word[0];
+const middle = word.slice(1, -1);
+const last = word.slice(-1);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Mitte sortieren, aufsteigend:
+
+```ts
+const sortedMiddle = middle
+  .split("")
+  .sort((a, b) => b.localeCompare(a))
+  .join("");
+```
+
+<ExternalLink href={docs.string.localeCompare}>`localeCompare()`</ExternalLink> ist
+eine coole Methode, die entsprechend `0`, `1` oder `-1` zurückgibt.
+
+Wenn dir <ExternalLink href={docs.string.localeCompare}>`localeCompare()`</ExternalLink> zu unheimlich ist, kannst du alternativ auch z.B. folgendes in deinen Sorter-Function-Body schreiben:
+
+```ts
+if (a < b) return 1;
+if (a > b) return -1;
+return 0;
+```
+
+{/* TODO: Exkurs: Ich kann mir verdammt nochmal nicht merken ob das `a` oder das `b` zuerst kommt... [Link] */}
+
+</Accordion>
+<Accordion>
+
+Dann das neue Wort zusammensetzen und ans Array zurückgeben:
+
+```ts
+      return first + sortedMiddle + last;
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nicht vergessen das Array wieder zu einem String zusammenzufügen:
+
+```ts
+    .join(" ");
+}
+```
+
+Returnen brauchen wir nicht, haben wir ja oben schon gemacht.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function sortTheInnerContent(words: string): string {
+  return words
+    .split(" ")
+    .map((word) => {
+      if (word.length <= 2) return word;
+
+      const first = word[0];
+      const middle = word.slice(1, -1);
+      const last = word.slice(-1);
+
+      const sortedMiddle = middle
+        .split("")
+        .sort((a, b) => b.localCompare(a))
+        .join("");
+
+      return first + sortedMiddle + last;
+    })
+    .join(" ");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
