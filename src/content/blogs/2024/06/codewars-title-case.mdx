@@ -1,0 +1,242 @@
+---
+title:
+pubDate: 2024-06-29
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: fb70ee5fdfd7424181a4b593bebc9ba7
+
+codeChallengeData:
+  platform: codewars
+  id: 5202ef17a402dd033c000009
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes erstellen wir uns eine `capitalize()`-Hilfsfunktion.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wenn wir keinen Titel haben, können wir direkt den Inhalt des `title`-Arguments zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn wir keine `minorWords` haben, können wir einfach einmal durch die Wörter des Titels loopen und alle Wörter kapitalisieren.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ansonsten loopen wir durch die Wörter und prüfen ob das aktuelle Wort in `minorWords` enthalten ist (und ob es sich um das erste Wort handelt).
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn es enthalten ist, geben wir das aktuelle Wort unverändert zurück. Wenn nicht, kapitalisieren wir es.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Zuerst die `capitalize()`-Hilfsfuntion:
+
+```js
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}
+```
+
+Und schon geht’s weiter mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```js
+function titleCase(title, minorWords) {
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Test, ob wir überhaupt einen Titel haben:
+
+```js
+if (!title) return title;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, wandeln wir ihn in ein Array um:
+
+```js
+const words = title.toLowerCase().split(" ");
+```
+
+Vorsichtshalber wandeln wir hier alle Buchstaben noch in Kleinbuchstaben um.
+
+</Accordion>
+<Accordion>
+
+Wenn wir keine `minorWords` haben loopen wir einfach ein Mal durch das Array und kapitalisieren jedes Wort:
+
+```js
+if (!minorWords) return words.map((word) => capitalize(word)).join(" ");
+```
+
+Das Ergebnis können wir in diesem Fall direkt wieder in einen String umwandeln und zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Ansonsten machen wir aus den `minorWords` auch ein Array:
+
+```js
+const minorWordsArr = minorWords.toLowerCase().split(" ");
+```
+
+Auch hier wandeln wir wieder alles in Kleinbuchstaben um.
+
+</Accordion>
+<Accordion>
+
+Dann loopen wir durch die Wörter:
+
+```js
+  return words
+    .map((word, i) => {
+```
+
+Hier können wir locker chainen. Darum können wir das `return` hier schon hinschreiben. Der Index wird uns gleich noch nützlich sein.
+
+</Accordion>
+<Accordion>
+
+Jetzt prüfen wir, ob das aktuelle Wort in `minorWords` (bzw. im Array) enthalten ist:
+
+```js
+if (i && minorWordsArr.includes(word)) return word;
+```
+
+Mit dem Index prüfen wir hier, ob es sich um das erste Wort handelt. `0` ist `falsy`. D.h., wenn `i` gleich `0` ist, wird der Ausdruck `false` und damit übersprungen.
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Wort also am Anfang steht oder nicht in `minorWords` enthalten ist, geben wir das Wort kapitalisiert zurück:
+
+```js
+      return capitalize(word);
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Aus dem Array wieder einen String machen und fertig:
+
+```js
+    .join(" ");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function titleCase(title, minorWords) {
+  if (!title) return title;
+  const words = title.toLowerCase().split(" ");
+
+  if (!minorWords) return words.map((word) => capitalize(word)).join(" ");
+  const minorWordsArr = minorWords.toLowerCase().split(" ");
+
+  return words
+    .map((word, i) => {
+      if (i && minorWordsArr.includes(word)) return word;
+      return capitalize(word);
+    })
+    .join(" ");
+}
+
+function capitalize(word) {
+  return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
