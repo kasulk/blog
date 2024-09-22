@@ -1,0 +1,205 @@
+---
+title:
+pubDate: 2024-08-16
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 7521cebac0af4f1ea30c1227d1f1bfa3
+
+codeChallengeData:
+  platform: codewars
+  id: 57f625992f4d53c24200070e
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop!
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Nein, wir brauchen 2 Loops!
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Im ersten, äußeren Loop, gehen wir durch alle Sub-Arrays.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Im zweiten, inneren Loop, prüfen wir den Char-Code jedes Zeichens des Strings im Sub-Array, ob er mit der gegebenen Zahl übereinstimmt.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn ja, addieren wir `1` zu einer Zählvariablen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Zum Schluss testen wir, ob wir mehr Mini-Wins haben, als das Input-`win`-Argument und geben den entsprechenden String zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function bingo(ticket, win) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst der äußere Loop durch die Sub-Arrays:
+
+```js
+const miniWins = ticket.reduce((accWins, currSubArr) => {
+  const [str, num] = currSubArr;
+
+  // todo
+}, 0);
+```
+
+Da wir eine Summe suchen, entscheide ich mich hier für ein <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>. Du kannst auch mappen[Link] und die Wins zu einer Summen-Variablen addieren.
+
+Außerdem deconstructe ich mir zur besseren Lesbarkeit das jeweils aktuelle Sub-Array in `str` und `num`. Den Startwert setze ich auf `0`.
+
+</Accordion>
+<Accordion>
+
+Danach kommt schon direkt der zweite, innere Loop:
+
+```js
+    for (const char of str) {
+```
+
+Hier entscheide ich mich für einen `for-of`-Loop, da wir kein `i` brauchen und uns die Möglichkeit zum vorzeitigen Beenden des Loops offen halten wollen.
+
+</Accordion>
+<Accordion>
+
+Dann der Check, ob der Char-Code des aktuellen Zeichens im aktuellen String mit der Zahl im Sub-Array übereinstimmt:
+
+```js
+      if (char.charCodeAt(0) === num) return ++accWins;
+    }
+```
+
+Wenn ja, können wir den inneren Loop vorzeitig beenden und unserem <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> einen um `1` erhöhten Win-Accumulator zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Ansonsten geben wir den Win-Accumulator unverändert zurück:
+
+```js
+    return accWins;
+  }, 0);
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Loop müssen wir nur noch unser Ergebnis ermitteln und zurückgeben:
+
+```js
+  return miniWins >= win ? "Winner!" : "Loser!";
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function bingo(ticket, win) {
+  const miniWins = ticket.reduce((accWins, currSubArr) => {
+    const [str, num] = currSubArr;
+
+    for (let char of str) {
+      if (char.charCodeAt(0) === num) return ++accWins;
+    }
+
+    return accWins;
+  }, 0);
+
+  return miniWins >= win ? "Winner!" : "Loser!";
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
