@@ -1,0 +1,259 @@
+---
+title:
+pubDate: 2024-08-12
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: a338cf730bce4c83a64a6323cc0fdeec
+
+codeChallengeData:
+  platform: codewars
+  id: 54a2e93b22d236498400134b
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes definieren wir uns das Keypad mit den Buttons und eine Variable um die Button-Drückungen zu zählen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir einen Loop durch den Input-String (Ich entscheide mich hier für <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>, wird also etwas anders).
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir suchen den jeweils aktuellen Buchstaben im Keypad.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn wir den passenden Button gefunden haben, ermitteln wir die Position des gesuchten Buchstaben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Damit können wir ermitteln, wie oft der Button gedrückt werden muss.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Das speichern wir in unserer Variablen.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann addieren wir die Anzahl der Drückungen zu einer Summe.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Zum Schluss geben wir alles noch schön zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function presses(phrase) {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes unsere Variablen für Keypad und Anzahl der Drückungen:
+
+```js
+const keypad = [
+  ["1"],
+  ["ABC2"],
+  ["DEF3"],
+  ["GHI4"],
+  ["JKL5"],
+  ["MNO6"],
+  ["PQRS7"],
+  ["TUV8"],
+  ["WXYZ9"],
+  ["*"],
+  [" 0"],
+  ["#"],
+];
+
+let numPresses = 0;
+```
+
+> [!tip]
+> Statt als 2-dimensionales Array kannst du das Keypad auch gerne als String-Array anlegen (→ ["1", "ABC2", "DEF3", ...]).
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch den Input-String:
+
+```js
+return phrase
+  .toUpperCase()
+  .split("")
+  .reduce((sum, char) => {
+    // Todo
+  }, 0);
+```
+
+Vorher müssen wir den `phrase` noch in ein Array umwandeln.
+
+Wie oben erwähnt, entscheide ich mich hier für einen <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Loop. Meinen Accumulator nenne ich `sum`, das jeweils aktuelle Elment `char` und meinen Startwert setze ich auf `0`.
+
+Außerdem setze ich das `return` hier schon mal davor. Mal sehen ob’s klappt... 🫢
+
+</Accordion>
+<Accordion>
+Jetzt können wir den jeweils aktuellen Buchstaben im Keypad suchen. Dafür loopen wir also innerhalb des <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> noch mal durch jeden Button des Keypads:
+```js
+      for (const button of keypad) {
+        const buttonChars = button[0].split("");
+```
+Der Übersicht und Lesbarkeit halber speichere ich die Zeichen des aktuellen Buttons als Array in einer Variablen.
+
+Da jeder Button ein Array ist, müssen wir immer das erste Element auswählen (`button[0]`). Man hätte das Keypad auch als String-Array anlegen können (s.o.), dann kann man hier direkt auf den `button` zugreifen.
+
+</Accordion>
+<Accordion>
+
+Dann können wir die Position des aktuellen Zeichen auf dem Button und damit die Anzahl der nötigen Drückungen ermitteln:
+
+```js
+        numPresses = buttonChars.indexOf(char) + 1;
+        if (numPresses) break; // optional
+      }
+```
+
+Wenn wir den richtigen Button gefunden und die Drückungen berechnet haben, können wir den inneren Loop vorzeitig beenden. Das kitzelt noch mal ein Klitze Performance aus unserer krassen Funktion. Müssen wir aber nicht.
+
+</Accordion>
+<Accordion>
+
+Nach dem inneren Loop müssen wir unser Ergebnis noch für die <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Methode zurückgeben:
+
+```js
+      return numPresses ? sum + numPresses : sum;
+    }, 0);
+}
+```
+
+Wenn wir Drückungen feststellen konnten, addieren wir sie zu unserer Summe, ansonsten geben wir die Summe so zurück wie sie vorher war.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function presses(phrase) {
+  const keypad = [
+    ["1"],
+    ["ABC2"],
+    ["DEF3"],
+    ["GHI4"],
+    ["JKL5"],
+    ["MNO6"],
+    ["PQRS7"],
+    ["TUV8"],
+    ["WXYZ9"],
+    ["*"],
+    [" 0"],
+    ["#"],
+  ];
+
+  let numPresses = 0;
+
+  return phrase
+    .toUpperCase()
+    .split("")
+    .reduce((sum, char) => {
+      for (const button of keypad) {
+        const buttonChars = button[0].split("");
+        numPresses = buttonChars.indexOf(char) + 1;
+        if (numPresses) break;
+      }
+
+      return numPresses ? sum + numPresses : sum;
+    }, 0);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
