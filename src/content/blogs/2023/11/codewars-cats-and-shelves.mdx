@@ -1,0 +1,218 @@
+---
+title:
+pubDate: 2024-11-25
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 61a1b2c823834982a25fa344102e92e7
+
+codeChallengeData:
+  platform: codewars
+  id: 62c93765cef6f10030dfa92b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Ich entscheide mich das mit einem Loop zu lösen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Für jeden Sprung wird ein Counter um `1` erhöht.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn die aktuelle Position `+3` kleiner oder gleich dem Ziel ist, mach das.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Sonst, mach aktuelle Position `+1`.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function solution(start: number, finish: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Den Sprung-Counter definieren:
+
+```ts
+let numJumps = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Die aktuelle Position definieren:
+
+```ts
+let currPos = start;
+```
+
+Als Nächstes kommt der Loop.
+
+</Accordion>
+<Accordion>
+
+Wir wollen solange hüpfen, bis das Ziel erreicht ist:
+
+```ts
+  while (currPos < finish) {
+```
+
+</Accordion>
+<Accordion>
+
+Erstmal den Sprungzähler um `1` erhöhen:
+
+```ts
+numJumps++;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt prüfen wir, ob die aktuelle Position `+3` kleiner/gleich dem Ziel ist:
+
+```ts
+    if (currPos + 3 <= finish) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, addieren wir `3` zur aktuellen Position und springen zum nächsten Durchlauf:
+
+```ts
+      currPos += 3;
+      continue;
+    }
+```
+
+<ExternalLink href={docs.statements.continue}>`continue`</ExternalLink> ist
+eines meiner Lieblings-Keywords!
+
+</Accordion>
+<Accordion>
+
+Wenn nicht, addieren wir nur `1` zur aktuellen Position:
+
+```ts
+    currPos++;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nicht vergessen den Sprungzähler auszugeben:
+
+```ts
+  return numJumps;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function solution(start: number, finish: number): number {
+  let numJumps = 0;
+  let currPos = start;
+
+  while (currPos < finish) {
+    numJumps++;
+
+    if (currPos + 3 <= finish) {
+      currPos += 3;
+      continue;
+    }
+
+    currPos++;
+  }
+
+  return numJumps;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
