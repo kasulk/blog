@@ -1,0 +1,185 @@
+---
+title:
+pubDate: 2024-01-20
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 5801fcbd99f54a868ab6c0ccc5202616
+
+codeChallengeData:
+  platform: codewars
+  id: 5cd12646cf44af0020c727dd
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Schnappe dir die ersten `n` Ziffern von `Pi`.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Für jede Ziffer,
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+multiplizier sie mit sich selbst und addiere das zu einer Summe.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Nach dem Loop,
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+errechne die Wurzel der Summe
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+und gebe das Ergebnis abgerundet zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `digits` in `n` umbenannt):
+
+```ts
+export function squarePi(n: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Freundlicher Weise werden uns die Ziffern von `Pi` zur Verfügung gestellt. Die speichern wir in einer Variablen. Außerdem brauchen wir noch die Variable für die Summe:
+
+```ts
+const piDigits =
+  "31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+let sum = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Und nu der Loop:
+
+```ts
+  for (let i = 0; i < n; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Aktuelle Ziffer hoch `2` nehmen und zur Summe addieren:
+
+```ts
+    sum += Number(piDigits[i]) ** 2;
+  }
+```
+
+Denk dran die aktuelle Ziffer jeweils vom String in eine Zahl (<ExternalLink href={docs.number.number}>`Number()`</ExternalLink>) umzuwandeln.
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch Wurzel ziehen, aufrunden und zurückgeben - fert’sch:
+
+```ts
+  return Math.ceil(Math.sqrt(sum));
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function squarePi(n: number): number {
+  const piDigits =
+    "31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+  let sum = 0;
+
+  for (let i = 0; i < n; i++) {
+    sum += Number(piDigits[i]) ** 2;
+  }
+
+  return Math.ceil(Math.sqrt(sum));
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
