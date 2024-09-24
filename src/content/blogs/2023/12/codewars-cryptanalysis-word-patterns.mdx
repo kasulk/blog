@@ -1,0 +1,232 @@
+---
+title:
+pubDate: 2024-12-10
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: fd6c2c0d444b425da3d6ee88867ee91a
+
+codeChallengeData:
+  platform: codewars
+  id: 5f3142b3a28d9b002ef58f5e
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop!
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Zuerst wandeln wir jeden Buchstaben in einen Kleinbuchstaben um.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Bereits gefundene Buchstaben können wir in einem String oder Array speichern.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn der aktuelle Buchstabe noch nicht im Gefunden-Array enthalten ist, ergänzen wir ihn.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann speichern wir seinen Index im Gefunden-Array in einem neuen Array.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Zum Schluss geben wir das neue Array mit den Indices als punkt-getrennten String zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function wordPattern(word: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann unser Gefunden-Array initialisieren:
+
+```ts
+const foundChars: string[] = [];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  word
+    .split("")
+    .map((char) => {
+```
+
+Erst wandeln wir den String mit <ExternalLink href={docs.string.split}>`.split("")`</ExternalLink> in ein Array um. Dann können wir durch das Array loopen.
+
+Weil wir genauso viele Elemente ändern/zurückgeben wollen wie drin sind, bietet sich hier <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an.
+
+</Accordion>
+<Accordion>
+
+Dann den aktuellen Buchstaben in einen Kleinbuchstaben umwandeln:
+
+```ts
+char = char.toLowerCase();
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt prüfen wir, ob der aktuelle Buchstabe bereits im Gefunden-Array enthalten ist. Wenn nicht, ergänzen wir ihn:
+
+```ts
+if (!foundChars.includes(char)) foundChars.push(char);
+```
+
+**Alternative:**
+
+Wir könnten hier den jeweiligen Buchstaben auch in einem String speichern. Das sähe dann so aus:
+
+```ts
+if (!foundChars.includes(char)) foundChars += char;
+```
+
+Dazu müssten wir oben statt des Arrays einen leeren String initialisieren.
+
+</Accordion>
+<Accordion>
+
+Dann geben wir dem Array den Index im Gefunden-Array zurück:
+
+```ts
+      return foundChars.indexOf(char);
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Dann nur noch die Elemente des Arrays mit einem Punkt zu einem String verbinden:
+
+```ts
+    .join(".");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch das `return`-Keyword. Unser kompletter method-gechainter Loop sieht dann so aus:
+
+```ts
+return word
+  .split("")
+  .map((char) => {
+    char = char.toLowerCase();
+    if (!foundChars.includes(char)) foundChars.push(char);
+    return foundChars.indexOf(char);
+  })
+  .join(".");
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function wordPattern(word: string): string {
+  const foundChars: string[] = [];
+
+  return word
+    .split("")
+    .map((char) => {
+      char = char.toLowerCase();
+      if (!foundChars.includes(char)) foundChars.push(char);
+      return foundChars.indexOf(char);
+    })
+    .join(".");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
