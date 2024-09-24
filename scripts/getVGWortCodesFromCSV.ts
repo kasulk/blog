@@ -1,14 +1,14 @@
 ///    HOW TO:
 ///    =======
 /// 1. Update inputFilename (ln 11)
-/// 2. Run in CLI: npx ts-node scripts/getVGWortCodesFromCSV.ts
+/// 2. run: $ npx ts-node scripts/getVGWortCodesFromCSV.ts
 
 const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
 
 //! change here
-const inputFilename = "VGWORT_Zaehlmarken_05092024-16_41_37" + ".csv";
+const inputFilename = "VGWORT_Zaehlmarken_24092024-16_05_07" + ".csv";
 
 const inputFolder = "/home/kasulk/Downloads";
 const outputFolder = process.cwd();
