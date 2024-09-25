@@ -8,12 +8,15 @@ import {
   PinLeftIcon,
   PinRightIcon,
 } from "@radix-ui/react-icons";
+import { siteConfig } from "@/config";
 
 type Props = {
   numBlogPosts: number;
   hasPrevPage: boolean;
   hasNextPage: boolean;
 };
+
+const { PER_PAGE } = siteConfig.blog.pagination;
 
 export function PaginationControls({
   numBlogPosts,
@@ -24,8 +27,8 @@ export function PaginationControls({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const page = Number(searchParams.get("page") ?? "1");
-  const per_page = Number(searchParams.get("per_page") ?? "5");
+  const page = Number(searchParams.get("page") ?? 1);
+  const per_page = Number(searchParams.get("per_page") ?? PER_PAGE);
   const numPages = Math.ceil(numBlogPosts / per_page);
 
   const boxClass = "flex text-xs sm:text-sm";

@@ -1,5 +1,4 @@
 import type { SearchParams } from "@/../types";
-import { Metadata } from "next";
 import { H2 } from "@/components/Headings";
 import { PageHeader, BlogPostsList, PaginationControls } from "@/components";
 import {
@@ -12,14 +11,28 @@ import { siteConfig } from "@/config";
 import { getBlogs } from "@/lib/blogFetchers";
 import { formatBlogs } from "@/lib/blogFetchers/utils";
 
-export const metadata: Metadata = {
-  title: `Mein Blog | ${siteConfig.name}`,
-  description: "Hier findest du eine Liste meiner letzten Blog-Posts",
-};
-
 type Props = {
   searchParams: Partial<SearchParams>;
 };
+
+const { PER_PAGE } = siteConfig.blog.pagination;
+
+export async function generateMetadata({ searchParams }: Props) {
+  const page = Number(searchParams.page ?? 1);
+
+  return {
+    title: `Letzte Blogs | ${siteConfig.name} | Seite ${page}`,
+    description: "Hier findest du eine Liste meiner letzten Blog-Posts",
+  };
+}
+
+// static generation of first paginated page (i.e. if there are no `searchParams`)
+export async function generateStaticParams() {
+  return [{}]; // first page (/blog) has no `searchParams`
+}
+
+// dynamic generation for all other paginated pages (with `searchParams`)
+export const dynamic = "force-dynamic";
 
 export default async function AllBlogPostsPage({ searchParams }: Props) {
   try {
@@ -29,8 +42,8 @@ export default async function AllBlogPostsPage({ searchParams }: Props) {
     const formattedBlogs = formatBlogs(blogs);
 
     // pagination
-    const page = Number(searchParams["page"] ?? "1");
-    const per_page = Number(searchParams["per_page"] ?? "5");
+    const page = Number(searchParams.page ?? 1);
+    const per_page = Number(searchParams.per_page ?? PER_PAGE);
     const start = (page - 1) * per_page;
     const end = start + per_page;
 
