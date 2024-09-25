@@ -58,6 +58,12 @@ export const siteConfig = {
   showCategoryCount: true,
   showTagCount: true,
 
+  blog: {
+    pagination: {
+      PER_PAGE: 5,
+    },
+  },
+
   defaultTooltips: {
     affiliate: {
       order:
