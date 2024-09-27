@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+    image: blog-dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+
+    ### sync files (hot reload feature)
+    volumes:
+      - .:/app # mount curr working dir to /app dir
+      - /app/node_modules # ignore node_modules
+    command: npm run dev # run in dev mode
