@@ -1,0 +1,191 @@
+---
+title:
+pubDate: 2024-03-13
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: f5aea39baeec402eb3fdafd58a411199
+
+codeChallengeData:
+  platform: codewars
+  id: 52b305bec65ea40fe90007a7
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes können wir die Buchstaben im gegebenen Wort sortieren.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch das Dictionary.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir sortieren die Buchstaben des aktuellen Wortes im Dictionary und vergleichen das Resultat mit unserem gegebenen Wort.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn beide sortierte Wörter gleich sind, fügen wir das aktuelle Wort zu einem Array hinzu.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function grabscrab(anagram: string, dictionary: string[]): string[] {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes das Input-Anagram sortieren:
+
+```ts
+const sortedAnagram = [...anagram].sort().join("");
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  return dictionary.reduce((possibleMeanings: string[], word) => {
+```
+
+Ich habe mich hier für <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> entschieden. Die <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Method gibt hier am Ende ein “reduziertes” Array zurück, das nur noch die passenden Wörter enthält.
+
+Das `return` füge ich hier gleich mit dazu.
+
+</Accordion>
+<Accordion>
+
+Das aktuelle Wort sortieren:
+
+```ts
+const sortedWord = [...word].sort().join("");
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die beiden sortierten Wörter vergleichen:
+
+```ts
+if (sortedAnagram === sortedWord) return [...possibleMeanings, word];
+```
+
+Wenn beide Wörter gleich sind, fügen wir das aktuelle Wort zum neuen Array hinzu.
+
+</Accordion>
+<Accordion>
+
+Ansonsten geben wir das Array (den Akkumulator) unverändert zurück:
+
+```ts
+    return possibleMeanings;
+  }, []);
+}
+```
+
+Das ist ähnlich wie beim reducen von Zahlen:
+
+```ts
+numbers.reduce((sum, curr) => (curr > 5 ? sum + curr : sum), 0);
+```
+
+Returnen brauchen wir nicht mehr, haben wir oben schon vor unserem <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Loop.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function grabscrab(anagram: string, dictionary: string[]): string[] {
+  const sortedAnagram = [...anagram].sort().join("");
+
+  return dictionary.reduce((possibleMeanings: string[], word) => {
+    const sortedWord = [...word].sort().join("");
+
+    if (sortedAnagram === sortedWord) return [...possibleMeanings, word];
+    return possibleMeanings;
+  }, []);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
