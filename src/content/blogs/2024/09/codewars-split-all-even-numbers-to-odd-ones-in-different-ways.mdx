@@ -1,0 +1,340 @@
+---
+title:
+pubDate: 2024-09-16
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 9ac8c78cf0d045cca2e3afc1136e1ab6
+
+codeChallengeData:
+  platform: codewars
+  id: 5883b79101b769456e000003
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Da wir `4` klare Fälle haben, können wir überlegen hier `4` Hilfsfunktionen zu erstellen. Das macht den Code wunderbar lesbar.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Außerdem noch eine, die prüft, ob die aktuelle Zahl `gerade` ist.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+**Fall 1:**
+
+`2` Zahlen möglichst dicht aneinander:
+
+Wir prüfen, ob die Hälfte der `geraden` Input-Zahl auch `gerade` ist.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn ja, geben wir ein Array mit den beiden Zahlen `+` bzw. `-` `1` zurück.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Ansonsten geben wir ein Array mit `2` Hälften zurück.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+**Fall 2:**
+
+`2` Zahlen möglichst weit auseinander:
+
+Hier geben wir einfach ein Array zurück mit `1` und der Input-Zahl `minus` `1`.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+**Fall 3:**
+
+Gleiche Zahlen und so groß wie möglich:
+
+Hier brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wir teilen die Input-Zahl solange durch `2`, bis wir eine `ungerade` Zahl bekommen.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Dann geben wir ein Array zurück, das so lang ist, wie die erhaltene `ungerade` Zahl in die Input-Zahl rein passt und füllen es mit diesen `ungeraden` Zahlen.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+**Fall 4:**
+
+Alles Einsen:
+
+Hier geben wir einfach ein Array zurück, das so lang ist wie die Input-Zahl und füllen es mit Einsen.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Dann können wir uns endlich an die Hauptfunktion machen! 🕺
+
+</Accordion>
+<Accordion>
+Schritt 12
+
+Hier loopen wir durch alle Zahlen im Input-Array.
+
+</Accordion>
+<Accordion>
+Schritt 13
+
+Wenn die aktuelle Zahl `ungerade` ist, geben wir sie unverändert zurück.
+
+</Accordion>
+<Accordion>
+Schritt 14
+
+Ansonsten prüfen wir den Fall/`way`.
+
+</Accordion>
+<Accordion>
+Schritt 15
+
+Je nach Fall geben wir das Ergebnis unserer entsprechenden Hilfsfunktion zurück.
+
+</Accordion>
+<Accordion>
+Schritt 16
+
+Zum Schluss geben wir das Gesamtergebnis zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Zuerst die Hilfsfunktion, die prüft, ob es sich um eine `gerade` Zahl handelt:
+
+```ts
+function isEven(num: number): boolean {
+  return num % 2 === 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Dann die Hilfsfunktion, die die beiden `ungeraden` Zahlen zurückgibt, die sich am nächsten sind:
+
+```ts
+function splitEvenNumToOddsClosestToEachOther(num: number): number[] {
+  const half = num / 2;
+  return isEven(half) ? [half - 1, half + 1] : [half, half];
+}
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die Hilfsfunktion, die die beiden `ungeraden` Zahlen zurückgibt, die am weitesten voneinander entfernt sind:
+
+```ts
+function splitEvenNumToOddsFarestToEachOther(num: number): number[] {
+  return [1, num - 1];
+}
+```
+
+</Accordion>
+<Accordion>
+
+Als Drittes die Funktion, die die größtmöglichen gleichen `ungeraden` Zahlen zurück gibt:
+
+```ts
+function splitEvenNumToEqualOddsAndMaxPossible(num: number): number[] {
+  let half = num / 2;
+  while (isEven(half)) half /= 2;
+  return Array(num / half).fill(half);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Und die letzte Hilfsfunktion, die nur Einsen zurück gibt:
+
+```ts
+function splitEvenNumToAllOnes(num: number): number[] {
+  return Array(num).fill(1);
+}
+```
+
+Dann endlich die Hauptfunktion! 😅
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function splitAllEvenNumbers(nums: number[], way: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  return nums.flatMap((num) => {
+```
+
+Da wir am Schluss Arrays ins Ergebnis-Array zurück bekommen, können wir diese Arrays hier mit <ExternalLink href={docs.array.flatMap}>`.flatMap()`</ExternalLink> im Loop direkt auflösen.
+
+Und da wir nach dem Loop fertig sind, können wir unser `return` hier direkt davor setzen.
+
+</Accordion>
+<Accordion>
+
+Dann die Logik. Wenn die aktuelle Zahl `ungerade ` ist, geben wir sie unverändert ins Array zurück:
+
+```ts
+if (!isEven(num)) return num;
+```
+
+</Accordion>
+<Accordion>
+
+Ansonsten führen wir eine unserer Hilfsfunktionen aus, basierend auf der `way`-Variablen:
+
+```ts
+    if (way === 0) return splitEvenNumToOddsClosestToEachOther(num);
+    if (way === 1) return splitEvenNumToOddsFarestToEachOther(num);
+    if (way === 2) return splitEvenNumToEqualOddsAndMaxPossible(num);
+    return splitEvenNumToAllOnes(num);
+  });
+}
+```
+
+Das Ganze geht hier wunderbar ohne `else` und ist so meiner Meinung nach viel übersichtlicher.
+
+Alternativ kannst Du hier natürlich auch ein <ExternalLink href={docs.statements.switch}>`switch`</ExternalLink>-Statement verwenden. Bin ich persönlich aber kein Fan von...
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function splitAllEvenNumbers(nums: number[], way: number): number[] {
+  return nums.flatMap((num) => {
+    if (!isEven(num)) return num;
+    if (way === 0) return splitEvenNumToOddsClosestToEachOther(num);
+    if (way === 1) return splitEvenNumToOddsFarestToEachOther(num);
+    if (way === 2) return splitEvenNumToEqualOddsAndMaxPossible(num);
+    return splitEvenNumToAllOnes(num);
+  });
+}
+
+function splitEvenNumToOddsClosestToEachOther(num: number): number[] {
+  const half = num / 2;
+  return isEven(half) ? [half - 1, half + 1] : [half, half];
+}
+
+function splitEvenNumToOddsFarestToEachOther(num: number): number[] {
+  return [1, num - 1];
+}
+
+function splitEvenNumToEqualOddsAndMaxPossible(num: number): number[] {
+  let half = num / 2;
+  while (isEven(half)) half /= 2;
+  return Array(num / half).fill(half);
+}
+
+function splitEvenNumToAllOnes(num: number): number[] {
+  return Array(num).fill(1);
+}
+
+function isEven(num: number): boolean {
+  return num % 2 === 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
