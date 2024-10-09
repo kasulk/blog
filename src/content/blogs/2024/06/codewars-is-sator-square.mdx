@@ -1,0 +1,239 @@
+---
+title:
+pubDate: 2024-06-20
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 0d1c1b96288b4772b6d51ac30e7254b4
+
+codeChallengeData:
+  platform: codewars
+  id: 5cb7baa989b1c50014a53333
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Um alle Reihen bzw. Spalten zu durchlaufen brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir alle `4` Optionen erst mal jeweils in einer Variablen speichern.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+`leftToRight`: easy, einfach die aktuelle (`i`-te) Reihe bzw. das aktuelle Element.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+`topToBottom`: das ist jeweils der `i`-te Buchstabe jeder Reihe.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+`bottomToTop`: das ist jeweils der `i`-te Buchstabe jeder Reihe von hinten bzw. rechts, spiegelverkehrt.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+`rightToLeft`: das ist die aktuelle Reihe von hinten bzw. unten, spiegelverkehrt.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function isSatorSquare(tablet: string[][]): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Erst der Loop:
+
+```ts
+  for (let i = 0; i < tablet.length; i++) {
+```
+
+Ein stinknormaler Standard-<ExternalLink href={docs.statements.for}>`For-Loop`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Dann die `leftToRight`-Variable:
+
+```ts
+const leftToRight = tablet[i].join("");
+```
+
+</Accordion>
+<Accordion>
+
+Als Zweites die `topToBottom`-Variable:
+
+```ts
+const topToBottom = tablet.map((row) => row[i]).join("");
+```
+
+Hier <ExternalLink href={docs.array.map}>mappen</ExternalLink> wir durch jedes Element, also jede Reihe und geben nur den jeweils `i`-ten Buchstaben zurück. Wir erhalten jeden Buchstaben der aktuellen (`i`-ten) Spalte.
+
+</Accordion>
+<Accordion>
+
+Jetzt die `bottomToTop`-Variable:
+
+```ts
+const bottomToTop = tablet
+  .slice()
+  .map((row) => row[row.length - 1 - i])
+  .reverse()
+  .join("");
+```
+
+Hier kommen wir von hinten, also rechts, indem wir vom `Index` des letzten Buchstaben jeder Reihe jeweils `i` abziehen. Dann drehen wir das Ganze mit <ExternalLink href={docs.array.reverse}>`.reverse()`</ExternalLink> um.
+
+> [!warning]
+> Nicht vergessen hier mit .slice() vorher eine Kopie zu erstellen, denn .reverse() mutiert das Array!
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss die `rightToLeft`-Variable:
+
+```ts
+const rightToLeft = tablet[tablet.length - 1 - i].slice().reverse().join("");
+```
+
+Hier kommen wir von unten, indem wir vom `Index` der letzten Reihe `i` abziehen. Wir drehen das Ganze wieder mit <ExternalLink href={docs.array.reverse}>`.reverse()`</ExternalLink> um und erstellen vorher die Kopie mit <ExternalLink href={docs.array.slice}>`.slice()`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir unsere Ergebnisse logisch überprüfen:
+
+```ts
+    if (leftToRight !== topToBottom) return false;
+    if (topToBottom !== bottomToTop) return false;
+    if (bottomToTop !== rightToLeft) return false;
+  }
+```
+
+Hier gibt es viele Möglichkeiten dies zu tun. Diese finde ich am lesbarsten. _Keep it simple!_
+
+Sollte eines unserer Ergebnisse nicht mit den anderen übereinstimmen, geben wir `false` zurück.
+
+</Accordion>
+<Accordion>
+
+Ansonsten `true`:
+
+```ts
+  return true;
+}
+
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function isSatorSquare(tablet: string[][]): boolean {
+  for (let i = 0; i < tablet.length; i++) {
+    const leftToRight = tablet[i].join("");
+    const topToBottom = tablet.map((row) => row[i]).join("");
+    const bottomToTop = tablet
+      .slice()
+      .map((row) => row[row.length - 1 - i])
+      .reverse()
+      .join("");
+    const rightToLeft = tablet[tablet.length - 1 - i]
+      .slice()
+      .reverse()
+      .join("");
+
+    if (leftToRight !== topToBottom) return false;
+    if (topToBottom !== bottomToTop) return false;
+    if (bottomToTop !== rightToLeft) return false;
+  }
+
+  return true;
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
