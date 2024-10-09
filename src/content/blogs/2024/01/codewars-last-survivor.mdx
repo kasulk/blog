@@ -1,0 +1,190 @@
+---
+title:
+pubDate: 2024-01-23
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 851e0cc3e254413194e81da071f53c16
+
+codeChallengeData:
+  platform: codewars
+  id: 609eee71109f860006c377d1
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Solange das Input Array (`coords`) nicht leer ist...
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+entferne den Buchstaben im Input String mit dem Index gleich des jeweils ersten Elements des Arrays.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function lastSurvivor(letters: string, coords: number[]): string {
+```
+
+</Accordion>
+<Accordion>
+
+Unsere Buchstaben können wir schon mal in ein Array umwandeln:
+
+```ts
+let lettersArr = letters.split("");
+```
+
+</Accordion>
+<Accordion>
+
+Das `coords`-Array können wir kopieren, damit das Ursprungs-Array intakt bleibt:
+
+```ts
+const remainingCoords = [...coords];
+```
+
+Für die Kopie verwende ich hier den <ExternalLink href={docs.operators.spread}>`Spread`</ExternalLink>-Operator.
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  while (remainingCoords.length) {
+```
+
+Ich entscheide mich hier für eine <ExternalLink href={docs.statements.while}>`while`</ExternalLink>-Schleife. Hier wird solange geloopt, wie das Array eine Länge hat. Hat es keine Länge mehr (also `0`), ist die Bedingung `false` und der Loop ist beendet.
+
+</Accordion>
+<Accordion>
+
+Jetzt entfernen wir das erste Element im `remainingCoords` Array und speichern es in einer Variablen:
+
+```ts
+const nextIndexToBeRemoved = remainingCoords.shift();
+```
+
+Das speichern in der Variable ist hier nicht zwingend notwendig, erhöht aber die Lesbarkeit!
+
+</Accordion>
+<Accordion>
+
+Dann können wir den Buchstaben mit dem gleichen Index wie die Zahl in `nextIndexToBeRemoved` entfernen:
+
+```ts
+    lettersArr = lettersArr.filter((_, i) => i !== nextIndexToBeRemoved);
+  }
+```
+
+Das mache ich hier mit <ExternalLink href={docs.array.filter}>`.filter`</ExternalLink>. Das erste Argument der Callback-Function interessiert uns nicht. Darum nennen wir es `_`. Das zweite Argument ist der Index des jeweiligen aktuellen Elements. Wir wollen nur die Elemente behalten, die _nicht_ diesen Index haben. <ExternalLink href={docs.array.filter}>`.filter`</ExternalLink> gibt uns ein neues Array zurück, das wir wieder in `lettersArr` speichern.
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch unsere übrigen Buchstaben als String zurückgeben:
+
+```ts
+  return lettersArr.join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function lastSurvivor(letters: string, coords: number[]): string {
+  let lettersArr = letters.split("");
+  const remainingCoords = [...coords];
+
+  while (remainingCoords.length) {
+    const nextIndexToBeRemoved = remainingCoords.shift();
+
+    lettersArr = lettersArr.filter((_, i) => i !== nextIndexToBeRemoved);
+  }
+
+  return lettersArr.join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
