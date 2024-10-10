@@ -1,0 +1,195 @@
+---
+title:
+pubDate: 2024-04-15
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 3343c1eea72e4407be5dd33f23caba58
+
+codeChallengeData:
+  platform: codewars
+  id: 61393fd03e441f001ac9c7d4
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst erstellen wir uns `2` Arrays.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+`1` mit den Ziffern der Telefonnummer, und `1` mit allen Zeichen des Templates.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir die Anzahl der Rauten/Hashes im Template mit der Anzahl der Ziffern in der Telefonnummer vergleichen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Sollten wir weniger Ziffern als Rauten haben, können wir direkt `"Invalid phone number"` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Ansonsten loopen wir durch die Template-Zeichen und ersetzen jede Raute mit der aktuellen Ziffer der Telefonnummer.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function formatNumber(number: number, template: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Erst die beiden Arrays:
+
+```ts
+const digits = [...number.toString()];
+const templateChars = [...template];
+```
+
+</Accordion>
+<Accordion>
+
+Die Anzahl der Zeichen speichere ich mir auch gleich in einer Variablen ab _(optional)_:
+
+```ts
+const numDigits = digits.length;
+```
+
+</Accordion>
+<Accordion>
+
+Dann die Anzahl der Rauten/Hashes im Template berechnen:
+
+```ts
+const numHashes = templateChars.filter((char) => char === "#").length;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Check, ob wir zuviel Rauten haben:
+
+```ts
+if (numDigits < numHashes) return "Invalid phone number";
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss der Loop durch die Template-Zeichen:
+
+```ts
+  return templateChars
+    .map((char) => (char === "#" ? digits.shift() : char))
+    .join("");
+}
+```
+
+Hier bietet sich <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an, da das Array am Ende genauso viele Zeichen haben soll wie vorher.
+
+Wenn das aktuelle Zeichen eine Raute ist, knapsen wir mit <ExternalLink href={docs.array.shift}>`.shift()`</ExternalLink> die erste Ziffer im Ziffer-Array ab und geben dieses zurück. Ansonsten belassen wir es beim aktuellen Zeichen. Das Ziffer-Array wird also immer kürzer.
+
+Am Ende das Array wieder zu einem String <ExternalLink href={docs.array.join}>joinen</ExternalLink>.
+
+Das Ganze können wir mit dem `return`-Statement davor direkt zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function formatNumber(number: number, template: string): string {
+  const digits = [...number.toString()];
+  const templateChars = [...template];
+  const numDigits = digits.length;
+  const numHashes = templateChars.filter((char) => char === "#").length;
+
+  if (numDigits < numHashes) return "Invalid phone number";
+
+  return templateChars
+    .map((char) => (char === "#" ? digits.shift() : char))
+    .join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
