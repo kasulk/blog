@@ -1,0 +1,306 @@
+---
+title:
+pubDate: 2024-09-11
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 46319a171cb64de98848fbe7ea04d58e
+
+codeChallengeData:
+  platform: codewars
+  id: 635e70f47dadea004acb5663
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir eine Variable für das Alphabet.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Außerdem können wir uns noch eine Variable für die jeweils nächste Reihe erstellen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann brauchen wir einen Loop! Durch die Reihen...
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wir loopen solange, bis nur noch `1` Buchstabe übrigt ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann brauchen wir einen weiteren Loop, durch die Buchstaben in der Reihe.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+In jedem Durchlauf ermitteln wir den jeweils aktuellen und den nächsten Buchstaben.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann können wir für beide Buchstaben den Index im Alphabet ermitteln.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Und beide Indizes zusammen addieren.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Um einen "Off-by-One-Error" zu vermeiden müssen wir die Summe gegebenenfalls korrigieren.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Wir werden auch den `Modulo`-Operator brauchen, falls die Summe über `26` (bzw. `25`) ist.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Dann den neuen Buchstaben im Alphabet ermitteln und an die nächste Zeile anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 12
+
+Zum Schluss das Ergebnis zurückgeben.
+
+</Accordion>
+
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `row` in `str` umbenannt):
+
+```ts
+export function triangle(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes das Alphabet und die Variable für die nächste Reihe definieren:
+
+```ts
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+let nextRow = str;
+```
+
+</Accordion>
+<Accordion>
+
+Dann der äußere Loop, solange wie unsere nächste Reihe länger als `1` ist:
+
+```ts
+  while (nextRow.length > 1) {
+```
+
+Ich hab mich hier für einen <ExternalLink href={docs.statements.while}>`while`</ExternalLink>-Loop entschieden.
+
+</Accordion>
+<Accordion>
+
+Dann der innere Loop durch die einzelnen Buchstaben:
+
+```ts
+    nextRow = nextRow
+      .split("")
+      .reduce((acc, currChar, i) => {
+```
+
+Hier habe ich mich für Method-Chaining und <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> entschieden. Du kannst auch gerne z.B. einen <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop verwenden. 😉
+
+</Accordion>
+<Accordion>
+
+Dann müssen wir prüfen, ob der aktuelle Buchstabe der letzte in der Reihe ist:
+
+```ts
+const isLastChar = i === nextRow.length - 1;
+```
+
+Der Lesbarkeit halber speichere ich mir das Ergebnis in einer Variablen ab _(optional)_, die ich dann im nächsten Schritt verwurste.
+
+</Accordion>
+<Accordion>
+
+Wenn ja, geben wir für diesen Buchstaben das Ergebnis-Array (den Akkumulator) unverändert zurück:
+
+```ts
+if (isLastChar) return acc;
+```
+
+Ansonsten können wir fortfahren.
+
+</Accordion>
+<Accordion>
+
+Ich erstelle mir eine Variable für den nächsten Buchstaben _(optional)_:
+
+```ts
+const nextChar = nextRow[i + 1];
+```
+
+</Accordion>
+<Accordion>
+
+Dann suchen wir uns die Indizes des jeweils aktuellen und des nächsten Buchstabens raus und addieren sie:
+
+```ts
+const currCharIndex = alphabet.indexOf(currChar);
+const nextCharIndex = alphabet.indexOf(nextChar);
+
+const newCharIndex = (currCharIndex + nextCharIndex + 1) % 26;
+```
+
+Um einen “Off-by-One-Error” zu vermeiden, addieren wir die `1` noch oben drauf. Mit `Modulo` `26` schneiden wir alles ab, was über `26` ist.
+
+</Accordion>
+<Accordion>
+
+Jetzt noch den neuen Buchstaben ans Ergebnis-Array anhängen:
+
+```ts
+        return [...acc, alphabet[newCharIndex]];
+      }, [] as string[])
+```
+
+Fertig ist der <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Loop!
+
+</Accordion>
+<Accordion>
+
+Dann das Ergebnis-Array in einen String umwandeln:
+
+```ts
+      .join("");
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss das Ergebnis zurückgeben:
+
+```ts
+  return nextRow;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function triangle(str: string): string {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  let nextRow = str;
+
+  while (nextRow.length > 1) {
+    nextRow = nextRow
+      .split("")
+      .reduce((acc, currChar, i) => {
+        const isLastChar = i === nextRow.length - 1;
+
+        if (isLastChar) return acc;
+
+        const nextChar = nextRow[i + 1];
+        const currCharIndex = alphabet.indexOf(currChar);
+        const nextCharIndex = alphabet.indexOf(nextChar);
+
+        const newCharIndex = (currCharIndex + nextCharIndex + 1) % 26;
+
+        return [...acc, alphabet[newCharIndex]];
+      }, [] as string[])
+      .join("");
+  }
+
+  return nextRow;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
