@@ -1,0 +1,199 @@
+---
+title:
+pubDate: 2024-02-27
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 99bf4a98659f4afd82a239d0970bb75a
+
+codeChallengeData:
+  platform: codewars
+  id: 59c287b16bddd291c700009a
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes müssen wir rauskriegen was die Länge bzw. Breite der Grundfläche des Würfels ist. Dafür machen wir uns am besten eine Zeichnung.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir die Höhe des Würfels berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn wir alle `3` Seiten haben, können wir das Volumen berechnen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export const iceBrickVolume = (radius: number, bottleLength: number, rimLength: number): number => {
+```
+
+</Accordion>
+<Accordion>
+
+Dann berechnen wir also die Länge bzw. Breite der Grundfläche des Würfels:
+
+```ts
+const brickLength = Math.sqrt(radius ** 2 + radius ** 2);
+```
+
+Wir wissen, dass der größtmögliche Würfel in der Flasche die Flaschenwand an `4` Punkten berührt. Und wir haben den Radius der Flasche.
+
+Wenn wir jetzt `2` Geraden von der Mitte aus mit jeweils der Länge des Radius im rechten Winkel ziehen - etwa so: `|_`, erhalten wir `2` Berührpunkte des Würfels mit dem Flaschenrand.
+
+Wenn wir diese beiden Punkte miteinander verbinden, erhalten wir die Länge einer der `4` Seiten der Grundfläche des Würfels.
+
+Um die Länge der Seite gegenüber des rechten Winkels in einem Dreieck zu berechnen, können wir den Satz des Pythagoras verwenden.
+
+**Satz des Pythagoras:**
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <msup>
+      <mi>c</mi>
+      <mn>2</mn>
+    </msup>
+    <mo>=</mo>
+    <msup>
+      <mi>a</mi>
+      <mn>2</mn>
+    </msup>
+    <mo>+</mo>
+    <msup>
+      <mi>b</mi>
+      <mn>2</mn>
+    </msup>
+  </mrow>
+</math>
+
+nach `c` auflösen, also Wurzel ziehen:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mi>c</mi>
+    <mo>=</mo>
+    <msqrt>
+      (a<sup>2</sup> + b<sup>2</sup>)
+    </msqrt>
+  </mrow>
+</math>
+
+Übersetzt für unseren Fall:
+
+```ts
+brickLength = Math.sqrt(radius ** 2 + radius ** 2);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt berechnen wir noch schnell die Höhe des Würfels:
+
+```ts
+const brickHeight = bottleLength - rimLength;
+```
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss nur noch das Volumen berechnen und zurückgeben:
+
+```ts
+  return Math.round(brickLength * brickLength * brickHeight);
+};
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export const iceBrickVolume = (
+  radius: number,
+  bottleLength: number,
+  rimLength: number,
+): number => {
+  const brickLength = Math.sqrt(radius ** 2 + radius ** 2); // c^2 = a^2 + b^2
+  const brickHeight = bottleLength - rimLength;
+
+  return Math.round(brickLength * brickLength * brickHeight);
+};
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
