@@ -1,0 +1,239 @@
+---
+title:
+pubDate: 2024-01-21
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: b088574a945847368b28de927e557619
+
+codeChallengeData:
+  platform: codewars
+  id: 573c91c5eaffa3bd350000b0
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir einen "Schlüssel", in dem festgelegt ist, welcher Buchstabe welchen Wert hat.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann sollten wir die Leerzeichen aus dem Input String entfernen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Und dann können wir durch String loopen,
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+checken welche Zahl sich hinter dem jeweils aktuellen Buchstaben verbirgt und
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+diese Zahl zu einer Summe aufaddieren.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function gematria(str: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Schlüssel:
+
+```ts
+const map: { [key: string]: number } = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+  e: 5,
+  f: 6,
+  g: 7,
+  h: 8,
+  i: 9,
+  k: 10,
+  l: 20,
+  m: 30,
+  n: 40,
+  o: 50,
+  p: 60,
+  q: 70,
+  r: 80,
+  s: 90,
+  t: 100,
+  u: 200,
+  x: 300,
+  y: 400,
+  z: 500,
+  j: 600,
+  v: 700,
+  w: 900,
+};
+```
+
+Ich nenne meinen Schlüssel `map` und speichere ihn als Objekt.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Leerzeichen (Whitespace) entfernen:
+
+```ts
+str.replace(/\s/g, "");
+```
+
+Das mache ich hier mit <ExternalLink href={docs.string.replace}>`.replace()`</ExternalLink>. `/\s/g` ist hier eine <ExternalLink href={docs.guide.regex}>Regular Expression</ExternalLink>. `\s` steht für Whitespace und das `g` heißt, dass es auf ALLE angewendet werden soll. Hier ersetzen wir also alle Leerzeichen mit einem leeren String, also mit nüscht.
+
+</Accordion>
+<Accordion>
+
+Dann können wir durch den String loopen, die jeweilige Zahl raussuchen und zu einer Summe aufaddieren:
+
+```ts
+    .split("")
+    .reduce((sum, letter) => sum + map[letter.toLowerCase()], 0);
+```
+
+Hier nutze ich Method-Chaining.
+
+Erst wandle ich unseren String mit <ExternalLink href={docs.string.split}>`.split("")`</ExternalLink> in ein Array. Dann kann ich die Array-Method <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> anwenden. Den jeweiligen Buchstaben im Loop wandle ich in einen Kleinbuchstaben um und addiere dessen Wert in meinem `map`-Objekt zu einer Summe.
+
+Den Anfangswert hab ich hier auf `0` gesetzt.
+
+</Accordion>
+<Accordion>
+
+Und nu noch das Ganze zurückgeben. Zusammen mit dem `return` sieht unsere Logik dann so aus:
+
+```ts
+  return str
+    .replace(/\s/g, "")
+    .split("")
+    .reduce((sum, letter) => sum + map[letter.toLowerCase()], 0);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function gematria(str: string): number {
+  const map: { [key: string]: number } = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+    e: 5,
+    f: 6,
+    g: 7,
+    h: 8,
+    i: 9,
+    k: 10,
+    l: 20,
+    m: 30,
+    n: 40,
+    o: 50,
+    p: 60,
+    q: 70,
+    r: 80,
+    s: 90,
+    t: 100,
+    u: 200,
+    x: 300,
+    y: 400,
+    z: 500,
+    j: 600,
+    v: 700,
+    w: 900,
+  };
+
+  return str
+    .replace(/\s/g, "")
+    .split("")
+    .reduce((sum, letter) => sum + map[letter.toLowerCase()], 0);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
