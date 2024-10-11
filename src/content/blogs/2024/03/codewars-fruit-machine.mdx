@@ -1,0 +1,263 @@
+---
+title:
+pubDate: 2024-03-25
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 83b75594e58c4b9185ab67daf3382f26
+
+codeChallengeData:
+  platform: codewars
+  id: 590adadea658017d90000039
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes erstellen wir uns ein Array mit den Symbolen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Die entsprechenden Punkte können wir aus dem Index ermitteln.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann loopen wir durch die `3` Spins und ermitteln für jeden Spin das entsprechende Symbol.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Danach können wir die doppelten Symbole entfernen und kucken wie viele übrig bleiben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn `1` übrig bleibt, hatten wir `3` gleiche und können die Punkte mal `10` nehmen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn `2` übrig bleiben, müssen wir noch schauen, ob ein `"Wild"` dabei ist.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn ja, Punkte mal `2`.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wenn nicht, einfache Punkte.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Ansonsten geben wir `0` Punkte zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function fruit(reels: string[][], spins: number[]): number {
+```
+
+</Accordion>
+<Accordion>
+
+Dann das Array:
+
+```ts
+const items = "_,Jack,Queen,King,Bar,Cherry,Seven,Shell,Bell,Star,Wild".split(
+  ",",
+);
+```
+
+Da ich ein bisschen faul bin und keinen Bock hab die ganzen Anführungszeichen zu tippen, erstelle ich einfach einen String, den ich direkt in ein Array umwandle. 🤤
+
+Außerdem setze ich ein Dummy-Element an den Anfang, damit das erste richtige Element den Index `1` hat.
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop durch die Spins um die Symbole zu ermitteln:
+
+```ts
+const sortedResults = spins.map((spin, i) => reels[i][spin]).sort();
+```
+
+Außerdem sortiere ich hier das Ergebnis direkt. Das wird uns gleich hilfreich sein...
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir schon mal die Punkte für `2` gleiche Symbole ermitteln:
+
+```ts
+const middle = sortedResults[1];
+const points = items.indexOf(middle);
+```
+
+Wenn wir ein doppeltes Symbol dabei haben, dann ist es nach dem Sortieren auf jeden Fall in der Mitte. Die Punkte für dieses Symbol entnehmen wir dem Index im Array.
+
+</Accordion>
+<Accordion>
+
+Dann können wir die doppelten Symbole entfernen:
+
+```ts
+const differentItems = [...new Set(sortedResults)];
+```
+
+Mit <ExternalLink href={docs.set.set}>`Set`</ExternalLink> entfernen wir einfach und effizient alle doppelten Elemente. Dann erstellen wir daraus sofort wieder ein Array.
+
+Cool! Jetzt können wir schauen wie viele Elemente übrig geblieben sind und dementsprechend die Punkte berechnen.
+
+</Accordion>
+<Accordion>
+
+Wenn wir nur noch `1` Symbol übrig haben, waren es `3` gleiche. Wir können die Punkte mit `10` multiplizieren:
+
+```ts
+if (differentItems.length === 1) return points * 10;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn wir noch `2` Symbole übrig haben, war ein Päarchen dabei. In diesem Fall müssen wir noch checken, ob genau ein `"Wild"` in den ursprünglichen sortierten Ergebnissen ist:
+
+```ts
+  if (differentItems.length === 2) {
+    if (sortedResults.filter((result) => result === "Wild").length === 1) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, multiplizieren wir unsere Punkte mit `2`, ansonsten lassen wir sie, wie sie sind:
+
+```ts
+      return points * 2;
+    }
+    return points;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Ansonsten - also wenn wir immer noch `3` verschiedene Symbole haben - geben wir `0` Punkte zurück:
+
+```ts
+  return 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function fruit(reels: string[][], spins: number[]): number {
+  const items = "_,Jack,Queen,King,Bar,Cherry,Seven,Shell,Bell,Star,Wild".split(
+    ",",
+  );
+
+  const sortedResults = spins.map((spin, i) => reels[i][spin]).sort();
+  const middle = sortedResults[1];
+  const points = items.indexOf(middle);
+  const differentItems = [...new Set(sortedResults)];
+
+  if (differentItems.length === 1) return points * 10;
+  if (differentItems.length === 2) {
+    if (sortedResults.filter((result) => result === "Wild").length === 1) {
+      return points * 2;
+    }
+
+    return points;
+  }
+
+  return 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
