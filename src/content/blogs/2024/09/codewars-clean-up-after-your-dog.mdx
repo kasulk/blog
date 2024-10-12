@@ -1,0 +1,194 @@
+---
+title:
+pubDate: 2024-09-21
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: a1a5fd4b80134fc29d651d0e23cc70bc
+
+codeChallengeData:
+  platform: codewars
+  id: 57faa6ff9610ce181b000028
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes können wir die Inneren Arrays auflösen, so dass wir nur noch 1 Array haben.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Sollte Fiffi (`"D"`) im Garten sein, können wir sofort `"Dog!!"` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Ich schlage vor, dass wir uns die Gesamt-Crap-Kapazität in einer Variablen speichern.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann zählen wir die Craps.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Zum Schluss nur noch der Test, ob unsere Kapazitäten ausreichen. Wenn ja, geben wir `"Clean"` zurück, ansonsten `"Cr@p"`.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `x` in `garden` umbenannt):
+
+```js
+function crap(garden, bags, cap) {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes machen wir aus dem Array-Wust ein einziges Array:
+
+```js
+const flatGarden = garden.flat();
+```
+
+Seit `ES10` geht das ziemlich easy mit <ExternalLink href={docs.array.flat}>`flat()`</ExternalLink> .
+
+</Accordion>
+<Accordion>
+
+Dann kucken wir direkt, ob wir Fiffi (`"D"`) im Garten finden. Wenn ja, können wir sofort `"Dog!!"` zurückgeben (und damit die Funktion beenden):
+
+```js
+if (flatGarden.includes("D")) return "Dog!!";
+```
+
+Dank unseres geflatteten Gartens brauchen wir hier nicht doppelt und dreifach loopen.
+
+</Accordion>
+<Accordion>
+
+Ansonsten speichern wir uns unsere Gesamt-Crap-Kapazität in einer Variablen ab (optional):
+
+```js
+const totalCrapCap = bags * cap;
+```
+
+Optional, aber macht die ganze Sache schön übersichtlich!
+
+</Accordion>
+<Accordion>
+
+Dann zählen wir alle Häufchen zusammen:
+
+```js
+const numCraps = flatGarden.filter((spot) => spot === "@").length;
+```
+
+Auch hier brauchen wir dank unseres geflatteten Gartens nicht doppelt und dreifach loopen. Wir filtern einfach 1x.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch der Test, ob unsere `CrapCap` ausreicht um alle Häufchen ordnungsgemäß einzusammeln:
+
+```js
+  if (totalCrapCap >= numCraps) return "Clean";
+  return "Cr@p";
+}
+```
+
+Wenn ja, geben wir `"Clean"` zurück, ansonsten `"Cr@p"`.
+
+</Accordion>
+<Accordion>
+
+Voilà! 💩
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function crap(garden, bags, cap) {
+  const flatGarden = garden.flat();
+
+  if (flatGarden.includes("D")) return "Dog!!";
+
+  const totalCrapCap = bags * cap;
+  const numCraps = flatGarden.filter((spot) => spot === "@").length;
+
+  if (totalCrapCap >= numCraps) return "Clean";
+  return "Cr@p";
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
