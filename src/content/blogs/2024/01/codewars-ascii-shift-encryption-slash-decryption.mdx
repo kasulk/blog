@@ -1,0 +1,221 @@
+---
+title:
+pubDate: 2024-01-23
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 78f31e8bc161490f835dae08d4ed0204
+
+codeChallengeData:
+  platform: codewars
+  id: 56e9ac87c3e7d512bc001363
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann addieren wir den aktuellen Index zu jedem Char-Code hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Diesen neuen Char-Code wandeln wir dann wieder in ein Zeichen um.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ähnlich für die Entschlüsselungs-Funktion, nur dass wir hier den Index abziehen statt addieren.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile der Verschlüsselungs-Funktion:
+
+```ts
+export function asciiEncrypt(plainText: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  return [...plaintext]
+    .map((char, i) => {
+```
+
+Ich versuch's hier mal mit Method-Chaining. Dazu wandele ich mir den String erst in ein Array um und loope dann mit <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>.
+
+Das `return` können wir schon mal davor schreiben, weil wir sind ja gleich fertig 😉
+
+</Accordion>
+<Accordion>
+
+Dann addieren wir den Index zum Char-Code des aktuellen Zeichens dazu und wandeln den neuen Char-Code wieder in ein Zeichen um:
+
+```ts
+      const charCode = char.charCodeAt(0);
+      return String.fromCharCode(charCode + i);
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss das Array wieder in einen String umwandeln:
+
+```ts
+    .join("");
+}
+```
+
+Jetzt die zweite Funktion. Der Verschlüsselungs-Funktion sehr, sehr ähnlich...
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile meiner Entschlüsselungs-Funktion:
+
+```ts
+export function asciiDecrypt(cipherText: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Loop-Loop:
+
+```ts
+  return [...ciphertext]
+    .map((char, i) => {
+
+```
+
+Auch hier wieder direkt mit `return`-Statement.
+
+</Accordion>
+<Accordion>
+
+Hier müssen wir den Index vom Char-Code des aktuellen Zeichens _abziehen_ bevor wir das Ergebnis in das neue Zeichen umwandeln:
+
+```ts
+      const charCode = char.charCodeAt(0);
+      return String.fromCharCode(charCode - i);
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Dann noch das Array wieder in einen String umwandeln:
+
+```ts
+    .join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+Man hätte hier auch eine dritte Funktion schreiben können, die die ganze Logik enthält und als Parameter quasi nur das `+` bzw. `-` empfängt.
+
+Hmm... eigentlich eine coole Bonus-Aufgabe... viel Spaß!
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function asciiEncrypt(plainText: string): string {
+  return [...plaintext]
+    .map((char, i) => {
+      const charCode = char.charCodeAt(0);
+      return String.fromCharCode(charCode + i); // Index addieren
+    })
+    .join("");
+}
+
+export function asciiDecrypt(cipherText: string): string {
+  return [...ciphertext]
+    .map((char, i) => {
+      const charCode = char.charCodeAt(0);
+      return String.fromCharCode(charCode - i); // Index abziehen
+    })
+    .join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
