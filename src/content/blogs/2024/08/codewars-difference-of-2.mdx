@@ -1,0 +1,230 @@
+---
+title:
+pubDate: 2024-08-29
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 875970d37d4c4035bf68e9bfa46ea857
+
+codeChallengeData:
+  platform: codewars
+  id: 5340298112fa30e786000688
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Ich schlage vor, als Erstes sortieren das Input-Array.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Außerdem brauchen wir eine Variable um die gefundenen Paare zu speichern.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir durch das Input-Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Mit einem zweiten, inneren Loop können wir die zweite Zahl erfassen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann prüfen wir, ob die aktuelle (erste) Zahl + `2` gleich der zweiten Zahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn ja, fügen beide Zahlen in einem Array an unser Ergebnis-Array an.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Nach beiden Loops nur noch das Ergebnis zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function twosDifference(nums) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst das Input-Array sortieren:
+
+```js
+const sortedNums = [...nums].sort((a, b) => a - b);
+```
+
+Vor dem Sortieren erstelle ich eine Kopie des Input-Arrays, indem ich es in ein neues Array <ExternalLink href={docs.operators.spread}>spreade</ExternalLink>. Dadurch bleibt das Input-Array unberührt.
+
+</Accordion>
+<Accordion>
+
+Dann noch die Variable um unsere Ergebnisse, die Paare zu speichern:
+
+```js
+const pairs = [];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der erste, äußere Loop:
+
+```js
+  for (let i = 0; i < nums.length; i++) {
+```
+
+Standart <ExternalLink href={docs.statements.for}>`for`</ExternalLink>-Loop. Nüscht Besonderes.
+
+</Accordion>
+<Accordion>
+
+Dann der zweite, innere Loop:
+
+```js
+    for (let j = i + 1; j < nums.length; j++) {
+```
+
+`j` ist hier immer einen größer als `i`. Wir fangen also immer eine Zahl nach der aktuellen (`i`) an und gehen den Rest der Zahlen durch.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir der Übersicht halber die erste und die zweite Zahl in Variablen speichern _(optional)_:
+
+```js
+const first = sortedNums[i];
+const second = sortedNums[j];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Test, ob die erste Zahl + `2` gleich der zweiten ist:
+
+```js
+      if (first + 2 === second) pairs.push([first, second]);
+    }
+  }
+```
+
+Wenn ja, fügen wir das Paar als Array hinten an das Ergebnis-Array an.
+
+Das war’s schon für beide Loops.
+
+</Accordion>
+<Accordion>
+
+Nach den Loops nur noch das Ergebnis-Array zurückgeben:
+
+```js
+  return pairs;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function twosDifference(nums) {
+  const sortedNums = [...nums].sort((a, b) => a - b);
+  const pairs = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      const first = sortedNums[i];
+      const second = sortedNums[j];
+
+      if (first + 2 === second) pairs.push([first, second]);
+    }
+  }
+
+  return pairs;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
