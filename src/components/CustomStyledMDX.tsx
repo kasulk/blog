@@ -3,17 +3,14 @@ import Image from "next/image";
 import React from "react";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-import rehypeRaw from "rehype-raw"; // needed to render HTML inside Mardown
-import DOMPurify from "dompurify"; // sanitizes HTML
-import { JSDOM } from "jsdom"; // needed for DOMPurify to run on server
 import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { H2, H3, H4, H5, H6 } from "@/components/Headings";
 import {
   Accordion,
   Callout,
   DateFormatter,
+  FetchedMarkdown,
   SocialLinks,
   SupportButton,
 } from "@/components";
@@ -37,16 +34,7 @@ export const customComponents: MDXComponents = {
   },
   DateFormatter,
   ExternalLink,
-  // neccessary to render dynamically/API-fetched markdown
-  FetchedMarkdown: ({ children }) => {
-    const window = new JSDOM("").window;
-    const cleanedMarkdown = DOMPurify(window).sanitize(children);
-    return (
-      <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-        {cleanedMarkdown}
-      </ReactMarkdown>
-    );
-  },
+  FetchedMarkdown, // neccessary to render dynamically/API-fetched markdown
   SocialLinks,
   SupportButton: ({ className }) => (
     <SupportButton className={`h-7 w-7 ${className}`} />
