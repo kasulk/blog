@@ -1,4 +1,5 @@
 export * from "./CustomStyledMDX";
+export * from "./FetchedMarkdown";
 
 export * from "./PageHeader";
 

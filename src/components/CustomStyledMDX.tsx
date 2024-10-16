@@ -4,13 +4,13 @@ import React from "react";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
-import ReactMarkdown from "react-markdown";
 import { Link, ExternalLink, AffiliateLink } from "@/components/Links";
 import { H2, H3, H4, H5, H6 } from "@/components/Headings";
 import {
   Accordion,
   Callout,
   DateFormatter,
+  FetchedMarkdown,
   SocialLinks,
   SupportButton,
 } from "@/components";
@@ -34,8 +34,7 @@ export const customComponents: MDXComponents = {
   },
   DateFormatter,
   ExternalLink,
-  // neccessary to render dynamically/API-fetched markdown
-  FetchedMarkdown: ({ children }) => <ReactMarkdown>{children}</ReactMarkdown>,
+  FetchedMarkdown, // neccessary to render dynamically/API-fetched markdown
   SocialLinks,
   SupportButton: ({ className }) => (
     <SupportButton className={`h-7 w-7 ${className}`} />
