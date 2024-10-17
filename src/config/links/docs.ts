@@ -93,6 +93,7 @@ const preDocs: DocLinks = {
     values: "values",
   },
   set: {
+    set: "Set", // Set Constructor
     entries: "entries",
     has: "has",
     keys: "keys",
