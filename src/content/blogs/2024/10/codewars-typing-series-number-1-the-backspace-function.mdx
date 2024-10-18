@@ -1,0 +1,283 @@
+---
+title:
+pubDate: 2024-10-16
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 482b619873454b2f8f5f1a8a6bf1ad6c
+
+codeChallengeData:
+  platform: codewars
+  id: 62b3e38df90eac002c7a983f
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes empfehle ich dringend dem Rat des Kata-Autors zu folgen und den <ExternalLink href='https://www.codewars.com/kata/5727bb0fe81185ae62000ae3'>Vorgänger anzuschauen</ExternalLink>.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wir werden eine Variable brauchen um unser Ergebnis zu speichern, am besten ein Array.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir als Nächstes die multiplen Backspaces in einzelne auflösen. Dafür können wir uns eine kleine Helferfunktion basteln.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Die einzelnen Backspaces können wir dann jeweils z.B. durch ein `#` ersetzen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Jetzt können wir durch den String loopen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn das aktuelle Zeichen ein `#` ist, entfernen wir das letzte Element in unserem Ergebnis-Array.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Ansonsten hängen wir das aktuelle Zeichen an unser Ergebnis an.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Nach dem Loop nur noch das Ergebnis als String zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Als Erstes die Helferfunktion um die multiplen Backspaces in einzelne aufzulösen. Meine erste Zeile:
+
+```ts
+function resolveMultipleBackspaces(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann die Logik für das Ersetzen:
+
+```ts
+  return str.replace(/\[backspace]\*\d+/g, (match) => {
+```
+
+Die <ExternalLink href={docs.guide.regex}>RegEx</ExternalLink> `/\[backspace]\*\d+/g` matcht alle Zeichenfolgen mit `[backspace]` und `*` gefolgt von einer (oder mehr) Ziffer(n). Die erste eckige Klammer, das `*` und das `d` müssen wir jeweils mit einem `\` escapen.
+
+Für jeden Treffer wird eine Funktion ausgeführt, der wir das aktuelle `match` übergeben.
+
+Das `return` können wir hier bereits davor schreiben.
+
+</Accordion>
+<Accordion>
+
+Jetzt die Logik für das Innere der Replace-Funktion:
+
+```ts
+const num = Number(match.split("*")[1]);
+```
+
+Wir speichern uns die Zahl am Ende jedes Treffers in eine Variable.
+
+</Accordion>
+<Accordion>
+
+Dann können wir so viele `[backspace]` zurückgeben, wie die Zahl hergibt:
+
+```ts
+    return "[backspace]".repeat(num);
+  });
+}
+```
+
+Und das war’s schon fürs Helferlein. Weiter geht’s mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion (ich habe `s` in `str` umbenannt):
+
+```ts
+export function solve(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann unsere Variable für das Ergebnis:
+
+```ts
+const result: string[] = [];
+```
+
+</Accordion>
+<Accordion>
+
+Mit unserer Hilfsfunktion können wir jetzt die multiplen Backspaces (z.B. `[backspace]*2`) in einzelne `[backspace]` auflösen:
+
+```ts
+const resolvedBackspaces = resolveMultipleBackspaces(str);
+```
+
+`[backspace]*2` wird also zu `[backspace][backspace]` usw.
+
+</Accordion>
+<Accordion>
+
+Dann können wir alle `[backspace]` durch ein `#` ersetzen:
+
+```ts
+const backspacesReplaced = resolvedBackspaces.replace(/\[backspace]/g, "#");
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  for (const char of backspacesReplaced) {
+```
+
+Da wir durch den String loopen können, empfiehlt sich hier ein einfacher <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop.
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Zeichen ein `#` ist, entfernen wir das letzte Element aus unserem Ergebnis-Array:
+
+```ts
+if (char === "#") result.pop();
+```
+
+</Accordion>
+<Accordion>
+
+Ansonsten hängen wir das aktuelle Zeichen ans Ergebnis-Array an:
+
+```ts
+    else result.push(char);
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das Ergebnis als String zurückgeben:
+
+```ts
+  return result.join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+Zugegeben, man hätte es etwas performanter gestalten können. Dann hätte allerdings die Lesbarkeit etwas gelitten. Ich habe mich hier für die Lesbarkeit entschieden!
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function solve(str: string): string {
+  const result: string[] = [];
+
+  const resolvedBackspaces = resolveMultipleBackspaces(str);
+  const backspacesReplaced = resolvedBackspaces.replace(/\[backspace]/g, "#");
+
+  for (const char of backspacesReplaced) {
+    if (char === "#") result.pop();
+    else result.push(char);
+  }
+
+  return result.join("");
+}
+
+function resolveMultipleBackspaces(str: string): string {
+  return str.replace(/\[backspace]\*\d+/g, (match) => {
+    const num = Number(match.split("*")[1]);
+    return "[backspace]".repeat(num);
+  });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
