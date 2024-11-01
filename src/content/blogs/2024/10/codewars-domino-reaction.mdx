@@ -1,0 +1,231 @@
+---
+title:
+pubDate: 2024-10-17
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: e5b792926fba4d9db098c684f7b42816
+
+codeChallengeData:
+  platform: codewars
+  id: 584cfac5bd160694640000ae
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht's:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir eine Variable für unser Ergebnis.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann einen Loop! Wir loopen durch die Dominosteine.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn der aktuelle Dominostein steht, hängen wir einen gekippten an unser Ergebnis und fahren mit dem Loop fort.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ansonsten war's das für die Kettenreaktion. Wir können die restlichen Dominos wie sie sind an unser Ergebnis hängen und den Loop abbrechen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Am Schluss nur noch das Ergebnis zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `sequence` in `dominos` umbenannt):
+
+```ts
+export function dominoReaction(dominos: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes die Variable für's Ergebnis:
+
+```ts
+const result: string[] = [];
+```
+
+Ich entscheide mich hier für ein Array. Es ginge natürlich auch mit einem String 😉
+
+</Accordion>
+<Accordion>
+
+Dann direkt der Loop durch die Dominosteine:
+
+```ts
+  for (let i = 0; i < dominos.length; i++) {
+    const curr = dominos[i];
+```
+
+Da wir den Index brauchen werden, entscheide ich mich hier für den klassischen <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. Du kannst auch gerne den `dominos`-String in ein Array umwandeln und dann mit `forEach()` loopen.
+
+Das jeweils aktuelle Element speichere ich mir unter `curr` ab.
+
+</Accordion>
+<Accordion>
+
+Jetzt checken wir, ob der aktuelle Dominostein steht:
+
+```ts
+    if (curr === "|") {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, hängen wir einen gekippten an unser Ergebnis-Array:
+
+```ts
+result.push("/");
+```
+
+</Accordion>
+<Accordion>
+
+Außerdem können wir dann mit dem Loop fortfahren:
+
+```ts
+      continue;
+    }
+```
+
+Ich verwende hier gerne <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink> statt `else`. Ist meiner Meinung nach lesbarer.
+
+</Accordion>
+<Accordion>
+
+Ansonsten hängen wir den Rest der Dominos an unser Ergebnis-Array:
+
+```ts
+result.push(...dominos.slice(i));
+```
+
+Hier kommt der Index zum Einsatz!
+
+</Accordion>
+<Accordion>
+
+Außerdem können wir dann den Loop (vorzeitig) beenden:
+
+```ts
+    break;
+  }
+```
+
+Infos zu `break` findest du <ExternalLink href={docs.statements.break}>hier</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch das Ergebnis als String zurückgeben:
+
+```ts
+  return result.join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function dominoReaction(dominos: string): string {
+  const result: string[] = [];
+
+  for (let i = 0; i < dominos.length; i++) {
+    const curr = dominos[i];
+
+    if (curr === "|") {
+      result.push("/");
+      continue;
+    }
+
+    result.push(...dominos.slice(i));
+    break;
+  }
+
+  return result.join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
