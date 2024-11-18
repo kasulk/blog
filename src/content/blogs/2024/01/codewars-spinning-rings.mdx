@@ -1,0 +1,208 @@
+---
+title:
+pubDate: 2024-01-05
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: d8a64c6ac23e4a0589662b435342e8ba
+
+codeChallengeData:
+  platform: codewars
+  id: 59afff65f1c8274f270020f5
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes kreieren wir uns `2` Variablen um den aktuellen Stand der Ringe zu tracken. Dieser ist beim Start für beide Ringe `0`.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In jeder Runde wird der äußere Ring um `1` größer, der innere um `1` kleiner. So weit, so gut.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn aber der innere Ring kleiner als `0` wird, müssen wir ihn wieder auf das `innerMax` setzen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn der äußere Ring das `outerMax` überschreitet, müssen wir ihn wieder auf `0` setzen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn beide Ringe den selben Stand haben, geben wir die Anzahl der Runden zurück, die es gebraucht hat.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function spinningRings(innerMax: number, outerMax: number): number {
+```
+
+Wir stellen sicher, dass unsere Funktion am Ende eine Zahl (`number`) zurück gibt.
+
+</Accordion>
+<Accordion>
+
+Dann initialisieren wir die Counter für die Stände der Ringe:
+
+```ts
+let outer = 0;
+let inner = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+for (let i = 1; ; i++) {
+```
+
+Ich entscheide mich hier für einen ordinären <ExternalLink href={docs.statements.for}>`for`</ExternalLink>-Loop, ohne Condition/Bedingung.
+
+</Accordion>
+<Accordion>
+
+Dann den äußeren Ring um `1` erhöhen und den inneren um `1` verringern:
+
+```ts
+outer++;
+inner--;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn der äußere Ring das `outerMax` überschreitet, setzen wir ihn wieder auf `0`:
+
+```ts
+if (outer > outerMax) outer = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn der innere Ring `0` unterschreitet, setzen wir ihn auf das `innerMax`:
+
+```ts
+if (inner < 0) inner = innerMax;
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch prüfen, ob `inner` und `outer` den gleichen Stand haben:
+
+```ts
+if (inner === outer) return i;
+```
+
+Wenn ja, geben wir die Anzahl Runden aus.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function spinningRings(innerMax: number, outerMax: number): number {
+  let outer = 0;
+  let inner = 0;
+
+  for (let i = 1; ; i++) {
+    outer++;
+    inner--;
+
+    if (outer > outerMax) outer = 0;
+    if (inner < 0) inner = innerMax;
+
+    if (inner === outer) return i;
+  }
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
