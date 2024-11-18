@@ -1,0 +1,269 @@
+---
+title:
+pubDate: 2024-11-07
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: fc23a5a69c904140b2c47cfb7a8d14c7
+
+codeChallengeData:
+  platform: codewars
+  id: 6444f6b558ed4813e8b70d43
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst sollten wir herausfinden, welche Zahl im Input-Array die größte ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Außerdem brauchen wir eine Variable für unser Ergebnis.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Als Nächstes brauchen wir einen (vertikalen) Loop.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Mit diesem loopen wir durch alle Zahlen bis zum Maximum, am besten rückwärts!
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wir werden eine Variable brauchen, um die Zeichen jeder Ebene zu speichern.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Dann brauchen wir einen zweiten (horizontalen) Loop.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Mit dem zweiten Loop loopen wir durch die Zahlen im Input-Array.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Für jede Zahl hängen wir die nötigen Zeichen an unsere Ebenen-Variable.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Abhängig davon, ob die Zahl größer, kleiner oder gleich der aktuellen Ebenen-Zahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Nach dem zweiten Loop noch die Achse: Wenn die aktuelle Ebene die oberste ist, hängen wir ein `^` an, sonst ein `|`.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Hinten noch die aktuelle Ebenen-Zahl anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 12
+
+Dann können wir unsere fertige aktuelle Ebene an unser Ergebnis-Array anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 13
+
+Nach dem zweiten Loop nur noch das Ergebnis als String mit `"\n"` verbunden zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `arr` in `nums` umbenannt):
+
+```ts
+export function graph(nums: number[]): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann ermitteln wir das Maximum im Input-Array und initialisieren unser Ergebnis-Array:
+
+```ts
+const result: string[] = [];
+const max = Math.max(...nums);
+```
+
+</Accordion>
+<Accordion>
+
+Dann der erste (vertikale) Loop:
+
+```ts
+  for (let level = max; level >= 0; level--) {
+```
+
+Wir loopen hier rückwärts. Also vom Maximum bis zur `0`.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir schon mal die Achse vorbereiten und unsere Variable für die aktuelle Zeile erstellen:
+
+```ts
+const axis = level === max ? " ^ " : " | ";
+let row = "";
+```
+
+</Accordion>
+<Accordion>
+
+Dann der zweite (horizontale) Loop durch die Zahlen im Input-Array:
+
+```ts
+    for (const num of nums) {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die Bedingungen:
+
+```ts
+      if (num === level) row += " ____ ";
+      if (num > level) row += "|    |";
+      if (num < level) row += "......";
+    }
+```
+
+Ich finde <ExternalLink href={docs.statements.ifElse}>`if...elseif...else`</ExternalLink> und die ganzen geschweiften Klammern nicht besonders sexy. Darum erstelle ich hier für jeden Fall eine eigene `if`-Bedingung.
+
+</Accordion>
+<Accordion>
+
+Nach dem zweiten Loop noch die Achse an die aktuelle Zeile und die aktuelle Zeile ans Ergebnis anhängen:
+
+```ts
+    row += axis + level;
+    result.push(row);
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss das Ergebnis nach dem ersten Loop nur noch als String ` "\n"`-getrennt zurückgeben:
+
+```ts
+  return result.join("\n");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function graph(nums: number[]): string {
+  const result: string[] = [];
+  const max = Math.max(...nums);
+
+  for (let level = max; level >= 0; level--) {
+    const axis = level === max ? " ^ " : " | ";
+    let row = "";
+
+    for (const num of nums) {
+      if (num === level) row += " ____ ";
+      if (num > level) row += "|    |";
+      if (num < level) row += "......";
+    }
+
+    row += axis + level;
+    result.push(row);
+  }
+
+  return result.join("\n");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
