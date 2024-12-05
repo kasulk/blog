@@ -1,0 +1,194 @@
+---
+title:
+pubDate: 2024-12-07
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: a8a5828352794aec91902259f410de9d
+
+codeChallengeData:
+  platform: codewars
+  id: 6411b91a5e71b915d237332d
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir loopen durch den Input-String.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Für jede öffnende Klammer erhöhen wir einen Counter um `1`.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Für jede schließende Klammer ziehen wir `1` vom Counter ab.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+_Optional:_ Sollte zu irgendeinem Zeitpunkt der Counter negativ werden, können wir den Loop vorzeitig abbrechen und `false` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Ansonsten geben wir nach dem Loop zurück, ob der Counter `0` ist.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function validParentheses(str: string): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Counter initialisieren:
+
+```ts
+let numOpenParentheses = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Loop durch den Input-String:
+
+```ts
+  for (const char of str) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Zeichen eine öffnende Klammer ist, addieren wir `1` zum Counter:
+
+```ts
+if (char === "(") numOpenParentheses++;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn das aktuelle Zeichen eine schließende Klammer ist, ziehen wir `1` vom Counter ab:
+
+```ts
+if (char === ")") numOpenParentheses--;
+```
+
+</Accordion>
+<Accordion>
+
+_Optional:_ Sollte der Counter irgendwann kleiner `0` werden (also mehr schließende als öffnende Klammern), können wir die Funktion vorzeitig beenden:
+
+```ts
+    if (numOpenParentheses < 0) return false;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop geben wir aus, ob der Counter `0` ist, also alle öffnenden Klammern geschlossen wurden:
+
+```ts
+  return numOpenParentheses === 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function validParentheses(str: string): boolean {
+  let numOpenParentheses = 0;
+
+  for (let char of str) {
+    if (char === "(") numOpenParentheses++;
+    if (char === ")") numOpenParentheses--;
+
+    if (numOpenParentheses < 0) return false;
+  }
+
+  return numOpenParentheses === 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
