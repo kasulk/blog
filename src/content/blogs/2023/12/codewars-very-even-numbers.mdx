@@ -1,0 +1,177 @@
+---
+title:
+pubDate: 2023-12-05
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 156200a720384781a5ee3793afba84e0
+
+codeChallengeData:
+  platform: codewars
+  id: 58c9322bedb4235468000019
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Damit wir die Input-Zahl nicht verändern, speichern wir sie als erstes in einer neuen Variablen ab.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir solange, wie unsere Zahl zweistellig ist.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+In jeder Iteration summieren wir die Ziffern.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Nach dem Loop geben wir zurück, ob unsere (einstellige) Zahl gerade ist.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function isVeryEvenNumber(n: number): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Erst die Input-Zahl in einer neuen Variable speichern:
+
+```ts
+let num = n;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop solange unsere Zahl zweistellig ist:
+
+```ts
+  while (num > 9) {
+```
+
+</Accordion>
+<Accordion>
+
+Dann die Ziffern aufsummieren:
+
+```ts
+    num = num
+      .toString()
+      .split("")
+      .map(Number)
+      .reduce((sum, digit) => sum + digit, 0);
+  }
+```
+
+Um die Ziffern aufsummieren zu können, müssen wir die Zahl in ihre Ziffern unterteilen. Das wiederum geht nur mit einem String. Bevor wir aber die Ziffern summieren können, müssen wir sie wieder in Zahlen umwandeln.
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch zurückgeben, ob unsere einstellige Zahl gerade ist:
+
+```ts
+  return num % 2 === 0;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Whoop whoop! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function isVeryEvenNumber(n: number): boolean {
+  let num = n;
+
+  while (num > 9) {
+    num = num
+      .toString()
+      .split("")
+      .map(Number)
+      .reduce((sum, digit) => sum + digit, 0);
+  }
+
+  return num % 2 === 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
