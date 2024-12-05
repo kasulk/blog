@@ -1,0 +1,235 @@
+---
+title:
+pubDate: 2023-12-29
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 6f759319601f42f7b9f16b31ae2a0953
+
+codeChallengeData:
+  platform: codewars
+  id: 57e2dd0bec7d247e5600013a
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir müssen durch das Input-Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Zuerst prüfen wir, ob das aktuelle Element kleiner `3` ist. Wenn ja, fügen wir es zu einem Output-Array hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann schauen wir, ob es größer `2` ist. Wenn ja,
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+1. dann erstellen wir ein neues Sub-Array
+2. und fügen die nächsten x Elemente hinzu
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Das Sub-Array fügen wir dann zum Output Array hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Weiter zum nächsten Element.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Und zum Schluss das Output-Array ausgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function unflatten(flatArray: number[]): number[] | number[][] {
+```
+
+</Accordion>
+<Accordion>
+
+Durch das Input-Array loopen:
+
+```ts
+for (let i = 0; i < flatArray.length; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Der Übersichtlichkeit halber speichere ich das aktuelle Element in einer Variablen (optional):
+
+```ts
+const curr = flatArray[i];
+```
+
+</Accordion>
+<Accordion>
+
+Ist das aktuelle Element kleiner als `3` (also `0`, `1` oder `2`), fügen wir es direkt zu einem Output-Array hinzu:
+
+```ts
+if (curr < 3) output.push(curr);
+```
+
+</Accordion>
+<Accordion>
+
+Ist dieses Element größer als `2`, fügen wir die nächsten x Elemente zu einem Sub-Array hinzu. Das geht z.B. mit einem <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop:
+
+```ts
+    if (curr > 2) {
+      const subArray: number[] = [];
+
+      for (let j = 0; j < curr; j++) {
+        const subCurr = flatArray[j + i];
+        if (subCurr) subArray.push(subCurr);
+      }
+```
+
+Das aktuelle Sub-Element speichere ich wieder der Übersichtlichkeit halber in einer Variablen (optional). Das aktuelle Sub-Element hat immer den Index `i` + `j`.
+
+</Accordion>
+<Accordion>
+
+Dann noch das Sub-Array zum Output-Array hinzufügen:
+
+```ts
+output.push(subArray);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt müssen wir noch `i` korrigieren, da wir ja nun ein paar Schritte im Input-Array gesprungen sind:
+
+```ts
+      i += curr - 1;
+    }
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Als letztes nur noch das Output-Array ausgeben:
+
+```ts
+return output;
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function unflatten(flatArray: number[]): number[] | number[][] {
+  const output: any[] = [];
+
+  for (let i = 0; i < flatArray.length; i++) {
+    const curr = flatArray[i];
+
+    if (curr < 3) output.push(curr);
+
+    if (curr > 2) {
+      const subArray: number[] = [];
+
+      for (let j = 0; j < curr; j++) {
+        const subCurr = flatArray[j + i];
+        if (subCurr) subArray.push(subCurr);
+      }
+
+      output.push(subArray);
+      i += curr - 1;
+    }
+  }
+
+  return output;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
