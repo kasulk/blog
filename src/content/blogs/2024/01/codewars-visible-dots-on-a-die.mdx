@@ -1,0 +1,152 @@
+---
+title:
+pubDate: 2024-01-27
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 91be31bedca4435db9234ff76107f6be
+
+codeChallengeData:
+  platform: codewars
+  id: 5a39724945ddce2223000800
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir die Summe aller Seiten.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir noch die Zahl auf der unteren Seite des Würfels.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Von der Summe müssen wir dann nur noch die Zahl auf der unteren Seite abziehen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `numOfSides` zu `numSides` umbenannt):
+
+```ts
+export function totalAmountVisible(topNum: number, numSides: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Die Summe aller Seiten berechnen:
+
+```ts
+const allSidesSum = (numSides / 2) * (numSides + 1);
+```
+
+Auf einem 6-seitigen Würfel zum Beispiel, ergeben 2 gegenüberliegende Seiten immer die Summe 7. Also die Anzahl der Seiten + 1. Das ganze kann man 3x machen. Also (Anzahl der Seiten / 2) mal.
+
+</Accordion>
+<Accordion>
+
+Jetzt berechnen wir die Zahl auf der unteren, nicht sichtbaren Seite:
+
+```ts
+const bottomNum = numSides + 1 - topNum;
+```
+
+Wie gerade schon erwähnt, ergeben 2 sich gegenüberliegende Seiten auf einem 6-seitigen Würfel 7, also die Anzahl Seiten + 1. Da wir die obere Zahl haben, können wir diese einfach von der Anzahl der Seiten + 1 abziehen.
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch die untere Zahl von der Summe aller Seiten abziehen und returnen:
+
+```ts
+  return allSidesSum - bottomNum;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Whoop whoop! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function totalAmountVisible(topNum: number, numSides: number): number {
+  const allSidesSum = (numSides / 2) * (numSides + 1);
+  const bottomNum = numSides + 1 - topNum;
+
+  return allSidesSum - bottomNum;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
