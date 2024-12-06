@@ -1,0 +1,246 @@
+---
+title:
+pubDate: 2024-07-05
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 8c08af398b2641938ba42d2881e78106
+
+codeChallengeData:
+  platform: codewars
+  id: 5a30e7e9c5e28454790000c1
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst erstellen wir uns eine Variable für die Buchstaben der Strahlen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Außerdem können wir uns die Entfernungen von Spinne und Fliege vom Mittelpunkt in Variablen speichern (also den Zahlteil der Koordinate).
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn wir die Spinne und die Fliege mit einer Linie verbinden, haben wir (zusammen mit den beiden Geraden vom Mittelpunkt zur Spinne und vom Mittelpunkt zur Fliege) ein Dreieck.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn wir einen Winkel hätten, könnten wir die Länge dieser Linie berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Also berechnen wir die Winkel der Strahlen, auf denen jeweils die Spinne und die Fliege sitzen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn wir beide Winkel haben, können wir den Winkel zwischen Spinne und Fliege berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Von diesem Winkel wiederum können wir den Kosinus berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Und mit dem Kosinus können wir die Entfernung zwischen Spinne und Fliege berechnen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function spiderToFly(spider: string, fly: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst die Buchstaben der Strahlen in eine Variable:
+
+```ts
+const radials = "ABCDEFGH";
+```
+
+</Accordion>
+<Accordion>
+
+Dann bekommen die Zahlen der Koordinaten, also die Entfernungen von Spinne und Fliege vom Mittelpunkt, auch ihre eigenen Variablen:
+
+```ts
+const a = Number(spider[1]);
+const b = Number(fly[1]);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt berechnen wir die Winkel der Strahlen auf denen die Tierchen jeweils sitzen:
+
+```ts
+const angleSpider = radials.indexOf(spider[0]) * 45;
+const angleFly = radials.indexOf(fly[0]) * 45;
+```
+
+Dafür schlagen wir den Buchstaben der Koordinate in unserer `radials`-Variablen nach. Sitzt die Fliege beispielsweise wie im Bild auf dem Strahl `E`, erhalten wir den Index `4`. `4 x 45°` sind `180°`.
+
+</Accordion>
+<Accordion>
+
+Da wir jetzt beide Winkel haben, können wir den Winkel zwischen Spinne und Fliege berechnen:
+
+```ts
+const angleSpiderFly = Math.abs(angleSpider - angleFly);
+```
+
+</Accordion>
+<Accordion>
+
+Und mit dem Winkel können wir den Kosinus des Winkels berechnen:
+
+```ts
+const cosine = Math.cos(degreesToRadians(angleSpiderFly));
+```
+
+Für den Kosinus brauchen wir hier den Winkel im Bogenmaß. Da wir unseren Winkel aber im Gradmaß berechnet haben, müssen wir kurz umrechnen.
+
+</Accordion>
+<Accordion>
+
+Dafür hab ich mir eine kleine Hilfsfunktion gebaut:
+
+```ts
+function degreesToRadians(degrees: number): number {
+  return degrees * (Math.PI / 180);
+}
+```
+
+Weiter mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Mit dem Kosinus können wir dann die Seite gegenüber des Winkels berechnen:
+
+```ts
+const distance = Math.sqrt(a ** 2 + b ** 2 - 2 * a * b * cosine);
+```
+
+</Accordion>
+<Accordion>
+
+Dann nur noch das Ergebnis zurückgeben:
+
+```ts
+  return distance;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback) 🪰🕷️
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function spiderToFly(spider: string, fly: string): number {
+  const radials = "ABCDEFGH";
+
+  const a = Number(spider[1]);
+  const b = Number(fly[1]);
+  const angleSpider = radials.indexOf(spider[0]) * 45;
+  const angleFly = radials.indexOf(fly[0]) * 45;
+
+  const angleSpiderFly = Math.abs(angleSpider - angleFly);
+  const cosine = Math.cos(degreesToRadians(angleSpiderFly));
+
+  const distance = Math.sqrt(a ** 2 + b ** 2 - 2 * a * b * cosine);
+
+  return distance;
+}
+
+function degreesToRadians(degrees: number): number {
+  return degrees * (Math.PI / 180);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
