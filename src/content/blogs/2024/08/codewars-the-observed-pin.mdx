@@ -1,0 +1,460 @@
+---
+title:
+pubDate: 2024-08-09
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 02ae2a07af024486ba7a631c60ffa36e
+
+codeChallengeData:
+  platform: codewars
+  id: 5263c6999e0f40dee200059d
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir eine Hilfsfunktion um die Nachbar-Ziffern zu bekommen. Man könnte das auch hardcoden, aber ich entscheide mich für die gecodete Version.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+In der Hilfsfunktion definieren wir uns erst mal das Keypad mit den Zahlen. Z.B. als 2-dimensionales Array.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir durch das Keypad loopen. Wenn wir die Reihe mit der gesuchten Zahl gefunden haben geht’s weiter.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann schnappen wir uns die beiden Zahlen links und rechts davon und dann die Zahlen drüber und drunter.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Das kommt alles in ein Array, das wir dann zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Zurück in unserer Hauptfunktion loopen wir als Erstes durch die beobachteten Input-Ziffern.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Für jede Ziffer lassen wir unsere Hilfsfunktion laufen und speichern sämtliche Ziffern mit ihren Nachbarn in einem 2-dimensionalen Array.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Dann loopen wir durch dieses 2-dimensionale Array.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Im ersten Schritt kombinieren wir das erste Innere-Array mit dem zweiten inneren Array. So dass wir danach ein Array mit 2-stelligen Zahlen erhalten.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Im nächsten Schritt kombinieren wir dieses Array mit dem nächsten inneren Array bis wir durch alle inneren Arrays durch sind. Es bietet sich wahrscheinlich an diese Kombinations-Arie in eine weitere Hilfsfunktion auszulagern.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Nach dem Loop können wir dann einfach das Ergebnis-Array mit den Kombinationen zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner `getNeighbours`-Hilfsfunktion:
+
+```js
+function getNeighbours(key) {
+```
+
+</Accordion>
+<Accordion>
+
+Also Erstes also unser Keypad definieren:
+
+```js
+const keypad = [
+  ["1", "2", "3"],
+  ["4", "5", "6"],
+  ["7", "8", "9"],
+  ["", "0", ""],
+];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop durchs Keypad:
+
+```js
+    .reduce((acc, row, i) => {
+```
+
+Hier bietet sich ein <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> mit einem Array als Startwert an. Du kannst es aber auch gerne mit einem <ExternalLink href={docs.array.forEach}>`.forEach()`</ExternalLink> und einem Ergebnis-Array machen.
+
+</Accordion>
+<Accordion>
+
+Wir checken jede Reihe, ob sie die gesuchte Ziffer enthält:
+
+```js
+      if (row.includes(key)) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, können wir die Reihe auseinandernehmen, wir extrahieren die Nachbar-Zahlen:
+
+```js
+const j = row.indexOf(key);
+const prevRow = keypad[i - 1];
+const nextRow = keypad[i + 1];
+
+const numLeft = row[j - 1];
+const numRight = row[j + 1];
+const numUp = prevRow ? prevRow[j] : null;
+const numDown = nextRow ? nextRow[j] : null;
+```
+
+Der Lesbarkeit halber erstelle ich mir zuerst ein paar Variablen.
+
+Den Index der gefunden Zahl in der aktuellen Reihe speichern wir uns als `j`. Außerdem können wir uns die vorige und die nächste Reihe speichern.
+
+Dann schnappen wir uns die eigentlichen Nachbarn. Wenn es keinen linken oder rechten Nachbarn gibt, bekommen wir `undefined` zurück. Das ist erst mal OK und sogar so gewollt.
+
+Für den oberen bzw. unteren Nachbarn müssen wir erst mal checken, ob die jeweilige Reihe überhaupt existiert. Wenn nicht, speichern wir uns `null` an diese Stelle.
+
+</Accordion>
+<Accordion>
+
+Dann können wir die aktuelle Zahl (`key`) und ihre Nachbarn an den Accumulator der <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>-Methode, also ans Ergebnis-Array (`acc`) anhängen:
+
+```js
+        acc.push(key, numLeft, numRight, numUp, numDown);
+      }
+
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nicht vergessen den Accumulator zurückzugeben:
+
+```js
+      return acc;
+    }, [])
+```
+
+</Accordion>
+<Accordion>
+
+Wir haben oben teilweise `undefined` und/oder `null` zurückbekommen, wenn die Zahl nicht existierte. Diese Werte löschen wir jetzt.
+
+```js
+    .filter((num) => num);
+}
+```
+
+Auch leere Strings (`””`) sind möglich, wenn der Nachbar in der letzten Reihe gesucht wurde.
+
+Mit .filter((num) => num) behalten wir nur die Werte, die nicht <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink> sind. Damit fliegen alle `undefined`s, `null`s und `””`s raus. Perfekt!
+
+Das war das `getNeighbours`-Helferlein, weiter geht’s mit der Hauptfunktion:
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```js
+function getPINs(observed) {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes loopen wir durch die beobachteten Input-Ziffern:
+
+```js
+const allPossibleDigits = [...observed].map((digit) => getNeighbours(digit));
+```
+
+Für jede Ziffer lassen wir unsere Hilfsfunktion laufen und speichern die Ziffer mit ihren Nachbarn in einem Array.
+
+Wir erhalten also ein Array mit Arrays. Ein ein 2-dimensionales Array.
+
+</Accordion>
+<Accordion>
+
+Dann können wir schnell testen, ob die beobachteten Ziffern mehr als eine sind:
+
+```js
+if (observed.length === 1) return allPossibleDigits[0];
+```
+
+Wenn es nur eine war, brauchen wir gar nicht weiter rumrödeln. Dann geben wir direkt diese Zahl mit ihren Nachbarn zurück und beenden damit die Funktion. Diese stecken im ersten inneren Array unseres 2-dimensionalen Arrays.
+
+Ansonsten geht’s weiter!
+
+</Accordion>
+<Accordion>
+
+Jetzt wollen wir die Arrays miteinander in allen möglichen Varianten miteinander kombinieren. Wir brauchen erst mal ein Ergebnis-Array:
+
+```js
+let pins;
+```
+
+</Accordion>
+<Accordion>
+
+Dann ein weiterer Loop:
+
+```js
+  for (let i = 0; i < allPossibleDigits.length - 1; i++) {
+```
+
+Zur Erinnerung: Wir loopen hier durch ein 2-dimensionales Array.
+
+Da wir uns immer das aktuelle und das nächste Array schnappen und zusammenführen wollen, müssen wir 1x weniger loopen, als wir Elemente in `allPossibleDigits` haben. Denn in der letzten Iteration gibt es kein nächstes Element mehr. Und das würde fieses Kuddelmuddel geben...
+
+</Accordion>
+<Accordion>
+
+Das jeweils aktuelle und das nächste Element bzw. innere Array speichere ich mir wieder jeweils in einer Variablen ab:
+
+```js
+const currArr = pins || allPossibleDigits[i];
+const nextArr = allPossibleDigits[i + 1];
+```
+
+Wenn wir zwei Arrays miteinander kombiniert haben, wollen wir immer das neu entstandene Array als Grundlage für unsere nächste Kombination verwenden.
+
+Das erreichen wir, indem wir unser aktuelles Array `currArr` immer auf unser Ergebnis-Array setzen. Außer in der ersten Runde, wenn unser Ergebnis-Array `pins` noch leer bzw. `undefined` ist. Da setzen wir es auf das erste Array von unseren `allPossibleDigits`.
+
+</Accordion>
+<Accordion>
+
+Jetzt erstellen wir die Kombination aus beiden Arrays:
+
+```js
+    pins = getAllCombosFrom2Arrs(currArr, nextArr);
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Und geben nach dem Loop unser Ergebnis zurück:
+
+```js
+  return pins;
+}
+```
+
+Müssen wir also nur noch unsere zweite Hilfsfunktion `getAllCombosFrom2Arrs`- basteln. Easy. Endspurt - los geht’s!
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile meiner `getAllCombosFrom2Arrs`-Hilfsfunktion:
+
+```js
+function getAllCombosFrom2Arrs(strs1, strs2) {
+```
+
+Ich habe die Parameter hier `strs1` und `strs2` genannt, weil diese Funktion beliebige Strings kombinieren kann.
+
+</Accordion>
+<Accordion>
+
+Zuerst ein Ergebnis-Array initialisieren:
+
+```js
+const newStrs = [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann loopen wir durch das erste Array:
+
+```js
+  strs1.forEach((str1) => {
+```
+
+</Accordion>
+<Accordion>
+
+Für jedes Element in `strs1` loopen wir dann wiederum durch das zweite Array:
+
+```js
+    strs2.forEach((str2) => newStrs.push(str1 + str2));
+  });
+```
+
+Alles klar? Gut!
+
+Für jedes Element in `strs2` hängen wir jetzt die Kombination des jeweils aktuellen Elements aus `strs1` und `strs2` an unser Ergebnis-Array. Cool!
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das Ergebnis zurückgeben:
+
+```js
+  return newStrs;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Puh... 🥵
+
+Aber geschafft!
+
+Respekt wenn du bis hier durchgehalten hast!
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function getPINs(observed) {
+  const allPossibleDigits = [...observed].map((digit) => getNeighbours(digit));
+
+  if (observed.length === 1) return allPossibleDigits[0];
+
+  let pins;
+
+  for (let i = 0; i < allPossibleDigits.length - 1; i++) {
+    const currArr = pins || allPossibleDigits[i];
+    const nextArr = allPossibleDigits[i + 1];
+
+    pins = getAllCombosFrom2Arrs(currArr, nextArr);
+  }
+
+  return pins;
+}
+
+function getAllCombosFrom2Arrs(strs1, strs2) {
+  const newStrs = [];
+
+  strs1.forEach((str1) => {
+    strs2.forEach((str2) => newStrs.push(str1 + str2));
+  });
+
+  return newStrs;
+}
+
+function getNeighbours(key) {
+  const keypad = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+    ["", "0", ""],
+  ];
+
+  return keypad
+    .reduce((acc, row, i) => {
+      if (row.includes(key)) {
+        const j = row.indexOf(key);
+        const prevRow = keypad[i - 1];
+        const nextRow = keypad[i + 1];
+
+        const numLeft = row[j - 1];
+        const numRight = row[j + 1];
+        const numUp = prevRow ? prevRow[j] : null;
+        const numDown = nextRow ? nextRow[j] : null;
+
+        acc.push(key, numLeft, numRight, numUp, numDown);
+      }
+      return acc;
+    }, [])
+    .filter((num) => num);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
