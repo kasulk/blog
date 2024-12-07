@@ -1,0 +1,423 @@
+---
+title:
+pubDate: 2024-09-02
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 7bcb2bfa386a41a08c8f42013301ee01
+
+codeChallengeData:
+  platform: codewars
+  id: 5ca24526b534ce0018a137b5
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst brauchen wir ein paar Variablen. Eine für’s gesamte Keypad, eine um den aktuellen Klein-/Großschreibmodus festzuhalten und eine um uns den letzten gedrückten Button zu merken.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir durch den Input-String.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir suchen das jeweils aktuelle Zeichen in unserem Keypad, darum gehen wir mit einem weiteren Loop durch jeden Button im Keypad.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Und prüfen, ob unser aktuelles Zeichen auf dem aktuellen Button ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn ja, speichern wir uns den Index, den das Zeichen auf dem Button hat.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn der aktuelle Button der gleiche ist, wie der letzte, fügen wir schon mal ein Leerzeichen zum aktuellen Button-Zwischenergebnis hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn sich das aktuelle Zeichen in der oberen Reihe des Buttons befindet (also z.B. eine Zahl ist), setzen wir den letzten Button zurück und fügen den aktuellen Button, gefolgt von einem `-` zum aktuellen Button-Zwischenergebnis hinzu. In diesem Fall können wir das Zwischenergebnis speichern und zum nächsten Element springen.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wenn das aktuelle Zeichen ein Kleinbuchstabe ist `UND` wir uns im Großbuchstaben-Modus befinden `ODER` ein Großbuchstabe ist `UND` wir uns `NICHT` im Großbuchstabenmodus befinden, switchen wir den Großbuchstabenmodus ins Gegenteil und fügen ein `#` zum aktuellen Button-Zwischenergebnis hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Am Ende des inneren Loops hängen wir noch den Button so oft ans aktuelle Button-Zwischenergebnis an, wie der Index des aktuellen Zeichens auf dem Button (also bei einem `h`, mit Index `2` auf dem Button `4`: `2x4 → 44`).
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Nicht vergessen den letzten Button für die nächste Runde auf den aktuellen zu setzen.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Nach dem inneren Loop speichern wir das aktuelle Button-Zwischenergebnis.
+
+</Accordion>
+<Accordion>
+Schritt 12
+
+Nach dem äußeren Loop geben wir das Endergebnis als String zurück.
+
+Puh, ganz schön komplex... Aber ich hab dich gewarnt!
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Der Lesbarkeit halber erstelle ich mir 2 Hilfsfunktionen:
+
+```ts
+function isLowerCaseLetter(char: string): boolean {
+  return /[a-z]/.test(char);
+}
+
+function isUpperCaseLetter(char: string): boolean {
+  return /[A-Z]/.test(char);
+}
+```
+
+Dann geht’s los mit der Hauptfunktion!
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function sendMessage(message: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann erstellen wir unsere Variablen:
+
+```ts
+const keypad = [
+  "1.,?!",
+  "2abc",
+  "3def",
+  "4ghi",
+  "5jkl",
+  "6mno",
+  "7pqrs",
+  "8tuv",
+  "9wxyz",
+  "*'-+=",
+  "0 ",
+  "#",
+];
+
+let isUpperCaseMode = false;
+let lastButton = "";
+```
+
+</Accordion>
+<Accordion>
+
+Dann loopen wir durch den Input-String:
+
+```ts
+  return [...message]
+    .map((char) => {
+      let currResult = "";
+```
+
+Dafür wandeln wir den String als Erstes in ein Array um. Da wir für jedes Zeichen im Input-String etwas zurück haben wollen, bietet sich hier ein <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an.
+
+Und da das Array, das wir danach erhalten (fast) schon unserem Endergebnis entspricht, können wir unser `return`-Statement schon hier platzieren.
+
+Außerdem brauchen wir noch eine Variable um unsere Zwischenergebnisse für das jeweils aktuelle Zeichen zu speichern.
+
+</Accordion>
+<Accordion>
+
+Dann der (innere) Loop durch die Keypad-Buttons:
+
+```ts
+      for (const button of keypad) {
+```
+
+Hier entscheide ich mich für einen <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop, damit wir ihn ggf. vorzeitig beenden können.
+
+</Accordion>
+<Accordion>
+
+Wir checken jeden Button, ob er unser aktuelles Zeichen enthält:
+
+```ts
+        if (button.includes(char.toLowerCase())) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, speichern wir uns den Index des Zeichens im Button in einer Variablen:
+
+```ts
+const currButton = button[0];
+const keyIndex = button.indexOf(char.toLowerCase());
+const isTopRow = !keyIndex;
+```
+
+Außerdem erstelle ich mir ein paar weitere (optionale) Variablen zur besseren Lesbarkeit.
+
+Sollte der `keyIndex` `0` sein, ist unser gesuchtes Zeichen das erste auf dem Button. Also das Zeichen in der oberen Reihe. Da `0` <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink> ist, gibt `!keyIndex` `true` zurück. In allen anderen Fällen `false`.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob der aktuelle Button der selbe ist wie der letzte:
+
+```ts
+if (currButton === lastButton) currResult += " ";
+```
+
+Wenn ja, fügen wir das Leerzeichen zu unserem aktuellen Zwischenergebnis hinzu.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob sich unser Zeichen in der oberen Reihe befindet (also z.B. eine Zahl ist):
+
+```ts
+if (isTopRow) {
+  lastButton = "";
+  return currResult + currButton + "-";
+}
+```
+
+Wenn ja, können wir den inneren Loop beenden und für das aktuelle Zeichen im Input-String unser bisheriges Zwischenergebnis plus den aktuellen Button und ein `-` zurückgeben.
+
+Da es laut Regel für das Halten eines Buttons der letzte Button keine Rolle spielt, setzen wir ihn vorher noch zurück.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir prüfen, ob das aktuelle Zeichen ein Kleinbuchstabe ist `UND` der UpperCaseMode gerade aktiv ist `ODER` ob es ein Großbuchstabe ist `UND` der UpperCaseMode gerade `NICHT` aktiv ist:
+
+```ts
+          if (
+            (isLowerCaseLetter(char) && isUpperCaseMode) ||
+            (isUpperCaseLetter(char) && !isUpperCaseMode)
+          ) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn eines von beiden zutrifft, müssen wir den aktuellen UpperCaseMode in sein Gegenteil switchen:
+
+```ts
+            isUpperCaseMode = !isUpperCaseMode;
+            currResult = "#";
+          }
+```
+
+Außerdem ersetzen wir dann unser bisheriges Zwischenergebnis mit einem `#`.
+
+</Accordion>
+<Accordion>
+
+Dann ergänzen wir den aktuellen Button in entsprechender Anzahl zum Zwischenergebnis:
+
+```ts
+currResult += currButton.repeat(keyIndex);
+```
+
+Die Anzahl der Wiederholungen ergibt sich aus der Position, also dem Index, auf dem Button.
+
+</Accordion>
+<Accordion>
+
+Am Ende des inneren Loops nicht vergessen, den letzten Button zu aktualisieren:
+
+```ts
+          lastButton = currButton;
+        }
+      }
+```
+
+</Accordion>
+<Accordion>
+
+Am Ende des äußeren Loops noch das aktuelle Zwischenergnis zurückgeben:
+
+```ts
+      return currResult;
+    })
+```
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss noch das Endergebnis-Array in einen String umwandeln:
+
+```ts
+    .join("");
+}
+```
+
+Zurückgegeben haben wir das Ganze schon oben mit dem `return`-Statement vor dem <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>-Loop.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+Wie gesagt, dat Ding war ziemlich komplex und eher etwas anspruchsvoller als ein Level 6. Aber: Nur die Harten komm’ in’ Garten!
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function sendMessage(message: string): string {
+  const keypad = [
+    "1.,?!",
+    "2abc",
+    "3def",
+    "4ghi",
+    "5jkl",
+    "6mno",
+    "7pqrs",
+    "8tuv",
+    "9wxyz",
+    "*'-+=",
+    "0 ",
+    "#",
+  ];
+
+  let isUpperCaseMode = false;
+  let lastButton = "";
+
+  return [...message]
+    .map((char) => {
+      let currResult = "";
+
+      for (const button of keypad) {
+        if (button.includes(char.toLowerCase())) {
+          const currButton = button[0];
+          const keyIndex = button.indexOf(char.toLowerCase());
+          const isTopRow = !keyIndex;
+
+          if (currButton === lastButton) currResult += " ";
+
+          if (isTopRow) {
+            lastButton = "";
+            return currResult + currButton + "-";
+          }
+
+          if (
+            (isLowerCaseLetter(char) && isUpperCaseMode) ||
+            (isUpperCaseLetter(char) && !isUpperCaseMode)
+          ) {
+            isUpperCaseMode = !isUpperCaseMode;
+            currResult = "#";
+          }
+
+          currResult += currButton.repeat(keyIndex);
+          lastButton = currButton;
+        }
+      }
+
+      return currResult;
+    })
+    .join("");
+}
+
+function isLowerCaseLetter(char: string): boolean {
+  return /[a-z]/.test(char);
+}
+
+function isUpperCaseLetter(char: string): boolean {
+  return /[A-Z]/.test(char);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
