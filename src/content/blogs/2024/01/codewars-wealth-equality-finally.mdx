@@ -1,0 +1,153 @@
+---
+title:
+pubDate: 2024-01-26
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 77c82c68e7154379887c6c43bf25fff0
+
+codeChallengeData:
+  platform: codewars
+  id: 5815f7e789063238b30001aa
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir die Anzahl der Bürger.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann müssen wir berechnen, was jeder Bürger bekommt.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Am Schluss noch das `wealth`-Array ändern, ohne etwas zu returnen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function redistributeWealth(wealth: number[]): void {
+```
+
+</Accordion>
+<Accordion>
+
+Die Anzahl der Bürger berechnen:
+
+```ts
+const numCitizens = wealth.length;
+```
+
+Die Anzahl der Bürger ist einfach die Anzahl der Elemente im Array.
+
+</Accordion>
+<Accordion>
+
+Den Betrag berechnen, der jedem Bürger zusteht:
+
+```ts
+const equalWealth = wealth.reduce((sum, num) => sum + num, 0) / numCitizens;
+```
+
+Dafür berechnen wir erstmal die Summe aller Vermögen im Input-Array, z.B. mit <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink>. Diese Summe Teilen wir dann durch die Anzahl der Bürger und erhalten so den Durchschnitt. Also das, was jedem Bürger im Sozialismus zusteht.
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss noch das Input-Array ändern:
+
+```ts
+wealth.fill(equalWealth);
+```
+
+Das geht zum Beispiel mit <ExternalLink href={docs.array.fill}>`.fill()`</ExternalLink>. Damit wird jedes Element im Array überschrieben. Returnt wird nüscht!
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function redistributeWealth(wealth: number[]): void {
+  const numCitizens = wealth.length;
+  const equalWealth = wealth.reduce((sum, num) => sum + num, 0) / numCitizens;
+
+  wealth.fill(equalWealth);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
