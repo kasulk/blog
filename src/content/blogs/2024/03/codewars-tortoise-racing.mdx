@@ -1,0 +1,212 @@
+---
+title:
+pubDate: 2024-03-06
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 726480f0011945fe9d87af5f9587eae2
+
+codeChallengeData:
+  platform: codewars
+  id: 55e2adece53b4cdcb900006c
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes fangen wir die Fälle ab, in denen 🐢 `A` schneller (oder gleich schnell) als 🐢 `B`, und damit uneinholbar ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann berechnen wir den Geschwindigkeitsunterschied.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Diesen können wir verwenden um die Zeit zu berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Diese Zeit wandeln wir dann noch in Stunden, Minuten und Sekunden um.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function race(v1: number, v2: number, g: number): [number, number, number] | null {
+```
+
+</Accordion>
+<Accordion>
+
+Erst die Fälle abfangen in denen 🐢 `A` schneller als 🐢 `B` ist:
+
+```ts
+if (v1 >= v2) return null;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt berechnen wir den Geschwindigkeitsunterschied:
+
+```ts
+const speedDiff = v2 - v1;
+```
+
+</Accordion>
+<Accordion>
+
+Danach die können wir leicht die Gesamtzeit in Stunden berechnen:
+
+```ts
+const durationInHrs = g / speedDiff;
+```
+
+</Accordion>
+<Accordion>
+
+Mit Sekunden lässt es sich leichter rechnen, darum wandele ich mir die Stunden in Sekunden um:
+
+```ts
+const durationInSecs = durationInHrs * 3600;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Ausgabewerte berechnen. Als Erstes die Stunden:
+
+```ts
+const hrs = Math.trunc(durationInHrs);
+```
+
+Da wir oben schon die Stunden berechnet haben, brauchen wir von diesem Wert nur noch alles nach dem Komma zu entfernen.
+
+</Accordion>
+<Accordion>
+
+Jetzt die Minuten:
+
+```ts
+const mins = Math.trunc(durationInSecs / 60) % 60;
+```
+
+</Accordion>
+<Accordion>
+
+Last but not least - die Sekunden:
+
+```ts
+const secs = Math.trunc(durationInSecs % 60);
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss alles nur noch als Array zurückgeben:
+
+```ts
+  return [hrs, mins, secs];
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function race(
+  v1: number,
+  v2: number,
+  g: number,
+): [number, number, number] | null {
+  if (v1 >= v2) return null;
+
+  const speedDiff = v2 - v1;
+  const durationInHrs = g / speedDiff;
+  const durationInSecs = durationInHrs * 3600;
+
+  const hrs = Math.trunc(durationInHrs);
+  const mins = Math.trunc(durationInSecs / 60) % 60;
+  const secs = Math.trunc(durationInSecs % 60);
+
+  return [hrs, mins, secs];
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
