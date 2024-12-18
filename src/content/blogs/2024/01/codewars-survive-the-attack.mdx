@@ -1,0 +1,231 @@
+---
+title:
+pubDate: 2024-01-13
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 75c27e084c5543b5bce0ceb32e11754b
+
+codeChallengeData:
+  platform: codewars
+  id: 634d0f7c562caa0016debac5
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop, in dem wir die Zahlen beider Arrays vergleichen können.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Da die Arrays unterschiedliche Längen haben können, müssen wir durchs längere Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn die Zahl des Angreifer größer ist, erhöhen wir einen Zähler für die Überlebenden Angreifer.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn die Zahl des Verteidigers größer ist, erhöhen wir einen Zähler für die Überlebenden Verteidiger.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Nach dem Loop prüfen wir, ob beide Zähler gleich sind.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn ja, vergleichen wir die Summen der ursprünglichen Arrays und geben aus, ob die Summe des Verteidiger-Arrays größer oder gleich dem Angreifer-Arrays ist.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Wenn nicht, geben wir aus, ob mehr Verteidiger überlebt haben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function hasSurvived(attackers: number[], defenders: number[]): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Legen wir die Länge des Loops fest:
+
+```ts
+const loopLength = Math.max(attackers.length, defenders.length);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der <ExternalLink href={docs.statements.for}>`For`</ExternalLink>-Loop:
+
+```ts
+  for (let i = 0; i < loopLength; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ein Angreifer nicht existiert, legen wir seinen Wert auf `0` fest und speichern seinen Wert in einer Variablen. Gleiches für die Verteidiger:
+
+```ts
+const currAttacker = attackers[i] || 0;
+const currDefender = defenders[i] || 0;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt ermitteln wir den aktuellen Überlebenden und speichern die Anzahl in einem Zähler (die Zähler oben noch initialisieren!):
+
+```ts
+    if (currAttacker > currDefender) numAttackSurvivors++;
+    if (currDefender > currAttacker) numDefendSurvivors++;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop prüfen wir, ob die Anzahl der Überlebenden gleich sind:
+
+```ts
+  if (numAttackSurvivors === numDefendSurvivors) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, bilden wir die Summen der Ursprungs-Arrays und geben aus, ob die Verteidiger-Power größer oder gleich der Angreifer-Power ist:
+
+```ts
+    const attackersInitialPower = attackers.reduce((sum, num) => sum + num, 0);
+    const defendersInitialPower = defenders.reduce((sum, num) => sum + num, 0);
+
+    return defendersInitialPower >= attackersInitialPower;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Wenn nein, geben wir aus, ob die Anzahl der überlebenden Verteidiger größer als die Anzahl der überlebenden Angreifer ist:
+
+```ts
+return numDefendSurvivors > numAttackSurvivors;
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function hasSurvived(attackers: number[], defenders: number[]): boolean {
+  let numAttackSurvivors = 0;
+  let numDefendSurvivors = 0;
+
+  const loopLength = Math.max(attackers.length, defenders.length);
+
+  for (let i = 0; i < loopLength; i++) {
+    const currAttacker = attackers[i] || 0;
+    const currDefender = defenders[i] || 0;
+
+    if (currAttacker > currDefender) numAttackSurvivors++;
+    if (currDefender > currAttacker) numDefendSurvivors++;
+  }
+
+  if (numAttackSurvivors === numDefendSurvivors) {
+    const attackersInitialPower = attackers.reduce((sum, num) => sum + num, 0);
+    const defendersInitialPower = defenders.reduce((sum, num) => sum + num, 0);
+
+    return defendersInitialPower >= attackersInitialPower;
+  }
+
+  return numDefendSurvivors > numAttackSurvivors;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
