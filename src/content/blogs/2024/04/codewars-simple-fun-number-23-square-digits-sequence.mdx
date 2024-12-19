@@ -1,0 +1,254 @@
+---
+title:
+pubDate: 2024-04-12
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 3fe0b4f6d4c345bc95c37b59da0a81b2
+
+codeChallengeData:
+  platform: codewars
+  id: 5886d65e427c27afeb0000c1
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes können wir uns 2 Hilfsfunktionen basteln, eine, die Zahlen in ihre Ziffern zerlegt und eine, die diese Ziffern aufsummiert.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir uns um die Hauptfunktion kümmern.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dort können wir zuerst ein Ergebnis-Array anlegen und schon mal die Input-Zahl rein tun.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann wird geloopt bis der Arzt kommt oder wir auf eine Summe stoßen, die bereits im Ergebnis-Array enthalten ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn das so ist, geben wir die Länge des Ergebnis-Arrays + 1 zurück.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Ansonsten fügen wir die aktuelle quadrierte Ziffernsumme zum Ergebnis-Array hinzu.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meines Verzifferungs-Helferleins:
+
+```ts
+function digitize(num: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Was kommt jetzt? Ah, die Logik! Logisch oder?!:
+
+```ts
+  return [...num.toString()].map(Number);
+}
+```
+
+Hier wird einfach die Input-Zahl erst in einen String und dann in ein Array umgewandelt. Mit [.map(Number)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#using_parseint_with_map) werden dann die String-Zahlen wieder in Zahlen umgewandelt.
+
+Dann die Hilfsfunktion zum Aufsummieren der Ziffern.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile der Hilfsfunktion zum Aufsummieren der Ziffern:
+
+```ts
+function sumUpSquaredDigits(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Hier die Logik:
+
+```ts
+  return digitize(num).reduce((sum, digit) => sum + digit ** 2, 0);
+}
+```
+
+Hier können wir unsere erste Hilfsfunktion anwenden um die Input-Zahl in ein Array aus Ziffern zu verwandeln. Dann können wir mit <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> jede Ziffer quadrieren und zur Summe addieren, die wir dann zurückgeben. Die `0` am Ende heißt, dass wir bei `0` anfangen.
+
+Dann kann es endlich losgehen mit der Hauptfunktion:
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion (ich habe `a` in `num` umbenannt):
+
+```ts
+export function squareDigitsSequence(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes erstelle ich mir mein Ergebnis-Array und packe direkt `num` als erstes Element rein:
+
+```ts
+const results = [num];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  while (true) {
+```
+
+Dieser Loop ist unendlich. Wir müssen also dran denken, ihn irgendwann zu beenden.
+
+</Accordion>
+<Accordion>
+
+Für jeden Durchlauf erstelle ich mir 2 Variablen:
+
+```ts
+const curr = results[0];
+const squaredDigitsSum = sumUpSquaredDigits(curr);
+```
+
+Als aktuelles Element wähle ich hier das erste. Du kannst hier gerne auch immer das letzte nehmen.
+
+</Accordion>
+<Accordion>
+
+Wir loopen solange, bis wir auf eine Zahl stoßen, die bereits im Ergebnis-Array vorhanden ist:
+
+```ts
+if (results.includes(squaredDigitsSum)) return results.length + 1;
+```
+
+Wenn das der Fall ist, beenden wir Loop und Funktion mit `return`. Wir geben die aktuelle Länge des Arrays plus dem einen Element mit der aktuellen Summe zurück.
+
+</Accordion>
+<Accordion>
+
+Wenn nicht, hängen wir die aktuelle Summe an das Ergebnis-Array dran:
+
+```ts
+    results.unshift(squaredDigitsSum);
+  }
+}
+```
+
+Da wir oben das erste Element als unser aktuelles gewählt haben, hängen wir es hier VORNE an. Wenn du das letzte genommen hast, musst du es HINTEN anfügen.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function squareDigitsSequence(num: number): number {
+  const results = [num];
+
+  while (true) {
+    const curr = results[0];
+    const squaredDigitsSum = sumUpSquaredDigits(curr);
+
+    if (results.includes(squaredDigitsSum)) return results.length + 1;
+
+    results.unshift(squaredDigitsSum);
+  }
+}
+
+function digitize(num: number): number[] {
+  return [...num.toString()].map(Number);
+}
+
+function sumUpSquaredDigits(num: number): number {
+  return digitize(num).reduce((sum, digit) => sum + digit ** 2, 0);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
