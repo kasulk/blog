@@ -1,0 +1,204 @@
+---
+title:
+pubDate: 2024-01-11
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: b29712715aa44b2d84d3a9615680f746
+
+codeChallengeData:
+  platform: codewars
+  id: 605f5d33f38ca800322cb18f
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Man könnte jetzt hier ohne Ende loopen, if-Statements und haste-nich-jesehn...
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Da es nur 26 Buchstaben sind, schlage ich vor, wir erstellen hier einfach einen Schlüssel.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir die Buchstaben und deren Tap-Codes einfach im Schlüssel nachschlagen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `text` in `word` umbenannt):
+
+```ts
+export function tapCodeTranslation(word: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt erstellen wir unseren Schlüssel:
+
+```ts
+const letterTapCodes: { [key: string]: string } = {
+  A: ". .",
+  B: ". ..",
+  C: ". ...",
+  D: ". ....",
+  E: ". .....",
+  F: ".. .",
+  G: ".. ..",
+  H: ".. ...",
+  I: ".. ....",
+  J: ".. .....",
+  K: ". ...",
+  L: "... .",
+  M: "... ..",
+  N: "... ...",
+  O: "... ....",
+  P: "... .....",
+  Q: ".... .",
+  R: ".... ..",
+  S: ".... ...",
+  T: ".... ....",
+  U: ".... .....",
+  V: "..... .",
+  W: "..... ..",
+  X: "..... ...",
+  Y: "..... ....",
+  Z: "..... .....",
+};
+```
+
+Wir stopfen alle Buchstaben mit ihren Codes in ein Objekt. TypeScript sagen wir, dass die Keys und Values Strings sind.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Buchstaben des Input-Strings im Schlüssel easy "nachschlagen":
+
+```ts
+  return word
+    .split("")
+    .map((letter) => letterTapCodes[letter.toUpperCase()])
+    .join(" ");
+}
+```
+
+Erst wird der Input-String in ein Array umgewandelt. Dann können wir mit <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> durch dieses Array loopen. Für jedes Element `letter` geben wir den Value im `letterTapCodes`-Objekt mit dem Key `letter` zum Array zurück.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+Schöner Quickie.
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function tapCodeTranslation(word: string): string {
+  const letterTapCodes: { [key: string]: string } = {
+    A: ". .",
+    B: ". ..",
+    C: ". ...",
+    D: ". ....",
+    E: ". .....",
+    F: ".. .",
+    G: ".. ..",
+    H: ".. ...",
+    I: ".. ....",
+    J: ".. .....",
+    K: ". ...",
+    L: "... .",
+    M: "... ..",
+    N: "... ...",
+    O: "... ....",
+    P: "... .....",
+    Q: ".... .",
+    R: ".... ..",
+    S: ".... ...",
+    T: ".... ....",
+    U: ".... .....",
+    V: "..... .",
+    W: "..... ..",
+    X: "..... ...",
+    Y: "..... ....",
+    Z: "..... .....",
+  };
+
+  return word
+    .split("")
+    .map((letter) => letterTapCodes[letter.toUpperCase()])
+    .join(" ");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
