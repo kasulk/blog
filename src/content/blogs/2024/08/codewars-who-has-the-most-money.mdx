@@ -1,0 +1,225 @@
+---
+title:
+pubDate: 2024-08-30
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: c4afb8bc6c904c2fb8f0d59ad09e9c0a
+
+codeChallengeData:
+  platform: codewars
+  id: 528d36d7cc451cd7e4000339
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wenn wir nur einen Schüler haben, hat dieser das meiste Geld und wir können direkt dessen Namen zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Ansonsten loopen wir durch alle Schüler.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir berechnen für jeden Schüler die Summe des Cashs und speichern alles in einer Variablen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn alle das Gleiche haben, geben wir `"all"` zurück.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Ansonsten ermitteln wir die größte Summe.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Und wo sie sich befindet.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Zum Schluss brauchen wir nur noch den Namen des Schülers mit dem meisten Cash zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function mostMoney(students) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst kucken wir, ob wir nur einen Schüler haben:
+
+```js
+if (students.length === 1) return students[0].name;
+```
+
+Wenn ja, können wir direkt dessen Namen zurückgeben.
+
+</Accordion>
+<Accordion>
+
+Ansonsten loopen wir durch alle Schüler:
+
+```js
+  const amounts = students.map((student) => {
+```
+
+Hier bietet sich ein <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an, da wir für jeden Schüler einen Wert zurück haben wollen. Diesen speichern wir uns in einem Array.
+
+</Accordion>
+<Accordion>
+
+Wir berechnen für jeden Schüler die Summe seines Cashs:
+
+```js
+    const { fives, tens, twenties } = student;
+    return fives * 5 + tens * 10 + twenties * 20;
+  });
+```
+
+Der Übersicht halber deconstructe ich mir vorher die Scheine (optional).
+
+</Accordion>
+<Accordion>
+
+Sollte jeder Schüler die gleiche Summe haben, geben wir `"all"` zurück:
+
+```js
+if (amounts.every((amount) => amount === amounts[0])) return "all";
+```
+
+</Accordion>
+<Accordion>
+
+Ansonsten ermitteln wir die größte Summe:
+
+```js
+const maxAmount = Math.max(...amounts);
+```
+
+</Accordion>
+<Accordion>
+
+Und kucken dann, wo sie ist:
+
+```js
+const indexOfMax = amounts.indexOf(maxAmount);
+```
+
+</Accordion>
+<Accordion>
+
+Dann können wir den Namen des Besitzers ermitteln und zurückgeben:
+
+```js
+  return students[indexOfMax].name;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function mostMoney(students) {
+  if (students.length === 1) return students[0].name;
+
+  const amounts = students.map((student) => {
+    const { fives, tens, twenties } = student;
+    return fives * 5 + tens * 10 + twenties * 20;
+  });
+
+  if (amounts.every((amount) => amount === amounts[0])) return "all";
+
+  const maxAmount = Math.max(...amounts);
+  const indexOfMax = amounts.indexOf(maxAmount);
+
+  return students[indexOfMax].name;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
