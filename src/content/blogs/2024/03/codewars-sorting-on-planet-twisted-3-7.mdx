@@ -1,0 +1,222 @@
+---
+title:
+pubDate: 2024-03-20
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 0a932d6d203e4562b3ca3d43bd4b5dcb
+
+codeChallengeData:
+  platform: codewars
+  id: 58068479c27998b11900056e
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes baue ich mir einen kleinen Helfer, der in einer Zahl jede `7` mit einer `3` und jede `3` mit einer `7` ersetzt.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loope ich durch alle Zahlen im Input-Array.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Ich ersetze jede `7` mit einer `3` und umgekehrt.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann kann das Array sortiert werden.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Zum Schluss noch mal durch das Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Und noch mal jede `7` durch eine `3` und jede `3` durch eine `7` ersetzen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Ersetz-Helfer-Funktion:
+
+```ts
+function swap7sAnd3s(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die Ersetz-Logik (mit Method-Chaining):
+
+```ts
+  return Number(
+    num
+      .toString()
+      .replace(/3/g, "x")
+      .replace(/7/g, "3")
+      .replace(/x/g, "7")
+  );
+}
+```
+
+Man kann nicht einfach jede `3` mit einer `7` ersetzen und dann jede `7` mit einer `3`, sonst hat man keine `7`en mehr. Darum ersetze ich erst jede `3` mit einem Platzhalter `x`, dann jede `7` mit einer `3` und zum Schluss den Platzhalter `x` wieder mit einer `7`.
+
+Jetzt die Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Meine erste Zeile (ich habe `array` in `nums` umbenannt):
+
+```ts
+export function sortTwisted37(nums: number[]): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Los geht’s (mit Method-Chaining):
+
+```ts
+  return nums
+    .slice()
+```
+
+Erst erstelle ich mir eine Kopie des Input-Arrays. Da ich Method-Chaining betreiben möchte, kann ich das `return` direkt hier hin schreiben.
+
+</Accordion>
+<Accordion>
+
+Jetzt der erste Loop:
+
+```ts
+    .map((num) => swap7sAnd3s(num))
+```
+
+Da die Anzahl der Elemente im Array gleich bleibt, ist <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> hier die Wahl. Für den Tausch bemühen wir unser Helferlein.
+
+</Accordion>
+<Accordion>
+
+Nu kann das Array sortiert werden:
+
+```ts
+    .sort((a, b) => a - b)
+```
+
+</Accordion>
+<Accordion>
+
+Und jetzt der zweite Loop:
+
+```ts
+    .map((num) => swap7sAnd3s(num));
+}
+```
+
+Ist identisch zum Ersten.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function sortTwisted37(nums: number[]): number[] {
+  return nums
+    .slice()
+    .map((num) => swap7sAnd3s(num))
+    .sort((a, b) => a - b)
+    .map((num) => swap7sAnd3s(num));
+}
+
+function swap7sAnd3s(num: number): number {
+  return Number(
+    num
+      .toString()
+      .replace(/3/g, "x")
+      .replace(/7/g, "3")
+      .replace(/x/g, "7")
+  );
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
