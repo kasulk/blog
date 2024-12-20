@@ -1,0 +1,289 @@
+---
+title:
+pubDate: 2024-06-21
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: c5d9379f861e434c922bf11dbffec6f4
+
+codeChallengeData:
+  platform: codewars
+  id: 521c2db8ddc89b9b7a0000c1
+  language: JavaScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Es gibt wie immer viele Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes erstellen wir uns ein leeres Ergebnis-Array.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann loopen wir solange durch die Input-Arrays, bis sie leer sind.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir entfernen das jeweils das aktuell erste Element (die erste Zeile), (speichern es in einer Variablen) und fügen es zu unserem Ergebnis-Array hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Danach entfernen wir die aktuell letzte Reihe und speichern sie in einer Variablen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann loopen wir durch die verbleibenden mittleren Zeilen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wir entfernen von jeder mittleren Zeile das jeweils letzte Element und hängen es ans Ergebnis-Array.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Jetzt können wir die letzte vom vorletzten Schritt umgedreht ans Ergebnis-Array anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Dann wieder durch die mittleren Zeilen loopen.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Diesmal das jeweils erste Element entfernen und ans Ergebnis-Array anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Zum Schluss nur noch die Arrays im Ergebnis-Array auflösen und zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```js
+function snail(arrays) {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst das Ergebnis-Array initialisieren:
+
+```js
+const result = [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der äußere Loop durch die Arrays, solange bis sie leer sind:
+
+```js
+  while (arrays.length) {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt schnappen wir uns die jeweils erste Zeile und hängen sie ans Ergebnis-Array:
+
+```js
+const currFirstRow = arrays.shift();
+result.push(currFirstRow);
+```
+
+</Accordion>
+<Accordion>
+
+Danach schnappen wir uns die letzte Zeile und speichern sie zwischen:
+
+```js
+    const currLastRow = arrays.pop();
+    if (!currLastRow) break;
+```
+
+Sollte es keine letzte Zeile geben, ist die Schnecke einzeilig und wir können den Loop direkt verlassen.
+
+</Accordion>
+<Accordion>
+
+Ansonsten loopen wir dann durch die mittleren Zeilen:
+
+```js
+    for (let i = 0; i < arrays.length; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Wir schnappen uns das jeweils letzte Element jeder Zeile und hängen es ans Ergebnis-Array:
+
+```js
+      const currMiddleRow = arrays[i];
+      const currLast = currMiddleRow.pop();
+      result.push(currLast);
+    }
+```
+
+</Accordion>
+<Accordion>
+
+Dann hängen wir unsere zuvor zwischengespeicherte letzte Zeile umgedreht ans Ergebnis an:
+
+```js
+result.push(currLastRow.reverse());
+```
+
+</Accordion>
+<Accordion>
+
+Dann loopen wir noch mal durch die mittleren Zeilen:
+
+```js
+    for (let i = 0; i < arrays.length; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Diesmal von unten nach oben. Und wir schnappen uns jetzt das jeweils erste Element:
+
+```js
+      const currMiddleRow = arrays[arrays.length - 1 - i];
+      const currFirst = currMiddleRow.shift();
+      result.push(currFirst);
+    }
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Wenn alle Loops durch sind, können wir unser Ergebnis zurückgeben:
+
+```js
+  return result.flat();
+}
+```
+
+Da ich hier einfach wild einen Mix aus Arrays und ordinären Zahlen ans Ergebnis angehangen habe, muss das noch ein Mal “geflatted” werden um ein sauberes eindimensionales Array zu erhalten.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```js
+function snail(arrays) {
+  const result = [];
+
+  while (arrays.length) {
+    const currFirstRow = arrays.shift();
+    result.push(currFirstRow);
+
+    const currLastRow = arrays.pop();
+    if (!currLastRow) break;
+
+    // add middle rows last elements
+    for (let i = 0; i < arrays.length; i++) {
+      const currMiddleRow = arrays[i];
+      const currLast = currMiddleRow.pop();
+      result.push(currLast);
+    }
+
+    result.push(currLastRow.reverse());
+
+    // add middle rows first elements
+    for (let i = 0; i < arrays.length; i++) {
+      const currMiddleRow = arrays[arrays.length - 1 - i];
+      const currFirst = currMiddleRow.shift();
+      result.push(currFirst);
+    }
+  }
+
+  return result.flat();
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
