@@ -12,12 +12,14 @@ export const plasma = [
     },
     payoutOn: "Gewöhnlich nach deiner 10. Spende.",
     // lastUpdated: new Date("2024-06-17"), // not neccessary, get date from last file modification
-    currentCampainEnd: new Date("2024-06-30"),
+    currentCampainEnd: new Date("2024-12-31"),
     blog: "",
 
     links: {
-      infos: "https://www.cslplasma.de/plasmaspende",
-      locations: "https://www.cslplasma.de/standorte",
+      infos: "https://www.plasma-spenden.de",
+      locations: "https://www.plasma-spenden.de/#kontakt",
+      infos_legacy: "https://www.cslplasma.de/plasmaspende",
+      locations_legacy: "https://www.cslplasma.de/standorte",
       maps: [
         {
           city: "Berlin",
@@ -36,9 +38,11 @@ export const plasma = [
       "Frankfurt",
       "Gelsenkirchen",
       "Göttingen",
-      "Karlsruhe (coming soon...)",
+      "Karlsruhe",
       "Kiel",
+      "Köln",
       "Mainz",
+      "Marburg (coming soon...)",
       "Münster",
       "Nürnberg",
     ],
