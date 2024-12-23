@@ -148,6 +148,8 @@ const preDocs: DocLinks = {
     for: "for",
     forIn: "for...in",
     forOf: "for...of",
+    ifElse: "if...else",
+    label: "label",
     return: "return",
     switch: "switch",
     var: "var",
