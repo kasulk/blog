@@ -1,0 +1,248 @@
+---
+title:
+pubDate: 2024-01-25
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 9b4d92da53204ec1a80675f70c4ad480
+
+codeChallengeData:
+  platform: codewars
+  id: 5c784110bfe2ef660cb90369
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes das Input-Array sortieren (erst nach Punkten, dann nach Namen).
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir durch das sortierte Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn die Punkte der aktuellen Person ungleich der Punkte der vorigen Person sind,
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+erhöhen wir die Position (setzen die Position auf `i + 1`).
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann noch den Position-Key zu jeder Person hinzufügen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (inklusive Types):
+
+```ts
+export type inputMan = {
+  name: string;
+  points: number;
+};
+
+export type outputMan = {
+  name: string;
+  points: number;
+  position: number;
+};
+
+export function ranking(people: inputMan[]): outputMan[] {
+```
+
+</Accordion>
+<Accordion>
+
+Positionsvariable initialisieren:
+
+```ts
+let position = 1;
+```
+
+</Accordion>
+<Accordion>
+
+Die People sortieren:
+
+```ts
+const sortedPeople = [...people].sort((a, b) => {
+  if (a.points === b.points) {
+    return a.name.localeCompare(b.name);
+  }
+  return b.points - a.points;
+});
+```
+
+Erst erstellen wir eine Kopie vom Input-Array, damit die Ursprungsdaten unversehrt bleiben. Auf die Kopie wenden wir dann <ExternalLink href={docs.array.sort}>`.sort()`</ExternalLink> an:
+
+Wenn die Punkte von Person `a` und Person `b` gleich sind, wird nach Buchstaben sortiert. Ansonsten nach den Punkten absteigend.
+
+</Accordion>
+<Accordion>
+
+_Alternative_ => Eine coole kürzere Variante wäre:
+
+```ts
+const sortedPeople = [...people].sort(
+  (a, b) => b.points - a.points || a.name.localeCompare(b.name),
+);
+```
+
+Was passiert hier?
+
+<ExternalLink href={docs.array.sort}>`.sort()`</ExternalLink> loopt durch das
+Array. Wenn wir Zahlen sortieren, ziehen wir die eine Zahl (das nächste Element)
+von der anderen Zahl (das aktuelle Element) ab `a - b`. Wenn diese Differenz
+negativ ist, kommt das zweite Element vor das erste. Wenn `0` rauskommt, heißt
+das, beide sind gleich. Es muss also nicht umsortiert werden.
+
+`0` ist außerdem <ExternalLink href={docs.glossary.falsy}>`falsy`</ExternalLink>. D.h., in unserer <ExternalLink href={docs.operators.logicalOr}>`ODER`</ExternalLink>-Verknüpfung oben wird zum Teil rechts des `ODER`-Operators gesprungen. Mit <ExternalLink href={docs.string.localeCompare}>`.localeCompare()`</ExternalLink> werden die Buchstaben verglichen.
+
+`return`-Statement brauchen wir nicht mehr, weil wir nur eine einzige Zeile haben (auch wenn `prettier` mir das Ding hier mehrzeilig macht...).
+
+</Accordion>
+<Accordion>
+
+Jetzt noch zu jeder Person die Position hinzufügen:
+
+```ts
+  return sortedPeople.map((person, i) => {
+    const prevPerson = sortedPeople[i - 1];
+
+    if (prevPerson) {
+      if (person.points !== prevPerson.points) position = i + 1;
+    }
+
+    return { ...person, position };
+  });
+}
+```
+
+Dafür bietet sich <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an.
+
+Das Ergebnis des Loops können wir direkt mit einem `return` davor zurückgeben.
+
+Wir speichern der Übersichtlichkeit halber die vorige Person in einer Variablen.
+
+Da vor der ersten Person keine vorige Person existiert, müssen wir sicherstellen, dass die nächste Aktion nur ausgeführt wird, wenn eine vorige Person existiert.
+
+Nur wenn die aktuelle und die vorige Person verschiedene Punkte haben wird die Positions-Variable auf `i + 1` gesetzt (bleibt also ansonsten gleich).
+
+Zum Schluss hängen wir an das `person`-Objekt die zugehörige Position an.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export type inputMan = {
+  name: string;
+  points: number;
+};
+
+export type outputMan = {
+  name: string;
+  points: number;
+  position: number;
+};
+
+export function ranking(people: inputMan[]): outputMan[] {
+  let position = 1;
+
+  const sortedPeople = [...people].sort((a, b) => {
+    if (a.points === b.points) {
+      return a.name.localeCompare(b.name);
+    }
+    return b.points - a.points;
+  });
+
+  return sortedPeople.map((person, i) => {
+    const prevPerson = sortedPeople[i - 1];
+
+    if (prevPerson) {
+      if (person.points !== prevPerson.points) position = i + 1;
+    }
+
+    return { ...person, position };
+  });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
