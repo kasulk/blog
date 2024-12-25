@@ -1,0 +1,263 @@
+---
+title:
+pubDate: 2024-05-29
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 4d02038ffd564a90a9e5a2144fb60d6f
+
+codeChallengeData:
+  platform: codewars
+  id: 52f78966747862fc9a0009ae
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes wandeln wir den Input-String in ein Array um und loopen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wir brauchen einen inneren und einen äußeren Loop.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Außen loopen wir solange, wie unser Array mehr als `1` Element hat.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Innen loopen wir durch jedes Element und suchen das nächste Element das keine Zahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn das aktuelle Element keine Zahl ist,
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+schnappen wir uns das aktuelle und die beiden Elemente davor
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+und basteln uns daraus unsere mathematische Operation.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Dann stecken wir das Ergebnis der Operation wieder zurück ins Array.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Und loopen nochmal durch das verbleibende Array (wir fahren fort mit dem äußeren Loop).
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Wenn nur noch `1` Element im Array ist, geben wir das zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function calc(expr: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Input-String in ein Array umwandeln:
+
+```ts
+const arr = expr.split(" ");
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der äußere Loop (solange wie das Array mehr als `1` Element hat):
+
+```ts
+  while (arr.length > 1) {
+```
+
+</Accordion>
+<Accordion>
+
+Dann der innere Loop durch jedes Element (das noch im Array ist):
+
+```ts
+    for (let i = 0; i < arr.length; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Wir prüfen, ob das aktuelle Element eine Zahl ist:
+
+```ts
+      if (!Number(arr[i])) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn es keine Zahl ist, extrahieren wir das aktuelle Element und die beiden Elemente davor:
+
+```ts
+const [first, second, operator] = arr.splice(i - 2, 3);
+```
+
+Hier dekonstruiere ich die `3` Elemente direkt. So haben sie gleich Namen.
+
+</Accordion>
+<Accordion>
+
+Dann führen wir die aktuelle Rechenoperation aus und speichern das Ergebnis:
+
+```ts
+const currResult = eval(`${first} ${operator} ${second}`);
+```
+
+Ich verwende hier <ExternalLink href={docs.other.eval}>`eval()`</ExternalLink>. `eval()` sollte man unbedingt mit Vorsicht genießen. Vor allem, wenn man mit Nutzereingaben arbeitet.
+
+</Accordion>
+<Accordion>
+
+Dann fügen wir das Ergebnis wieder in unser Array ein:
+
+```ts
+arr.splice(i - 2, 0, currResult);
+```
+
+Das geht z.B. mit <ExternalLink href={docs.array.splice}>`.splice()`</ExternalLink>. Wenn man ein drittes Argument angibt, wird dieses am Index des erstes Argumentes eingefügt.
+
+</Accordion>
+<Accordion>
+
+Dann können wir den aktuellen Schleifendurchlauf abbrechen und wieder zur <ExternalLink href={docs.statements.while}>`while`</ExternalLink>-Schleife hochspringen:
+
+```ts
+        break;
+      }
+    }
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach beiden Loops - wenn wir nur noch `1` Element in unserem Array haben (unser Ergebnis) - geben wir dieses als Zahl zurück:
+
+```ts
+  return Number(arr[0]);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function calc(expr: string): number {
+  const arr = expr.split(" ");
+
+  while (arr.length > 1) {
+    for (let i = 0; i < arr.length; i++) {
+      if (!Number(arr[i])) {
+        const [first, second, operator] = arr.splice(i - 2, 3);
+        const currResult = eval(`${first} ${operator} ${second}`);
+        arr.splice(i - 2, 0, currResult);
+        break;
+      }
+    }
+  }
+
+  return Number(arr[0]);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
