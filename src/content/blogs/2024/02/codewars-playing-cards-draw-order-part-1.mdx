@@ -1,0 +1,227 @@
+---
+title:
+pubDate: 2024-02-10
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 88e53345a57f48e6b1bde676446b5122
+
+codeChallengeData:
+  platform: codewars
+  id: 630647be37f67000363dff04
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Ordentlich Text... 🫣 aber letztlich halb so wild!
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst brauchen wir eine Variable, in der wir die gezogenen, nicht zurückgelegten Karten speichern.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann sollten wir vom Input Array eine Kopie erstellen, um die Funktion "pur" zu halten.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt können wir durch das kopierte Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn der Index der nächsten Karte gerade ist, legen wir sie auf den neuen Stapel.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn nicht, kommt sie zurück ans Ende.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export const draw = (deck: string[]): string[] => {
+```
+
+</Accordion>
+<Accordion>
+
+Wir erstellen unsere beiden Variablen:
+
+```ts
+const drawnCards: string[] = [];
+const remainingDeck = [...deck];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  while (remainingDeck.length) {
+```
+
+Wir wollen solange loopen, wie Karten im Ausgangs-Stapel sind. Also solange die Länge des Arrays nicht `0`, also `true` ist.
+
+</Accordion>
+<Accordion>
+
+Die jeweils aktuelle Karte speichere ich der Übersichtlichkeit halber in einer Variablen:
+
+```ts
+const currCard = remainingDeck.shift()!;
+```
+
+Das Ausrufezeichen `!` am Ende sagt `TypeScript`, dass wir sicher sind, dass es dieses Element im Array auch wirklich gibt.
+
+Wir können uns sicher sein, da wir ja nur solange loopen, wie Elemente im Array sind.
+
+</Accordion>
+<Accordion>
+
+Jetzt prüfen wir den Index der Karte:
+
+```ts
+if (i % 2 === 0) drawnCards.push(currCard);
+```
+
+Wenn er gerade ist, legen wir die Karte (ans Ende) des neuen Stapels.
+
+</Accordion>
+<Accordion>
+
+Um den Index prüfen zu können müssen wir ihn vorher deklarieren. Wir ergänzen oben also unsere Deklaration von `i`. Der obere Bereich unserer Funktion sieht dann so aus:
+
+```ts
+const drawnCards: string[] = [];
+const remainingDeck = [...deck];
+let i = 0; // Deklaration von i hinzufügen
+```
+
+</Accordion>
+<Accordion>
+
+Wenn `i` ungerade ist, legen wir die Karte (ans Ende) des Ausgangsstapels:
+
+```ts
+    else remainingDeck.push(currCard);
+```
+
+</Accordion>
+<Accordion>
+
+Und jetzt noch `i`:
+
+```ts
+    i++;
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch unser Ergebnis zurückgeben:
+
+```ts
+	return drawnCards;
+};
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export const draw = (deck: string[]): string[] => {
+  const drawnCards: string[] = [];
+  const remainingDeck = [...deck];
+  let i = 0;
+
+  while (remainingDeck.length) {
+    const currCard = remainingDeck.shift()!;
+    if (i % 2 === 0) drawnCards.push(currCard);
+    else remainingDeck.push(currCard);
+    i++;
+  }
+
+  return drawnCards;
+};
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
