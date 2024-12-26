@@ -1,0 +1,294 @@
+---
+title:
+pubDate: 2024-03-02
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 9af00222c5244ebf825361ad9388136b
+
+codeChallengeData:
+  platform: codewars
+  id: 5a99a03e4a6b34bb3c000124
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes sollten wir uns Gedanken um das Prüfen auf eine Primzahl machen, dazu wäre es sinnvoll, die Primzahl-Prüflogik in eine gesonderte Hilfs-Funktion auszulagern.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dafür brauchen wir einen Loop, der von `2` bis zur zu prüfenden Zahl loopt und in jedem Loop prüft, ob unsere potentielle Primzahl durch die aktuelle Zahl teilbar ist.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Außerdem sollte sie möglichst effizient sein, wir können zum Beispiel die ["Trial Division"](https://en.wikipedia.org/wiki/Trial_division) (zu deutsch: ["Probedivision"](https://de.wikipedia.org/wiki/Probedivision)) verwenden.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn wir unsere Prim-Prüf-Hilfsfunktion haben, können wir uns wieder der `numPrimorial` widmen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Auch hier können wir wieder einen Loop verwenden.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn die aktuelle Zahl eine Primzahl ist, multiplizieren wir sie einfach zu einer Produkt-Variablen hinzu.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Das müssen wir solange machen bis `n` erreicht ist.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Prim-Prüf-Hilfsfunktion:
+
+```ts
+function isPrime(num: number): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Primzahlen sind nur durch `1` und sich selbst teilbar. Darum können wir erst mal alle Zahlen ausschließen, die kleiner oder gleich `1` sind:
+
+```ts
+if (num <= 1) return false;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+```
+
+Wir legen bei `2` los, weil: siehe oben.
+
+Dann der Clou: Wir loopen nicht bis zu unserer zu prüfenden Zahl, sondern nur bis zu ihrer Wurzel. Wem et interessiert, [hier](https://de.wikipedia.org/wiki/Probedivision) steht mehr dazu.
+
+</Accordion>
+<Accordion>
+
+Jetzt prüfen wir für jede Zahl (ab `2`), ob sie unsere potentielle Primzahl teilen kann:
+
+```ts
+    if (num % i === 0) return false;
+  }
+```
+
+Wenn ja, ist unsere potentielle Primzahl keine Primzahl und wir können mit einem `false` abbrechen.
+
+</Accordion>
+<Accordion>
+
+Ansonsten:
+
+```ts
+  return true;
+}
+```
+
+Gibts ein wunderbares `true` zurück! Ende der Prim-Prüf-Hilfsfunktion.
+
+</Accordion>
+<Accordion>
+
+Jetzt die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function numPrimorial(n: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Auch hier ein Loop:
+
+```ts
+  for (let i = 0; i < n; ) {
+```
+
+Das `i++` lasse ich hier weg, da ich mein `i` abhängig von einer Bedingung erhöhen möchte.
+
+</Accordion>
+<Accordion>
+
+Hier die Bedingung:
+
+```ts
+    if (isPrime(num)) {
+```
+
+Hier kommt unsere Primzahl-Prüf-Hilfsfunktion zum Einsatz. `num` müssen wir oben noch initialisieren. In meinem Fall so: `let num = 1`
+
+</Accordion>
+<Accordion>
+
+Wenn wir eine Primzahl haben, multiplizieren wir sie zu einer Ergebnis-Variablen:
+
+```ts
+output *= num;
+```
+
+</Accordion>
+<Accordion>
+
+Auch unseren `output` müssen wir oben initialisieren: `let output = 1`. Damit sieht unser Funktions-Kopf etwa so aus:
+
+```ts
+export function numPrimorial(n: number): number {
+  let output = 1;
+  let num = 1;
+...
+```
+
+</Accordion>
+<Accordion>
+
+Außerdem erhöhen wir bei einer gefundenen Primzahl unser `i`:
+
+```ts
+      i++;
+    }
+```
+
+Wir wollen ja solange loopen, bis wir `n` Primzahlen gefunden haben.
+
+</Accordion>
+<Accordion>
+
+Weiter geht’s nach der `if`-Bedingung:
+
+```ts
+    num++;
+  }
+```
+
+Ob Primzahl oder nicht. In jedem Fall wollen wir die nächste Zahl prüfen. Darum erhöhen wir nach der `if`-Bedingung unser `num` um `1`:
+
+</Accordion>
+<Accordion>
+
+Nach der `For`-Schleife geben wir unser Ergebnis zurück:
+
+```ts
+  return output;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function numPrimorial(n: number): number {
+  let output = 1;
+  let num = 1;
+
+  for (let i = 0; i < n; ) {
+    if (isPrime(num)) {
+      output *= num;
+      i++;
+    }
+    num++;
+  }
+
+  return output;
+}
+
+function isPrime(num: number): boolean {
+  if (num <= 1) return false;
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
