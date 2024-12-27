@@ -1,0 +1,194 @@
+---
+title:
+pubDate: 2024-01-12
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: ef599c2d09004f2b857abbadebe16849
+
+codeChallengeData:
+  platform: codewars
+  id: 589577f0d1b93ae32a000001
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst müssen die Bäume aus dem Weg: Wir entfernen die Bäume aus dem Input-Array.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Das Ergebnis sortieren wir.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir jede Person im Input-Array durch eine Person aus dem sortierten Array (ohne Bäume) ersetzen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Das Ergebnis geben wir aus.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile sieht so aus:
+
+```ts
+export function sortByHeight(list: number[]): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Bäume entfernen, Resultat sortieren und in einer Variablen speichern:
+
+```ts
+const sortedPeople = list
+  .filter((element) => element > 0)
+  .sort((a, b) => a - b);
+```
+
+</Accordion>
+<Accordion>
+
+Jede Person im Input-Array durch eine Person aus dem sortierten Array ersetzen.
+Das Wort ‘jede’ gibt uns den Hinweis, dass wir einen Loop brauchen.
+Zusammen mit dem Wort ‘ersetzen’ wissen wir, dass wir hier <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> benutzen können:
+
+```ts
+  list.map((element) => {
+```
+
+</Accordion>
+<Accordion>
+
+Woran erkennen wir eine Person? Eine Person wird niemals kleiner als `0` sein:
+
+```ts
+    if (element > 0)
+```
+
+</Accordion>
+<Accordion>
+
+Aktuelles Element durch das erste Element in unseren sortierten Menschen ersetzen (und das erste Element aus den sortierten Menschen entfernen):
+
+```ts
+if (element > 0) return sortedPeople.shift()!;
+```
+
+Das Ausrufezeichen am Ende der Zeile sagt `TypeScript`, dass es dieses Element auf jeden Fall gibt. Sonst hätte es Angst, dass es womöglich auf ein nicht existierendes Element stoßen könnte...
+
+</Accordion>
+<Accordion>
+
+Andernfalls (wenn das Element ein Baum, also `-1`, ist), geben wir es einfach zurück:
+
+```ts
+    return element;
+  });
+```
+
+</Accordion>
+<Accordion>
+
+Das Ergebnis des Loops können wir direkt ausgeben. Also noch ein `return` davor. Fertig!
+
+```ts
+return list.map((element) => {
+  if (element > 0) return sortedPeople.shift()!;
+  return element;
+});
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function sortByHeight(list: number[]): number[] {
+  const sortedPeople = list
+    .filter((element) => element > 0)
+    .sort((a, b) => a - b);
+
+  return list.map((element) => {
+    if (element > 0) return sortedPeople.shift()!;
+    return element;
+  });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
