@@ -1,0 +1,359 @@
+---
+title:
+pubDate: 2024-03-05
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 155816dfa8d245ccb033f43f56ed35af
+codeChallengeData:
+  platform: codewars
+  id: 56a32dd6e4f4748cc3000006
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Da wir die nackten Regenmengen in beiden Funktionen brauchen, schreibe ich mir als Erstes eine Helfer-Funktion, die diese nackten Daten extrahiert.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Auf diese Werte greife ich dann in meiner `mean`-Funktion zu.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn es keine Werte gibt, wird `-1` zurückgegeben.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ansonsten geben wir den Durchschnitt zurück.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Auch in der `variance`-Funktion greife ich auf die Werte aus der Hilfsfunktion zurück.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Auch hier wird `-1` zurückgegeben, wenn keine Werte existieren.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann berechnen wir die Varianz.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Die Varianz berechnen wir, indem wir
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+1. die Abweichung, also den Abstand jeden Wertes vom Durchschnitt berechnen und quadrieren
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+2. den Durchschnitt dieser erhaltenen Werte berechnen
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion um an die nackten Werte zu kommen:
+
+```ts
+export function getValues(town: string, str: string): number[] | null {
+```
+
+</Accordion>
+<Accordion>
+
+Ich trenne zuerst die Stadt von den Rohdaten:
+
+```ts
+const [city, data] = str
+  .split("\n")
+  .filter((line) => line.includes(town))
+  .join()
+  .split(":");
+```
+
+Dazu erstelle ich mir erst ein Array mit allen Zeilen. Dann sortiere ich die Zeile raus, die meine gesuchte Stadt enthält. Mit <ExternalLink href={docs.array.join}>`.join()`</ExternalLink> wandele ich das Array wieder in einen String um. Diesen String wandele ich dann gleich wieder in ein Array mit 2 Werten um, die durch das `":"` getrennt sind. Diese beiden Werte deconstructe ich in die Variablen `city` und `data`.
+
+</Accordion>
+<Accordion>
+
+Wenn es die gesuchte Stadt nicht gibt, können wir gleich `null` zurückgeben:
+
+```ts
+if (city !== town) return null;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt kümmern wir uns um die Daten. Wir brauchen nur die reinen Zahlen:
+
+```ts
+const nakedValues = data
+  .replace(/[a-z\s]/gi, "")
+  .split(",")
+  .map(Number);
+```
+
+Dazu entferne ich mit einer <ExternalLink href={docs.guide.regex}>Regex</ExternalLink> erst mal alle (Klein- und Groß-)Buchstaben und Leerzeichen bzw. Whitespaces. Das was übrig bleibt, sind die Werte kommagetrennt. Mit <ExternalLink href={docs.string.split}>`.split(",")`</ExternalLink> entferne ich diese Kommas und wandele den String in ein Array mit eben diesen Werten um. Danach mache ich aus den String-Werten mit <ExternalLink href={docs.array.mapNumber}>`.map(Number)`</ExternalLink> noch Zahlen.
+
+</Accordion>
+<Accordion>
+
+Dann noch die Werte zurückgeben und wir haben unsere `getValues`-Hilfsfunktion:
+
+```ts
+  return nakedValues;
+}
+```
+
+Weiter gehts mit der `mean`-Funktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner `mean`-Funktion:
+
+```ts
+export function mean(town: string, str: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst holen wir uns die nackten Werte aus dem Input:
+
+```ts
+const values = getValues(town, str);
+```
+
+Dafür können wir einfach unsere Hilfsfunktion callen. Geil!
+
+</Accordion>
+<Accordion>
+
+Wenn es keine Werte (zu der Stadt) gibt, also wenn wir von `getValues()` z.B. `null` bekommen, geben wir `-1` zurück:
+
+```ts
+if (!values) return -1;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch den Durchschnitt der Werte berechnen:
+
+```ts
+  return values.reduce((sum, value) => sum + value) / 12;
+}
+```
+
+Mit <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> summieren wir alle Werte auf und teilen sie danach durch die Anzahl der Werte, also `12`. Das Resultat können wir mit einem `return` davor direkt zurückgeben.
+
+Und zu guter letzt noch unsere `variance`-Funktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner `variance`-Funktion:
+
+```ts
+export function variance(town: string, str: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Wieder können wir die nackten Werte einfach mit unserer Hilfsfunktion ziehen:
+
+```ts
+const values = getValues(town, str);
+```
+
+</Accordion>
+<Accordion>
+
+Danach wieder kucken, ob es überhaupt Werte gibt:
+
+```ts
+if (!values) return -1;
+```
+
+</Accordion>
+<Accordion>
+
+Für die Varianz brauchen wir den Durchschnitt aller Werte:
+
+```ts
+const average = mean(town, str);
+```
+
+Dafür hatten wir auch schon eine Funktion! Die Werte speichere ich in `average`, weil `mean` schon für die Funktion reserviert ist.
+
+</Accordion>
+<Accordion>
+
+Jetzt berechnen wir die Abweichung, also den Abstand jeden Wertes vom Durchschnitt und quadrieren diesen jeweils:
+
+```ts
+values.map((value) => Math.abs(average - value) ** 2);
+```
+
+<ExternalLink href={docs.math.abs}>`Math.abs()`</ExternalLink> gibt uns den
+absoluten Wert zurück. Auch bekannt als
+["Betrag"](https://de.wikipedia.org/wiki/Betragsfunktion). Zu Deutsch: Wenn
+unser errechnete Wert ein Vorzeichen hat, wird es entfernt.
+
+</Accordion>
+<Accordion>
+
+Aus den erhaltenen Beträgen errechnen wir wieder den Durchschnitt:
+
+```ts
+      .reduce((sum, squaredDeviation) => sum + squaredDeviation) / 12
+```
+
+Das können wir, wie oben, einfach mit einem drangehangenen <ExternalLink href={docs.array.reduce}>`.reduce()`</ExternalLink> machen.
+
+</Accordion>
+<Accordion>
+
+Danach noch das Resultat zurückgeben. Ich setze einfach ein `return` vor unsere letzte Method-Chain und das sieht dann zusammen so aus:
+
+```ts
+  return values
+    .map((value) => Math.abs(average - value) ** 2)
+    .reduce((sum, squaredDeviation) => sum + squaredDeviation) / 12
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function mean(town: string, str: string): number {
+  const values = getValues(town, str);
+  if (!values) return -1;
+
+  return values.reduce((sum, value) => sum + value) / 12;
+}
+
+export function variance(town: string, str: string): number {
+  const values = getValues(town, str);
+  if (!values) return -1;
+
+  const average = mean(town, str);
+
+  return (
+    values
+      .map((value) => Math.abs(average - value) ** 2)
+      .reduce((sum, squaredDeviation) => sum + squaredDeviation) / 12
+  );
+}
+
+export function getValues(town: string, str: string): number[] | null {
+  const [city, data] = str
+    .split("\n")
+    .filter((line) => line.includes(town))
+    .join()
+    .split(":");
+
+  if (city !== town) return null;
+
+  const nakedValues = data
+    .replace(/[a-z\s]/gi, "")
+    .split(",")
+    .map(Number);
+
+  return nakedValues;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
