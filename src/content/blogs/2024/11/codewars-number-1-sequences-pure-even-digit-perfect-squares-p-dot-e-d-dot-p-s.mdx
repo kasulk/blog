@@ -1,0 +1,267 @@
+---
+title:
+pubDate: 2024-11-01
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: f2c53ae687d54228a05a9479744612a4
+
+codeChallengeData:
+  platform: codewars
+  id: 59290e641a640c53d000002c
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Da die Zahlen irgendwann ziemlich groß werden, können wir uns zuerst überlegen, was wir tun können um das Ganze effektiver zu machen und nicht durch jede einzelne Zahl der Range loopen zu müssen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Richtig! Wir loopen nur von der Wurzel der Start-Zahl bis zur Wurzel der End-Zahl.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn die jeweils aktuelle Zahl nicht gerade ist, können wir sie direkt überspringen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Ansonsten multiplizieren wir sie mit sich selbst und loopen durch die Ziffern dieses Quadrats.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn eine Ziffer nicht gerade ist, kann es kein P.E.D.P.S. mehr sein und wir können direkt die komplette aktuelle Zahl überspringen und die nächste testen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn alle Ziffern gerade sind, können wir das aktuelle Quadrat an ein Ergebnis-Array anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Nach dem äußeren Loop können wir dann das Ergebnis zurückgeben.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Da wir mehrmals prüfen, ob eine Zahl gerade ist, erstelle ich mir schnell eine kleine Hilfsfunktion:
+
+```ts
+function isEven(num: number): boolean {
+  return num % 2 === 0;
+}
+```
+
+Außerdem ist es so auch lesbarer 😉
+
+Dann können wir mit der Hauptfunktion anfangen!
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function evenDigitSquares(a: number, b: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Wir erstellen uns unsere Variablen für das Ergebnis, den Anfang und das Ende des äußeren Loops:
+
+```ts
+const sequence: number[] = [];
+const start = Math.sqrt(a);
+const end = Math.sqrt(b);
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  loopRoots: for (let i = start; i <= end; i++) {
+```
+
+Damit wir aus dem zweiten Loop zum nächsten Element des ersten Loops springen können, verpassen wir unserem <ExternalLink href={docs.statements.for}>`for`</ExternalLink>-Loop hier ein <ExternalLink href={docs.statements.label}>`Label`</ExternalLink> (`loopRoots`).
+
+</Accordion>
+<Accordion>
+
+Dann der Test, ob die aktuelle Zahl gerade ist:
+
+```ts
+if (!isEven(i)) continue;
+```
+
+Wenn nicht, können wir direkt mit dem nächsten Element weitermachen. Dafür verwende ich hier das <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink>-Keyword.
+
+</Accordion>
+<Accordion>
+
+Ansonsten besorgen wir uns die Ziffern des Quadrats:
+
+```ts
+const square = i ** 2;
+const digits = square.toString().split("").map(Number);
+```
+
+Mit <ExternalLink href={docs.array.mapNumber}>`.map(Number)`</ExternalLink> wandeln wir alle Ziffern gleich in Zahlen um.
+
+</Accordion>
+<Accordion>
+
+Dann der (innere) Loop durch die Ziffern:
+
+```ts
+    for (const digit of digits) {
+```
+
+</Accordion>
+<Accordion>
+
+Hier testen wir jede Ziffer auf Geradeheit\*:
+
+```ts
+      if (!isEven(digit)) continue loopRoots;
+    }
+```
+
+> [!note:* HINWEIS]
+> Das Wort hab ich mir gerade ganz alleine ausgedacht, cool oder?!
+
+Wenn die Ziffer _nicht_ gerade ist, kann sie keine P.E.D.P.S. sein und wir können direkt zur nächsten Zahl (im äußeren Loop) springen.
+
+Hier kommt unser Label zum Einsatz! Da wir mit <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink> nur zum nächsten Element des _inneren_ Loops springen können, setzen wir einfach den Labelnamen des äußeren Loops dahinter.
+
+</Accordion>
+<Accordion>
+
+Sollte es ein Quadrat durch den Ziffern-Loop geschafft haben, hängen wir es an unser Ergebnis-Array:
+
+```ts
+    sequence.push(square);
+  }
+```
+
+</Accordion>
+<Accordion>
+
+Nach dem äußeren Loop dann nur noch das Ergebnis zurückgeben:
+
+```ts
+  return sequence;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function evenDigitSquares(a: number, b: number): number[] {
+  const sequence: number[] = [];
+  const start = Math.sqrt(a);
+  const end = Math.sqrt(b);
+
+  loopRoots: for (let i = start; i <= end; i++) {
+    if (!isEven(i)) continue;
+    const square = i ** 2;
+    const digits = square.toString().split("").map(Number);
+
+    for (const digit of digits) {
+      if (!isEven(digit)) continue loopRoots;
+    }
+
+    sequence.push(square);
+  }
+
+  return sequence;
+}
+
+function isEven(num: number): boolean {
+  return num % 2 === 0;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
