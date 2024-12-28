@@ -1,0 +1,223 @@
+---
+title:
+pubDate: 2024-02-17
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 92aeffcd281141d69d7fe1dcd47f2ac6
+
+codeChallengeData:
+  platform: codewars
+  id: 5829994cd04efd4373000468
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Die Beschreibung dieses Katas ist sehr abschreckend geschrieben. Aber so schlimm ist es gar nicht...
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes gebe ich den Argumenten aussagekräftigere Namen. Mit `fmt` und `nbr` kann ich leider überhaupt nix anfangen...
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+`fmt` wird bei mir also zu `template` und `nbr` zu `numFiles`.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann müssen wir kucken, dass wir für die Fälle in denen `numFiles` kleiner oder gleich `0` ist, ein leeres Array returnen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Das gleiche gilt, wenn `numFiles` oder `start` keine Ganze Zahl ist.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann können wir uns ein Array erstellen mit `numFiles`-vielen Elementen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Durch dieses Array brauchen wir nur noch zu loopen und und ein neues Array zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dabei ersetzen wir jedes `<index_no>` mit der aktuellen Index-Nummer.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `fmt` und `nbr` umbenannt):
+
+```ts
+export function nameFile(template: string, numFiles: number, start: number): string[] {
+```
+
+</Accordion>
+<Accordion>
+
+Erst kümmern wir uns um den Fall `numFiles <= 0`:
+
+```ts
+if (numFiles <= 0) return [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann die Fälle in denen `numFiles` oder `start` keine ganze Zahl sind:
+
+```ts
+if (!Number.isInteger(numFiles) || !Number.isInteger(start)) return [];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir unser Array erstellen:
+
+```ts
+Array(numFiles).fill("x");
+```
+
+Ich fülle es gleich mit `x`'n. Man kann auch jeden beliebigen anderen String (oder Zahl nehmen).
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch unser neues Array:
+
+```ts
+    .map((_, i) => {
+```
+
+Ich hänge hier einfach <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> dran. Wir brauchen hier nur den Index. Darum nenne ich das erste Argument `_`. Das ist Konvention für: “Brauchen wa nich.”
+
+</Accordion>
+<Accordion>
+
+Jetzt alle `<index_no>` im `template`-String mit der aktuellen Index-Nummer ersetzen:
+
+```ts
+      const currIndexNo = start + i;
+      return template.replace(/<index_no>/g, currIndexNo.toString());
+    });
+}
+```
+
+Der Übersichtlichkeit halber speichere ich die Index-Nummer vorher in einer Variablen. Zum Finden aller `<index_no>`-Strings verwende ich eine <ExternalLink href={docs.guide.regex}>RegEx</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch das Ergebnis zurückgeben:
+
+```ts
+...
+  return Array(numFiles)
+    .fill("x")
+...
+```
+
+Das `return` können wir gleich oben beim Erstellen des Arrays ansetzen.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function nameFile(
+  template: string,
+  numFiles: number,
+  start: number,
+): string[] {
+  if (numFiles <= 0) return [];
+  if (!Number.isInteger(numFiles) || !Number.isInteger(start)) return [];
+
+  return Array(numFiles)
+    .fill("x")
+    .map((_, i) => {
+      const currIndexNo = start + i;
+      return template.replace(/<index_no>/g, currIndexNo.toString());
+    });
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
