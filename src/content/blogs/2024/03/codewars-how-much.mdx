@@ -1,0 +1,212 @@
+---
+title:
+pubDate: 2024-03-24
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 845592fe3af444d8a6c4e0e9e6026787
+
+codeChallengeData:
+  platform: codewars
+  id: 55b4d87a3766d9873a0000d4
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Da mal `m` und mal `n` größer sein können, müssen wir zuerst herausfinden welches das Größere und welches das Kleinere ist.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jetzt macht sich mein Mathe-Leistungskurs bezahlt.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn der Wert aller Boote durch `7` teilbar ist und der Wert aller Autos durch `9`, haben wir eine mögliche Konstellation.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+In diesem Fall hängen wir diese Konstellation an ein Array an.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function howMuch(m: number, n: number): string[][] {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes also ermitteln wir, welches die große und welches die kleine Zahl ist:
+
+```ts
+const [min, max] = [m, n].sort((a, b) => a - b);
+const result: string[][] = [];
+```
+
+Bei dieser Gelegenheit initialisiere ich mir auch gleich das Ergebnis-Array für die möglichen Konstellationen.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir fröhlich loopen:
+
+```ts
+  for (let i = min; i <= max; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Der Lesbarkeit halber speichere ich mir den Wert aller Boote und Autos jeweils in einer Variablen ab (optional):
+
+```ts
+const allBoatsValue = i - 2;
+const allCarsValue = i - 1;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir prüfen, ob der Wert aller Boote durch `7` und der Wert aller Autos durch `9` teilbar ist:
+
+```ts
+    if (allBoatsValue % 7 === 0 && allCarsValue % 9 === 0) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, können wir diese mögliche Konstellation ans Ergebnis-Array anhängen:
+
+```ts
+      const money = i;
+      const costBoat = allBoatsValue / 7;
+      const costCar = allCarsValue / 9;
+
+      result.push([`M: ${money}`, `B: ${costBoat}`, `C: ${costCar}`]);
+    }
+  }
+```
+
+Der Lesbarkeit halber speichere ich mir die Werte vorher noch mal jeweils in einer Variablen ab (optional).
+
+</Accordion>
+<Accordion>
+
+Nach dem Loop nur noch unsere Ergebnisse zurückgeben:
+
+```ts
+  return result;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function howMuch(m: number, n: number): string[][] {
+  const [min, max] = [m, n].sort((a, b) => a - b);
+  const result: string[][] = [];
+
+  for (let i = min; i <= max; i++) {
+    const allBoatsValue = i - 2;
+    const allCarsValue = i - 1;
+
+    if (allBoatsValue % 7 === 0 && allCarsValue % 9 === 0) {
+      const money = i;
+      const costBoat = allBoatsValue / 7;
+      const costCar = allCarsValue / 9;
+
+      result.push([`M: ${money}`, `B: ${costBoat}`, `C: ${costCar}`]);
+    }
+  }
+
+  return result;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
