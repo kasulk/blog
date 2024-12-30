@@ -1,0 +1,360 @@
+---
+title:
+pubDate: 2024-11-06
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 12d7b614e32a47928dcb3223590b1ce9
+
+codeChallengeData:
+  platform: codewars
+  id: 58de42bab4b74c214d0000e2
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Ich schlage vor, dass wir jede Range in einem Token in ein Array mit Zahlen auflösen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dafür macht es Sinn eine eigene Hilfsfunktion zu erstellen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn wir der Hilfsfunktion das Intervall mit übergeben, können wir sie für beide möglichen Intervall-Tokens verwenden.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+In der Hilfsfunktion sollten wir dann als Erstes das `bis` also das `-` finden.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Da eine Range auch bei negativen Zahlen starten und enden kann, können allerdings mehrere `-` enthalten sein.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Eine Möglichkeit ist, das `-` zu finden, welches das erste `-` nach dem ersten Zeichen ist.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann können wir Start und Ende der Range bestimmen.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wenn der Anfang der Range kleiner als das Ende ist, müssen wir vorwärts zählen, ansonsten rückwärts.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Jetzt können wir ein Array mit den Zahlen von Anfang bis Ende mit dem richtigen Intervall befüllen.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Dann können wir uns um die Hauptfunktion kümmern.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Zuerst loopen wir durch die einzelnen Tokens.
+
+</Accordion>
+<Accordion>
+Schritt 12
+
+Da wir alle Ranges und Tokens mit `*` in Arrays auflösen, loopen wir hier am besten direkt mit <ExternalLink href={docs.array.flatMap}>`.flatMap()`</ExternalLink>!
+
+</Accordion>
+<Accordion>
+Schritt 13
+
+Jetzt brauchen wir nur noch `3` Bedingungen.
+
+</Accordion>
+<Accordion>
+Schritt 14
+
+1. Wenn das aktuelle Token ein `*` enthält, geben wir dem Array ein Array mit `x` Wiederholungen der Zahl zurück.
+
+</Accordion>
+<Accordion>
+Schritt 15
+
+2. Wenn das aktuelle Token ein `/` enthält, geben wir dem Array ein Array mit den Zahlen von-bis mit dem entsprechenden Intervall zurück.
+
+</Accordion>
+<Accordion>
+Schritt 16
+
+3. Wenn das Token nur ein `-` enthält, geben wir dem Array ein Array mit den Zahlen von-bis mit dem Intervall `1` zurück.
+
+</Accordion>
+<Accordion>
+Schritt 17
+
+Ansonsten geben wir dem Array das Token als Zahl zurück.
+
+</Accordion>
+<Accordion>
+Schritt 18
+
+Das Ganze noch zurückgeben, fertig!
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion:
+
+```ts
+function createArrayFromRange(range: string, interval: number = 1): number[] {
+```
+
+Die Hilfsfunktion bekommt den Range-String und ein optionales Intervall. Wenn kein Intervall übergeben wird, setzen wir es standardmäßig auf `1`.
+
+</Accordion>
+<Accordion>
+
+Jetzt suchen wir die Position des richtigen `-`:
+
+```ts
+const dashPosition = range.indexOf("-", 1);
+```
+
+Da auch an der ersten Stelle ein `-` stehen kann, suchen wir den Index des ersten `-` nach dem ersten Element. Dafür steht die `1` im zweiten Argument von <ExternalLink href={docs.string.indexOf}>`.indexOf()`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Mit der `dashPosition` können wir dann Anfang und Ende der Range definieren:
+
+```ts
+const start = Number(range.slice(0, dashPosition));
+const end = Number(range.slice(dashPosition + 1));
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Länge der Range definieren:
+
+```ts
+const arrLen = Math.abs(start - end) / interval + 1;
+```
+
+</Accordion>
+<Accordion>
+
+Außerdem müssen wir ermitteln in welche Richtung die Range geht:
+
+```ts
+const signedInterval = start < end ? +interval : -interval;
+```
+
+</Accordion>
+<Accordion>
+
+Wenn wir beides haben können wir das Array erstellen:
+
+```ts
+  return Array(arrLen)
+    .fill(0)
+    .map((_, i) => start + i * signedInterval);
+}
+```
+
+Wir erstellen ein leeres Array mit der oben ermittelten Länge. Das füllen wir zuerst mit Nullen und anschließend mit den richtigen Zahlen der Range.
+
+Das Ganze noch zurückgeben und fertig ist die Hilfsfunktion um Ranges in Arrays umzuwandeln. Weiter geht’s mit der Hauptfunktion!
+
+</Accordion>
+<Accordion>
+
+Hier die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function uncompress(music: string): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes der Loop durch die Tokens:
+
+```ts
+  return music.split(",").flatMap((token) => {
+```
+
+Wie oben erwähnt, eignet sich hier wunderbar <ExternalLink href={docs.array.flatMap}>`.flatMap()`</ExternalLink>, damit wir die ganzen Subarrays in einem Rutsch mit auflösen können.
+
+Unser `return` können wir bereits hier mit hinsetzen.
+
+</Accordion>
+<Accordion>
+
+Dann die erste Bedingung:
+
+```ts
+if (token.includes("*")) {
+  const [num, count] = token.split("*").map(Number);
+  return Array(count).fill(num);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die zweite Bedingung:
+
+```ts
+if (token.includes("/")) {
+  const [range, interval] = token.split("/");
+  return createArrayFromRange(range, Number(interval));
+}
+```
+
+Hier kommt zum ersten Mal unsere Hilfsfunktion zu Einsatz. Geil!
+
+</Accordion>
+<Accordion>
+
+Dann die dritte Bedingung:
+
+```ts
+if (token.includes("-")) return createArrayFromRange(token);
+```
+
+Ich spare mir hier das Gewurschtel mit wilden `if...else`-Konstrunktionen. Darum ist es wichtig, dass der Check (für Ranges) mit dem `-` _nach_ dem Check (für Ranges) mit dem `/` kommt!
+
+</Accordion><Accordion>
+
+In allen übrigen Fällen ist das aktuelle Token eine Zahl. Die geben wir einfach als solche zurück:
+
+```ts
+    return Number(token);
+  });
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+Schönes Kata! Bisschen schwierig zu erklären... Aber ich hoffe es hat Dir trotzdem Spaß gemacht! 😉
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function uncompress(music: string): number[] {
+  return music.split(",").flatMap((token) => {
+    if (token.includes("*")) {
+      const [num, count] = token.split("*").map(Number);
+      return Array(count).fill(num);
+    }
+
+    if (token.includes("/")) {
+      const [range, interval] = token.split("/");
+      return createArrayFromRange(range, Number(interval));
+    }
+
+    if (token.includes("-")) return createArrayFromRange(token);
+
+    return Number(token);
+  });
+}
+
+function createArrayFromRange(range: string, interval: number = 1): number[] {
+  const dashPosition = range.indexOf("-", 1);
+  const start = Number(range.slice(0, dashPosition));
+  const end = Number(range.slice(dashPosition + 1));
+  const arrLen = Math.abs(start - end) / interval + 1;
+  const signedInterval = start < end ? +interval : -interval;
+  return Array(arrLen)
+    .fill(0)
+    .map((_, i) => start + i * signedInterval);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
