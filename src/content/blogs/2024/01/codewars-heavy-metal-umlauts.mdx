@@ -1,0 +1,172 @@
+---
+title:
+pubDate: 2024-01-21
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 6762d3d889d248979de8a7b96320d92a
+
+codeChallengeData:
+  platform: codewars
+  id: 57d4e99bec16701a67000033
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir einen Schlüssel, in dem festgelegt ist, welcher Buchstabe mit welchem ersetzt werden soll.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann können wir durch den Input Text loopen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wenn es eine Entsprechung in unserem Schlüssel gibt, soll der jeweils aktuelle Buchstabe damit ersetzt werden, sonst nicht.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function heavyMetalUmlauts(boringText: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt müssen wir unsere Daten so hinterlegen, dass wir sie nachschlagen können. Z.B. in einem Objekt:
+
+```ts
+const map: { [key: string]: string } = {
+  A: "Ä",
+  E: "Ë",
+  I: "Ï",
+  O: "Ö",
+  U: "Ü",
+  Y: "Ÿ",
+  a: "ä",
+  e: "ë",
+  i: "ï",
+  o: "ö",
+  u: "ü",
+  y: "ÿ",
+};
+```
+
+Das war schon mal die halbe Miete und hat mich am meisten Zeit gekostet... `TypeScript` sagen wir hier, dass `key` und `value` jeweils Strings sind. Ich nenne mein Schlüssel-Objekt `map`.
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch durch den String loopen und für jeden Buchstaben seine Übersetzung zurückgeben (wenn es eine gibt):
+
+```ts
+  return [...boringText].map((char) => (map[char] ? map[char] : char)).join("");
+}
+```
+
+Hier spreaden wir unseren String in ein Array damit wir <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> anwenden können. Dann prüfen wir (mit einem <ExternalLink href={docs.operators.ternary}>`Ternary`</ExternalLink> für jedes Element `char`, ob es in unserem `map`-Objekt existiert.
+
+Wenn ja, geben wir den zugehörigen Wert zurück. Wenn nicht, geben wir einfach das Element unverändert zurück.
+
+Zum Schluss <ExternalLink href={docs.array.join}>`joinen`</ExternalLink> wir das Array wieder zu einem String.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function heavyMetalUmlauts(boringText: string): string {
+  const map: { [key: string]: string } = {
+    A: "Ä",
+    E: "Ë",
+    I: "Ï",
+    O: "Ö",
+    U: "Ü",
+    Y: "Ÿ",
+    a: "ä",
+    e: "ë",
+    i: "ï",
+    o: "ö",
+    u: "ü",
+    y: "ÿ",
+  };
+
+  return [...boringText].map((char) => (map[char] ? map[char] : char)).join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
