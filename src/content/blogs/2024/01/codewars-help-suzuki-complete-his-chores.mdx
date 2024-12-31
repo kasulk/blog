@@ -1,0 +1,196 @@
+---
+title:
+pubDate: 2024-01-08
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 45102be4d8434da0977ed6e3a26e2a54
+
+codeChallengeData:
+  platform: codewars
+  id: 584dc1b7766c2bb158000226
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Um die Gesamtdauer von Suzukis Arbeit zu minimieren, müssen wir immer die jeweils längste verbleibende Aufgabe mit der jeweils kürzesten verbleibenden Aufgabe kombinieren.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Richtig! D.h. als Erstes sollten wir das Input-Array sortieren.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Beim Sortieren denken wir daran, dass JavaScripts Standard-Sortierfunktion das Ursprungs-Array mutiert, d.h. verändert.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Als nächstes loopen wir durch das Array. In diesem Fall reicht es, wenn wir nur durch das halbe Array loopen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Jetzt können wir die erste und die letzte Zahl addieren. Dann die zweite und die vorletzte, die dritte und die drittletzte usw...
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Als Erstes vergewissern wir uns, dass uns der Code-Editor anschreit, sollten wir am Ende das `return` vergessen. Wir legen den `return`-Wert unserer Funktion auf ein Array aus Zahlen fest:
+
+```ts
+export function choreAssignment(chores: number[]): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Dann sortieren wir das Input Array. Um mögliche Sideeffects zu vermeiden, erstelle ich vorher eine Kopie der Daten:
+
+```ts
+const sortedChores = [...chores].sort((a, b) => a - b);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt wird geloopt. Bis zur Hälfte des Arrays:
+
+```ts
+for (let i = 0; i < chores.length / 2; i++) {
+```
+
+</Accordion>
+<Accordion>
+
+Um den Code lesbarer zu machen, speichere ich das `i`-te Element und das dazugehörige `i`-letzte Element in einer Variablen ab:
+
+```ts
+const shortChore = sortedChores[i];
+const longChore = sortedChores[sortedChores.length - 1 - i];
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt noch Workload berechnen:
+
+```ts
+const currWorkload = shortChore + longChore;
+```
+
+</Accordion>
+<Accordion>
+
+Und das aktuelle Ergebnis zu einem Array hinzufuegen:
+
+```ts
+workloads.push(currWorkload);
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt nochmal Workloads sortieren und returnen:
+
+```ts
+return workloads.sort((a, b) => a - b);
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function choreAssignment(chores: number[]): number[] {
+  const sortedChores = [...chores].sort((a, b) => a - b);
+  const workloads: number[] = [];
+
+  for (let i = 0; i < chores.length / 2; i++) {
+    const shortChore = sortedChores[i];
+    const longChore = sortedChores[sortedChores.length - 1 - i];
+
+    const currWorkload = shortChore + longChore;
+
+    workloads.push(currWorkload);
+  }
+
+  return workloads.sort((a, b) => a - b);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
