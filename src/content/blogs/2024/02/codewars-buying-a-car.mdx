@@ -1,0 +1,252 @@
+---
+title:
+pubDate: 2024-02-24
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 4f03c21ddd5940ff88d48901f25858c6
+
+codeChallengeData:
+  platform: codewars
+  id: 554a44516729e4d80b000012
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop!
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wir müssen solange loopen, wie der aktuelle “Kontostand” (aus Preisdifferenz und Erspartem) negativ ist.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Für jede Iteration müssen wir den neuen Kontostand berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dafür müssen wir erst mal in geraden Monaten den Preisverfall-Prozentsatz um `0.5` erhöhen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Dann können wir den Preisverfall für den aktuellen Monat berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Und dann den aktuellen Preisunterschied beider Autos.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Dann noch die Sparrate dazu addieren und wir haben unseren neuen Kontostand.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function nbMonths(startPriceOld: number, startPriceNew: number, savingPerMonth: number, percentLossByMonth: number): number[] {
+```
+
+</Accordion>
+<Accordion>
+
+Dann lege ich mir ein paar Variablen an:
+
+```ts
+let currPercentLossByMonth = percentLossByMonth;
+let currPriceDiffCars = startPriceOld - startPriceNew;
+let balance = currPriceDiffCars;
+let numMonths = 0;
+let savings = 0;
+```
+
+`balance` steht hier für unseren aktuellen “Kontostand”.
+
+</Accordion>
+<Accordion>
+
+Jetzt unser Loop:
+
+```ts
+  while (balance < 0) {
+```
+
+Ich entscheide mir hier für eine <ExternalLink href={docs.statements.while}>`while`</ExternalLink>-Schleife.
+
+</Accordion>
+<Accordion>
+
+Erst mal erhöhe ich die Gesamt-Sparsumme und den aktuellen Monat:
+
+```ts
+savings += savingPerMonth;
+numMonths++;
+```
+
+</Accordion>
+<Accordion>
+
+Dann können wir kucken, ob wir die aktuelle Preisverfallrate erhöhen müssen:
+
+```ts
+if (numMonths % 2 === 0) currPercentLossByMonth += 0.5;
+```
+
+Wenn ja, tun wir das.
+
+</Accordion>
+<Accordion>
+
+Mir der aktuellen Preisverfallrate können wir dann den aktuellen Preisverfall beider Autos berechnen:
+
+```ts
+const currPriceLossCars = (currPriceDiffCars * currPercentLossByMonth) / 100;
+```
+
+</Accordion>
+<Accordion>
+
+Und damit dann den aktuellen Preisunterschied beider Autos berechnen:
+
+```ts
+currPriceDiffCars -= currPriceLossCars;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt noch den neuen Kontostand berechnen:
+
+```ts
+    balance = currPriceDiffCars + savings;
+  }
+```
+
+Wir addieren einfach unsere Gesamtsparsumme zum aktuellen Preisunterschied hinzu.
+
+</Accordion>
+<Accordion>
+
+Und nach dem Loop unser Ergebnis zurückgeben:
+
+```ts
+  return [numMonths, Math.round(balance)];
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function nbMonths(
+  startPriceOld: number,
+  startPriceNew: number,
+  savingPerMonth: number,
+  percentLossByMonth: number,
+): number[] {
+  let currPercentLossByMonth = percentLossByMonth;
+  let currPriceDiffCars = startPriceOld - startPriceNew;
+  let balance = currPriceDiffCars;
+  let numMonths = 0;
+  let savings = 0;
+
+  while (balance < 0) {
+    savings += savingPerMonth;
+    numMonths++;
+
+    if (numMonths % 2 === 0) currPercentLossByMonth += 0.5;
+
+    const currPriceLossCars =
+      (currPriceDiffCars * currPercentLossByMonth) / 100;
+    currPriceDiffCars -= currPriceLossCars;
+
+    balance = currPriceDiffCars + savings;
+  }
+
+  return [numMonths, Math.round(balance)];
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
