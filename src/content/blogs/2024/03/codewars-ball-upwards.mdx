@@ -1,0 +1,226 @@
+---
+title:
+pubDate: 2024-03-15
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: f5b98689d10243efad7f82b01ca786e8
+
+codeChallengeData:
+  platform: codewars
+  id: 566be96bb3174e155300001b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst können wir uns eine Helfer-Funktion erstellen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Da tue ich einfach die gegebene Formel [(s. Beschreibung)](#beschreibung) rein.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Für die Hauptfunktion brauchen wir einen Loop.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Für jede Zehntelsekunde berechnen wir die aktuelle Höhe.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Sobald die aktuelle Höhe kleiner wird als die vorige, können wir die vorige Zehntelsekunde zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Wenn nicht, setzen wir die vorige Höhe gleich der aktuellen und gehen in die nächste Iteration.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meines Helferleins:
+
+```ts
+function calcHeightAtTenthOfSec(speed: number, time: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Da tue ich jetzt einfach die gegebene Formel aus der [Beschreibung](#beschreibung) rein:
+
+```ts
+  const gravity = 9.81;
+  return speed * time - 0.5 * gravity * time ** 2;
+}
+```
+
+Für die Schwerkraft erstelle ich eine extra Variable. Ist aber absolut optional und dient hier nur ein bisl der besseren Lesbarkeit.
+
+Das wars auch schon fürs Helferlein, weiter gehts mit der Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion:
+
+```ts
+export function maxBall(v0: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes initalisiere ich mir die vorige Höhe:
+
+```ts
+let prevHeight = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  for (let t = 0; ; t++) {
+```
+
+Ich entscheide mich hier für einen unendlichen <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. Also ohne End-Bedingung.
+
+</Accordion>
+<Accordion>
+
+Dann berechnen wir die aktuelle Höhe:
+
+```ts
+const currHeight = calcHeightAtTenthOfSec(v0 / 3.6, t / 10);
+```
+
+Indem wir die Geschwindigkeit durch `3,6` teilen, rechnen wir sie in `m/s` um.
+
+Dabei hilft uns unser Helferlein.
+
+</Accordion>
+<Accordion>
+
+Sobald die aktuelle Höhe kleiner wird als die vorige, können wir die vorige Zehntelsekunde zurückgeben:
+
+```ts
+if (currHeight < prevHeight) return t - 1;
+```
+
+Und damit die Funktion und den unendlichen Loop beenden.
+
+</Accordion>
+<Accordion>
+
+Ansonsten setzen wir die vorige Höhe gleich der aktuellen:
+
+```ts
+    prevHeight = currHeight;
+  }
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function maxBall(v0: number): number {
+  let prevHeight = 0;
+
+  for (let t = 0; ; t++) {
+    const currHeight = calcHeightAtTenthOfSec(v0 / 3.6, t / 10);
+
+    if (currHeight < prevHeight) return t - 1;
+    prevHeight = currHeight;
+  }
+}
+
+function calcHeightAtTenthOfSec(speed: number, time: number): number {
+  const gravity = 9.81;
+  return speed * time - 0.5 * gravity * time ** 2;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
