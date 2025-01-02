@@ -1,0 +1,250 @@
+---
+title:
+pubDate: 2024-01-22
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 462be7dc11e042718f26784989d3fd3e
+
+codeChallengeData:
+  platform: codewars
+  id: 5eb27d81077a7400171c6820
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst berechnen wir den Gesamtbetrag inkl. 15% Trinkgeld.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann müssen wir rausfinden, wie viele Ziffern es vor dem Komma gibt.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann den Rundungs-Faktor berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Zum Schluss müssen wir prüfen, ob die Gesamtsumme größer als `10` ist und wenn ja, den Faktor richtig darauf anwenden.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function gracefulTipping(bill: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Den Gesamtbetrag inklusive 15% Trinkgeld berechnen:
+
+```ts
+const billPlus15Percent = bill * 1.15;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt die Stellen vor dem Komma zählen:
+
+```ts
+const numDigits = Math.trunc(billPlus15Percent).toString().length;
+```
+
+</Accordion>
+<Accordion>
+
+Dann können wir unseren Rundungs-Faktor berechnen:
+
+```ts
+const factor = 5 * 10 ** (numDigits - 2);
+```
+
+Ist unsere Gesamtsumme z.B. `123`, hat also `3` Stellen vor dem Komma, ziehen wir `2` ab und erhalten `1`. Die `1` ist jetzt die Potenz für `10`.
+
+<span>Also: </span>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <msup>
+      <mn>10</mn>
+      <mn>1</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>10</mn>
+  </mrow>
+</math>
+
+Dann noch mit `5` malnehmen. Der Faktor ist also `50`.
+
+<span>Bei einer vierstelligen Gesamtsumme wäre unser Faktor also: </span>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mn>5</mn>
+    <mo>x</mo>
+    <msup>
+      <mn>10</mn>
+      <mrow>
+        <mo>(</mo>
+        <mn>4</mn>
+        <mo>-</mo>
+        <mn>2</mn>
+        <mo>)</mo>
+      </mrow>
+    </msup>
+    <mo>=</mo>
+    <mn>5</mn>
+    <mo>x</mo>
+    <msup>
+      <mn>10</mn>
+      <mn>2</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>500</mn>
+  </mrow>
+</math>
+
+<p />
+
+<span>Bei einer zweistelligen Zahl: </span>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mn>5</mn>
+    <mo>x</mo>
+    <msup>
+      <mn>10</mn>
+      <mrow>
+        <mo>(</mo>
+        <mn>2</mn>
+        <mo>-</mo>
+        <mn>2</mn>
+        <mo>)</mo>
+      </mrow>
+    </msup>
+    <mo>=</mo>
+    <mn>5</mn>
+    <mo>x</mo>
+    <msup>
+      <mn>10</mn>
+      <mn>0</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>5</mn>
+    <mo>x</mo>
+    <msup>
+      <mn>1</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>5</mn>
+  </mrow>
+</math>
+
+<p />
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch die Bedingung und die Berechnung der aufgerundeten Gesamtsumme inkl. 15%:
+
+```ts
+  return billPlus15Percent < 10
+    ? Math.ceil(billPlus15Percent)
+    : Math.ceil(billPlus15Percent / factor) * factor;
+}
+```
+
+Wenn der Gesamtbetrag unter `10` Euro ist, geben wir einfach den aufgerundeten Gesamtbetrag zurück. Ansonsten teilen wir unseren Gesamtbetrag durch den Faktor, runden auf und multiplizieren das Ganze wieder mit unserem Faktor.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function gracefulTipping(bill: number): number {
+  const billPlus15Percent = bill * 1.15;
+  const numDigits = Math.trunc(billPlus15Percent).toString().length;
+  const factor = 5 * 10 ** (numDigits - 2);
+
+  return billPlus15Percent < 10
+    ? Math.ceil(billPlus15Percent)
+    : Math.ceil(billPlus15Percent / factor) * factor;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
