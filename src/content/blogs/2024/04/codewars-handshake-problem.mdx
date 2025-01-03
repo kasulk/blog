@@ -1,0 +1,189 @@
+---
+title:
+pubDate: 2024-04-03
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 9ed3686f78624d5c840c4e54b7d9caf2
+
+codeChallengeData:
+  platform: codewars
+  id: 5574835e3e404a0bed00001b
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wenn wir keine Handshakes haben, können wir `0` zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Ansonsten könnten wir z.B. durch die Anzahl der Personen loopen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir fangen bei einer Person an und testen, ob die Summe aller Handshakes größer oder gleich der Input-Handshakes ist.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Wenn ja, können wir die Anzahl der Personen zurückgeben.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wenn nicht, die aktuelle Anzahl Personen zur Summe der Handshakes hinzufügen.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function getParticipants(handshakes: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst der Fall ohne Handshakes:
+
+```ts
+if (!handshakes) return 0;
+```
+
+Wenn es keine Handshakes gibt, geben wir `0` zurück.
+
+</Accordion>
+<Accordion>
+
+Dann initialisieren wir unsere Handshakes-Summe:
+
+```ts
+let sumHandshakes = 0;
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt der Loop:
+
+```ts
+  for (let numPeople = 1; ; numPeople++) {
+```
+
+Ich entscheide mich hier für einen (unendlichen) <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. Also ohne Bedingung. Du kannst hier auch gerne <ExternalLink href={docs.statements.while}>`while`</ExternalLink> verwenden.
+
+</Accordion>
+<Accordion>
+
+Dann unser Test:
+
+```ts
+if (sumHandshakes >= handshakes) return numPeople;
+```
+
+Wenn die Summe aller Handshakes größer oder gleich der Input-Handshakes wird, können wir die Anzahl der Personen zurückgeben und damit Funktion und Loop beenden.
+
+</Accordion>
+<Accordion>
+
+Ansonsten fügen wir die aktuelle Anzahl Personen zur Summe der Handshakes hinzu:
+
+```ts
+    sumHandshakes += numPeople;
+  }
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function getParticipants(handshakes: number): number {
+  if (!handshakes) return 0;
+
+  let sumHandshakes = 0;
+
+  for (let numPeople = 1; ; numPeople++) {
+    if (sumHandshakes >= handshakes) return numPeople;
+    sumHandshakes += numPeople;
+  }
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
