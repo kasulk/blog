@@ -1,0 +1,201 @@
+---
+title:
+pubDate: 2024-04-05
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 3c45d8695ed94acebff36b6355da834c
+
+codeChallengeData:
+  platform: codewars
+  id: 56bdd0aec5dc03d7780010a5
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen einen Loop!
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Wir loopen von der gegebenen Zahl so lange, bis wir die nächste Zahl mit gleich vielen Einsen finden.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dazu macht es Sinn das Umwandeln in eine Binär-Zahl und das Zählen der Einsen in eine Hilfsfunktion auszulagern.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+Am besten wir fangen mit der Hilfsfunktion an.
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Hier die erste Zeile meiner Hilfsfunktion:
+
+```ts
+function numOnesInBinaryOfNum(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Dann müssen wir die Einsen in der Binär-Version der Input-Zahl zählen:
+
+```ts
+  return num.toString(2).replace(/0/g, "").length;
+}
+```
+
+<ExternalLink href={docs.number.toString}>`.toString(2)`</ExternalLink> wandelt
+die Zahl in ihre Binär-Version um und mit
+<ExternalLink href={docs.string.replace}>`.replace()`</ExternalLink>
+und einer
+<ExternalLink href={docs.guide.regex}>RegEx</ExternalLink> finden und entfernen
+wir alle Nullen. Dann messen wir nur noch die Länge von dem String der übrig
+bleibt, also den Einsen.
+
+Und schon können wir uns an die Hauptfunktion machen.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion (ich habe `n` zu `num` umbenannt):
+
+```ts
+export function nextHigher(num: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Dann können wir uns die Anzahl der Einsen in der Binär-Version der Input-Zahl in einer Variablen abspeichern:
+
+```ts
+const numOnesInBinaryOfInputNum = numOnesInBinaryOfNum(num);
+```
+
+</Accordion>
+<Accordion>
+
+Gleiches mit der nächsten zu prüfenden Zahl _(optional)_:
+
+```ts
+const next = num + 1;
+```
+
+Dieser Schritt ist optional und dient nur der besseren Lesbarkeit.
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  for (let i = next; ; i++) {
+```
+
+Ich nehme hier einen (unendlichen) <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. Die Bedingung lassen wir weg. Du kannst auch gerne <ExternalLink href={docs.statements.while}>`while`</ExternalLink> verwenden. Wir beginnen den Loop bei der nächsten Zahl.
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die aktuelle Zahl genauso viele Einsen hat wie die Input-Zahl:
+
+```ts
+    if (numOnesInBinaryOfNum(i) === numOnesInBinaryOfInputNum) return i;
+  }
+}
+```
+
+Wenn ja, geben wir die aktuelle Zahl zurück und beenden damit gleichzeitig den (unendlichen) <ExternalLink href={docs.statements.forOf}>`For`</ExternalLink>-Loop.
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function nextHigher(num: number): number {
+  const numOnesInBinaryOfInputNum = numOnesInBinaryOfNum(num);
+  const next = num + 1;
+
+  for (let i = next; ; i++) {
+    if (numOnesInBinaryOfNum(i) === numOnesInBinaryOfInputNum) return i;
+  }
+}
+
+function numOnesInBinaryOfNum(num: number): number {
+  return num.toString(2).replace(/0/g, "").length;
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
