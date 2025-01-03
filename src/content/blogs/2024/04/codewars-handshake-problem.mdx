@@ -1,15 +1,15 @@
 ---
 title:
-pubDate: 2024-03-15
+pubDate: 2024-04-03
 description:
 category: coden
 tags:
 series: code challenges
-vgWortCode: f5b98689d10243efad7f82b01ca786e8
+vgWortCode: 9ed3686f78624d5c840c4e54b7d9caf2
 
 codeChallengeData:
   platform: codewars
-  id: 566be96bb3174e155300001b
+  id: 5574835e3e404a0bed00001b
   language: TypeScript
 ---
 
@@ -53,37 +53,31 @@ Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
 <Accordion>
 Schritt 1
 
-Zuerst können wir uns eine Helfer-Funktion erstellen.
+Wenn wir keine Handshakes haben, können wir `0` zurückgeben.
 
 </Accordion>
 <Accordion>
 Schritt 2
 
-Da tue ich einfach die gegebene Formel [(s. Beschreibung)](#beschreibung) rein.
+Ansonsten könnten wir z.B. durch die Anzahl der Personen loopen.
 
 </Accordion>
 <Accordion>
 Schritt 3
 
-Für die Hauptfunktion brauchen wir einen Loop.
+Wir fangen bei einer Person an und testen, ob die Summe aller Handshakes größer oder gleich der Input-Handshakes ist.
 
 </Accordion>
 <Accordion>
 Schritt 4
 
-Für jede Zehntelsekunde berechnen wir die aktuelle Höhe.
+Wenn ja, können wir die Anzahl der Personen zurückgeben.
 
 </Accordion>
 <Accordion>
 Schritt 5
 
-Sobald die aktuelle Höhe kleiner wird als die vorige, können wir die vorige Zehntelsekunde zurückgeben.
-
-</Accordion>
-<Accordion>
-Schritt 6
-
-Wenn nicht, setzen wir die vorige Höhe gleich der aktuellen und gehen in die nächste Iteration.
+Wenn nicht, die aktuelle Anzahl Personen zur Summe der Handshakes hinzufügen.
 
 </Accordion>
 </Accordion>
@@ -96,87 +90,61 @@ Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
 **Lösungsschritte**
 
 <Accordion>
-Die erste Zeile meines Helferleins:
+Meine erste Zeile:
 
 ```ts
-function calcHeightAtTenthOfSec(speed: number, time: number): number {
+export function getParticipants(handshakes: number): number {
 ```
 
 </Accordion>
 <Accordion>
 
-Da tue ich jetzt einfach die gegebene Formel aus der [Beschreibung](#beschreibung) rein:
+Zuerst der Fall ohne Handshakes:
 
 ```ts
-  const gravity = 9.81;
-  return speed * time - 0.5 * gravity * time ** 2;
-}
+if (!handshakes) return 0;
 ```
 
-Für die Schwerkraft erstelle ich eine extra Variable. Ist aber absolut optional und dient hier nur ein bisl der besseren Lesbarkeit.
-
-Das wars auch schon fürs Helferlein, weiter gehts mit der Hauptfunktion.
+Wenn es keine Handshakes gibt, geben wir `0` zurück.
 
 </Accordion>
 <Accordion>
 
-Die erste Zeile meiner Hauptfunktion:
+Dann initialisieren wir unsere Handshakes-Summe:
 
 ```ts
-export function maxBall(v0: number): number {
+let sumHandshakes = 0;
 ```
 
 </Accordion>
 <Accordion>
 
-Als Erstes initalisiere ich mir die vorige Höhe:
+Jetzt der Loop:
 
 ```ts
-let prevHeight = 0;
+  for (let numPeople = 1; ; numPeople++) {
 ```
+
+Ich entscheide mich hier für einen (unendlichen) <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. Also ohne Bedingung. Du kannst hier auch gerne <ExternalLink href={docs.statements.while}>`while`</ExternalLink> verwenden.
 
 </Accordion>
 <Accordion>
 
-Dann der Loop:
+Dann unser Test:
 
 ```ts
-  for (let t = 0; ; t++) {
+if (sumHandshakes >= handshakes) return numPeople;
 ```
 
-Ich entscheide mich hier für einen unendlichen <ExternalLink href={docs.statements.for}>`for`</ExternalLink>-Loop. Also ohne End-Bedingung.
+Wenn die Summe aller Handshakes größer oder gleich der Input-Handshakes wird, können wir die Anzahl der Personen zurückgeben und damit Funktion und Loop beenden.
 
 </Accordion>
 <Accordion>
 
-Dann berechnen wir die aktuelle Höhe:
+Ansonsten fügen wir die aktuelle Anzahl Personen zur Summe der Handshakes hinzu:
 
 ```ts
-const currHeight = calcHeightAtTenthOfSec(v0 / 3.6, t / 10);
-```
-
-Indem wir die Geschwindigkeit durch `3,6` teilen, rechnen wir sie in `m/s` um.
-
-Dabei hilft uns unser Helferlein.
-
-</Accordion>
-<Accordion>
-
-Sobald die aktuelle Höhe kleiner wird als die vorige, können wir die vorige Zehntelsekunde zurückgeben:
-
-```ts
-if (currHeight < prevHeight) return t - 1;
-```
-
-Und damit die Funktion und den unendlichen Loop beenden.
-
-</Accordion>
-<Accordion>
-
-Ansonsten setzen wir die vorige Höhe gleich der aktuellen:
-
-```ts
-    prevHeight = currHeight;
+    sumHandshakes += numPeople;
   }
 }
 ```
@@ -195,20 +163,15 @@ Voilá! 💪
 **Komplettlösung**
 
 ```ts
-export function maxBall(v0: number): number {
-  let prevHeight = 0;
+export function getParticipants(handshakes: number): number {
+  if (!handshakes) return 0;
 
-  for (let t = 0; ; t++) {
-    const currHeight = calcHeightAtTenthOfSec(v0 / 3.6, t / 10);
+  let sumHandshakes = 0;
 
-    if (currHeight < prevHeight) return t - 1;
-    prevHeight = currHeight;
+  for (let numPeople = 1; ; numPeople++) {
+    if (sumHandshakes >= handshakes) return numPeople;
+    sumHandshakes += numPeople;
   }
-}
-
-function calcHeightAtTenthOfSec(speed: number, time: number): number {
-  const gravity = 9.81;
-  return speed * time - 0.5 * gravity * time ** 2;
 }
 ```
 
