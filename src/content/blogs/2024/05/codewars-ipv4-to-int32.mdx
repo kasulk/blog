@@ -1,0 +1,193 @@
+---
+title:
+pubDate: 2024-05-06
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 82758def13be48b0a850e99ec5d64c4e
+
+codeChallengeData:
+  platform: codewars
+  id: 52ea928a1ef5cfec800003ee
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir ein Array, damit wir da durch loopen können.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dann der Loop.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Wir müssen jede der 4 Zahlen in ihre 8-stellige binäre Version verwandeln.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann machen wir aus dem Array wieder einen String.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Damit wir anschließend diese 32-Bit Binär-Zahl in eine Dezimalzahl umwandeln können.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile:
+
+```ts
+export function ipToInt32(ip: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Jetzt den String in ein Array umwandeln:
+
+```ts
+const binary32bit = ip.split(".");
+```
+
+Dazu splitten wir den String einfach an den Punkten.
+
+</Accordion>
+<Accordion>
+
+Da wir `TypeScript` verwenden, müssen wir die String-Zahlen in richtige Zahlen umwandeln:
+
+```ts
+    .map(Number)
+```
+
+Das ginge auch zusammen mit dem nächsten Schritt, aber mit diesem <ExternalLink href={docs.array.mapNumber}>`.map(Number)`</ExternalLink>-Zwischenschritt bleibt alles schön übersichtlich.
+
+</Accordion>
+<Accordion>
+
+Jetzt die Umwandlung von einer Zahl zu einem 8-stelligen binären String:
+
+```ts
+    .map((num) => num.toString(2).padStart(8, "0"))
+```
+
+Auch hier drängt sich wieder <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> auf. Denn wir wollen genauso viele Elemente zurück haben wie rein gegangen sind.
+
+Das (optionale) Argument `2` in <ExternalLink href={docs.number.toString}>`.toString()`</ExternalLink> wandelt die Zahl in einen binären String um.
+
+Da nicht jede binäre Zahl automatisch 8 Stellen (Bits) hat, hängen wir die fehlenden Nullen noch vorne dran.
+
+</Accordion>
+<Accordion>
+
+Dann machen wir aus den Elementen des Arrays einen einzigen String. Die Punkte brauchen wir nicht mehr:
+
+```ts
+    .join("");
+```
+
+Wir erhalten einen 32-stelligen binären String.
+
+</Accordion>
+<Accordion>
+
+Jetzt nur noch den binären String in eine Dezimalzahl umwandeln und zurückgeben:
+
+```ts
+  return parseInt(binary32bit, 2);
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function ipToInt32(ip: string): number {
+  const binary32bit = ip
+    .split(".")
+    .map(Number)
+    .map((num) => num.toString(2).padStart(8, "0"))
+    .join("");
+
+  return parseInt(binary32bit, 2);
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
