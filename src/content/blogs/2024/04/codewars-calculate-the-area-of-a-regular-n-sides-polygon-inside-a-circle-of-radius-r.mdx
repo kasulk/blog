@@ -1,0 +1,198 @@
+---
+title:
+pubDate: 2024-04-07
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 535ef88bd7f047a7b53a4d734a74622a
+
+codeChallengeData:
+  platform: codewars
+  id: 5a58ca28e626c55ae000018a
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst unterteilen wir das Polygon in einzelne Dreiecke.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Dafür verbinden wir jeden Punkt auf dem Kreisumfang mit dem Mittelpunkt.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Jede dieser Geraden hat die Länge des Radius.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Mit dem Winkel zwischen den beiden bekannten Geraden können wir mit Sinus die Fläche eines Dreiecks berechnen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Statt des Winkels können wir auch den [Radiant](<https://de.wikipedia.org/wiki/Radiant_(Einheit)>) nehmen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Die Summe der Flächen aller Dreiecke ergibt die Fläche des Polygons.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Meine erste Zeile (ich habe `circleRadius` und `numberOfSides` umbenannt:
+
+```ts
+export function areaOfPolygonInsideCircle(radius: number, numSides: number): number {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes definieren wir den Radiant des ganzen Kreises (360°):
+
+```ts
+const RADIANT_CIRCLE = 2 * Math.PI;
+```
+
+`Pi` sind `180°`, also sind `360° = 2 x Pi`.
+
+</Accordion>
+<Accordion>
+
+Dann können wir den Radiant für jedes der Dreiecke berechnen:
+
+```ts
+const radiantAngle = RADIANT_CIRCLE / numSides;
+```
+
+Wir teilen einfach den Kreisradiant durch die Anzahl der Seiten des Polygons bzw. die Anzahl der Dreiecke. Jedes Dreieck hat den gleichen Winkel.
+
+Alternativ würden wir in Grad hier `360° / numSides` rechnen.
+
+</Accordion>
+<Accordion>
+
+Jetzt können wir die Fläche _eines_ Dreiecks berechnen:
+
+```ts
+const areaTriangle = 0.5 * radius * radius * Math.sin(radiantAngle);
+```
+
+Hier noch mal die Formel zur Berechnung der Fläche eines Dreiecks: `1/2 x a x b x sin(ɣ)`
+
+</Accordion>
+<Accordion>
+
+Dann nur noch die Flächen _aller_ Dreiecke zusammenrechnen:
+
+```ts
+const areaPolygon = areaTriangle * numSides;
+```
+
+</Accordion>
+<Accordion>
+
+Und das Ganze auf 3-Nachkommastellen gerundet zurückgeben:
+
+```ts
+  return Number(areaPolygon.toFixed(3));
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function areaOfPolygonInsideCircle(
+  radius: number,
+  numSides: number,
+): number {
+  const RADIANT_CIRCLE = 2 * Math.PI; // all angles
+  const radiantAngle = RADIANT_CIRCLE / numSides; // each angle
+
+  const areaTriangle = 0.5 * radius * radius * Math.sin(radiantAngle);
+  const areaPolygon = areaTriangle * numSides;
+
+  return Number(areaPolygon.toFixed(3));
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
