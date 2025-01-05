@@ -1,0 +1,410 @@
+---
+title:
+pubDate: 2024-10-10
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 0d1f90ba7626491a86da9727dfd99f58
+
+codeChallengeData:
+  platform: codewars
+  id: 62d1eb93e5994c003156b2ae
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Zuerst können wir uns ein Objekt erstellen, das alle Buchstaben auf den Tap-Code umschlüsselt.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Für die `encode`-Funktion können wir dann einfach den Buchstaben in unserem Objekt nachschlagen und ausgeben.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Für die `decode`-Funktion können wir unser Objekt mit Buchstaben und Tap-Codes einfach umdrehen. D.h., `keys` und `values` vertauschen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann müssen wir aus dem Input-String Dreier-Gruppen erstellen.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Diese Dreier-Gruppen können wir dann im umgedrehten Objekt nachschlagen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Den jeweils erhaltenen Buchstaben nur noch ans Ergebnis anhängen.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Am Ende alles ausgeben - fertig!
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Zuerst mein Objekt mit Buchstaben und Tap-Codes:
+
+```ts
+const map: { [key: string]: string } = {
+  A: ". . .",
+  B: ".. . .",
+  C: "... . .",
+  D: ". .. .",
+  E: ".. .. .",
+  F: "... .. .",
+  G: ". ... .",
+  H: ".. ... .",
+  I: "... ... .",
+  J: ". . ..",
+  K: ".. . ..",
+  L: "... . ..",
+  M: ". .. ..",
+  N: ".. .. ..",
+  O: "... .. ..",
+  P: ". ... ..",
+  Q: ".. ... ..",
+  R: "... ... ..",
+  S: ". . ...",
+  T: ".. . ...",
+  U: "... . ...",
+  V: ". .. ...",
+  W: ".. .. ...",
+  X: "... .. ...",
+  Y: ". ... ...",
+  Z: ".. ... ...",
+  " ": "... ... ...",
+};
+```
+
+</Accordion>
+<Accordion>
+
+Als nächstes speichere ich mir schon mal das umgedrehte Objekt in einer Variablen:
+
+```ts
+const reversedMap = Object.fromEntries(
+  Object.entries(map).map(([key, value]) => [value, key]),
+);
+```
+
+<ExternalLink href={docs.object.entries}>`Object.entries()`</ExternalLink> erstellt
+ein Array aus einem Objekt durch das wir dann mappen können. Das Array habe ich
+direkt deconstructed. Das macht es schön kurz und lesbar.
+
+<ExternalLink href={docs.object.fromEntries}>`Object.fromEntries()`</ExternalLink> wiederum erstellt ein Objekt aus einem Array.
+
+Der Inhalt des umgedrehten Objekts sieht dann also so aus:
+
+```ts
+{
+  '. . .': 'A',
+  '.. . .': 'B',
+  '... . .': 'C',
+  '. .. .': 'D',
+  '.. .. .': 'E',
+  '... .. .': 'F',
+  '. ... .': 'G',
+  '.. ... .': 'H',
+  '... ... .': 'I',
+  '. . ..': 'J',
+  '.. . ..': 'K',
+  '... . ..': 'L',
+  '. .. ..': 'M',
+  '.. .. ..': 'N',
+  '... .. ..': 'O',
+  '. ... ..': 'P',
+  '.. ... ..': 'Q',
+  '... ... ..': 'R',
+  '. . ...': 'S',
+  '.. . ...': 'T',
+  '... . ...': 'U',
+  '. .. ...': 'V',
+  '.. .. ...': 'W',
+  '... .. ...': 'X',
+  '. ... ...': 'Y',
+  '.. ... ...': 'Z',
+  '... ... ...': ' '
+}
+```
+
+Dann können wir uns an die `encode`-Funktion machen.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner `encode`-Funktion:
+
+```ts
+export function encode(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst wandeln wir den Input-String in ein Array um:
+
+```ts
+  return str.split("");
+```
+
+Ich behaupte, wir können hier chainen. Darum setze ich schon mal das `return` davor.
+
+</Accordion>
+<Accordion>
+
+Dann der Loop für das Nachschlagen der Buchstaben bzw. Tap-Codes:
+
+```ts
+    .map((char) => map[char])
+```
+
+Da wir für jeden Buchstaben genau einen Tap-Code zurückbekommen wollen, eignet sich hier wunderbar <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das Array wieder zurück in einen String umwandeln:
+
+```ts
+    .join(" ");
+}
+```
+
+Das war schon die `encode`-Funktion. Weiter geht’s mit der `decode`-Funktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner `decode`-Funktion:
+
+```ts
+export function decode(str: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Hier brauchen wir als Erstes eine Variable in der wir alle entschlüsselten Buchstaben speichern:
+
+```ts
+  const chars: string[] = [];
+```
+
+</Accordion>
+<Accordion>
+
+Außerdem erstelle ich mir noch eine Variable in der ich die Dreier-Gruppen zusammenstelle:
+
+```ts
+  let triple: string[] = [];
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch Punkt-Gruppen:
+
+```ts
+  str.split(" ").forEach((dots, i) => {
+```
+
+</Accordion>
+<Accordion>
+
+Jede Punkt-Gruppe hängen wir an unsere Variable für die Dreier-Gruppen:
+
+```ts
+    triple.push(dots);
+```
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die Dreier-Gruppe komplett ist, also `3` Punkt-Gruppen enthält:
+
+```ts
+    if (i % 3 === 2) {
+```
+
+Das mache ich hier über den Index. Es ginge aber natürlich auch über die Array-Länge 😉
+
+</Accordion>
+<Accordion>
+
+Wenn die Dreier-Gruppe komplett ist, schlagen wir sie in unserem umgedrehten Objekt (`reversedMap`) nach:
+
+```ts
+      const charDots = triple.join(" ");
+      const char = reversedMap[charDots];
+```
+
+</Accordion>
+<Accordion>
+
+Den erhaltenen Buchstaben hängen wir dann an unser `chars`-Array:
+
+```ts
+      chars.push(char);
+      triple = [];
+    }
+  });
+```
+
+Danach setzen wir noch das Array für die aktuelle Dreier-Gruppe zurück, damit wir die nächste Dreier-Gruppe darin sammeln können.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch das `chars`-Array als String zurückgeben:
+
+```ts
+  return chars.join("");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+const map: { [key: string]: string } = {
+  A: ". . .",
+  B: ".. . .",
+  C: "... . .",
+  D: ". .. .",
+  E: ".. .. .",
+  F: "... .. .",
+  G: ". ... .",
+  H: ".. ... .",
+  I: "... ... .",
+  J: ". . ..",
+  K: ".. . ..",
+  L: "... . ..",
+  M: ". .. ..",
+  N: ".. .. ..",
+  O: "... .. ..",
+  P: ". ... ..",
+  Q: ".. ... ..",
+  R: "... ... ..",
+  S: ". . ...",
+  T: ".. . ...",
+  U: "... . ...",
+  V: ". .. ...",
+  W: ".. .. ...",
+  X: "... .. ...",
+  Y: ". ... ...",
+  Z: ".. ... ...",
+  " ": "... ... ...",
+};
+
+const reversedMap = Object.fromEntries(
+  Object.entries(map).map(([key, value]) => [value, key]),
+);
+
+export function encode(str: string): string {
+  return str
+    .split("")
+    .map((char) => map[char])
+    .join(" ");
+}
+
+export function decode(str: string): string {
+  const chars: string[] = [];
+  let triple: string[] = [];
+
+  str.split(" ").forEach((dots, i) => {
+    triple.push(dots);
+
+    if (i % 3 === 2) {
+      const charDots = triple.join(" ");
+      const char = reversedMap[charDots];
+      chars.push(char);
+      triple = [];
+    }
+  });
+
+  return chars.join("");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
