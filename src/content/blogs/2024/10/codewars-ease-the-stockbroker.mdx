@@ -1,0 +1,365 @@
+---
+title:
+pubDate: 2024-10-09
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: debd558be4704d5d8964d9b76bf85bf9
+
+codeChallengeData:
+  platform: codewars
+  id: 54de3257f565801d96001200
+  language: TypeScript
+---
+
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Als Erstes brauchen wir ein paar Variablen.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Eine für die Buy-Summe, eine für die Sell-Summe, eine für die Summe der schlechten Orders und eine für die gesammelten schlechten Orders.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Damit wir durch die Orders loopen können, sollten wir aus dem Input-String zuerst ein Array mit Orders machen.
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Dann der Loop.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+Wir zerlegen jede Order in ihre Bestandteile und speichern uns diese in Variablen.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Jetzt können wir checken, ob die Order valide ist.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Eine valide Order muss einen Preis als Komma-Zahl, eine Stückzahl als Integer (also keine Komma-Zahl) und einen Status von `B` oder `S` haben.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+Wenn das zutrifft, können wir beim Status `B` die Buy-Summe um den Wert der aktuellen Order erhöhen, und beim Status `S` die Sell-Summe.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Ansonsten hängen wir die schlechte Order ans Ende der Variablen für die schlechten Orders und erhöhen den Zähler für diese um `1`.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Nach dem Loop geben wir die Summen der Order-Werte gefolgt von den schlechten Orders als String zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+Der besseren Lesbarkeit halber erstelle ich mir für den Komma-Zahl-Check eine kleine Hilfsfunktion.
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Die erste Zeile meiner Hilfsfunktion:
+
+```ts
+function isFloat(strNum: string): boolean {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn die Zahl (im String-Format) einen Punkt hat, ist es eine Komma-Zahl:
+
+```ts
+  return strNum.includes(".");
+}
+```
+
+Das war’s auch schon für die Hilfsfunktion. Weiter geht’s mit der Hauptfunktion!
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hauptfunktion (ich habe `strng` in `orderStr` umbenannt):
+
+```ts
+export function balanceStatements(ordersStr: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst also unsere Variablen:
+
+```ts
+  let sumBuys = 0;
+  let sumSells = 0;
+  let sumBadlyFormed = 0;
+  let badlyFormed = "";
+```
+
+Die schlechten Orders sammle ich also in einem String. Find ich lesbarer. Du kannst sie natürlich auch in einem Array sammeln, dann sparst Du Dir außerdem die Zählvariable.
+
+</Accordion>
+<Accordion>
+
+Jetzt den Input-String in ein Array umwandeln:
+
+```ts
+  const orders = ordersStr.split(", ");
+```
+
+</Accordion>
+<Accordion>
+
+Dann der Loop:
+
+```ts
+  for (const order of orders) {
+```
+
+Da man mit einer Array-Method leider den Loop oder einzelne Iterationen nicht <ExternalLink href={docs.statements.break}>abbrechen</ExternalLink> kann, entscheide ich mich hier für einen <ExternalLink href={docs.statements.forOf}>`for...of`</ExternalLink>-Loop. 
+
+</Accordion>
+<Accordion>
+
+Als Erstes der Check, ob überhaupt ein Order-Array existiert:
+
+```ts
+    if (!order) break;
+```
+
+Wenn nicht, haben wir nämlich einen leeren Input-String bekommen und können in diesem Fall den Loop komplett überspringen.
+
+</Accordion>
+<Accordion>
+
+Ansonsten zerlegen wir die aktuelle Order in ihre Bestandteile:
+
+```ts
+    const [_, quantity, price, status] = order.split(" ");
+```
+
+Den Ticker bzw. das Aktienkürzel brauchen wir hier nicht, darum nenne ich es `_`.
+
+</Accordion>
+<Accordion>
+
+Der Lesbarkeit halber speichere ich mir in einer Variablen, ob der Status gültig ist *(optional)*:
+
+```ts
+    const isValidStatus = status === "B" || status === "S";
+```
+
+</Accordion>
+<Accordion>
+
+Dann prüfen wir, ob die aktuelle Order valide ist:
+
+```ts
+    if (isFloat(price) && !isFloat(quantity) && isValidStatus) {
+```
+
+</Accordion>
+<Accordion>
+
+Wenn ja, können wir uns den Order-Wert in einer Variablen speichern *(optional)*:
+
+```ts
+      const amount = Number(quantity) * Number(price);
+```
+
+</Accordion>
+<Accordion>
+
+Und dann je nach Order-Art den Wert zur richtigen Summe hinzufügen:
+
+```ts
+      if (status === "B") sumBuys += amount;
+      if (status === "S") sumSells += amount;
+```
+
+</Accordion>
+<Accordion>
+
+Danach springen wir zur nächsten Order:
+
+```ts
+      continue;
+    }
+```
+
+Ich bin ein großer Fan des <ExternalLink href={docs.statements.continue}>`continue`</ExternalLink>-Keywords. Macht den Code meiner Meinung nach lesbarer als wüste If-Else-Verschachtelungen.
+
+</Accordion>
+<Accordion>
+
+Wenn die Order nicht valide ist, fügen wir sie zu unseren schlechten Orders hinzu:
+
+```ts
+    badlyFormed += order + " ;";
+    sumBadlyFormed++;
+  }
+```
+
+> [!tip]
+> Eigentlich braucht man die Summe für die schlechten Orders nicht. Man könnte am Ende auch einfach die ";" in der Variable zählen.
+
+</Accordion>
+<Accordion>
+
+Dann erstelle ich mir eine Variable für den Output der gültigen Order-Werte:
+
+```ts
+  const outputOrderValues = `Buy: ${Math.round(sumBuys)} Sell: ${Math.round(sumSells)}`;
+```
+
+</Accordion>
+<Accordion>
+
+Und noch eine für den Output der schlechten Orders:
+
+```ts
+  const outputBadlyFormed = sumBadlyFormed ? `; Badly formed ${sumBadlyFormed}: ${badlyFormed}` : "";
+```
+
+Wenn es keine schlechten Orders gibt, wird diese Variable einfach auf einen leeren String gesetzt 😉
+
+</Accordion>
+<Accordion>
+
+Zum Schluss nur noch beide Output-Variablen zusammenfügen und ausgeben:
+
+```ts
+  return outputOrderValues + outputBadlyFormed;
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+export function balanceStatements(ordersStr: string): string {
+  let sumBuys = 0;
+  let sumSells = 0;
+  let sumBadlyFormed = 0;
+  let badlyFormed = "";
+
+  const orders = ordersStr.split(", ");
+
+  for (const order of orders) {
+    if (!order) break;
+
+    const [_, quantity, price, status] = order.split(" ");
+    const isValidStatus = status === "B" || status === "S";
+
+    if (isFloat(price) && !isFloat(quantity) && isValidStatus) {
+      const amount = Number(quantity) * Number(price);
+
+      if (status === "B") sumBuys += amount;
+      if (status === "S") sumSells += amount;
+
+      continue;
+    }
+
+    badlyFormed += order + " ;";
+    sumBadlyFormed++;
+  }
+
+  const outputOrderValues = `Buy: ${Math.round(sumBuys)} Sell: ${Math.round(sumSells)}`;
+  const outputBadlyFormed = sumBadlyFormed ? `; Badly formed ${sumBadlyFormed}: ${badlyFormed}` : "";
+
+  return outputOrderValues + outputBadlyFormed;
+}
+
+function isFloat(strNum: string): boolean {
+  return strNum.includes(".");
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
