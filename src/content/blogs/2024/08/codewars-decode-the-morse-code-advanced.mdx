@@ -1,0 +1,439 @@
+---
+title:
+pubDate: 2024-08-21
+description:
+category: coden
+tags:
+series: code challenges
+vgWortCode: 454ee93542784686bac28cfb9db40db8
+
+codeChallengeData:
+  platform: codewars
+  id: 54b72c16cd7f5154e9000457
+  language: TypeScript
+---
+
+## Inhalt
+
+1. [Die Fakten](#)
+1. [Beschreibung](#)
+1. [Lösung](#)
+   1. [Pseudo-Code](#)
+   1. [Code](#)
+1. [Feedback](#)
+
+---
+
+## Die Fakten:
+
+|                |                                                                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Plattform:** | <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>                       |
+| **Name:**      | <ExternalLink href={`${codeChallenge[codeChallengeData['platform']].challenge.url}/${codeChallengeData.id}`}>{apiData.name}</ExternalLink> |
+| **Level**:     | {apiData.level}                                                                                                                            |
+| **Sprache**:   | {codeChallengeData.language}                                                                                                               |
+
+## Beschreibung:
+
+<FetchedMarkdown>{apiData.description}</FetchedMarkdown>
+
+Quelle: <ExternalLink href={baseURLs[codeChallengeData['platform']]}>{domains[codeChallengeData['platform']]}</ExternalLink>
+
+## Lösung
+
+### Pseudo-Code
+
+Wie immer gibt's reichlich Varianten, hier ist eine meiner.
+
+Erst die Lösungsschritte in Pseudo-Code. Los geht’s:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Schritt 1
+
+Wir brauchen `2` Funktionen. Außerdem macht es Sinn, hier ein paar Hilfsfunktionen zu basteln. Das trägt zur Lesbarkeit und Übersichtlichkeit bei.
+
+</Accordion>
+<Accordion>
+Schritt 2
+
+Als Erstes basteln wir uns eine Hilfsfunktion um potentielle Nullen vom Anfang und Ende des Input-Strings zu entfernen.
+
+</Accordion>
+<Accordion>
+Schritt 3
+
+Dann können wir eine Hilfsfunktion erstellen, die die Transmission-Rate ermittelt (das ist der kniffligste Teil).
+
+</Accordion>
+<Accordion>
+Schritt 4
+
+Für die Transmission-Rate müssen wir die Bits in Zeichengruppen aufteilen. Auch das kann man noch mal in eine Hilfsfunktion auslagern.
+
+</Accordion>
+<Accordion>
+Schritt 5
+
+In der ersten Hauptfunktion `decodeBits()` entfernen wir dann mit unseren Hilfsfunktionen alle Nullen vom Anfang und Ende und ermitteln die Transmission-Rate.
+
+</Accordion>
+<Accordion>
+Schritt 6
+
+Dann ersetzen wir Bits entsprechend mit Leerzeichen bzw. Bindestrichen, Punkten oder wir löschen sie.
+
+</Accordion>
+<Accordion>
+Schritt 7
+
+Das Ergebnis zurückgeben und fertig ist die erste Hauptfunktion.
+
+</Accordion>
+<Accordion>
+Schritt 8
+
+In der zweiten Hauptfunktion `decodeMorse()` wandeln wir als Erstes den Input-String in ein Array von Morsecode-Wörtern um.
+
+</Accordion>
+<Accordion>
+Schritt 9
+
+Dann können wir durch dieses Array von Wörtern in Morsecode loopen.
+
+</Accordion>
+<Accordion>
+Schritt 10
+
+Danach loopen wir durch jedes Morsecode-Wort und ersetzen jeden Morsecode-Buchstaben mit Hilfe des `MORSE_CODE`-Objekts mit einem richtigen Buchstaben.
+
+</Accordion>
+<Accordion>
+Schritt 11
+
+Das Ergebnis geben wir als String zurück.
+
+</Accordion>
+</Accordion>
+
+### Code
+
+Geil. Übersetzen wir unseren Pseudo-Code in {codeChallengeData.language}:
+
+<Accordion>
+**Lösungsschritte**
+
+<Accordion>
+Wenn du den Morsecode zum Testen brauchst (z.B. in RunJS), du findest ihn hier:
+
+```ts
+const morseCode: { [key: string]: string } = {
+  ".-": "A",
+  "-...": "B",
+  "-.-.": "C",
+  "-..": "D",
+  ".": "E",
+  "..-.": "F",
+  "--.": "G",
+  "....": "H",
+  "..": "I",
+  ".---": "J",
+  "-.-": "K",
+  ".-..": "L",
+  "--": "M",
+  "-.": "N",
+  "---": "O",
+  ".--.": "P",
+  "--.-": "Q",
+  ".-.": "R",
+  "...": "S",
+  "-": "T",
+  "..-": "U",
+  "...-": "V",
+  ".--": "W",
+  "-..-": "X",
+  "-.--": "Y",
+  "--..": "Z",
+};
+```
+
+</Accordion>
+<Accordion>
+Die erste Zeile meiner ersten Hilfsfunktion:
+
+```ts
+export function removeLeadingAndTrailingZeros(bits: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Dann wollen wir alle Nullen von Anfang und Ende entfernen. Dafür bietet sich eine <ExternalLink href={docs.guide.regex}>RegEx</ExternalLink> an:
+
+```ts
+  return bits.replace(/^0*|0*$/g, "");
+}
+```
+
+Was genau passiert hier?
+
+Das ist die Regex: `/^0*|0*$/g`
+
+Die Regex matcht:
+
+1. Alle Nullen am Anfang des Strings (`^0*`).
+
+- ODER (`|`)
+
+2. Alle Nullen am Ende des Strings (`0*$`).
+
+Mit <ExternalLink href={docs.string.replace}>`.replace()`</ExternalLink> werden dann die gematchten Nullen durch einen leeren String (`""`) ersetzt, also entfernt.
+
+Weiter geht’s mit einer Hilfsfunktion für die zweite Hilfsfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner Hilfsfunktion für meine zweite Hilfsfunktion:
+
+```ts
+export function createArrWithCharGroups(str: string): string[] {
+```
+
+</Accordion>
+<Accordion>
+
+Auch hier bietet sich wieder eine <ExternalLink href={docs.guide.regex}>RegEx</ExternalLink> an:
+
+```ts
+  return str.match(/(.)\1*/g) || [];
+}
+```
+
+**Kurz:** Die Regex sucht nach Gruppen von wiederholten, gleichen Zeichen.
+
+Falls `match` keine Übereinstimmungen findet (z.B. wenn der String leer ist), gibt `match` `null` zurück. Um das zu verhindern, wird stattdessen ein leeres Array `[]` zurückgegeben.
+
+Das war’s auch hier auch schon. Weiter geht’s mit der zweiten Hilfsfunktion um die Transmission-Rate zu ermitteln.
+
+</Accordion>
+<Accordion>
+
+Dann die erste Zeile meiner zweiten Hilfsfunktion:
+
+```ts
+export function getTransmissionRate(bits: string): number {
+```
+
+</Accordion>
+<Accordion>
+
+Hier holen wir uns als Erstes die Zeichen-Gruppen in eine Variable:
+
+```ts
+const groups = createArrWithCharGroups(bits);
+```
+
+</Accordion>
+<Accordion>
+
+Dann ermitteln wir jeweils die Längen aller Zeichengruppen in diesem Array:
+
+```ts
+const groupsLengths = groups.map((group) => group.length);
+```
+
+Hier bietet sich <ExternalLink href={docs.array.map}>`.map()`</ExternalLink> an, da wir genauso viele Elemente raus haben wollen, wie rein gehen.
+
+</Accordion>
+<Accordion>
+
+Zum Schluss noch die Länge der kürzesten Gruppe ermitteln:
+
+```ts
+  return Math.min(...groupsLengths);
+}
+```
+
+Dann kann’s endlich mit den Hauptfunktionen losgehen!
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner ersten Hauptfunktion (`decodeBits()`):
+
+```ts
+export function decodeBits(bits: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Als Erstes entfernen wir mit unserer ersten Hilfsfunktion alle Nullen vom Anfang und Ende des Input-Strings:
+
+```ts
+const cleanedBits = removeLeadingAndTrailingZeros(bits);
+```
+
+</Accordion>
+<Accordion>
+
+Dann ermitteln wir mit unserer zweiten Hilfsfunktion die Transmission-Rate:
+
+```ts
+const rate = getTransmissionRate(cleanedBits);
+```
+
+</Accordion>
+<Accordion>
+
+Als nächstes wandeln wir die Bits in Morsecode um:
+
+```ts
+  return cleanedBits
+    .replaceAll("000000".repeat(rate), "   ")
+    .replaceAll("111".repeat(rate), "-")
+    .replaceAll("000".repeat(rate), " ")
+    .replaceAll("1".repeat(rate), ".")
+    .replaceAll("0".repeat(rate), "");
+}
+```
+
+Die <ExternalLink href={docs.string.replaceAll}>`.replaceAll()`</ExternalLink>-Methods können wir wunderbar chainen, darum können wir das `return` schon oben setzen.
+
+Weiter geht’s mit der zweiten Hauptfunktion.
+
+</Accordion>
+<Accordion>
+
+Die erste Zeile meiner zweiten Hauptfunktion (`decodeMorse()`):
+
+```ts
+export function decodeMorse(morseCode: string): string {
+```
+
+</Accordion>
+<Accordion>
+
+Zuerst den Input-Morsecode in ein Array umwandeln:
+
+```ts
+return morseCode.split("   ");
+```
+
+Hier können wir wieder wunderbar chainen, darum setzen wir das `return` auch hier wieder bereits oben an.
+
+Da die Morse-Wörter mit `3` Leerzeichen voneinander getrennt sind, führen wir den Split mit eben diesen `3` Leerzeichen durch.
+
+</Accordion>
+<Accordion>
+
+Dann der Loop durch die Morse-Wörter:
+
+```ts
+    .map((morseWord) =>
+```
+
+Wir wollen genauso viele Wörter zurück bekommen, wie wir rein geben. Daher bietet sich hier wieder ein <ExternalLink href={docs.array.map}>`.map()`</ExternalLink>-Loop an.
+
+</Accordion>
+<Accordion>
+
+Dann loopen wir durch jedes Morse-Wort:
+
+```ts
+morseWord.split(" ").map((morseChar) => MORSE_CODE[morseChar]);
+```
+
+Wir schlagen jedes Morse-Zeichen im `MORSE_CODE`-Wörterbuch nach und geben die Übersetzung zurück.
+
+</Accordion>
+<Accordion>
+
+Danach wandeln wir das Zeichen-Array wieder in einen String um:
+
+```ts
+        .join("")
+    )
+```
+
+</Accordion>
+<Accordion>
+
+Und zum Schluss nicht vergessen auch das Wörter-Array wieder in einen String umzuwandeln:
+
+```ts
+    .join(" ");
+}
+```
+
+</Accordion>
+<Accordion>
+
+Voilá! 💪
+
+[Fragen?](#feedback)
+
+</Accordion>
+</Accordion>
+
+<Accordion>
+**Komplettlösung**
+
+```ts
+import { MORSE_CODE } from "./preloaded";
+
+export function decodeBits(bits: string): string {
+  const cleanedBits = removeLeadingAndTrailingZeros(bits);
+  const rate = getTransmissionRate(cleanedBits);
+
+  return cleanedBits
+    .replaceAll("000000".repeat(rate), "   ")
+    .replaceAll("111".repeat(rate), "-")
+    .replaceAll("000".repeat(rate), " ")
+    .replaceAll("1".repeat(rate), ".")
+    .replaceAll("0".repeat(rate), "");
+}
+
+export function decodeMorse(morseCode: string): string {
+  return morseCode
+    .split("   ")
+    .map((morseWord) =>
+      morseWord
+        .split(" ")
+        .map((morseChar) => MORSE_CODE[morseChar])
+        .join(""),
+    )
+    .join(" ");
+}
+
+// helpers
+export function removeLeadingAndTrailingZeros(bits: string): string {
+  return bits.replace(/^0*|0*$/g, "");
+}
+
+export function getTransmissionRate(bits: string): number {
+  const groups = createArrWithCharGroups(bits);
+  const groupsLengths = groups.map((group) => group.length);
+  return Math.min(...groupsLengths);
+}
+
+export function createArrWithCharGroups(str: string): string[] {
+  return str.match(/(.)\1*/g) || [];
+}
+```
+
+</Accordion>
+
+## Feedback
+
+<Accordion>
+**Schreib mir!**
+
+<SocialLinks
+  emailSubject={`Frage zu ${apiData.platform} "${apiData.name}" (${codeChallengeData.language})`}
+/>
+
+</Accordion>
