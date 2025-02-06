@@ -12,7 +12,7 @@ export const plasma = [
     },
     payoutOn: "Gewöhnlich nach deiner 10. Spende.",
     // lastUpdated: new Date("2024-06-17"), // not neccessary, get date from last file modification
-    currentCampainEnd: new Date("2025-01-31"),
+    currentCampainEnd: new Date("2025-02-28"),
     blog: "",
 
     links: {
