@@ -2,12 +2,13 @@
 
 import { Fragment } from "react";
 import { DateFormatter } from "../DateFormatter";
-import { plasma } from "@/config/links";
 
-const { currentCampainEnd } = plasma[0];
+type Props = {
+  currCampaignEnd: Date;
+};
 
-export function SupportLatestPlasmaCampain() {
-  const numDays = getNumDaysFromNowToDate(currentCampainEnd);
+export function SupportLatestPlasmaCampaign({ currCampaignEnd }: Props) {
+  const numDays = getNumDaysFromNowToDate(currCampaignEnd);
 
   const color = getColorByDaysLeft(numDays);
   const message = getDaysLeftMessage(numDays);
@@ -16,7 +17,7 @@ export function SupportLatestPlasmaCampain() {
   return (
     <>
       <p className={`text-center font-bold ${color}`}>
-        <DateFormatter date={currentCampainEnd} weekday />
+        <DateFormatter date={currCampaignEnd} weekday />
       </p>
       <p className="text-center">
         {messageLines.map((line, i) => (
