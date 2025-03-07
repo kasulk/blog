@@ -1,3 +1,5 @@
+const currCampaignDefaultEnd = new Date("2025-03-31");
+
 export const plasma = [
   {
     name: "CSL",
@@ -11,8 +13,6 @@ export const plasma = [
       user: "100 Euro",
     },
     payoutOn: "Gewöhnlich nach deiner 10. Spende.",
-    // lastUpdated: new Date("2024-06-17"), // not neccessary, get date from last file modification
-    currentCampainEnd: new Date("2025-03-31"),
     blog: "",
 
     links: {
@@ -20,31 +20,103 @@ export const plasma = [
       locations: "https://www.plasma-spenden.de/#kontakt",
       infos_legacy: "https://www.cslplasma.de/plasmaspende",
       locations_legacy: "https://www.cslplasma.de/standorte",
-      maps: [
-        {
-          city: "Berlin",
-          link: "https://www.google.com/maps/place/Axel-Springer-Straße+42,+10969+Berlin",
-        },
-      ],
+      googleMapsCSLSearchURL: "https://www.google.com/maps/search/CSL+Plasma",
     },
 
     locations: [
-      "Berlin",
-      "Bielefeld",
-      "Bonn",
-      "Braunschweig",
-      "Bremen",
-      "Duisburg",
-      "Frankfurt",
-      "Gelsenkirchen",
-      "Göttingen",
-      "Karlsruhe",
-      "Kiel",
-      "Köln",
-      "Mainz",
-      "Marburg (coming soon...)",
-      "Münster",
-      "Nürnberg",
-    ],
+      {
+        city: "Berlin",
+        hasCurrCampaign: true,
+        isHomeTown: true,
+      },
+      {
+        city: "Berlin2",
+        info: "(coming soon...)", //! COMING SOON
+      },
+      {
+        city: "Bielefeld",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Bonn",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Braunschweig",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Bremen",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Bremen Weserpark",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Duisburg",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Frankfurt",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Gelsenkirchen",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Göttingen",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Karlsruhe",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Kiel",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Köln",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Mainz",
+        hasCurrCampaign: true,
+      },
+      {
+        city: "Marburg",
+        // hasCurrCampaign: true,
+      },
+      {
+        city: "Münster",
+        // hasCurrCampaign: true,
+      },
+      // {
+      // city: "Nürnberg", /// Betrieb seit 1.3.25 eingestellt
+      // },
+      {
+        // Nürnberg2
+        city: "Nürnberg",
+        hasCurrCampaign: true,
+        currCampaignEnd: new Date("2025-03-08"),
+      },
+    ] as Location[],
   },
 ];
+
+// if no special campaign end, add default campaign end
+plasma[0].locations.forEach((location) => {
+  if (location.hasCurrCampaign && !location.currCampaignEnd) {
+    location.currCampaignEnd = currCampaignDefaultEnd;
+  }
+});
+
+export type Location = {
+  city: string;
+  isHomeTown?: boolean;
+  hasCurrCampaign?: boolean;
+  currCampaignEnd?: Date;
+  info: string;
+};
