@@ -1,8 +1,8 @@
-import { H3, H4, H5 } from "@/components/Headings";
+import { H3, H4 } from "@/components/Headings";
 import { ExternalLink } from "../Links";
 import { plasma } from "@/config/links";
 import { getLastModifiedDateOfFile } from "@/lib/utils/getLastModifiedDateOfFile";
-import { SupportLatestPlasmaCampain } from ".";
+import { SupportCurrPlasmaCampainsList } from ".";
 import {
   AffiliateLinkListItemCategory,
   AffiliateLinkListItemDate,
@@ -15,6 +15,9 @@ const { locations, links, category, subCategory, rewards, payoutOn } =
   plasma[0];
 
 const lastModified = getLastModifiedDateOfFile("src/config/links/csl.ts");
+const hometownCenter =
+  locations.find(({ isHomeTown }) => isHomeTown) || locations[0];
+const { googleMapsCSLSearchURL } = links;
 
 export function SupportDonatePlasmaSection() {
   return (
@@ -44,7 +47,12 @@ export function SupportDonatePlasmaSection() {
       <H4>So funktioniert&apos;s:</H4>
       <p>
         <span>Gib bei deiner Anmeldung in einem der </span>
-        <ExternalLink href={links.locations} title={locations.join("\n")}>
+        <ExternalLink
+          href={links.locations}
+          title={locations
+            .map(({ city, info = "" }) => city + " " + info)
+            .join("\n")}
+        >
           CSL-Zentren in Deutschland
         </ExternalLink>
         <span> meine Spendernummer (AS062706) an. Das war&apos;s.</span>
@@ -58,8 +66,8 @@ export function SupportDonatePlasmaSection() {
       </p>
       <p>
         <span>Wer weiss, vielleicht sehen wir uns ja mal im </span>
-        <ExternalLink href={links.maps[0].link}>
-          CSL-Center in Berlin
+        <ExternalLink href={googleMapsCSLSearchURL + "+" + hometownCenter.city}>
+          CSL-Center in {hometownCenter.city}
         </ExternalLink>
         <span> 😉</span>
       </p>
@@ -73,12 +81,8 @@ export function SupportDonatePlasmaSection() {
           <span>👇</span>
         </div>
       </Callout>
-      <H5 className="font-bold">
-        <span>Aktuelle Aktion in </span>
-        <ExternalLink href={links.maps[0].link}>Berlin</ExternalLink>
-        <span> bis einschließlich:</span>
-      </H5>
-      <SupportLatestPlasmaCampain />
+
+      <SupportCurrPlasmaCampainsList links={links} locations={locations} />
       <AffiliateLinkListItemDate lastUpdated={lastModified} />
     </section>
   );
