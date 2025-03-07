@@ -45,21 +45,6 @@ export const affiliate = [
     blog: "",
   },
   {
-    name: "Estateguru",
-    description: "",
-    url: "",
-    type: "register",
-    category: "Finanzen",
-    subCategory: "P2P-Kredite",
-    rewards: {
-      referrer: "",
-      user: "",
-    },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
-    blog: "",
-  },
-  {
     name: "Flatex",
     description: "",
     url: "",
@@ -75,23 +60,6 @@ export const affiliate = [
     blog: "",
   },
   {
-    name: "Honeypot",
-    description:
-      "Europas tech-fokussierte Job Plattform. Erstelle dir ein Profil und lass Unternehmen sich bei Dir bewerben!",
-    url: "https://app.honeypot.io/ref/WiTQJcPU6dXEPsNgdJVaeHzN",
-    type: "register",
-    category: "Jobs",
-    subCategory: "Jobvermittlung",
-    rewards: {
-      referrer: "512 Euro",
-      user: "z.Zt. leider nüscht... Aber wir teilen wenn du möchtest. Schreib mir nach deiner Anmeldung. Und wenn du einen Job über Honeypot bekommen hast und der Bonus ausgezahlt wird, machen wir halbe-halbe.",
-    },
-    payoutOn:
-      "Erfolgreicher Anstellung des Geworbenen durch einen Arbeitgeber.",
-    lastUpdated: new Date("2024-05-13"),
-    blog: "",
-  },
-  {
     name: "Interactive Brokers",
     description: "",
     url: "https://ibkr.com/referral/daniel471",
@@ -103,7 +71,7 @@ export const affiliate = [
       user: "",
     },
     payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    lastUpdated: new Date("2025-03-07"),
     blog: "",
   },
   {
@@ -196,7 +164,7 @@ export const affiliate = [
     },
     payoutOn:
       "Investition des Geworbenen innerhalb der ersten 21 Tage nach Kontoeröffung.",
-    lastUpdated: new Date("2024-05-13"),
+    lastUpdated: new Date("2025-03-07"),
     blog: "",
   },
   {
