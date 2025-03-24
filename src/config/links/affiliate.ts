@@ -115,16 +115,17 @@ export const affiliate = [
   {
     name: "Robocash",
     description: "",
-    url: "",
+    url: "https://robo.cash/ref/ajTe",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "0,5% des Investierten Betrags. Max. 10 Euro.",
+      user: "0,5% des Investierten Betrags. Max. 10 Euro.",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Investitionen von mind. 500 Euro innerhalb der ersten 30 Tage nach Registrierung. Maximal 10 Euro.",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
