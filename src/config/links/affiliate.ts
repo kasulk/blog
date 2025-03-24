@@ -17,16 +17,16 @@ export const affiliate = [
   {
     name: "Bondora",
     description: "",
-    url: "",
+    url: "https://bondora.com/ref/danielk39",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "5 Euro",
-      user: "",
+      user: "5 Euro",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn: "nach 90 Tagen",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
