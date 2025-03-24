@@ -17,31 +17,35 @@ export const affiliate = [
   {
     name: "Bondora",
     description: "",
-    url: "",
+    url: "https://bondora.com/ref/danielk39",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "5 Euro",
-      user: "",
+      user: "5 Euro",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn: "nach 90 Tagen",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
     name: "Debitum",
     description: "",
-    url: "",
+    url: "https://debitum.investments/en/r/PRU4I",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "1-2,5% der investierten Summe in den ersten 30 Tagen",
+      user: "1-2,5% der investierten Summe in den ersten 30 Tagen",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Sofort. Für jede Investition von 10 Euro oder mehr, die innerhalb von 30 Tagen nach der Registrierung getätigt wird.<br>" +
+      "<b>Beispiel:</b><br>" +
+      '"Wenn Ihr Freund 5000 EUR investiert, erhalten Sie beide einen Bonus von 2,5% für 1000 EUR + 1% für den Restbetrag.<br>' +
+      '(25 EUR + 1% von den verbleibenden 4000 EUR) = 65 EUR" &mdash; Debitum',
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
@@ -76,47 +80,52 @@ export const affiliate = [
   },
   {
     name: "Lande",
-    description: "",
+    description:
+      "LANDE ist eine Crowdfunding-Plattform, die sich auf die Finanzierung des Agrarsektors konzentriert.",
     url: "https://lande.finance?referral=F7QGGIB",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "1% Cashback",
+      user: "1% Cashback",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Investments auf dem Primärmarkt in den ersten 90 Tagen nach der Registrierung des Geworbenen",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
     name: "Mintos",
-    description: "",
-    url: "",
+    description:
+      "Mit einer einzigen Plattform kannst Du hier Dein Portfolio über eine breite Palette von Vermögenswerten diversifizieren. Von Krediten und Anleihen bis hin zu ETFs, Immobilien und Geldmarktfonds.",
+    url: "https://www.mintos.com/de/l/ref/IH3ANU",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "50 Euro",
+      user: "50 Euro<br>+1% Bonus auf die durchschnittliche Investiion in den ersten 90 Tagen",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Wenn der Geworbene mind. 1.000 Euro innerhalb von 60 Tagen nach der Registrierung investiert und bis zum 90. Tag nach der Registrierung mind. 1.000 Euro aufrechterhält.",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
     name: "Robocash",
     description: "",
-    url: "",
+    url: "https://robo.cash/ref/ajTe",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "0,5% des Investierten Betrags. Max. 10 Euro.",
+      user: "0,5% des Investierten Betrags. Max. 10 Euro.",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Investitionen von mind. 500 Euro innerhalb der ersten 30 Tage nach Registrierung. Maximal 10 Euro.",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
