@@ -37,15 +37,15 @@ export const affiliate = [
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "1-2,5% der investierten Summe in den ersten 30 Tage",
+      referrer: "1-2,5% der investierten Summe in den ersten 30 Tagen",
       user: "1-2,5% der investierten Summe in den ersten 30 Tagen",
     },
     payoutOn:
       "Sofort. Für jede Investition von 10 Euro oder mehr, die innerhalb von 30 Tagen nach der Registrierung getätigt wird.<br>" +
       "<b>Beispiel:</b><br>" +
       '"Wenn Ihr Freund 5000 EUR investiert, erhalten Sie beide einen Bonus von 2,5% für 1000 EUR + 1% für den Restbetrag.<br>' +
-      '(25 EUR + 1% von den verbleibenden 4000 EUR) = 65 EUR"',
-    lastUpdated: new Date("2024-05-13"),
+      '(25 EUR + 1% von den verbleibenden 4000 EUR) = 65 EUR" &mdash; Debitum',
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
@@ -80,22 +80,25 @@ export const affiliate = [
   },
   {
     name: "Lande",
-    description: "",
+    description:
+      "LANDE ist eine Crowdfunding-Plattform, die sich auf die Finanzierung des Agrarsektors konzentriert.",
     url: "https://lande.finance?referral=F7QGGIB",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "1% Cashback",
+      user: "1% Cashback",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Investments auf dem Primärmarkt in den ersten 90 Tagen nach der Registrierung des Geworbenen",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
     name: "Mintos",
-    description: "",
+    description:
+      "Mit einer einzigen Plattform kannst Du hier Dein Portfolio über eine breite Palette von Vermögenswerten diversifizieren. Von Krediten und Anleihen bis hin zu ETFs, Immobilien und Geldmarktfonds.",
     url: "https://www.mintos.com/de/l/ref/IH3ANU",
     type: "register",
     category: "Finanzen",
