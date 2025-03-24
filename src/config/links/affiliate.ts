@@ -32,15 +32,19 @@ export const affiliate = [
   {
     name: "Debitum",
     description: "",
-    url: "",
+    url: "https://debitum.investments/en/r/PRU4I",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "1-2,5% der investierten Summe in den ersten 30 Tage",
+      user: "1-2,5% der investierten Summe in den ersten 30 Tagen",
     },
-    payoutOn: "",
+    payoutOn:
+      "Sofort. Für jede Investition von 10 Euro oder mehr, die innerhalb von 30 Tagen nach der Registrierung getätigt wird.<br>" +
+      "<b>Beispiel:</b><br>" +
+      '"Wenn Ihr Freund 5000 EUR investiert, erhalten Sie beide einen Bonus von 2,5% für 1000 EUR + 1% für den Restbetrag.<br>' +
+      '(25 EUR + 1% von den verbleibenden 4000 EUR) = 65 EUR"',
     lastUpdated: new Date("2024-05-13"),
     blog: "",
   },
