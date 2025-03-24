@@ -92,16 +92,17 @@ export const affiliate = [
   {
     name: "Mintos",
     description: "",
-    url: "",
+    url: "https://www.mintos.com/de/l/ref/IH3ANU",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "50 Euro",
+      user: "50 Euro<br>+1% Bonus auf die durchschnittliche Investiion in den ersten 90 Tagen",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Wenn der Geworbene mind. 1.000 Euro innerhalb von 60 Tagen nach der Registrierung investiert und bis zum 90. Tag nach der Registrierung mind. 1.000 Euro aufrechterhält.",
+    lastUpdated: new Date("2025-03-24"),
     blog: "",
   },
   {
