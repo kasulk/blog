@@ -178,17 +178,20 @@ export const affiliate = [
   },
   {
     name: "Twino",
-    description: "",
-    url: "",
+    description:
+      "Twino ist eine europäische Peer-to-Peer-Kreditplattform, die Investoren ermöglicht, in Verbraucherkredite aus verschiedenen Ländern zu investieren. Sie bietet Rückkaufgarantien, attraktive Renditen und einfache Handhabung, ideal für Anleger, die alternative Investments mit moderatem Risiko suchen.",
+    url: "https://www.twino.eu/de/join-today?refer_friend=118913",
     type: "register",
     category: "Finanzen",
     subCategory: "P2P-Kredite",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer:
+        "2% Cashback auf alle Investitionen, die der Geworbene in den ersten 90 Tagen nach Registrierung tätigt.",
+      user: "2% Cashback auf alle Investitionen, die der Geworbene in den ersten 90 Tagen nach Registrierung tätigt.",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2024-05-13"),
+    payoutOn:
+      "Allen Investitionen innerhalb der ersten 90 Tage nach der Registrierung",
+    lastUpdated: new Date("2025-03-26"),
     blog: "",
   },
 ] as const;
