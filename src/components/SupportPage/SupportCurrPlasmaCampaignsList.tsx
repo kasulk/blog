@@ -16,13 +16,16 @@ export function SupportCurrPlasmaCampainsList({ links, locations }: Props) {
 
         return (
           currCampaignEnd && (
-            <li key={city} className="list-none">
+            <li key={city} className="flex list-none flex-col items-center">
               <H5 className="font-bold">
                 <span>Aktuelle Aktion in </span>
                 <ExternalLink href={mapURL}>{city}</ExternalLink>
                 <span> bis einschließlich:</span>
               </H5>
-              <SupportLatestPlasmaCampaign currCampaignEnd={currCampaignEnd} />
+              <SupportLatestPlasmaCampaign
+                currCampaignEnd={currCampaignEnd}
+                city={city}
+              />
             </li>
           )
         );

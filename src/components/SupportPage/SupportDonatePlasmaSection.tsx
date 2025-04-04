@@ -71,7 +71,7 @@ export function SupportDonatePlasmaSection() {
         </ExternalLink>
         <span> 😉</span>
       </p>
-      <Callout title="Achtung" type="caution" className="my-8">
+      <Callout title="Achtung" type="caution" className="my-8 text-center">
         Diese Aktionen gibt es leider immer nur in zeitlich unregelmäßigen
         Abständen. Je nach Neu-Spender-Bedarf halt.
         <br />
