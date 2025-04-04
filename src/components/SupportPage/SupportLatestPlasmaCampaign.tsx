@@ -5,21 +5,22 @@ import { DateFormatter } from "../DateFormatter";
 
 type Props = {
   currCampaignEnd: Date;
+  city: string;
 };
 
-export function SupportLatestPlasmaCampaign({ currCampaignEnd }: Props) {
+export function SupportLatestPlasmaCampaign({ currCampaignEnd, city }: Props) {
   const numDays = getNumDaysFromNowToDate(currCampaignEnd);
 
   const color = getColorByDaysLeft(numDays);
-  const message = getDaysLeftMessage(numDays);
+  const message = getDaysLeftMessage(numDays, city);
   const messageLines = message.split("\n");
 
   return (
     <>
-      <p className={`text-center font-bold ${color}`}>
+      <p className={`w-1/2 text-center font-bold ${color} my-4`}>
         <DateFormatter date={currCampaignEnd} weekday />
       </p>
-      <p className="text-center">
+      <p className="mt-0 text-center">
         {messageLines.map((line, i) => (
           <Fragment key={i}>
             {line}
@@ -47,12 +48,12 @@ function getColorByDaysLeft(numDays: number): string {
   return "bg-success text-success-800";
 }
 
-function getDaysLeftMessage(numDays: number): string {
+function getDaysLeftMessage(numDays: number, city: string): string {
   if (numDays === 1) return "Nur noch heute!";
   if (numDays > 1) return `Noch ${numDays} Tage`;
   return (
-    "Leider aktuell abgelaufen...\n" +
+    `In ${city} leider aktuell abgelaufen...\n` +
     "Die nächste Aktion kommt bestimmt.\n" +
-    "Schaue nächsten Monat noch mal vorbei!"
+    "Schaue in den nächsten Wochen noch mal vorbei!"
   );
 }

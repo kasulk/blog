@@ -22,9 +22,13 @@ export function SupportAffiliateSection() {
         <u className="font-bold">unterstrichen</u> und mit einem{" "}
         <span className="font-bold">*</span> markiert.
       </p>
-      <Callout type="warning" className="font-semibold">
+      <Callout type="warning" className="text-center font-semibold">
         Bitte schaue dir vorher die jeweils geltenden Teilnahmebedingungen des
         jeweiligen Anbieters an.
+      </Callout>
+      <Callout type="caution" className="text-center font-semibold">
+        Investitionen in Finanzinstrumente bergen Verlustrisiken. Keine
+        Anlageberatung!
       </Callout>
       <p>
         Ich empfehle nur, was ich auch selber nutze und guten Gewissens

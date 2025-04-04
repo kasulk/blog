@@ -1,4 +1,4 @@
-const currCampaignDefaultEnd = new Date("2025-03-31");
+const currCampaignDefaultEnd = new Date("2025-04-30");
 
 export const plasma = [
   {
@@ -12,7 +12,8 @@ export const plasma = [
       referrer: "50-100 Euro",
       user: "100 Euro",
     },
-    payoutOn: "Gewöhnlich nach deiner 10. Spende.",
+    payoutOn:
+      "Gewöhnlich nach deiner 10. Spende, oder für die ersten 10 Spenden jeweils 10 € extra.",
     blog: "",
 
     links: {
@@ -59,7 +60,7 @@ export const plasma = [
       },
       {
         city: "Frankfurt",
-        // hasCurrCampaign: true,
+        hasCurrCampaign: true,
       },
       {
         city: "Gelsenkirchen",
@@ -93,12 +94,8 @@ export const plasma = [
         city: "Münster",
         // hasCurrCampaign: true,
       },
-      // {
-      // city: "Nürnberg", /// Betrieb seit 1.3.25 eingestellt
-      // },
       {
-        // Nürnberg2
-        city: "Nürnberg",
+        city: "Nürnberg", // Nürnberg2 (seit 1.3.25; Nürnberg dicht)
         hasCurrCampaign: true,
         currCampaignEnd: new Date("2025-03-08"),
       },
