@@ -8,7 +8,7 @@ export const affiliate = [
     subCategory: "Online-Shop",
     rewards: {
       referrer: "",
-      user: "",
+      referred: "",
     },
     payoutOn: "",
     lastUpdated: new Date("2024-05-13"),
@@ -24,7 +24,7 @@ export const affiliate = [
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "5 Euro",
-      user: "5 Euro",
+      referred: "5 Euro",
     },
     payoutOn: "nach 90 Tagen",
     lastUpdated: new Date("2025-03-27"),
@@ -40,7 +40,7 @@ export const affiliate = [
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "1-2,5% der investierten Summe in den ersten 30 Tagen",
-      user: "1-2,5% der investierten Summe in den ersten 30 Tagen",
+      referred: "1-2,5% der investierten Summe in den ersten 30 Tagen",
     },
     payoutOn:
       "Sofort. Für jede Investition von 10 Euro oder mehr, die innerhalb von 30 Tagen nach der Registrierung getätigt wird.<br>" +
@@ -60,7 +60,7 @@ export const affiliate = [
     subCategory: "Broker",
     rewards: {
       referrer: "50 Euro Orderguthaben",
-      user: "50 Euro Orderguthaben",
+      referred: "50 Euro Orderguthaben",
     },
     payoutOn: "Registrierung/Depot-Eröffnung des Geworbenen",
     lastUpdated: new Date("2025-03-27"),
@@ -75,11 +75,14 @@ export const affiliate = [
     category: "Finanzen",
     subCategory: "Broker",
     rewards: {
-      referrer: "",
-      user: "",
+      referrer: "200 US-Dollar",
+      referred:
+        "<a href='https://finviz.com/quote.ashx?t=IBKR' target='_blank'>IBKR-Aktien</a> im Wert von bis zu 1.000 US-Doller",
     },
-    payoutOn: "",
-    lastUpdated: new Date("2025-03-27"),
+    payoutOn:
+      "<b>Werber:</b> wenn der Geworbene ein Einzel- oder Gemeinschaftskonto eröffnet, innerhalb von 30 Tagen nach der Kontoeröffnung 10.000 US-Dollar einzahlt und ein Jahr lang ein Guthaben von mindestens 10.000 US-Dollar hält.<br>" +
+      "<b>Geworbene:</b> erhalten 1 USD in <a href='https://finviz.com/quote.ashx?t=IBKR' target='_blank'>IBKR-Aktien</a> für jeweils 100 USD an Wert (Bargeld oder andere Vermögenswerte), die auf ihr Konto eingezahlt werden, bis zu einem Wert von 1.000 USD in IBKR-Aktien. Der durchschnittliche Kontostand muss mindestens ein Jahr lang aufrechterhalten werden, damit die Aktien übertragen werden und verfügbar sind.",
+    lastUpdated: new Date("2025-04-04"),
     blog: "",
   },
   {
@@ -92,7 +95,7 @@ export const affiliate = [
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "1% Cashback",
-      user: "1% Cashback",
+      referred: "1% Cashback",
     },
     payoutOn:
       "Investments auf dem Primärmarkt in den ersten 90 Tagen nach der Registrierung des Geworbenen",
@@ -109,7 +112,7 @@ export const affiliate = [
     subCategory: "",
     rewards: {
       referrer: "",
-      user: "",
+      referred: "",
     },
     payoutOn: "",
     lastUpdated: new Date("2025-03-27"),
@@ -125,7 +128,8 @@ export const affiliate = [
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "50 Euro",
-      user: "50 Euro<br>+1% Bonus auf die durchschnittliche Investiion in den ersten 90 Tagen",
+      referred:
+        "50 Euro<br>+1% Bonus auf die durchschnittliche Investiion in den ersten 90 Tagen",
     },
     payoutOn:
       "Wenn der Geworbene mind. 1.000 Euro innerhalb von 60 Tagen nach der Registrierung investiert und bis zum 90. Tag nach der Registrierung mind. 1.000 Euro aufrechterhält.",
@@ -142,7 +146,7 @@ export const affiliate = [
     subCategory: "P2P-Kredite",
     rewards: {
       referrer: "0,5% des Investierten Betrags. Max. 10 Euro.",
-      user: "0,5% des Investierten Betrags. Max. 10 Euro.",
+      referred: "0,5% des Investierten Betrags. Max. 10 Euro.",
     },
     payoutOn:
       "Investitionen von mind. 500 Euro innerhalb der ersten 30 Tage nach Registrierung. Maximal 10 Euro.",
@@ -160,7 +164,7 @@ export const affiliate = [
     rewards: {
       referrer:
         "2% des in den ersten 30 Tagen nach der Registrierung eingezahlten Betrages des Geworbenen",
-      user: "leider z.Zt. nüscht...",
+      referred: "leider z.Zt. nüscht...",
     },
     payoutOn: "35 Tage nach der Einzahlung des Geworbenen",
     lastUpdated: new Date("2025-03-27"),
@@ -176,7 +180,7 @@ export const affiliate = [
     subCategory: "Broker",
     rewards: {
       referrer: "",
-      user: "",
+      referred: "",
     },
     payoutOn: "",
     lastUpdated: new Date("2025-03-27"),
@@ -192,7 +196,7 @@ export const affiliate = [
     subCategory: "Todo-App",
     rewards: {
       referrer: "1 Monat TickTick-Premium gratis (ca.&nbsp;3&nbsp;Euro)",
-      user: "leider z.Zt. nüscht...",
+      referred: "leider z.Zt. nüscht...",
     },
     payoutOn: "Buchung einer Premium-Mitgliedschaft durch den Geworbenen.",
     lastUpdated: new Date("2024-05-13"),
@@ -208,7 +212,7 @@ export const affiliate = [
     subCategory: "Broker",
     rewards: {
       referrer: "15 Euro",
-      user: "leider z.Zt. nüscht...",
+      referred: "leider z.Zt. nüscht...",
     },
     payoutOn:
       "Investition des Geworbenen innerhalb der ersten 21 Tage nach Kontoeröffung.",
@@ -226,7 +230,8 @@ export const affiliate = [
     rewards: {
       referrer:
         "2% Cashback auf alle Investitionen, die der Geworbene in den ersten 90 Tagen nach Registrierung tätigt.",
-      user: "2% Cashback auf alle Investitionen, die der Geworbene in den ersten 90 Tagen nach Registrierung tätigt.",
+      referred:
+        "2% Cashback auf alle Investitionen, die der Geworbene in den ersten 90 Tagen nach Registrierung tätigt.",
     },
     payoutOn:
       "Allen Investitionen innerhalb der ersten 90 Tage nach der Registrierung",
