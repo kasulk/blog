@@ -12,10 +12,10 @@ export function AffiliateLinkListItemRewards({ rewards }: Props) {
         </div>
       )}
 
-      {rewards.user && (
+      {rewards.referred && (
         <div className="sm:flex-1">
           <div className="font-semibold">Bonus für dich:</div>
-          <div dangerouslySetInnerHTML={{ __html: rewards.user }} />
+          <div dangerouslySetInnerHTML={{ __html: rewards.referred }} />
         </div>
       )}
     </div>
