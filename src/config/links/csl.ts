@@ -1,4 +1,4 @@
-const currCampaignDefaultEnd = new Date("2025-04-30");
+const currCampaignDefaultEnd = new Date("2025-06-30");
 
 export const plasma = [
   {
@@ -76,7 +76,7 @@ export const plasma = [
       },
       {
         city: "Kiel",
-        hasCurrCampaign: true,
+        // hasCurrCampaign: true,
       },
       {
         city: "Köln",
@@ -96,7 +96,7 @@ export const plasma = [
       },
       {
         city: "Nürnberg", // Nürnberg2 (seit 1.3.25; Nürnberg dicht)
-        hasCurrCampaign: true,
+        // hasCurrCampaign: true,
         currCampaignEnd: new Date("2025-03-08"),
       },
     ] as Location[],
